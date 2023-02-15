@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: sap-lcm-blogs.html 
+summary: Una serie de blogs que analizan SAP Lifecycle Management 
+keywords: netapp, solutions, SAP, lifecycle, management, lcm, blogs 
+---
+= Blogs de gestión del ciclo de vida de SAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Descripción general de los blogs en los que se destaca SAP Lifecycle Management.
+
+
+
+== Blogs de gestión del ciclo de vida de SAP
+
+* link:https://blogs.sap.com/2021/10/27/whitepaper-sap-landscape-management-with-netapp/["SAP Landscape Management con NetApp"]
+

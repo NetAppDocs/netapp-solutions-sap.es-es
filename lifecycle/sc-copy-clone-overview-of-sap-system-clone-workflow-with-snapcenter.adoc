@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html 
+keywords: system clone, target host, clone create 
+summary: La tecnología FlexClone permite un proceso de aprovisionamiento rápido y proporciona un ahorro de capacidad significativo, ya que el sistema de reparación suele utilizarse sólo durante un breve tiempo. 
+---
+= Información general del flujo de trabajo de clonado de sistemas SAP con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html["Anterior: Descripción general del flujo de trabajo de copia del sistema SAP con SnapCenter."]
+
+Tal y como se explica en la sección anterior, SnapCenter puede gestionar clones de conjuntos de datos a partir de cualquier backup de Snapshot existente y puede aprovisionar rápidamente estos conjuntos de datos a cualquier sistema objetivo. La velocidad de aprovisionamiento de los datos de producción a un sistema de reparación para solucionar el daño lógico es esencial, ya que a menudo es necesario restablecer el sistema de reparación y elegir un conjunto de datos de producción diferente. La tecnología FlexClone permite un proceso de aprovisionamiento rápido y proporciona un ahorro de capacidad significativo, ya que el sistema de reparación suele utilizarse sólo durante un breve tiempo.
+
+La figura siguiente resume los pasos necesarios para una operación de clonación de sistemas SAP mediante SnapCenter.
+
+. Prepare el host de destino.
+. Flujo de trabajo de creación de clones de SnapCenter para el volumen compartido de HANA.
+. Inicie los servicios SAP HANA.
+. El flujo de trabajo SnapCenter clone create para el volumen de datos de HANA, incluida la recuperación de la base de datos.
+. El sistema HANA ahora se puede usar como sistema de reparación.
+
+
+
+NOTE: Si debe restablecer el sistema a un backup Snapshot diferente, el paso 6 y el paso 4 serán suficientes. El volumen compartido HANA puede seguir montado.
+
+Si el sistema ya no es necesario, el proceso de limpieza se lleva a cabo con los siguientes pasos.
+
+. Flujo de trabajo de eliminación de clon de SnapCenter para el volumen de datos HANA, incluido el apagado de la base de datos.
+. Detenga los servicios SAP HANA.
+. Flujo de trabajo de eliminación de clones de SnapCenter para el volumen compartido de HANA.
+
+
+image:sc-copy-clone-image10.png["Error: Falta la imagen gráfica"]
+
+La sección link:sc-copy-clone-sap-system-clone-with-snapcenter.html["“Clonado del sistema SAP con SnapCenter”"] proporciona una descripción detallada paso a paso del flujo de trabajo de clon del sistema.
+
+link:sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html["Siguiente: Flujos de trabajo de operaciones de actualización del sistema SAP HANA mediante backups de snapshots de almacenamiento."]

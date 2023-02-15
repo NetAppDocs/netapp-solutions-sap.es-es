@@ -1,0 +1,38 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_disaster_recovery_failover_overview.html 
+keywords: log, backup, replication, disaster, recovery, system, data 
+summary: Dependiendo de si la replicación de backup de registros forma parte de la configuración de recuperación ante desastres, los pasos para la recuperación ante desastres son ligeramente diferentes. 
+---
+= Recuperación tras fallos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_hana_database_recovery.html["Anterior: Recuperación de base de datos DE HANA."]
+
+Dependiendo de si la replicación de backup de registros forma parte de la configuración de recuperación ante desastres, los pasos para la recuperación ante desastres son ligeramente diferentes. En esta sección se describe la conmutación al nodo de respaldo de recuperación ante desastres para la replicación solo de backup de datos y para la replicación del volumen de datos combinada con la replicación de volumen de backup de registros.
+
+Para ejecutar la recuperación tras fallos, lleve a cabo los siguientes pasos:
+
+. Prepare el host de destino.
+. Rompa y elimine las relaciones de replicación.
+. Restaure el volumen de datos al backup de Snapshot más reciente coherente con las aplicaciones.
+. Monte los volúmenes en el host de destino.
+. Recupere la base de datos HANA.
++
+** Únicamente recuperación del volumen de datos.
+** Recuperación posterior mediante backups de registros replicados.
+
+
+
+
+En las siguientes subsecciones se describen estos pasos con detalle, y la siguiente figura describe las pruebas de recuperación tras fallos en caso de desastre.
+
+image:saphana-dr-anf_image26.png["Error: Falta la imagen gráfica"]
+
+link:saphana-dr-anf_prepare_the_target_host_01.html["Siguiente: Prepare el host de destino."]

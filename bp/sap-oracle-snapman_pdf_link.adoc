@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: bp/sap-oracle-snapman_pdf_link.html 
+keywords: tr-4250, pdf, sap, hana, oracle, unix, nfs, dr, snap creator 
+summary: Este documento aborda los retos de diseñar soluciones de almacenamiento compatibles con los productos Business Suite de SAP mediante una base de datos de Oracle. El objetivo principal de este documento es los retos comunes de diseño, puesta en marcha, funcionamiento y gestión de la infraestructura de almacenamiento a los que se enfrentan los líderes de negocio Y DE TI que utilizan la última generación de soluciones SAP. Las recomendaciones de este documento son genéricas; no son específicas de una aplicación SAP ni del tamaño y alcance de la implementación SAP. 
+---
+= TR-4250: SAP con Oracle en UNIX y NFS con ONTAP de NetApp y SnapManager para SAP 3.4
+:allow-uri-read: 
+:firstname: : hardbreaks:
+:author: : hardbreaks:
+:authorinitials: :
+:authors: : hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer: NetApp
+
+Este documento aborda los retos de diseñar soluciones de almacenamiento compatibles con los productos Business Suite de SAP mediante una base de datos de Oracle. El objetivo principal de este documento es los retos comunes de diseño, puesta en marcha, funcionamiento y gestión de la infraestructura de almacenamiento a los que se enfrentan los líderes de negocio Y DE TI que utilizan la última generación de soluciones SAP. Las recomendaciones de este documento son genéricas; no son específicas de una aplicación SAP ni del tamaño y alcance de la implementación SAP. Este documento asume que el lector tiene conocimientos básicos de la tecnología y el funcionamiento de los productos NetApp y SAP. Este documento se desarrolló a partir de la interacción del personal técnico de NetApp, SAP, Oracle y nuestros clientes.
+
+link:https://www.netapp.com/pdf.html?item=/media/19525-tr-4250.pdf["https://www.netapp.com/pdf.html?item=/media/19525-tr-4250.pdf"]

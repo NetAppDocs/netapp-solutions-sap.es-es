@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: sap-videos.html 
+summary: Serie de vídeos y demostraciones en los que se destacan las soluciones SAP 
+keywords: netapp, solutions, SAP, videos, demos 
+---
+= Vídeos y demostraciones de soluciones para SAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Descripción general de los vídeos y demostraciones en los que se destacan las soluciones SAP.
+
+
+
+== Vídeos y demostraciones de prácticas recomendadas para la configuración de SAP
+
+* link:https://www.netapp.tv/details/28149["SAP HANA funciona mejor en la infraestructura de NetApp"]
+* link:https://www.netapp.tv/details/28189["SAP en Azure NetApp Files: Descripción general y actualizaciones"]
+* link:https://www.netapp.tv/details/28402["Uso del almacenamiento de bloques y objetos de NetApp para inteligencia de datos SAP"]
+
+
+
+
+=== Vídeos y demostraciones de backup, restauración y recuperación ante desastres de SAP
+
+* link:https://www.netapp.tv/details/25592["Garantice la disponibilidad de las aplicaciones SAP y minimice los tiempos de inactividad"]
+* link:https://www.netapp.tv/details/28399["Optimice su protección de datos para SAP HANA en Azure NetApp Files"]
+* link:https://www.netapp.tv/details/28398["Opciones de recuperación ante desastres para SAP HANA"]
+* link:https://www.netapp.tv/details/28406["Recuperación ante desastres de SAP HANA con ANF y replicación entre regiones"]
+
+
+
+
+== Vídeos y demostraciones sobre gestión del ciclo de vida de SAP
+
+* link:https://www.netapp.tv/details/25588["Reduzca el riesgo y aumente la calidad de los proyectos SAP"]
+* link:https://www.netapp.tv/details/25595["Garantice la continuidad de las líneas de negocio ante eventos inesperados"]
+* link:https://www.netapp.tv/details/28400["Casos de uso de SnapCenter"]
+* link:https://www.netapp.tv/details/28401["Copia del sistema SAP con Libelle y SnapCenter"]
+

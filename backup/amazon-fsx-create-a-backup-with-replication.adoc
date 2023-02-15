@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-create-a-backup-with-replication.html 
+keywords: backup, local snapshot, copy 
+summary: En esta sección se describe cómo crear un backup con replicación. 
+---
+= Cree un backup con la replicación
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-add-a-policy-to-resource-protection.html["Anterior: Añadir una política a la protección de recursos."]
+
+Se crea un backup del mismo modo que con una copia Snapshot local.
+
+Para crear un backup con replicación, seleccione la política que incluye la replicación de backup y haga clic en Backup.
+
+image:amazon-fsx-image88.png["Error: Falta la imagen gráfica"]
+
+Dentro del registro de trabajos de SnapCenter, puede ver el paso actualización secundaria, que inicia una operación de actualización de SnapVault. Los bloques modificados de replicación del volumen de origen al volumen objetivo.
+
+image:amazon-fsx-image89.png["Error: Falta la imagen gráfica"]
+
+En el FSX para el sistema de archivos ONTAP, se crea una copia Snapshot del volumen de origen con la etiqueta SnapMirror, `snapcenter`, Según se configuró en la directiva SnapCenter.
+
+....
+FsxId00fa9e3c784b6abbb::> snapshot show -vserver sapcc-hana-svm -volume PFX_data_mnt00001 -fields snapmirror-label
+vserver        volume            snapshot                                                    snapmirror-label
+-------------- ----------------- ----------------------------------------------------------- ----------------
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_03-31-2022_13.10.26.5482 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_03-31-2022_14.00.05.2023 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_04-05-2022_08.00.06.3380 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_04-05-2022_14.00.01.6482 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_04-14-2022_20.00.05.0316 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_04-28-2022_08.00.06.3629 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnap_Hourly_04-28-2022_14.00.01.7275 -
+sapcc-hana-svm PFX_data_mnt00001 SnapCenter_hana-1_LocalSnapAndSnapVault_Daily_04-28-2022_16.21.41.5853
+                                                                                             snapcenter
+8 entries were displayed.
+....
+En el volumen objetivo, se crea una copia Snapshot con el mismo nombre.
+
+....
+FsxId05f7f00af49dc7a3e::> snapshot show -vserver sapcc-backup-target-zone5 -volume PFX_data_mnt00001 -fields snapmirror-label
+vserver                   volume            snapshot                                                               snapmirror-label
+------------------------- ----------------- ---------------------------------------------------------------------- ----------------
+sapcc-backup-target-zone5 PFX_data_mnt00001 SnapCenter_hana-1_LocalSnapAndSnapVault_Daily_04-28-2022_16.21.41.5853 snapcenter
+FsxId05f7f00af49dc7a3e::>
+....
+El nuevo backup de Snapshot también se incluye en el catálogo de backup de HANA.
+
+image:amazon-fsx-image90.png["Error: Falta la imagen gráfica"]
+
+En SnapCenter, puede ver una lista de los backups replicados haciendo clic en Vault copies en la vista de topología.
+
+image:amazon-fsx-image91.png["Error: Falta la imagen gráfica"]
+
+link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Siguiente: Restauración y recuperación desde el almacenamiento secundario."]

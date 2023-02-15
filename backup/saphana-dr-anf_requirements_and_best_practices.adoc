@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_requirements_and_best_practices.html 
+keywords: requirements, best, practices, microsoft, azure, virtual, machine, vm 
+summary: Microsoft Azure no garantiza la disponibilidad de un tipo de máquina virtual específico tras la creación o al iniciar una máquina virtual no escrita 
+---
+= Requisitos y prácticas recomendadas
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html["Anterior: Opciones de configuración para replicación entre regiones con SAP HANA."]
+
+Microsoft Azure no garantiza la disponibilidad de un tipo de máquina virtual específico tras la creación o al iniciar una máquina virtual no escrita En concreto, en caso de fallo de la región, muchos clientes pueden necesitar equipos virtuales adicionales en la región de recuperación ante desastres. Por lo tanto, se recomienda utilizar activamente una máquina virtual con el tamaño necesario para la conmutación por error ante desastres como un sistema de prueba o control de calidad en la región de recuperación ante desastres para asignar el tipo de equipo virtual necesario.
+
+Para la optimización de los costes, es conveniente usar un pool de capacidad ANF con un nivel de rendimiento menor durante el funcionamiento normal. La replicación de datos no requiere alto rendimiento y, por consiguiente, podría utilizar un pool de capacidad con un nivel de rendimiento estándar. Para realizar pruebas de recuperación ante desastres o para realizar una conmutación al nodo de respaldo en caso de desastre, los volúmenes se deben mover a un pool de capacidad con un nivel de alto rendimiento.
+
+Si un segundo pool de capacidad no es una opción, los volúmenes de destino de replicación deben configurarse en función de los requisitos de capacidad y no de los requisitos de rendimiento durante las operaciones normales. La cuota o el rendimiento (para calidad de servicio manual) pueden entonces adaptarse para las pruebas de recuperación ante desastres en caso de conmutación por error.
+
+Para obtener más información, consulte https://docs.microsoft.com/en-us/azure/azure-netapp-files/cross-region-replication-requirements-considerations["Requisitos y consideraciones sobre el uso de la replicación entre regiones de volumen de Azure NetApp Files | Microsoft Docs"^].
+
+link:saphana-dr-anf_lab_setup.html["Siguiente: Configuración de laboratorio."]

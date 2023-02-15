@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-bandr-sc_pdf_link.html 
+keywords: tr-4313, pdf, sap, hana, backup, recovery, disaster, dr, snap creator 
+summary: 'El documento describe la instalación y la configuración de la solución de backup y recuperación de NetApp para SAP HANA. La solución se basa en el marco Snap Creator de NetApp y en el complemento Snap Creator para SAP HANA. Esta solución es compatible con el dispositivo de multinodo de Cisco SAP HANA certificado en combinación con el almacenamiento de NetApp. Esta solución también es compatible con sistemas SAP HANA de un único nodo y varios nodos en proyectos de integración personalizada de centro de datos (TDI).' 
+---
+= TR-4313: Backup y recuperación de SAP HANA mediante Snap Creator
+:allow-uri-read: 
+:firstname: : hardbreaks:
+:author: : hardbreaks:
+:authorinitials: :
+:authors: : hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer: NetApp
+
+El TR-4313 describe la instalación y la configuración de la solución de backup y recuperación de NetApp para SAP HANA. La solución se basa en el marco Snap Creator de NetApp y en el complemento Snap Creator para SAP HANA. Esta solución es compatible con el dispositivo de multinodo de Cisco SAP HANA certificado en combinación con el almacenamiento de NetApp. Esta solución también es compatible con sistemas SAP HANA de un único nodo y varios nodos en proyectos de integración personalizada de centro de datos (TDI).
+
+link:https://www.netapp.com/pdf.html?item=/media/19779-tr-4313.pdf["https://www.netapp.com/pdf.html?item=/media/19779-tr-4313.pdf"]

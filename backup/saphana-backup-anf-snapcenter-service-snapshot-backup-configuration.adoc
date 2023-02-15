@@ -1,0 +1,15 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-snapshot-backup-configuration.html 
+keywords:  
+summary:  
+---
+= Configuración de backup de la snapshot de servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+

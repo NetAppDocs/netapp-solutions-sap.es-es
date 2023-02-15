@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-additional-information.html 
+keywords: references 
+summary:  
+---
+= Dónde encontrar información adicional
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-restore-and-recovery.html["Anterior: Restauración y recuperación."]
+
+Si quiere más información sobre el contenido de este documento, consulte los siguientes documentos o sitios web:
+
+* link:https://review.docs.netapp.com/us-en/netapp-solutions-sap_main/backup/saphana-dr-anf_data_protection_overview_overview.html["TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files."]
+
+
+link:saphana-backup-anf-version-history.html["Siguiente: Historial de versiones."]

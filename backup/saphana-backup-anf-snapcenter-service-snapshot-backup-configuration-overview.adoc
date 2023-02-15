@@ -1,0 +1,44 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-snapshot-backup-configuration-overview.html 
+keywords:  
+summary:  
+---
+= Información general de la configuración de backup de snapshot de servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-policy-configuration.html["Anterior: Configuración de la directiva de servicio de SnapCenter."]
+
+El servicio SnapCenter es compatible con dos tipos de operación de backup de Snapshot diferentes:
+
+* Backups de datos de SAP HANA mediante operaciones de Snapshot.
++
+Backup del volumen de datos de base de datos SAP HANA que combina sentencias SQL de HANA para la coherencia de bases de datos y la gestión de catálogos de backup con operaciones Snapshot de Azure NetApp Files.
+
+* Backup de volúmenes con datos no estructurados con las operaciones de backup de Snapshot.
++
+Backup de binarios, archivos de configuración, etc., que no requieren ninguna interacción con la base de datos HANA. El backup se ejecuta con una operación de backup de Snapshot de Azure NetApp Files. En el servicio SnapCenter, se utilizan dos subtipos para definir si estos volúmenes pertenecen a un sistema HANA específico o si es un volumen compartido global que utilizan varios sistemas HANA.
+
++
+** Backup de volúmenes que no son de datos de una base de datos SAP HANA
++
+Backup de un volumen que está asociado con un sistema HANA específico, por ejemplo, el volumen compartido de HANA.
+
+** Respaldo de volúmenes globales sin datos
++
+Backup de un volumen que no está asociado con un sistema HANA específico, por ejemplo, el directorio de transporte SAP.
+
++
+En las siguientes secciones, se describe la configuración de los tres tipos de backup diferentes.
+
+
+
+
+
+link:saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html["Siguiente: Configuración de backup de backups de bases de datos SAP HANA."]

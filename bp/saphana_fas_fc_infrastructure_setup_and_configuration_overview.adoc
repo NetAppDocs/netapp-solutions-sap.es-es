@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_fas_fc_infrastructure_setup_and_configuration_overview.html 
+keywords: sap, hana, infrastructure, setup, configuration, guidelines, steps, host, data 
+summary: Las siguientes secciones proporcionan directrices para la instalación y la configuración de la infraestructura SAP HANA. 
+---
+= Descripción general
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_fas_fc_storage_sizing.html["Anterior: Ajuste de tamaño del almacenamiento."]
+
+Las siguientes secciones proporcionan directrices para la instalación y la configuración de la infraestructura SAP HANA. Se incluyen todos los pasos necesarios para configurar SAP HANA. Se crea una SVM para alojar los datos. Dentro de estas secciones, se utilizan las siguientes configuraciones de ejemplo:
+
+* Sistema HANA con SID=SS3 y ONTAP 9.7 o anterior
++
+** SAP HANA único y múltiple
+** Host único de SAP HANA que usa varias particiones de SAP HANA
+
+
+* Sistema HANA con SID=FC5 y ONTAP 9.8 mediante un gestor de volúmenes lógicos de Linux (LVM)
++
+** SAP HANA único y múltiple
+
+
+
+
+link:saphana_fas_fc_san_fabric_setup.html["Siguiente: Configuración de estructura SAN."]

@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana-fas-nfs_i_o_stack_configuration_for_sap_hana.html 
+keywords: io, stack, configuration, sap, hana, fas, nfs 
+summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para los sistemas de archivos y almacenamiento utilizados. 
+---
+= Configuración de pila de I/o para SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-fas-nfs_sap_hana_installation_preparations_for_nfsv4.html["Anterior: Preparativos para la instalación de SAP HANA para NFSv4."]
+
+A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para los sistemas de archivos y almacenamiento utilizados.
+
+NetApp ha realizado pruebas de rendimiento para definir los valores ideales. En la siguiente tabla se enumeran los valores óptimos inferidos de las pruebas de rendimiento.
+
+|===
+| Parámetro | Valor 
+
+
+| max_parallel_io_requests | 128 
+
+
+| async_read_submit | encendido 
+
+
+| async_write_submit_active | encendido 
+
+
+| async_write_submit_blocks | todo 
+|===
+Para las versiones de SAP HANA 1.0 hasta SPS12, estos parámetros se pueden establecer durante la instalación de la base de datos SAP HANA, como se describe en la nota de SAP https://launchpad.support.sap.com/["2267798: Configuración de la base de datos SAP HANA durante la instalación mediante hdbparam"^].
+
+Como alternativa, los parámetros se pueden establecer después de la instalación de la base de datos SAP HANA mediante el `hdbparam` marco.
+
+....
+nf2adm@sapcc-hana-tst-06:/usr/sap/NF2/HDB00> hdbparam --paramset fileio.max_parallel_io_requests=128
+nf2adm@sapcc-hana-tst-06:/usr/sap/NF2/HDB00> hdbparam --paramset fileio.async_write_submit_active=on
+nf2adm@sapcc-hana-tst-06:/usr/sap/NF2/HDB00> hdbparam --paramset fileio.async_read_submit=on
+nf2adm@sapcc-hana-tst-06:/usr/sap/NF2/HDB00> hdbparam --paramset fileio.async_write_submit_blocks=all
+....
+A partir de SAP HANA 2.0, `hdbparam` ha quedado obsoleto y los parámetros se han movido a. `global.ini`. Los parámetros se pueden definir con comandos de SQL o SAP HANA Studio. Para obtener más información, consulte la nota de SAP https://launchpad.support.sap.com/["2399079: Eliminación de hdbparam en el HANA 2"^]. También puede ajustar los parámetros dentro de global.ini como se muestra en el siguiente texto:
+
+....
+nf2adm@stlrx300s8-6: /usr/sap/NF2/SYS/global/hdb/custom/config> cat global.ini
+…
+[fileio]
+async_read_submit = on
+async_write_submit_active = on
+max_parallel_io_requests = 128
+async_write_submit_blocks = all
+…
+....
+Desde SAP HANA 2.0 SPS5, el `setParameter.py` la secuencia de comandos se puede utilizar para definir los parámetros correctos:
+
+....
+nf2adm@sapcc-hana-tst-06:/usr/sap/NF2/HDB00/exe/python_support>
+python setParameter.py -set=SYSTEM/global.ini/fileio/max_parallel_io_requests=128
+python setParameter.py -set=SYSTEM/global.ini/fileio/async_read_submit=on
+python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_active=on
+python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_blocks=all
+....
+link:saphana-fas-nfs_sap_hana_data_volume_size.html["Siguiente: Tamaño del volumen de datos de SAP HANA."]

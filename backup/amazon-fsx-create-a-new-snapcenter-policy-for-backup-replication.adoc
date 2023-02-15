@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html 
+keywords: policy, backup, replication, snapshot 
+summary: En esta sección se describe cómo configurar una política para la replicación de backup. 
+---
+= Cree una nueva política de SnapCenter para la replicación de backups
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Anterior: Añada una SVM de backup a SnapCenter."]
+
+Debe configurar una política para la replicación de backups de la siguiente manera:
+
+. Escriba un nombre para la política.
++
+image:amazon-fsx-image79.png["Error: Falta la imagen gráfica"]
+
+. Seleccione Snapshot backup and a schedule frequency. Normalmente se utiliza diariamente para la replicación de backup.
++
+image:amazon-fsx-image80.png["Error: Falta la imagen gráfica"]
+
+. Seleccione la retención para los backups de Snapshot.
++
+image:amazon-fsx-image81.png["Error: Falta la imagen gráfica"]
+
++
+Esta es la retención de los backups de Snapshot diarios que se realizan en el almacenamiento primario. La retención de backups secundarios en el destino de SnapVault ya se ha configurado previamente mediante el comando add rule en el nivel ONTAP. Consulte “Configurar relaciones de replicación en FSX para sistemas de archivos ONTAP” (xref).
+
++
+image:amazon-fsx-image82.png["Error: Falta la imagen gráfica"]
+
+. Seleccione el campo Update SnapVault y proporcione una etiqueta personalizada.
++
+Esta etiqueta debe coincidir con la etiqueta de SnapMirror que se proporciona en la `add rule` Comando a nivel de ONTAP.
+
++
+image:amazon-fsx-image83.png["Error: Falta la imagen gráfica"]
+
++
+image:amazon-fsx-image84.png["Error: Falta la imagen gráfica"]
+
+
+
+Se ha configurado la nueva política de SnapCenter.
+
+image:amazon-fsx-image85.png["Error: Falta la imagen gráfica"]
+
+link:amazon-fsx-add-a-policy-to-resource-protection.html["Siguiente: Añadir una política a la protección de recursos."]

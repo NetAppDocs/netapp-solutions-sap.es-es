@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html 
+keywords: backup, configuration, non-data volumes, snapshot copies 
+summary: El backup de volúmenes que no forman parte del servicio SnapCenter es una parte integrada. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento dado a condición de que los recursos de instalación de la base de datos y los registros necesarios sigan estando disponibles. 
+---
+= Configuración de backup de volúmenes que no pertenecen a datos SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html["Anterior: Configuración de backup de backups de la base de datos SAP HANA."]
+
+El backup de volúmenes que no forman parte del servicio SnapCenter es una parte integrada. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento dado a condición de que los recursos de instalación de la base de datos y los registros necesarios sigan estando disponibles.
+
+Para la recuperación tras situaciones en las que se deben restaurar otros archivos sin datos, NetApp recomienda desarrollar una estrategia de backup adicional para estos volúmenes a fin de aumentar el backup de la base de datos SAP HANA. En función de los requisitos específicos, el backup de volúmenes que no pertenecen a datos puede diferir en la configuración de frecuencia de programación y retención, por lo que se debe considerar la frecuencia con la que se modifican los archivos. Por ejemplo, el volumen HANA `/hana/shared` Contiene ejecutables, pero también archivos de seguimiento SAP HANA. Aunque los ejecutables solo cambian cuando se actualiza la base de datos SAP HANA, los archivos de seguimiento de SAP HANA pueden necesitar una frecuencia de backup más alta para permitir el análisis de situaciones problemáticas con SAP HANA.
+
+Un backup de volúmenes que no es de datos del servicio SnapCenter permite crear copias Snapshot de todos los volúmenes relevantes en solo unos segundos, con la misma eficiencia de espacio que los backups de base de datos SAP HANA. La diferencia es que no se requiere ninguna comunicación SQL con la base de datos SAP HANA.
+
+Los siguientes pasos muestran cómo proteger el volumen compartido HANA de la base de datos SAP HANA PR1.
+
+. En la vista SAP HANA Systems, seleccione Add Non-Data Volumes en el menú contextual a la derecha de la pantalla.
++
+image:saphana-backup-anf-image31.png["Error: Falta la imagen gráfica"]
+
+. Haga clic en Add Storage.
++
+image:saphana-backup-anf-image32.png["Error: Falta la imagen gráfica"]
+
+. Seleccione el volumen compartido de HANA y haga clic en Add Storage.
++
+image:saphana-backup-anf-image33.png["Error: Falta la imagen gráfica"]
+
++
+image:saphana-backup-anf-image34.png["Error: Falta la imagen gráfica"]
+
+. Para añadir el volumen que no es de datos, haga clic en Añadir.
++
+image:saphana-backup-anf-image35.png["Error: Falta la imagen gráfica"]
+
++
+La descripción general de SAP HANA Systems ahora muestra un segundo icono en la columna de protección, lo que indica que se ha añadido un volumen sin datos al sistema HANA.
+
++
+image:saphana-backup-anf-image36.png["Error: Falta la imagen gráfica"]
+
+. En el menú contextual de la derecha, seleccione Protect > Non-Data Volumes.
++
+image:saphana-backup-anf-image37.png["Error: Falta la imagen gráfica"]
+
+. Asigne una política al volumen que no contiene datos. En el siguiente ejemplo, la `SnapshotEvery4h` La política se asigna al volumen compartido de HANA.
++
+image:saphana-backup-anf-image38.png["Error: Falta la imagen gráfica"]
+
+
+
+link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Siguiente: Configuración de backup de volúmenes globales sin datos."]

@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_fas_fc_sap_hana_storage_connector_api.html 
+keywords: sap, hana, storage, connector, api, fas, fc 
+summary: Sólo se necesita un conector de almacenamiento en entornos de varios hosts que tengan capacidades de conmutación por error. 
+---
+= API del conector de almacenamiento SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_fas_fc_storage_controller_setup.html["Anterior: Configuración de la controladora de almacenamiento."]
+
+Sólo se necesita un conector de almacenamiento en entornos de varios hosts que tengan capacidades de conmutación por error. En configuraciones de múltiples hosts, SAP HANA ofrece una funcionalidad de alta disponibilidad para que un host de base de datos de SAP HANA pueda conmutar al nodo de respaldo a un host de espera. En este caso, el host en espera accede a los LUN del host con error y los usa. El conector de almacenamiento se utiliza para asegurarse de que sólo un host de base de datos puede acceder activamente a una partición de almacenamiento.
+
+En las configuraciones de varios hosts de SAP HANA con almacenamiento de NetApp, se utiliza el conector de almacenamiento estándar proporcionado por SAP. La “Guía de administración del conector de almacenamiento FC SAP HANA” se puede encontrar como un adjunto a. https://service.sap.com/sap/support/notes/1900823["Nota de SAP 1900823"^].
+
+link:saphana_fas_fc_host_setup.html["Siguiente: Configuración del host."]

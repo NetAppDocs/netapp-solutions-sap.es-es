@@ -1,0 +1,58 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html 
+keywords: destroy, workflow 
+summary: Para retirar un sistema clonado, se debe detener y preparar con antelación. Después se puede iniciar el flujo de trabajo de destrucción del sistema. 
+---
+= Flujo de trabajo de desaprovisionamiento de SAP Lama: Destrucción del sistema
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Anterior: Flujo de trabajo de aprovisionamiento de SAP Lama: Clone el sistema."]
+
+[role="lead"]
+En la siguiente figura, se destacan los principales pasos ejecutados con el flujo de trabajo de destrucción del sistema.
+
+image:lama-ansible-image32.png["Esta imagen muestra una descripción general del flujo de trabajo de destrucción del sistema. Contiene los pasos sistema de detención, sistema de desinstalación, Eliminar clon de almacenamiento y Eliminar configuración del sistema."]
+
+. Para retirar un sistema clonado, se debe detener y preparar con antelación. Después se puede iniciar el flujo de trabajo de destrucción del sistema.
++
+image:lama-ansible-image33.png["Este gráfico contiene un diagrama de arquitectura combinado con el lugar en el que se realizan los pasos del flujo de trabajo mencionados anteriormente con el sistema."]
+
+. En este ejemplo, ejecutamos el flujo de trabajo de destrucción del sistema para el sistema creado anteriormente. Seleccionamos el sistema en la pantalla *Vista del sistema* e iniciamos el flujo de trabajo de destrucción del sistema en *destruir procesos*.
++
+image:lama-ansible-image34.png["Esta captura de pantalla muestra la interfaz gráfica de usuario de SAP Lama abierta a la vista de sistemas de aprovisionamiento  que le permite abrir la lista desplegable Destroy Systems."]
+
+. Todos los puntos de montaje que se mantienen durante la fase de aprovisionamiento se muestran aquí y se eliminan durante el proceso de flujo de trabajo de destrucción del sistema.
++
+image:lama-ansible-image35.png["Esta captura de pantalla muestra la pantalla Destroy System (destruir sistema) en la ficha Destroy Storage Volumes (destruir volúmenes de almacenamiento) con todos los puntos de montaje mostrados."]
+
++
+No se eliminan nombres de host virtuales porque se mantienen a través de DNS y se les asigna automáticamente.
+
++
+image:lama-ansible-image36.png["Esta captura de pantalla muestra la pantalla destruir sistema bajo la ficha Eliminar nombres de host. No aparece ningún nombre de host."]
+
+. La operación se inicia haciendo clic en el botón EXECUTE.
++
+image:lama-ansible-image37.png["Esta captura de pantalla muestra la página Destroy Storage Volumes Summary."]
+
++
+SAP Lama ahora realiza la eliminación de clones de volúmenes y elimina la configuración del sistema clonado.
+
+. Puede supervisar el progreso del flujo de trabajo de clonado en el menú *Supervisión*.
++
+image:lama-ansible-image38.png["Esta captura de pantalla muestra el progreso del flujo de trabajo de destrucción del sistema en tiempo real."]
+
+. Al seleccionar la tarea *Delete NetAppClone*, se muestra el registro detallado de ese paso. Aquí se muestra la ejecución del libro de aplicaciones de Ansible. Como podrá ver, el libro de estrategia de Ansible `netapp_lama_ServiceConfigRemoval.yml` Se ejecuta para cada volumen de base de datos, datos, registro y compartido de HANA.
++
+image:lama-ansible-image39.png["Esta captura de pantalla muestra la página de registro del flujo de trabajo de destrucción del sistema."]
+
+
+
+link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Siguiente: Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema de copia."]

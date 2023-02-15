@@ -1,0 +1,126 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_hana_database_recovery_01.html 
+keywords: recovery, forward, log, backups, system, tenant, database, log, backups, check, consistency, hana, azure 
+summary: Los siguientes son pasos para la recuperación de la base de datos de HANA. 
+---
+= Recuperación de base de datos de HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_mount_the_volumes_at_the_target_host.html["Anterior: Monte los volúmenes en el host de destino."]
+
+Inicie los servicios SAP necesarios.
+
+....
+vm-pr1:~ # systemctl start sapinit
+....
+El siguiente resultado muestra los procesos necesarios.
+
+....
+vm-pr1:/ # ps -ef | grep sap
+root     23101     1  0 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/saphostexec pf=/usr/sap/hostctrl/exe/host_profile
+pr1adm   23191     1  3 11:29 ?        00:00:00 /usr/sap/PR1/HDB01/exe/sapstartsrv pf=/usr/sap/PR1/SYS/profile/PR1_HDB01_vm-pr1 -D -u pr1adm
+sapadm   23202     1  5 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/sapstartsrv pf=/usr/sap/hostctrl/exe/host_profile -D
+root     23292     1  0 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/saposcol -l -w60 pf=/usr/sap/hostctrl/exe/host_profile
+root     23359  2597  0 11:29 pts/1    00:00:00 grep --color=auto sap
+....
+Los siguientes subapartados describen el proceso de recuperación con recuperación futura mediante los backups de registros replicados. La recuperación se ejecuta mediante el script de recuperación de HANA para la base de datos del sistema y los comandos hdbsql para la base de datos del arrendatario.
+
+Los comandos para ejecutar una recuperación del último punto de guardado de datos se describen en el capítulo link:saphana-dr-anf_hana_database_recovery.html#recovery-to-latest-hana-data-volume-backup-savepoint["Recuperación en el último punto de guardado de Data Volume Backup de HANA"].
+
+
+
+== Recuperación con recuperación futura con backups de registros
+
+La recuperación mediante todas las copias de seguridad de registro disponibles se ejecuta con los siguientes comandos como usuario pr1adm:
+
+* Base de datos del sistema
+
+
+....
+recoverSys.py --command "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT"
+....
+* Base de datos de tenant
+
+
+....
+Within hdbsql: RECOVER DATABASE FOR PR1 UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT
+....
+
+NOTE: Para recuperar utilizando todos los registros disponibles, puede utilizar en cualquier momento en el futuro como Marca de tiempo de la sentencia Recovery.
+
+También puede usar HANA Studio o Cockpit para ejecutar la recuperación del sistema y la base de datos de inquilinos.
+
+El siguiente resultado del comando muestra la ejecución de la recuperación.
+
+
+
+=== Recuperación de la base de datos del sistema
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> HDBSettings.sh recoverSys.py --command "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-24 00:00:00' CLEAR LOG USING SNAPSHOT"
+[139792805873472, 0.008] >> starting recoverSys (at Tue Feb 23 12:05:16 2021)
+[139792805873472, 0.008] args: ()
+[139792805873472, 0.008] keys: {'command': "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-24 00:00:00' CLEAR LOG USING SNAPSHOT"}
+using logfile /usr/sap/PR1/HDB01/vm-pr1/trace/backup.log
+recoverSys started: ============2021-02-23 12:05:16 ============
+testing master: vm-pr1
+vm-pr1 is master
+shutdown database, timeout is 120
+stop system
+stop system on: vm-pr1
+stopping system: 2021-02-23 12:05:17
+stopped system: 2021-02-23 12:05:18
+creating file recoverInstance.sql
+restart database
+restart master nameserver: 2021-02-23 12:05:23
+start system: vm-pr1
+sapcontrol parameter: ['-function', 'Start']
+sapcontrol returned successfully:
+2021-02-23T12:07:53+00:00  P0012969      177cec93d51 INFO    RECOVERY RECOVER DATA finished successfully, reached timestamp 2021-02-23T09:03:11+00:00, reached log position 43123520
+recoverSys finished successfully: 2021-02-23 12:07:54
+[139792805873472, 157.466] 0
+[139792805873472, 157.466] << ending recoverSys, rc = 0 (RC_TEST_OK), after 157.458 secs
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01>
+....
+
+
+=== Recuperación de bases de datos de tenant
+
+Si no se ha creado una clave de almacenamiento de usuario para el usuario pr1adm en el sistema de origen, debe crearse una clave en el sistema de destino. El usuario de la base de datos configurado en la clave debe tener privilegios para ejecutar operaciones de recuperación de inquilinos.
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbuserstore set PR1KEY vm-pr1:30113 <backup-user> <password>
+....
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbsql -U PR1KEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql SYSTEMDB=> RECOVER DATABASE FOR PR1 UNTIL TIMESTAMP '2021-02-24 00:00:00' CLEAR LOG USING SNAPSHOT
+0 rows affected (overall time 98.740038 sec; server time 98.737788 sec)
+hdbsql SYSTEMDB=>
+....
+
+
+== Comprobar la coherencia de los backups de registros más recientes
+
+Debido a que la replicación del volumen de backup de registros se realiza de forma independiente del proceso de backup de registros ejecutado por la base de datos SAP HANA, puede haber archivos de backup de registros abiertos e incoherentes en el sitio de recuperación ante desastres. Sólo es posible que los archivos de backup de registro más recientes no sean consistentes y se deben comprobar dichos archivos antes de que se realice una recuperación Reenviar en el sitio de recuperación ante desastres mediante el `hdbbackupcheck` herramienta.
+
+....
+pr1adm@hana-10: > hdbbackupcheck /hanabackup/PR1/log/SYSTEMDB/log_backup_0_0_0_0.1589289811148
+Loaded library 'libhdbcsaccessor'
+Loaded library 'libhdblivecache'
+Backup '/mnt/log-backup/SYSTEMDB/log_backup_0_0_0_0.1589289811148' successfully checked.
+....
+La comprobación debe ejecutarse para los archivos de backup de registros más recientes del sistema y la base de datos de tenant.
+
+Si la `hdbbackupcheck` la herramienta informa de un error acerca de los backups de registros más recientes, es necesario eliminar o eliminar el último conjunto de backups de registros.
+
+link:saphana-dr-anf_update_history.html["Siguiente: Historial de actualizaciones."]

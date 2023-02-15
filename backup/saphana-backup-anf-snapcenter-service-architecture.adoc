@@ -1,0 +1,32 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-architecture.html 
+keywords: snapcenter service, data protection, cloud manager, kubernetes 
+summary: Servicio SnapCenter es una plataforma unificada y escalable destinada a la protección de datos coherente con las aplicaciones. El servicio SnapCenter proporciona control y supervisión centralizados, a la vez que delega la capacidad de los usuarios para gestionar operaciones de backup y restauración de datos específicas para aplicaciones. 
+---
+= Arquitectura del servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-the-netapp-solution.html["Anterior: La solución de NetApp."]
+
+Servicio SnapCenter es una plataforma unificada y escalable destinada a la protección de datos coherente con las aplicaciones. El servicio SnapCenter proporciona control y supervisión centralizados, a la vez que delega la capacidad de los usuarios para gestionar operaciones de backup y restauración de datos específicas para aplicaciones.
+
+Servicio SnapCenter aprovecha el software Cloud Manager de NetApp como interfaz de usuario y para gestionar credenciales de Azure NetApp Files. Los servicios de SnapCenter se ejecutan en un clúster de Kubernetes y se comunican con Cloud Manager de NetApp a través de Cloud Manager Connector. El servicio SnapCenter activa las operaciones de bases de datos HANA mediante el cliente hdbsql de HANA y la operación de almacenamiento de Azure NetApp Files con las API de gestión de Azure NetApp Files.
+
+Puede poner en marcha el clúster de Kubernetes del servicio SnapCenter y el conector de Cloud Manager en un vNet de servicio independiente o en la misma vNet que los sistemas SAP HANA, tal y como se muestra en las dos figuras siguientes.
+
+image:saphana-backup-anf-image6.jpg["Error: Falta la imagen gráfica"]
+
+image:saphana-backup-anf-image7.jpg["Error: Falta la imagen gráfica"]
+
+La instalación del servicio de SnapCenter requiere un mínimo de dos máquinas virtuales (VM), una máquina virtual para el conector Cloud Manager y otra máquina virtual que ejecute el clúster de Kubernetes en una configuración que no sea de alta disponibilidad. Se necesitan dos equipos virtuales adicionales cuando SnapCenter Service se configura en una configuración de alta disponibilidad (ha).
+
+image:saphana-backup-anf-image8.jpg["Error: Falta la imagen gráfica"]
+
+link:saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html["Siguiente: Solución de backup SAP HANA del servicio SnapCenter."]

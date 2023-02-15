@@ -1,0 +1,110 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-overview.html 
+keywords: tr4614, 4614, introduction, 
+summary: Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción. 
+---
+= TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer: NetApp
+
+Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción.
+
+Los períodos definidos para los procesos de backup se reducen, mientras que la cantidad de datos objeto de backup es cada vez mayor. Por consiguiente, resulta difícil encontrar un momento en el que los backups puedan realizarse con un efecto mínimo en los procesos empresariales. El tiempo necesario para restaurar y recuperar los sistemas SAP es una preocupación, ya que deben minimizarse el tiempo de inactividad para la producción SAP y los sistemas que no son de producción para reducir el coste y la pérdida de datos para la empresa.
+
+Los puntos siguientes resumen los desafíos a los que se enfrentan los procesos de respaldo y recuperación de SAP:
+
+* *Efectos sobre el rendimiento en los sistemas SAP de producción.* normalmente, las copias de seguridad tradicionales basadas en copias generan un significativo drenaje del rendimiento en los sistemas SAP de producción debido a las pesadas cargas que se encuentran en el servidor de bases de datos, el sistema de almacenamiento y la red de almacenamiento.
+* *Reducción de ventanas de copia de seguridad.* las copias de seguridad convencionales sólo se pueden realizar cuando pocas actividades de diálogo o por lotes están en proceso en el sistema SAP. La programación de backups se complica cuando los sistemas SAP se utilizan de forma ininterrumpida.
+* *Rápido crecimiento de datos.* el rápido crecimiento de datos y la reducción de los plazos de respaldo requieren una inversión continua en infraestructura de respaldo. En otras palabras, debe adquirir más unidades de cinta, espacio adicional en disco de backup y redes de backup más rápidas. También debe cubrir el gasto continuo en almacenamiento y gestión de estos activos de cinta. Los backups incrementales o diferenciales pueden resolver estos problemas, pero esta disposición da como resultado un proceso de restauración muy lento, engorroso y complejo que es más difícil de verificar. Dichos sistemas suelen aumentar los tiempos de objetivo de tiempo de recuperación (RTO) y objetivo de punto de recuperación (RPO) de formas que no son aceptables para la empresa.
+* *Aumento del costo del tiempo de inactividad.* el tiempo de inactividad no planificado de un sistema SAP afecta típicamente a las finanzas del negocio. El requisito de restaurar y recuperar el sistema SAP consume una parte significativa de cualquier tiempo de inactividad no planificado. Por tanto, el objetivo de tiempo de recuperación deseado determina el diseño de la arquitectura de backup y recuperación.
+* *Tiempo de copia de seguridad y recuperación para proyectos de actualización SAP.* el plan de proyecto para una actualización SAP incluye al menos tres copias de seguridad de la base de datos SAP. Estos backups reducen significativamente el tiempo disponible para el proceso de actualización. La decisión de proceder suele basarse en el tiempo necesario para restaurar y recuperar la base de datos desde el backup creado previamente. En lugar de simplemente restaurar un sistema a su estado anterior, una restauración rápida ofrece más tiempo para resolver los problemas que pueden ocurrir durante una actualización.
+
+
+
+
+== La solución de NetApp
+
+La tecnología Snapshot de NetApp se puede usar para crear backups de bases de datos en cuestión de minutos. El tiempo necesario para crear una copia Snapshot es independiente del tamaño de la base de datos porque la copia Snapshot no mueve bloques de datos físicos en la plataforma de almacenamiento. Además, el uso de la tecnología Snapshot no afecta al rendimiento del sistema SAP en vivo porque la tecnología Snapshot de NetApp no mueve ni copia bloques de datos cuando se crea la copia Snapshot o se cambian datos en el sistema de archivos activo. Por tanto, la creación de copias Snapshot puede programarse sin tener en cuenta los períodos de actividad en lote o con picos de carga. SAP y los clientes de NetApp suelen programar varios backups Snapshot en línea durante el día; por ejemplo, cada cuatro horas es habitual. Estos backups de Snapshot suelen conservarse de tres a cinco días en el sistema de almacenamiento principal antes de quitarse.
+
+Las copias Snapshot también proporcionan ventajas importantes para las operaciones de recuperación y restauración. El software de recuperación de datos SnapRestore de NetApp permite la restauración de una base de datos completa o, alternativamente, una porción de una base de datos en un momento específico, según las copias Snapshot disponibles. Estos procesos de restauración se completan en cuestión de minutos, independientemente del tamaño de la base de datos. Debido a que se crean varios backups Snapshot online durante el día, el tiempo necesario para el proceso de recuperación se reduce significativamente en comparación con un método de backup tradicional. Dado que una restauración se puede realizar con una copia Snapshot con sólo unas horas de antigüedad (en lugar de hasta 24 horas), deben aplicarse menos registros de transacciones. Por lo tanto, el RTO se reduce a varios minutos en lugar de las varias horas necesarias para los backups en cinta de ciclo único convencionales.
+
+Los backups de copias snapshot se almacenan en el mismo sistema de disco que los datos activos en línea. Por ello, NetApp recomienda utilizar los backups de copias snapshot como suplemento en lugar de como sustituto para los backups en una ubicación secundaria. La mayoría de las acciones de restauración y recuperación se realizan mediante SnapRestore en el sistema de almacenamiento principal. Solo son necesarias las restauraciones desde una ubicación secundaria si el sistema de almacenamiento primario que contiene las copias snapshot está dañado. La ubicación secundaria también puede utilizarse si es necesario restaurar un backup que ya no está disponible desde una copia Snapshot: Por ejemplo, un backup final de mes.
+
+Un backup en una ubicación secundaria se basa en las copias Snapshot creadas en el almacenamiento principal. Por tanto, los datos se leen directamente desde el sistema de almacenamiento primario sin generar carga en el servidor de bases de datos SAP. El almacenamiento primario se comunica directamente con el almacenamiento secundario y envía los datos de backup al destino mediante un backup de disco a disco de SnapVault de NetApp.
+
+SnapVault ofrece ventajas significativas en comparación con los backups tradicionales. Después de una transferencia de datos inicial, en la que todos los datos se transfieren del origen al destino, en las copias posteriores sólo se copian los bloques modificados al almacenamiento secundario. Por tanto, se reduce significativamente la carga del sistema de almacenamiento primario y el tiempo necesario para un backup completo. Como SnapVault almacena solo los bloques modificados en destino, un backup completo de la base de datos requiere menos espacio en disco.
+
+La solución también se puede ampliar sin problemas a un modelo de operación de cloud híbrido. La replicación de datos para recuperación ante desastres o los fines de backup externo pueden realizarse desde sistemas ONTAP de NetApp en las instalaciones a instancias Cloud Volumes ONTAP que se ejecuten en el cloud. Puede utilizar SnapCenter como herramienta central para gestionar la protección de datos y la replicación de datos, independientemente de si el sistema SAP HANA se ejecuta en las instalaciones o en el cloud. La siguiente figura muestra información general sobre la solución de backup.
+
+image:saphana-br-scs-image1.png["Error: Falta la imagen gráfica"]
+
+
+
+== Tiempo de ejecución de backups de Snapshot
+
+La siguiente captura de pantalla muestra HANA Studio de un cliente que ejecuta SAP HANA en almacenamiento de NetApp. El cliente usa copias de Snapshot para realizar backups de la base de datos HANA. La imagen muestra que se puede realizar un backup de la base de datos de HANA (aproximadamente 2,3 TB de tamaño) en 2 minutos y 11 segundos con la tecnología de backup de Snapshot.
+
+
+NOTE: La parte más grande del tiempo de ejecución del flujo de trabajo de backup general es el tiempo necesario para ejecutar la operación del punto de guardado del backup de HANA, y este paso depende de la carga de la base de datos de HANA. El propio backup de los snapshots de almacenamiento siempre finaliza en un par de segundos.
+
+image:saphana-br-scs-image2.png["Error: Falta la imagen gráfica"]
+
+
+
+== Comparación de objetivos de tiempo de recuperación
+
+Esta sección proporciona una comparación entre el objetivo de tiempo de recuperación de backups de copias Snapshot basadas en archivos y el almacenamiento. El objetivo de tiempo de recuperación se define por la suma del tiempo necesario para restaurar la base de datos y el tiempo necesario para iniciar y recuperar la base de datos.
+
+
+
+=== Tiempo necesario para restaurar las bases de datos
+
+Con un backup basado en archivos, el tiempo de restauración depende del tamaño de la infraestructura de backup y base de datos, que define la velocidad de restauración en megabytes por segundo. Por ejemplo, si la infraestructura admite una operación de restauración a una velocidad de 250 Mbps, se tarda aproximadamente 1 hora y 10 minutos en restaurar una base de datos de 1 TB de tamaño.
+
+Con los backups de copias Snapshot de almacenamiento, el tiempo de restauración es independiente del tamaño de la base de datos y está dentro del intervalo de un par de segundos cuando la restauración puede realizarse desde el almacenamiento principal. Solo es necesario llevar a cabo una restauración a partir del almacenamiento secundario cuando se produzca un desastre cuando el almacenamiento primario ya no esté disponible.
+
+
+
+=== Tiempo necesario para iniciar la base de datos
+
+La hora de inicio de la base de datos depende del tamaño del almacén de filas y columnas. En el almacén de columnas, la hora de inicio también depende de la cantidad de datos precargados durante el inicio de la base de datos. En los siguientes ejemplos asumimos que la hora de inicio es de 30 minutos. La hora de inicio es la misma para una restauración y recuperación basadas en archivos, y una restauración y recuperación basadas en Snapshot.
+
+
+
+=== Tiempo necesario para recuperar las bases de datos
+
+El tiempo de recuperación depende de la cantidad de registros que se deben aplicar después de la restauración. Este número viene determinado por la frecuencia con la que se realizan backups de datos.
+
+Con los backups de datos basados en archivos, la programación de backup suele ser una vez al día. Por lo general, no es posible aumentar la frecuencia de backup, ya que el backup reduce el rendimiento de producción. Por lo tanto, en el peor de los casos, todos los registros que se escribieron durante el día deben aplicarse durante la recuperación de avance.
+
+Los backups de datos de copias de Snapshot de almacenamiento suelen programarse con una frecuencia más alta debido a que no afectan al rendimiento de la base de datos de SAP HANA. Por ejemplo, si los backups de copias snapshot se programan cada seis horas, el tiempo de recuperación sería, en el peor de los casos, la cuarta parte del tiempo de recuperación de un backup basado en archivos (6 horas / 24 horas = ¼).
+
+La siguiente figura muestra un ejemplo de objetivo de tiempo de recuperación para una base de datos de 1 TB cuando se utilizan backups de datos basados en archivos. En este ejemplo, se realiza un backup una vez al día. El objetivo de tiempo de recuperación varía según el momento en que se realizó la restauración y la recuperación. Si las restauraciones y las recuperaciones se llevaron a cabo inmediatamente después de realizar un backup, el RTO se basa principalmente en el tiempo de restauración, que es de 1 hora y 10 minutos en el ejemplo. El tiempo de recuperación se aumentó a 2 horas y 50 minutos cuando se realizaron la restauración y la recuperación inmediatamente antes de que se pudiera realizar el siguiente backup, y el RTO máximo se mostró a 4 horas y 30 minutos.
+
+image:saphana-br-scs-image3.png["Error: Falta la imagen gráfica"]
+
+La siguiente figura muestra un ejemplo de objetivo de tiempo de recuperación para una base de datos de 1 TB cuando se utilizan backups Snapshot. En cuanto a los backups de Snapshot basados en almacenamiento, el objetivo de tiempo de recuperación solo depende del tiempo de inicio de la base de datos y del tiempo de recuperación de alcance, ya que la restauración se realiza en unos pocos segundos, independientemente del tamaño de la base de datos. El tiempo de recuperación futura también aumenta en función de cuándo se realicen las restauraciones y las recuperaciones, pero, debido a la mayor frecuencia de backups (cada seis horas en este ejemplo), el tiempo de recuperación futura es, como máximo, de 43 minutos. En este ejemplo, el objetivo de tiempo de recuperación máximo es de 1 hora y 13 minutos.
+
+image:saphana-br-scs-image4.png["Error: Falta la imagen gráfica"]
+
+La siguiente figura muestra una comparación de objetivos de tiempo de recuperación de backups Snapshot basados en archivos y basados en almacenamiento para diferentes tamaños de base de datos y diferentes frecuencias de los backups de Snapshot. La barra verde muestra el backup basado en archivos. Las otras barras muestran los backups de copias de Snapshot con diferentes frecuencias de backup.
+
+Con un único backup de datos de copia Snapshot al día, el objetivo de tiempo de recuperación ya se ha reducido en un 40 % en comparación con un backup de datos basado en archivos. La reducción aumenta hasta el 70% cuando se realizan cuatro backups Snapshot al día. La figura también muestra que la curva se mantendrá si aumenta la frecuencia de backup de Snapshot a más de cuatro o seis backups de Snapshot al día. Por lo tanto, nuestros clientes suelen configurar de cuatro a seis backups Snapshot al día.
+
+image:saphana-br-scs-image5.png["Error: Falta la imagen gráfica"]
+
+
+NOTE: El gráfico muestra el tamaño de la RAM del servidor HANA. El tamaño de la base de datos en la memoria se calcula para ser la mitad del tamaño de la RAM del servidor.
+
+
+NOTE: El tiempo de restauración y recuperación se calcula en función de las siguientes suposiciones. La base de datos se puede restaurar a 250 Mbps. La cantidad de archivos de registro por día es del 50% del tamaño de la base de datos. Por ejemplo, una base de datos de 1 TB crea 500 MB de archivos de registro al día. La recuperación se puede realizar a 100 Mbps.
+
+link:saphana-br-scs-snapcenter-architecture.html["Siguiente: Arquitectura de SnapCenter."]

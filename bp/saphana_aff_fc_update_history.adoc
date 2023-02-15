@@ -1,0 +1,53 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_update_history.html 
+keywords:  
+summary:  
+---
+= Actualizar historial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_fc_where_to_find_additional_information.html["Anterior: Dónde encontrar información adicional."]
+
+Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
+
+[cols="25,25,50"]
+|===
+| Versión | Fecha | Actualizar el resumen 
+
+
+| Versión 1.0 | Octubre de 2015 | Versión inicial 
+
+
+| Versión 1.1 | Marzo de 2016 | Ajuste de tamaño de la capacidad actualizado 
+
+
+| Versión 2.0 | Febrero de 2017 | Nuevos sistemas de almacenamiento y bandejas de discos de NetApp nuevas funciones de las nuevas versiones del sistema operativo ONTAP 9 (SLES12 SP1 y RHEL 7.2), nueva versión SAP HANA 
+
+
+| Versión 2.1 | Julio de 2017 | Actualizaciones menores 
+
+
+| Versión 3.0 | Septiembre de 2018 | Nuevos sistemas de almacenamiento de NetApp nuevas versiones del sistema operativo (SLES12 SP3 y RHEL 7.4) actualizaciones secundarias adicionales de SAP HANA 2.0 SPS3 
+
+
+| Versión 3.1 | Noviembre de 2019 | Nuevos sistemas de almacenamiento de NetApp y bandeja de NVMe nuevas versiones de sistema operativo (SLES12 SP4, SLES 15 y RHEL 7.6) actualizaciones secundarias adicionales 
+
+
+| Versión 3.2 | Abril de 2020 | Los sistemas de almacenamiento de la nueva serie AFF ASA introdujeron múltiples funciones de partición de datos disponibles desde SAP HANA 2.0 SPS4 
+
+
+| Versión 3.3 | Junio de 2020 | Información adicional sobre funcionalidades opcionales actualizaciones menores 
+
+
+| Versión 4.0 | Febrero de 2021 | LVM de Linux admite nuevos sistemas de almacenamiento NetApp nuevas versiones del SO (SLES15SP2, RHEL 8) 
+
+
+| Versión 4.1 | Abril de 2021 | Se añadió información específica de VMware vSphere 
+|===

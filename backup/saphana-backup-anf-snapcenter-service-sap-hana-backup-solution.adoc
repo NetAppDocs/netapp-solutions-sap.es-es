@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html 
+keywords: solution components, scheduling, retention, 
+summary: En esta sección se describen las áreas cubiertas por la solución de backup del servicio SnapCenter. 
+---
+= Solución de backup SAP HANA del servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-architecture.html["Anterior: Arquitectura de servicio de SnapCenter."]
+
+
+
+== Componentes de la solución
+
+La solución de backup de servicio SnapCenter para SAP HANA cubre las siguientes áreas:
+
+* Backup de datos SAP HANA con copias Snapshot basadas en almacenamiento:
++
+** Programación de copias de seguridad
+** Backups bajo demanda
+** Gestión de retención
+** Mantenimiento del catálogo de backup de SAP HANA
+** Operación de restauración
+
+
+* Backup de volúmenes no pertenecientes a datos con copias Snapshot basadas en el almacenamiento
++
+** SnapCenter diferencia entre los volúmenes que no pertenecen a un sistema HANA específico. Por ejemplo, el volumen compartido de HANA y los volúmenes no pertenecientes a un sistema HANA específico, por ejemplo, el directorio de transporte SAP.
+** Programación de copias de seguridad
+** Backups bajo demanda
+** Gestión de retención
+** Operación de restauración
+
+
+* Backup basado en archivos para comprobaciones de integridad de bloques de base de datos o backup en una segunda ubicación:
++
+** Programación de copias de seguridad
+** Backups bajo demanda
+** Gestión de retención
+** Mantenimiento del catálogo de backup de SAP HANA
+
+
+* Gestión de retención del backup de registros de base de datos de HANA:
++
+** Gestión de retención basada en la retención de backups de datos
+** Mantenimiento del catálogo de backup de SAP HANA
+
+
+
+
+Los backups de datos de Snapshot se ejecutan con el servicio SnapCenter activando el punto de guardado de backup de base de datos SAP HANA para que la copia de Snapshot, que se crea en la capa de almacenamiento, se base en una imagen consistente de la base de datos SAP HANA.
+
+Para permitir un backup completo de todos los recursos relacionados con SAP HANA, el servicio SnapCenter también le permite realizar un backup de todos los volúmenes que no sean de datos con copias de Snapshot basadas en almacenamiento. Puede programar volúmenes que no sean de datos independientemente del backup de datos de la base de datos para habilitar políticas de retención y protección individuales.
+
+SAP recomienda combinar backups de SnapVault basados en almacenamiento con un backup basado en archivos semanal para ejecutar una comprobación de la integridad de los bloques. Puede ejecutar la comprobación de integridad de bloques desde SnapCenter. También se usan backups de comprobación de integridad de los bloques (basados en archivos) para descargar los backups a una segunda ubicación de almacenamiento.
+
+Según sus políticas de retención configurables, el servicio de SnapCenter gestiona el mantenimiento de backups de datos, backups de registros y el catálogo de backup de SAP HANA.
+
+La siguiente figura resume la solución de backup.
+
+image:saphana-backup-anf-image9.png["Error: Falta la imagen gráfica"]
+
+Al ejecutar un backup de Snapshot basado en almacenamiento de volúmenes que no son de datos, el servicio de SnapCenter realiza las siguientes tareas:
+
+. Crea una copia snapshot de almacenamiento del volumen que no contiene datos.
+. Elimina copias Snapshot de almacenamiento en función de la política de retención definida.
+
+
+Al ejecutar un backup de Snapshot basado en el almacenamiento de la base de datos SAP HANA, el servicio SnapCenter realiza las siguientes tareas:
+
+. Crea un punto de guardado de backup de SAP HANA para crear una imagen consistente en la capa de persistencia.
+. Crea una copia snapshot de almacenamiento del volumen de datos.
+. Registra el backup de Snapshot de almacenamiento en el catálogo de backup de SAP HANA.
+. Lanza el punto de guardado de backup de SAP HANA.
+. Elimina copias Snapshot de almacenamiento en función de la política de retención definida.
+. Elimina las entradas del catálogo de backup de SAP HANA en función de la política de retención definida.
+. Cada vez que un backup de datos se eliminó manualmente o según la política de retención, el servicio SnapCenter elimina todos los backups de registros más antiguos que el backup de datos más antiguo. Los backups de registros se eliminan en el sistema de archivos y en el catálogo de backup SAP HANA.
+
+
+
+
+== Versiones y configuraciones de SAP HANA compatibles
+
+El servicio SnapCenter admite configuraciones de un solo host y varios hosts de SAP HANA conectadas a volúmenes Azure NetApp Files.
+
+El servicio SnapCenter es compatible con las siguientes arquitecturas y versiones de SAP HANA:
+
+* Contenedor único de SAP HANA:
++
+** SAP HANA 1.0 SPS12
+
+
+* Contenedor de base de datos multitenant (MDC) de SAP HANA con uno o varios inquilinos:
++
+** SAP HANA 2.0 SPS4 y posterior
+
+
+
+
+
+NOTE: SAP con HANA 2.0 SP1 ha introducido soporte de backup de copias Snapshot para sistemas MDC.y HANA 2.0 SPS4 para sistemas multi-tenant.
+
+No se admite la combinación de backups de Snapshot de datos con el servicio SnapCenter y backups de registros con una solución de backint. Los backups de registros deben configurarse para que se escriban en un sistema de archivos.
+
+link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html["Siguiente: Conceptos y prácticas recomendadas del servicio SnapCenter."]

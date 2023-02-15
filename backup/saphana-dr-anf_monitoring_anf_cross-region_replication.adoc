@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_monitoring_anf_cross-region_replication.html 
+keywords: replicated, snapshot, backups, status, monitoring, anf, cross, region 
+summary: Las tres siguientes capturas de pantalla muestran el estado de replicación de los datos, el backup de registros y los volúmenes compartidos. 
+---
+= Monitorización de la replicación entre regiones de ANF
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Anterior: Pasos de configuración para la replicación entre regiones de ANF."]
+
+
+
+== Estado de replicación
+
+Las tres siguientes capturas de pantalla muestran el estado de replicación de los datos, el backup de registros y los volúmenes compartidos.
+
+El tiempo de retraso de replicación de volúmenes es un valor útil para entender las expectativas de RPO. Por ejemplo, la replicación del volumen de backup de registros muestra un tiempo de demora máximo de 58 minutos, lo que significa que el objetivo de punto de recuperación máximo tiene el mismo valor.
+
+La duración de la transferencia y el tamaño de la transferencia proporcionan información valiosa sobre los requisitos de ancho de banda y cambian la tasa del volumen replicado.
+
+La siguiente captura de pantalla muestra el estado de replicación del volumen de datos HANA.
+
+image:saphana-dr-anf_image14.png["Error: Falta la imagen gráfica"]
+
+La siguiente captura de pantalla muestra el estado de replicación del volumen de backup de registros de HANA.
+
+image:saphana-dr-anf_image15.png["Error: Falta la imagen gráfica"]
+
+La siguiente captura de pantalla muestra el estado de replicación del volumen compartido de HANA.
+
+image:saphana-dr-anf_image16.png["Error: Falta la imagen gráfica"]
+
+
+
+== Backups Snapshot replicados
+
+Con cada actualización de replicación del volumen de origen al de destino, todos los cambios de bloques que ocurrieron entre la última actualización y la actual se replican en el volumen de destino. También incluye las copias de Snapshot, que se crearon en el volumen de origen. La siguiente captura de pantalla muestra las instantáneas disponibles en el volumen de destino. Como ya hemos visto, cada una de las copias Snapshot creadas por la herramienta AzAcSnap son imágenes consistentes con las aplicaciones de la base de datos HANA que se pueden utilizar para ejecutar un punto de guardado o una recuperación futura.
+
+
+NOTE: En el volumen de origen y destino, también se crean copias Snapshot de SnapMirror, que se utilizan para realizar operaciones de actualización de sincronización y replicación. Estas copias Snapshot no son coherentes con las aplicaciones desde el punto de vista de la base de datos de HANA; solo se pueden utilizar las copias snapshot coherentes con las aplicaciones creadas a través de AzaCSnap para las operaciones de recuperación de HANA.
+
+image:saphana-dr-anf_image17.png["Error: Falta la imagen gráfica"]
+
+link:saphana-dr-anf_disaster_recovery_testing_overview.html["Siguiente: Pruebas de recuperación ante desastres."]

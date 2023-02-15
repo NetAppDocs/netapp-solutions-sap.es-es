@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana-ibm-aff-nfs_pdf_link.html 
+keywords: tr-4821, pdf, sap, hana, ibm, aff, nfs 
+summary: 'IBM Power Systems está diseñado para cargas de trabajo de misión crítica y con un gran volumen de datos como SAP HANA. IBM Power Systems simplifica y acelera las puestas en marcha de SAP HANA al proporcionar cuatro funcionalidades clave: Una virtualización y una flexibilidad superiores, un aprovisionamiento más rápido, una escalabilidad asequible y un tiempo de actividad maximizado. La familia de productos AFF de NetApp está certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI) y complementa a la perfección con IBM Power Systems. En este documento se describen las prácticas recomendadas para una configuración de almacenamiento NAS (NFS) mediante ONTAP de NetApp con la familia de productos AFF e IBM Power Systems.' 
+---
+= TR-4821: SAP HANA en IBM Power Systems y sistemas AFF de NetApp con NFS
+:allow-uri-read: 
+:firstname: : hardbreaks:
+:author: : hardbreaks:
+:authorinitials: :
+:authors: : hardbreaks:
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Tobias Brandl, NetApp
+
+Carsten Dieterle, IBM
+
+IBM Power Systems está diseñado para cargas de trabajo de misión crítica y con un gran volumen de datos como SAP HANA. IBM Power Systems simplifica y acelera las puestas en marcha de SAP HANA a través de cuatro funcionalidades clave: Virtualización y flexibilidad superiores, aprovisionamiento más rápido, escalabilidad asequible y tiempo de actividad maximizado. La familia de productos AFF de NetApp está certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI) y complementa a la perfección con IBM Power Systems. En este documento se describen las prácticas recomendadas para una configuración de almacenamiento NAS (NFS) mediante ONTAP de NetApp con la familia de productos AFF e IBM Power Systems.
+
+link:https://www.netapp.com/pdf.html?item=/media/19887-TR-4821.pdf["https://www.netapp.com/pdf.html?item=/media/19887-TR-4821.pdf"]

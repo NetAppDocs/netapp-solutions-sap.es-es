@@ -1,0 +1,224 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html 
+keywords:  
+summary:  
+---
+= Conceptos y prácticas recomendadas del servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html["Anterior: Solución de backup SAP HANA del servicio SnapCenter."]
+
+
+
+== Estrategia de protección de datos
+
+Antes de configurar el servicio SnapCenter, debe definir la estrategia de protección de datos en función de los requisitos de objetivo de tiempo de recuperación y objetivo de punto de recuperación de los distintos sistemas SAP.
+
+Un enfoque común es definir tipos de sistemas como sistemas de producción, desarrollo, pruebas o entornos de pruebas. Normalmente, todos los sistemas SAP del mismo tipo tienen los mismos parámetros de protección de datos.
+
+Debe definir los siguientes parámetros:
+
+* La frecuencia con la que se ejecuta un backup de Snapshot
+* Durante cuánto tiempo se conserva un backup de Snapshot
+* ¿Con qué frecuencia se ejecuta una comprobación de integridad de bloques (backups basados en archivos)
+* ¿Cuánto tiempo se mantiene un backup de comprobación de integridad de bloque (backup basado en archivos)?
+
+
+En la siguiente tabla se muestra un ejemplo de parámetros de protección de datos para la producción, desarrollo y prueba del tipo de sistema. Para el sistema de producción se ha definido una alta frecuencia de backups y se ejecutan backups semanales basados en archivos. Los sistemas de prueba y desarrollo tienen menores requisitos, y se programan los backups de Snapshot con menos frecuencia.
+
+|===
+| Parámetros | Sistemas de producción | Sistemas de desarrollo | Pruebas de sistemas 
+
+
+| Frecuencia de backups de Snapshot | Cada 4 horas | Cada 6 horas | Cada 12 horas 
+
+
+| Retención de backup de Snapshot | 3 días | 3 días | 3 días 
+
+
+| Frecuencia de comprobación de integridad de bloques | Una vez a la semana | Una vez a la semana | Una vez a la semana 
+
+
+| Retención de comprobación de integridad de bloques | 4 semanas | 2 semanas | 1 semana 
+|===
+En la siguiente tabla, se muestran las políticas que deben configurarse para los parámetros de protección de datos para las operaciones de backup de Snapshot.
+
+|===
+| Parámetros | Política SnapshotEvery4h | Política SnapshotEvery6h | Política SnapshotEvery12h 
+
+
+| Tipo de backup | Basada en copias Snapshot | Basada en copias Snapshot | Basada en copias Snapshot 
+
+
+| Tipo de programación | Cada hora | Cada hora | Cada hora 
+
+
+| Retención | Recuento = 18 | Recuento = 12 | Recuento = 3 
+
+
+| Programa de backup | Cada 4 horas | Cada 6 horas | Cada 12 horas 
+|===
+En la siguiente tabla, se muestran las políticas que deben configurarse para los parámetros de protección de datos para las operaciones de backup basadas en archivos.
+
+|===
+| Parámetros | Archivo de políticas Based4Week | Archivo de políticas Based2Weeks | Archivo de directiva 1 Semana 
+
+
+| Tipo de backup | Basado en archivos | Basado en archivos | Basado en archivos 
+
+
+| Tipo de programación | Semanal | Semanal | Semanal 
+
+
+| Retención | Recuento = 4 | Recuento = 2 | Recuento = 1 
+
+
+| Programa de backup | Todos los domingos | Todos los domingos | Todos los domingos 
+|===
+
+
+=== Políticas de servicio de SnapCenter
+
+En el servicio SnapCenter, una única política de protección incluye los siguientes parámetros:
+
+* Tipo de backup
++
+** Basado en Snapshot
+** Basado en archivos
+
+
+* Programación y retención
++
+** Schedules: Hourly, Daily, Weekly, Monthly. Una única política puede tener varias programaciones.
+** Para cada programación, se configura una hora de inicio o de finalización y la frecuencia.
+** Para cada programación, se configura una retención. La retención puede basarse en el tiempo o en los contadores.
+
+
+
+
+La figura siguiente muestra una captura de pantalla de la configuración de la directiva.
+
+image:saphana-backup-anf-image10.png["Error: Falta la imagen gráfica"]
+
+
+
+== Operaciones de backup
+
+SAP introdujo la compatibilidad de los backups de Snapshot para sistemas de varios inquilinos MDC con HANA 2.0 SPS4. En un sistema MDC de SAP HANA, la configuración de inquilinos no es necesariamente estática. Puede agregar o eliminar inquilinos. El servicio SnapCenter no puede confiar en la configuración que se detecta cuando la base de datos HANA se añade a SnapCenter. El servicio de SnapCenter debe saber qué inquilinos están disponibles en el momento específico en que se ejecuta la operación de backup.
+
+Por lo tanto, con cada operación de backup, el primer paso del flujo de trabajo es obtener la información del inquilino. El siguiente paso es la operación de backup de Snapshot. Este paso incluye el comando SQL para activar el punto de guardado del backup de HANA, el backup de Snapshot de Azure NetApp Files y el comando SQL para cerrar el punto de guardado del backup de HANA. Al usar el comando close, la base de datos de HANA actualiza el catálogo de backup de la base de datos del sistema y cada inquilino.
+
+
+NOTE: SAP no admite las operaciones de backup de Snapshot para sistemas MDC cuando se detienen uno o varios inquilinos.
+
+Para la gestión de retención de backups de datos y la gestión del catálogo de backup de HANA, el servicio SnapCenter debe ejecutar las operaciones de eliminación de catálogo para la base de datos del sistema y todas las bases de datos de tenant que se identificaron en el primer paso. Del mismo modo para los backups de registros, el flujo de trabajo del servicio SnapCenter debe funcionar en cada inquilino que forme parte de la operación de backup.
+
+En la siguiente figura, se muestra información general sobre el flujo de trabajo de backup.
+
+image:saphana-backup-anf-image11.jpg["Error: Falta la imagen gráfica"]
+
+
+
+=== Flujo de trabajo de backup para backups de Snapshot de la base de datos HANA
+
+El servicio SnapCenter ejecuta el backup de la base de datos SAP HANA en la siguiente secuencia:
+
+. Lee la lista de inquilinos de la base de datos HANA.
+. Almacena información de inquilinos en los metadatos del servicio SnapCenter para la operación de backup.
+. Activa un punto de guardado de backup sincronizado global de SAP HANA para crear una imagen de base de datos coherente en la capa de persistencia.
++
+Para un sistema tenant único o múltiple de SAP HANA MDC, se crea un punto de guardado de backup global sincronizado para la base de datos del sistema y para cada base de datos de tenant.
+
+. Crea copias snapshot de Azure NetApp Files para todos los volúmenes de datos configurados para el sistema HANA. En nuestro ejemplo de una base de datos HANA de un único host, solo hay un volumen de datos. Con una base de datos de varios hosts SAP HANA, hay varios volúmenes de datos.
+. Registra el backup de Snapshot de Azure NetApp Files en el catálogo de backup de SAP HANA.
+. Elimina el punto de guardado del backup de SAP HANA.
+. Elimina las copias Snapshot de Azure NetApp Files y las entradas de backup en su base de datos, así como en el catálogo de backup de SAP HANA, según la política de retención definida para los backups. Las operaciones del catálogo de backup DE HANA se realizan para la base de datos del sistema y todos los inquilinos.
+. Elimina todos los backups de registros del sistema de archivos y en el catálogo de backup de SAP HANA más antiguos que el backup de datos más antiguo identificado en el catálogo de backup de SAP HANA. Estas operaciones se realizan para la base de datos del sistema y todos los inquilinos.
+
+
+
+
+=== Flujo de trabajo de backup para operaciones de comprobación de integridad de bloques
+
+El servicio SnapCenter ejecuta la comprobación de integridad de bloques en la siguiente secuencia:
+
+. Lee la lista de inquilinos de la base de datos HANA.
+. Activa una operación de backup basada en archivos de la base de datos del sistema y cada inquilino.
+. Elimina los backups basados en archivos de su base de datos, en el sistema de archivos y en el catálogo de backup de SAP HANA en función de la política de retención definida para las operaciones de comprobación de integridad de bloques. La eliminación de backup del sistema de archivos y las operaciones de catálogo de backup de HANA se realizan para la base de datos del sistema y todos los inquilinos.
+. Elimina todos los backups de registros del sistema de archivos y en el catálogo de backup de SAP HANA más antiguos que el backup de datos más antiguo identificado en el catálogo de backup de SAP HANA. Estas operaciones se realizan para la base de datos del sistema y todos los inquilinos.
+
+
+
+
+== Gestión de retención de backup y mantenimiento de backups de datos y registros
+
+La gestión de retención de backup de datos y el mantenimiento de backup de registros se pueden dividir en cuatro áreas principales, incluida la gestión de retención de las siguientes:
+
+* Backups Snapshot
+* Backups basados en archivos
+* Backups de datos en el catálogo de backup de SAP HANA
+* Los backups de registro en el catálogo de backup de SAP HANA y el sistema de archivos
+
+
+En la siguiente figura, se proporciona información general sobre los diferentes flujos de trabajo y las dependencias de cada operación. En las siguientes secciones se describen detalladamente las diferentes operaciones.
+
+image:saphana-backup-anf-image12.png["Error: Falta la imagen gráfica"]
+
+
+
+=== La gestión de retención de backups de Snapshot
+
+Servicio SnapCenter realiza tareas de mantenimiento de backups de bases de datos SAP HANA y backups de volúmenes que no son de datos. Para ello, elimina copias Snapshot en el almacenamiento y en el repositorio de servicios SnapCenter según una retención definida en la política de backup de servicios SnapCenter.
+
+La lógica de gestión de retención se ejecuta con cada flujo de trabajo de backup en SnapCenter.
+
+También es posible eliminar backups de snapshot manualmente en SnapCenter.
+
+
+
+=== Gestión de retención de backups basados en archivos
+
+El servicio SnapCenter realiza tareas de mantenimiento de los backups basados en archivos mediante la eliminación de los backups en el sistema de archivos según una retención definida en la política de backup de servicio de SnapCenter.
+
+La lógica de gestión de retención se ejecuta con cada flujo de trabajo de backup en SnapCenter.
+
+
+
+=== Gestión de retención de backups de datos dentro del catálogo de backup de SAP HANA
+
+Cuando el servicio SnapCenter elimina cualquier backup (Snapshot o basado en archivos), este backup de datos también se elimina en el catálogo de backup de SAP HANA.
+
+
+
+=== Gestión de retención de backups de registros
+
+La base de datos SAP HANA crea automáticamente backups de registro. Este backup de registro ejecuta crean archivos de backup para cada servicio SAP HANA individual en un directorio de backup configurado en SAP HANA.
+
+Los backups de registros más antiguos que el último backup de datos ya no son necesarios para la recuperación futura y, por lo tanto, se pueden eliminar.
+
+El servicio SnapCenter realiza tareas de mantenimiento de los backups de archivos de registro en el nivel del sistema de archivos y del catálogo de backup SAP HANA mediante la ejecución de las siguientes tareas:
+
+. Lee el catálogo de backup de SAP HANA para obtener el ID de backup del backup de Snapshot o basado en archivos más antiguo.
+. Elimina todos los backups de registros del catálogo SAP HANA y el sistema de archivos más antiguos que este ID de backup.
++
+El servicio de SnapCenter únicamente gestiona el mantenimiento de los backups creados por SnapCenter. Si se crean backups basados en archivos adicionales fuera de SnapCenter, debe asegurarse de que los backups basados en archivos se eliminen del catálogo de backup. Si un backup de datos de este tipo no se elimina manualmente del catálogo de backups, puede convertirse en el backup de datos más antiguo y los backups de registros más antiguos no se eliminan hasta que este backup basado en archivos se elimina.
+
+
+
+
+NOTE: No se puede desactivar la gestión de retención de backup de registros con la versión actual del servicio SnapCenter.
+
+
+
+== Requisitos de capacidad para backups de Snapshot
+
+Debe tener en cuenta la tasa de cambio de bloque más alta en la capa de almacenamiento en relación con la tasa de cambio con las bases de datos tradicionales. Debido al proceso de combinación de tablas HANA del almacén de columnas, la tabla completa se escribe en el disco, no solo en los bloques modificados. Los datos de nuestra base de clientes muestran una tasa de cambio diaria entre el 20 % y el 50 % si se realizan varios backups de Snapshot durante el día.
+
+link:saphana-backup-anf-lab-setup-used-for-this-report.html["Siguiente: Configuración de laboratorio utilizada para este informe."]

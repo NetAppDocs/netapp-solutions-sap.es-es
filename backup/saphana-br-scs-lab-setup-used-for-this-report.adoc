@@ -1,0 +1,65 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-lab-setup-used-for-this-report.html 
+keywords: lab, setup, configuration, 
+summary: La configuración de laboratorio utilizada para este informe técnico incluye cinco configuraciones distintas de SAP HANA. 
+---
+= Configuración de laboratorio utilizada para este informe
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-snapcenter-concepts-and-best-practices.html["Anterior: Conceptos y prácticas recomendadas de SnapCenter."]
+
+La configuración de laboratorio utilizada para este informe técnico incluye cinco configuraciones diferentes de SAP HANA:
+
+* *MS1.*
++
+** Sistema de un solo inquilino MDC de varios hosts de SAP HANA
+** Se gestiona con un host de plugin central (servidor SnapCenter).
+** Utiliza NFS como protocolo de almacenamiento
+
+
+* *SS1.*
++
+** Sistema de un solo inquilino MDC de host único de SAP HANA
+** Detección automática con el plugin de HANA instalado en el host de base de datos HANA
+** Utiliza NFS como protocolo de almacenamiento
+
+
+* *SM1.*
++
+** Sistema de varios inquilinos MDC de un solo host SAP HANA
+** Detección automática con el plugin de HANA instalado en el host de base de datos HANA
+** Utiliza NFS como protocolo de almacenamiento
+
+
+* *SS2.*
++
+** Sistema de un solo inquilino MDC de host único de SAP HANA
+** Se gestiona con un host de plugin central (servidor SnapCenter).
+** Utiliza NFS como protocolo de almacenamiento
+
+
+* *SS3.*
++
+** Sistema de un solo inquilino MDC de host único de SAP HANA
+** Detección automática con el plugin de HANA instalado en el host de base de datos HANA
+** Utiliza SAN Fibre Channel como protocolo de almacenamiento
+
+
+
+
+En las siguientes secciones se describe toda la configuración y los flujos de trabajo de backup, restauración y recuperación. La descripción abarca los backups de Snapshot locales y la replicación en el almacenamiento de backup mediante SnapVault. Las máquinas virtuales de almacenamiento (SVM) son `hana-primary` para el almacenamiento primario y. `hana-backup` para el almacenamiento de backup externo.
+
+El servidor SnapCenter se utiliza como host del complemento HANA central para los sistemas HANA MS1 y SS2.
+
+La siguiente figura muestra la configuración del laboratorio.
+
+image:saphana-br-scs-image21.png["Error: Falta la imagen gráfica"]
+
+link:saphana-br-scs-snapcenter-configuration.html["Siguiente: Configuración de SnapCenter."]

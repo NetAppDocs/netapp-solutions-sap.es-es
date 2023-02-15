@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html 
+keywords: non-data, volumes, configuration, global 
+summary: Esta sección enumera los pasos necesarios para realizar la configuración de backup de los volúmenes que no son de datos SAP HANA. 
+---
+= Configuración de backup de volúmenes no globales de datos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html["Anterior: Configuración de backup de volúmenes sin datos SAP HANA."]
+
+Para establecer la configuración de backup de volúmenes globales sin datos, siga estos pasos:
+
+. Vaya a SAP HANA Systems y haga clic en Add.
+. En la pantalla System Details (Detalles del sistema), seleccione el tipo de sistema, Global Non-Data Volume (volumen global no de datos). Puede proporcionar una lista de SIDS separada por comas, que están asociadas al volumen global. Introduzca el nombre del sistema que desee y haga clic en continuar.
++
+image:saphana-backup-anf-image39.png["Error: Falta la imagen gráfica"]
+
+. Seleccione el volumen y haga clic en Continue.
++
+image:saphana-backup-anf-image40.png["Error: Falta la imagen gráfica"]
+
+. Haga clic en Continue.
++
+image:saphana-backup-anf-image41.png["Error: Falta la imagen gráfica"]
+
+. Haga clic en Añadir.
++
+image:saphana-backup-anf-image42.png["Error: Falta la imagen gráfica"]
+
+. Para configurar la protección, haga clic en proseguir.
++
+image:saphana-backup-anf-image43.png["Error: Falta la imagen gráfica"]
+
+. Seleccione la política y haga clic en Protect.
++
+image:saphana-backup-anf-image44.png["Error: Falta la imagen gráfica"]
+
+. Transport Directory ahora se muestra en la lista de sistemas HANA como un volumen global que no es de datos.
++
+image:saphana-backup-anf-image45.png["Error: Falta la imagen gráfica"]
+
+
+
+link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Siguiente: Backups de Snapshot de la base de datos SAP HANA."]

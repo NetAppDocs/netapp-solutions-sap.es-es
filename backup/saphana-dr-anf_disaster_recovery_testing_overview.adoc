@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_disaster_recovery_testing_overview.html 
+keywords: disaster, recovery, strategy, workflow, testing, internal, documentation 
+summary: Para implementar una estrategia de recuperación ante desastres eficaz, es necesario probar el flujo de trabajo requerido. Las pruebas demuestran si la estrategia funciona y si la documentación interna es suficiente, y también permiten a los administradores entrenar sobre los procedimientos necesarios. 
+---
+= Pruebas de recuperación ante desastres
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Anterior: Monitorización de la replicación entre regiones de ANF."]
+
+Para implementar una estrategia de recuperación ante desastres eficaz, es necesario probar el flujo de trabajo requerido. Las pruebas demuestran si la estrategia funciona y si la documentación interna es suficiente, y también permiten a los administradores entrenar sobre los procedimientos necesarios.
+
+ANF Cross-Region Replication permite realizar pruebas de recuperación ante desastres sin poner en riesgo el objetivo de tiempo de recuperación ni el objetivo de punto de recuperación. Es posible realizar pruebas de recuperación ante desastres sin interrumpir la replicación de datos.
+
+El flujo de trabajo de pruebas de recuperación ante desastres aprovecha el conjunto de funciones de ANF para crear nuevos volúmenes basados en backups de Snapshot existentes en el destino de recuperación ante desastres. Consulte https://docs.microsoft.com/en-us/azure/azure-netapp-files/snapshots-introduction["Cómo funcionan las copias Snapshot de Azure NetApp Files | Microsoft Docs"^].
+
+Dependiendo de si la replicación de backup de registros forma parte o no de la configuración de recuperación ante desastres, los pasos para la recuperación ante desastres son ligeramente diferentes. En esta sección se describen las pruebas de recuperación ante desastres para la replicación solo de backup de datos y para la replicación de volúmenes de datos combinada con la replicación de volúmenes de backup de registros.
+
+Para realizar pruebas de recuperación ante desastres, complete los siguientes pasos:
+
+. Prepare el host de destino.
+. Crear nuevos volúmenes basados en backups de Snapshot en el centro de recuperación ante desastres.
+. Monte los nuevos volúmenes en el host de destino.
+. Recupere la base de datos HANA.
++
+** Únicamente recuperación del volumen de datos.
+** Recuperación posterior mediante backups de registros replicados.
+
+
+
+
+Las siguientes subsecciones describen estos pasos con detalle.
+
+image:saphana-dr-anf_image18.png["Error: Falta la imagen gráfica"]
+
+link:saphana-dr-anf_prepare_the_target_host.html["Siguiente: Prepare el host de destino."]

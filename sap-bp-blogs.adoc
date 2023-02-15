@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: sap-bp-blogs.html 
+summary: Serie de blogs que analizan las mejores prácticas de la configuración de SAP 
+keywords: netapp, solutions, SAP, best practices, blogs 
+---
+= Blogs de mejores prácticas de configuración de SAP
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Descripción general de los blogs en los que se destacan las mejores prácticas de configuración de SAP.
+
+
+
+== Blogs de mejores prácticas de configuración de SAP

@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html 
+keywords: overview, system copy, initial installation, clone create, clone split, post-processing 
+summary: El flujo de trabajo de copia SAP es similar a los pasos iniciales para un flujo de trabajo de actualización del sistema. El flujo de trabajo con SnapCenter consta de cinco pasos principales, como se muestra en la siguiente figura. 
+---
+= Información general del flujo de trabajo de copia de sistemas SAP con SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html["Anterior: Descripción general del flujo de trabajo de actualización del sistema SAP con SnapCenter."]
+
+El flujo de trabajo de copia SAP es similar a los pasos iniciales para un flujo de trabajo de actualización del sistema. El flujo de trabajo con SnapCenter consta de cinco pasos principales, como se muestra en la siguiente figura.
+
+. Instalación y preparación inicial del sistema de destino.
+. El flujo de trabajo de creación de clones de SnapCenter.
+. El flujo de trabajo de división de clones de SnapCenter (opcional).
+. Posprocesamiento SAP (manual o con una herramienta de terceros).
+. El nuevo sistema se puede utilizar como sistema de pruebas/control de calidad.
+
+
+image:sc-copy-clone-image9.png["Error: Falta la imagen gráfica"]
+
+link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Siguiente: Descripción general del flujo de trabajo de clonado de sistemas SAP con SnapCenter."]

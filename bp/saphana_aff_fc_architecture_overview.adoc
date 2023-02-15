@@ -1,0 +1,36 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_architecture_overview.html 
+keywords:  
+summary:  
+---
+= Descripción general
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+Los hosts SAP HANA están conectados a controladoras de almacenamiento mediante una infraestructura FCP redundante y un software multivía. Es necesaria una infraestructura de switch FCP redundante para proporcionar conectividad de host a almacenamiento de SAP HANA con tolerancia a fallos en caso de fallo del switch o del adaptador de bus de host (HBA). Debe configurarse la división en zonas adecuada en el switch para permitir que todos los hosts HANA lleguen a las LUN requeridas en las controladoras de almacenamiento.
+
+Los diferentes modelos de la familia de productos AFF pueden combinarse y emparejarse en la capa de almacenamiento para permitir el crecimiento y las distintas necesidades de rendimiento y capacidad. El número máximo de hosts SAP HANA que se pueden conectar al sistema de almacenamiento se define según los requisitos de rendimiento de SAP HANA y el modelo de controladora de NetApp utilizado. El número de bandejas de discos necesarias solo está determinado por los requisitos de capacidad y rendimiento de los sistemas SAP HANA.
+
+En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad de almacenamiento.
+
+image:saphana_aff_fc_image2.png["Error: Falta la imagen gráfica"]
+
+Esta arquitectura se puede escalar en dos dimensiones:
+
+* Conectando los hosts SAP HANA adicionales y la capacidad de almacenamiento al almacenamiento existente si las controladoras de almacenamiento proporcionan el rendimiento suficiente para cumplir los KPI actuales de SAP HANA
+* Agregando más sistemas de almacenamiento con capacidad de almacenamiento adicional para los hosts SAP HANA adicionales
+
+
+La siguiente figura muestra un ejemplo de configuración en el que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de los 16 hosts SAP HANA. Según los requisitos de rendimiento totales, debe añadir conexiones FC adicionales a las controladoras de almacenamiento.
+
+image:saphana_aff_fc_image3.png["Error: Falta la imagen gráfica"]
+
+Independientemente del sistema AFF puesto en marcha, el panorama SAP HANA también se puede escalar agregando controladoras de almacenamiento certificadas para cumplir con la densidad de nodos deseada, como se muestra en la siguiente figura.
+
+image:saphana_aff_fc_image4.png["Error: Falta la imagen gráfica"]
