@@ -1,0 +1,4133 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head class="at-element-marker">
+  <title>Conceptos y prácticas recomendadas de SnapCenter</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+  <meta http-equiv="language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Conceptos y prácticas recomendadas de SnapCenter" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://docs.netapp.com/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" />
+	<meta property="og:description" content="En esta sección se describen los conceptos y las prácticas recomendadas de SnapCenter relacionadas con la configuración y la implementación de recursos SAP H..." />
+  <meta property="og:image" content="https://docs.netapp.com/es-es/netapp-solutions-sap/images/logo-tophat-social.png" />
+  <meta property="og:image:alt" content="NetApp Logo" />
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="encoding" content="utf-8">
+  <meta http-equiv="nss-type" content="Product Documentation"/>
+  <meta http-equiv="nss-subtype" content="User Guide"/><meta name="description" content="En esta sección se describen los conceptos y las prácticas recomendadas de SnapCenter relacionadas con la configuración y la implementación de recursos SAP H...">
+  <meta name="keywords" content=" resource configuration, architecture, recovery, discovery, deployment"><!-- Icons -->
+  <link rel="icon" href="/es-es/netapp-solutions-sap/images/favicon.ico" type="image/x-icon">
+
+  <!-- RSS Feed --><!-- CSS Definitions: NetApp CSS should be defined after generic css -->
+
+  <!-- Elastic Search -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/searchkit/0.10.0/theme.css">
+
+  <!-- Combined CSS -->
+  <link rel="stylesheet" type="text/css" href="/es-es/netapp-solutions-sap/css/netappdocs.css">
+
+  
+  <link rel="stylesheet" href="/es-es/netapp-solutions-sap/css/landing-page.css" type="text/css">
+  <link rel="stylesheet" href="/es-es/netapp-solutions-sap/css/tabbed-blocks.css" type="text/css">
+  <!-- Canonical url -->
+  <link rel='stylesheet' href='/es-es/netapp-solutions-sap/css/na-feature.css' type='text/css'><!-- Top level site integrations --><script>
+    function addAdobeLaunch(adobeId) {
+      var head = document.getElementsByTagName('head')[0];
+      var adobe = document.createElement("script");
+      adobe.type = "text/plain";
+      adobe.className = "optanon-category-C0002";
+      adobe.src = "//assets.adobedtm.com/60287eadf1ee/c284da483c83/"+adobeId+".min.js";
+      head.appendChild(adobe);
+    }
+
+    function addGoogleAnalytics(gtagId) {
+      var google = document.createElement("script");
+      google.type = "text/plain";
+      google.className = "optanon-category-C0002";
+      google.src = "https://www.googletagmanager.com/gtag/js?id="+gtagId;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(google);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtagId);
+    }
+
+    function addConsent(consentId) {
+      var head = document.getElementsByTagName('head')[0];
+      var onetrustConsent = document.createElement("script");
+      onetrustConsent.type = "text/javascript";
+      onetrustConsent.src = "https://cdn.cookielaw.org/consent/"+consentId+"/OtAutoBlock.js";
+      head.appendChild(onetrustConsent);
+
+      var onetrustScript = document.createElement("script");
+      onetrustScript.type = "text/javascript";
+      onetrustScript.src = "https://cdn.cookielaw.org/scripttemplates/otSDKStub.js";
+      onetrustScript.charset = "UTF-8";
+      onetrustScript.dataset.documentLanguage = "true";
+      onetrustScript.dataset.domainScript = consentId;
+      head.appendChild(onetrustScript);
+    }addConsent("72570c5c-fe30-465f-b0e0-b77f7fb4ae34");
+    addAdobeLaunch("launch-e9ff3acac59f");
+    addGoogleAnalytics("UA-81697994-3");function OptanonWrapper() { }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <!-- Used for Product Family Page Sidebar Visibility --><!-- Used to import Promise for IE. Required for SearchKit -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script><script src='/es-es/netapp-solutions-sap/js/na-search.js'></script><script src='/es-es/netapp-solutions-sap/js/na-pagenav.js'></script><script src='/es-es/netapp-solutions-sap/js/na-utility.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/clouddocs.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/jquery.navgoco.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src='/es-es/netapp-solutions-sap/js/toc.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/customscripts.js'></script><script>
+      $(document).ready(function() {
+          
+          var collapseOnInit = true;
+          
+
+          var navSettings = {
+              "caretHtml": '',
+              "accordion": collapseOnInit,
+              "openClass": 'active', // open
+              "save": false, // leave false or nav highlighting doesn't work right
+              "cookie": {
+                  "name": 'navgoco',
+                  "expires": false,
+                  "path": '/'
+              },
+              "slide": {
+                  "duration": 400,
+                  "easing": 'swing'
+              }
+          };
+
+          // Initialize navgoco with default options
+          $("#mysidebar").navgoco(navSettings);
+          
+
+          $("#collapseAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', false);
+          });
+
+          $("#expandAll").click(function(e) {
+              e.preventDefault();
+              $("#mysidebar").navgoco('toggle', true);
+          });
+
+          $(".sidebar-nav-container").on("scroll", function() {
+            $.cookie("sidebarScroll", $(".sidebar-nav-container").scrollTop(), {
+              path    : "/es-es/netapp-solutions-sap"  
+            });
+          });
+          $(function() {
+            if ($.cookie("sidebarScroll")) {
+              $(".sidebar-nav-container").scrollTop($.cookie("sidebarScroll"));
+            }
+          });
+
+      });
+
+  </script>
+  <script>
+      $(document).ready(function() {
+          $("#tg-sb-link").click(function() {
+              $("#tg-sb-sidebar").toggle();
+              $("#tg-sb-content").toggleClass('col-md-9');
+              $("#tg-sb-content").toggleClass('col-md-12');
+              $("#tg-sb-icon").toggleClass('fa-toggle-on');
+              $("#tg-sb-icon").toggleClass('fa-toggle-off');
+          });
+      });
+  </script>
+  <script src='/es-es/netapp-solutions-sap/js/custom-dropdown.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/FileSaver.min.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/jszip-utils.min.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/jszip.min.js'></script>
+  <script src='/es-es/netapp-solutions-sap/js/pdf-ux.js'></script>
+</head>
+
+
+  <body class role="document" data-flavor="">
+    <div id="page" class="n-off-canvas-menu">
+      <div class="n-off-canvas-menu__menu"><!--TODO: Add offcanvas code --></div>
+      <div class="n-off-canvas-menu__content-wrap">
+        <header class="site-header" id="banner">
+  
+  <!-- Start Page Toolbar -->
+  
+  <div class="page-nav-toolbar"><div class="page-nav-contribute"><a target="_blank" href="https://github.com/NetAppDocs/netapp-solutions-sap/issues/new?body=Page%3A%20[Conceptos y prácticas recomendadas de SnapCenter](https://docs.netapp.com/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html)&template=public-issue-template.md" class="page-nav-contribute-link" role="button"><img src="/es-es/netapp-solutions-sap/images/discuss-sm.svg" alt="" class="github-icon" />Solicitar cambios en el documento</a><a target="_blank" href="https://github.com/NetAppDocs/netapp-solutions-sap/blob/main/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.adoc" class="page-nav-contribute-link" role="button"><img src="/es-es/netapp-solutions-sap/images/edit-sm.svg" alt="" class="github-icon" />Editar en GitHub</a><a target="_blank" href="https://docs.netapp.com/us-en/contribute/" class="page-nav-contribute-link"  ><img src="/es-es/netapp-solutions-sap/images/article-sm.svg" alt="" class="github-icon" />Guía del colaborador</a></div>
+    <div class="page-nav-container">
+      <nav class="page-nav-fixed">
+        <div class="page-nav-title">EN ESTA PÁGINA</div>
+        <div class="page-nav-links">
+          <ul class="page-nav-inner" id="page-menu"></ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  
+  <!-- Start top_hat -->
+  <div class="n-top-hat">
+    <div class="n-container">
+      <div class="n-top-hat__cross-property-nav">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/products-a-z/" class="n-top-hat__link">Producto y soluciones</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/support-and-training/netapp-university/" class="n-top-hat__link">Asistencia y capacitación</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://cloud.netapp.com" class="n-top-hat__link">Cloud Central</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://community.netapp.com/" class="n-top-hat__link">Comunidad</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://blog.netapp.com/" class="n-top-hat__link">Blog</a>
+          </li>
+          <li class="n-top-hat__list-item">
+            <a href="https://customers.netapp.com/en/" class="n-top-hat__link">Historias de clientes</a>
+          </li>
+        </ul>
+      </div>
+      <div class="n-top-hat__utils">
+        <ul class="n-top-hat__list">
+          <li class="n-top-hat__list-item">
+            <a href="https://www.netapp.com/company/contact-us/" target="_self" class="n-top-hat__link" data-ntap-ui="contact-us">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- End top_hat -->
+
+  <!-- Start property bar -->
+  <style>
+    .n-property-navigation-bar__menus--desktop-experience .n-menu--mega__default-content__heading span {
+    color: #34B0FF;
+    }
+  </style>
+  <div class="n-property-bar " data-ntap-ui="sticky-nav">
+    <div class="n-property-bar__inner-wrap">
+      <div class="n-property-bar__menu-toggle">
+        <a href="#" class="n-property-bar__menu-toggle-link">
+          <span class="n-property-bar__menu-toggle-text">Menu</span>
+          <svg class="n-icon-bars n-property-bar__menu-toggle-icon" aria-labelledby="title">
+            <title>bars</title>
+            <use xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#bars"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="n-property-bar__property-mark ">
+        <a href="https://www.netapp.com" class="n-property-bar__property-link">
+          <div class="n-property-bar__logo">
+            <svg class="n-icon-netapp-mark n-icon-netapp-mark n-property-bar__netapp-mark-icon" aria-labelledby="title">
+              <title>netapp-mark</title>
+              <use xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#netapp-mark"></use>
+            </svg>
+            <svg class="n-icon-netapp-logo n-property-bar__logo-svg" aria-labelledby="title">
+              <title>netapp-logo</title>
+              <use xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#netapp-logo"></use>
+            </svg>
+          </div>
+        </a>
+      </div>
+
+      
+      
+      
+      <div class="search-property-bar">
+        <div id="search-demo-container" class="searchbox n-property-bar__search">
+          <div id="react-search" 
+          data-search-html="/es-es/netapp-solutions-sap/search.html"
+          data-type="widget" 
+          data-placeholder="Buscar documentación"
+          data-no-results-found="No se encontraron resultados para {query}"
+          data-did-you-mean="Buscar {suggestion}."
+          data-no-results-found-did-you-mean="No se encontraron resultados para {query}. ¿Quiso decir {suggestion}?"
+          data-results-found="{hitCount} resultados encontrados"
+          data-error-message="We're sorry, an issue occurred when fetching your results. Please try again."
+          data-error-reset="Reset Search"
+          data-sk-es-pf-indexes=""
+          data-flavor=""></div>
+          <button class="n-property-bar__search-toggle-button" type="button">
+            <svg class="n-icon-search n-property-bar__search-toggle-button-icon" aria-labelledby="title">
+              <title>search</title>
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#search"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <div class="n-property-bar__toolbar">
+    <!-- Start Language Selector --><div id="language-dropdown" class="custom-dropdown custom-dropdown-lang">
+      <div class="custom-dropdown-select custom-dropdown-select-lang">
+      <span class="lang-name">Español</span>
+          <svg class="n-globe__icon" aria-labelledby="title">
+            <title>globe</title>
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#globe"></use>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="custom-dropdown-menu"><li>
+          <a href="https://docs.netapp.com/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">Español</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">English</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ja-jp/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">日本語</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/ko-kr/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">한국어</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-cn/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">简体中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/zh-tw/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">繁體中文</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/de-de/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">Deutsch</span></a>
+        </li><li>
+          <a href="https://docs.netapp.com/fr-fr/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html" target="_self"><span translate="no" class="notranslate">Français</span></a>
+        </li></ul>
+    </div><!-- End Language Selector -->
+
+    <div class="n-property-bar__cta"></div>
+  </div>
+  <!-- End property bar -->
+</header>
+
+
+        <main id="n-main-content" class="n-main-content">
+          <!-- Start Documentation Content -->
+<div class="ie-main">
+  <!-- Sidebar Column -->
+  
+  <div class="col-md-3" id="sidebar-height">
+      <button id="btn-sidebar-collapse" onclick="hideSidebar()"><img src="/es-es/netapp-solutions-sap/images/collapse.png" alt="Contraer panel de navegación"></button>
+      <div class="n-pdf-header">
+  <a id="toggleButtonPdf" class="n-pdf-button" type="button">
+    <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>PDFs disponibles<span>
+    </span>
+  </a>
+</div>
+<div class="n-pdf-body-container">
+  <ul id="toggleContainerPdf" class="n-pdf-body" style="display:none;"><li class="pdf-ux-container">
+        
+        
+        
+        <a target="_blank" href="/es-es/netapp-solutions-sap/pdfs/fullsite-sidebar/Aplicaciones_empresariales_SAP_y_soluciones_de_bases_de_datos_SAP_HANA.pdf" >
+          <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>PDF de este sitio de documentos</a>
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Mejores_prácticas.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Mejores prácticas
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/SAP_HANA_en_sistemas_AFF_de_NetApp_con_guía_de_configuración_de_FCP.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            SAP HANA en sistemas AFF de NetApp con guía de configuración de FCP
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Instalación_y_configuración_de_la_infraestructura.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Instalación y configuración de la infraestructura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/SAP_HANA_en_sistemas_AFF_de_NetApp_con_guía_de_configuración_de_NFS.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            SAP HANA en sistemas AFF de NetApp con guía de configuración de NFS
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Instalación_y_configuración_de_la_infraestructura.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Instalación y configuración de la infraestructura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/SAP_HANA_en_sistemas_FAS_de_NetApp_con_guía_de_configuración_de_NFS.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            SAP HANA en sistemas FAS de NetApp con guía de configuración de NFS
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Instalación_y_configuración_de_la_infraestructura.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Instalación y configuración de la infraestructura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Guía_de_configuración_de_SAP_HANA_en_sistemas_FAS_con_FCP.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Guía de configuración de SAP HANA en sistemas FAS con FCP
+          </a>
+          
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Instalación_y_configuración_de_la_infraestructura.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Instalación y configuración de la infraestructura
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Backup__restauración_y_recuperación_ante_desastres.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Backup, restauración y recuperación ante desastres
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/SAP_HANA_en_Amazon_FSX_para_ONTAP_de_NetApp__Backup_y_recuperación_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Replicación_de_backups_con_SnapVault.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Replicación de backups con SnapVault
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Backup_y_recuperación_de_datos_de_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Backup y recuperación de datos de SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+    <ul class="subfolders" id="pdf-remove" style="display:none;"><li class="active"></li></ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Backup_y_recuperación_de_datos_de_replicación_de_sistemas_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Backup y recuperación de datos de replicación de sistemas SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Recuperación_ante_desastres_de_SAP_HANA_con_Azure_NetApp_Files.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Recuperación ante desastres de SAP HANA con Azure NetApp Files
+          </a>
+          
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Replicación_entre_regiones_ANF_con_SAP_HANA.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Replicación entre regiones ANF con SAP HANA
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Pruebas_de_recuperación_ante_desastres.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Pruebas de recuperación ante desastres
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Recuperación_tras_fallos.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Recuperación tras fallos
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Backup_y_recuperación_de_datos_de_SAP_HANA_en_Azure_NetApp_Files_con_el_servicio_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Configuración_de_backup_de_la_snapshot_de_servicio_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Configuración de backup de la snapshot de servicio SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Gestión_del_ciclo_de_vida.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Gestión del ciclo de vida
+          </a>
+          
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Integración_de_la_gestión_de_entornos_SAP_de_NetApp_con_Ansible.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Integración de la gestión de entornos SAP de NetApp con Ansible
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Automatización_de_las_operaciones_de_copia_y_clonado_del_sistema_SAP_HANA_con_SnapCenter.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter
+          </a>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Automatización_de_las_operaciones_de_copia_del_sistema_SAP_con_Libelle_SystemCopy.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy
+          </a>
+          
+
+
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+    
+      <ul class="subfolders" style="display:none;">
+        <li class="pdf-ux-container">
+          
+          
+          
+          <a target="_blank" 
+            
+              href="/es-es/netapp-solutions-sap/pdfs/sidebar/Resúmenes_sobre_las_soluciones.pdf" 
+            
+          >
+            <img src="/es-es/netapp-solutions-sap/images/pdf.png" alt="" width="16" height="16"/>
+            Resúmenes sobre las soluciones
+          </a>
+          
+
+
+
+
+
+
+        </li>
+      </ul>
+    
+
+  
+
+
+
+
+
+
+
+</li></ul>
+  <div class="zip-pdf-link-container" style="display: none;">   
+    <a href="#" id="zipPdf">
+      <img src="/es-es/netapp-solutions-sap/images/pdf-zip.png" alt="" width="16" height="16"/>
+      <pre>Colección de documentos PDF separados<span class="zip-size"></span></pre>
+    </a><div id="zip-link-popup" class="hide">
+    <div class="inner-modal">
+        <div class="downloading-progress">
+            <div class="spinner"></div>
+            <h1>Creating your file...</h1>
+            <div>This may take a few minutes. Thanks for your patience.</div>
+            <button class="cancel-download-btn" type="button">Cancel</button>
+        </div>
+        <div class="download-complete hide">
+            <div class="done-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>
+            </div>
+            <div>Your file is ready</div>
+            <button class="cancel-download-btn" type="button">OK</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(".cancel-download-btn").click(function(){
+        $("#zip-link-popup").addClass("hide");
+        $("#zip-link-popup .downloading-progress").removeClass("hide");
+        $("#zip-link-popup .download-complete").addClass("hide");
+    });
+</script></div>
+</div>
+<script>
+  $("#toggleContainerPdf li.active:last-child").parents('ul.subfolders').toggle('display');
+  $("#toggleButtonPdf").click(function () {
+    $("#toggleContainerPdf").toggle('display');
+    $(".n-pdf-body-container .zip-pdf-link-container").toggle('display');
+  });
+</script><div class="sidebar-nav-container" id="mysidebardiv">
+  <ul id="mysidebar" class="nav"><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Soluciones SAP"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/index.html">
+        Soluciones SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Mejores prácticas"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Mejores prácticas</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en sistemas AFF de NetApp con guía de configuración de FCP"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> SAP HANA en sistemas AFF de NetApp con guía de configuración de FCP</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_architecture.html">
+        Arquitectura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ajuste de tamaño del almacenamiento"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_storage_sizing.html">
+        Ajuste de tamaño del almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación y configuración de la infraestructura"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Instalación y configuración de la infraestructura</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de la configuración y la instalación de la infraestructura"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_infrastructure_setup_and_configuration_overview.html">
+        Descripción general de la configuración y la instalación de la infraestructura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de estructura SAN"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_san_fabric_setup.html">
+        Configuración de estructura SAN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronización de la hora"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_time_synchronization.html">
+        Sincronización de la hora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de la controladora de almacenamiento"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_storage_controller_setup.html">
+        Configuración de la controladora de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="API del conector de almacenamiento SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_sap_hana_storage_connector_api.html">
+        API del conector de almacenamiento SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración del host"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_host_setup.html">
+        Configuración del host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de pila I/o para SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_i_o_stack_configuration_for_sap_hana.html">
+        Configuración de pila I/o para SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación del software SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_sap_hana_software_installation.html">
+        Instalación del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Añadir particiones de volúmenes de datos adicionales para sistemas de un solo host SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html">
+        Añadir particiones de volúmenes de datos adicionales para sistemas de un solo host SAP HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_where_to_find_additional_information.html">
+        Dónde encontrar información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualizar historial"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_fc_update_history.html">
+        Actualizar historial
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en sistemas AFF de NetApp con guía de configuración de NFS"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> SAP HANA en sistemas AFF de NetApp con guía de configuración de NFS</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_architecture.html">
+        Arquitectura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ajuste de tamaño del almacenamiento"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_storage_sizing.html">
+        Ajuste de tamaño del almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación y configuración de la infraestructura"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Instalación y configuración de la infraestructura</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de la configuración y la instalación de la infraestructura"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_infrastructure_setup_and_configuration_overview.html">
+        Descripción general de la configuración y la instalación de la infraestructura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de red"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_network_setup.html">
+        Configuración de red
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronización de la hora"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_time_synchronization.html">
+        Sincronización de la hora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de la controladora de almacenamiento"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_storage_controller_setup.html">
+        Configuración de la controladora de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración del host"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_host_setup.html">
+        Configuración del host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparación de la instalación de SAP HANA para NFSv4"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html">
+        Preparación de la instalación de SAP HANA para NFSv4
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de pila de I/o para SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html">
+        Configuración de pila de I/o para SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Tamaño del volumen de datos SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_data_volume_size.html">
+        Tamaño del volumen de datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación del software SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_sap_hana_software_installation.html">
+        Instalación del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Se añaden particiones de volúmenes de datos adicionales"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_adding_additional_data_volume_partitions.html">
+        Se añaden particiones de volúmenes de datos adicionales
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_where_to_find_additional_information.html">
+        Dónde encontrar información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualizar historial"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_aff_nfs_update_history.html">
+        Actualizar historial
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en sistemas FAS de NetApp con guía de configuración de NFS"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> SAP HANA en sistemas FAS de NetApp con guía de configuración de NFS</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_architecture.html">
+        Arquitectura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ajuste de tamaño del almacenamiento"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_storage_sizing.html">
+        Ajuste de tamaño del almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación y configuración de la infraestructura"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Instalación y configuración de la infraestructura</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de la configuración y la instalación de la infraestructura"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html">
+        Descripción general de la configuración y la instalación de la infraestructura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de red"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_network_setup.html">
+        Configuración de red
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronización de la hora"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_time_synchronization.html">
+        Sincronización de la hora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de la controladora de almacenamiento"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_storage_controller_setup.html">
+        Configuración de la controladora de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración del host"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_host_setup.html">
+        Configuración del host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Preparación de la instalación de SAP HANA para NFSv4"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_installation_preparations_for_nfsv4.html">
+        Preparación de la instalación de SAP HANA para NFSv4
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de pila de I/o para SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_i_o_stack_configuration_for_sap_hana.html">
+        Configuración de pila de I/o para SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Tamaño del volumen de datos SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_data_volume_size.html">
+        Tamaño del volumen de datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación del software SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_sap_hana_software_installation.html">
+        Instalación del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Se añaden particiones de volúmenes de datos adicionales"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_adding_additional_data_volume_partitions.html">
+        Se añaden particiones de volúmenes de datos adicionales
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_where_to_find_additional_information.html">
+        Dónde encontrar información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualizar historial"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-fas-nfs_update_history.html">
+        Actualizar historial
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Guía de configuración de SAP HANA en sistemas FAS con FCP"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Guía de configuración de SAP HANA en sistemas FAS con FCP</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_architecture.html">
+        Arquitectura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ajuste de tamaño del almacenamiento"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_storage_sizing.html">
+        Ajuste de tamaño del almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación y configuración de la infraestructura"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Instalación y configuración de la infraestructura</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de la configuración y la instalación de la infraestructura"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_infrastructure_setup_and_configuration_overview.html">
+        Descripción general de la configuración y la instalación de la infraestructura
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de estructura SAN"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_san_fabric_setup.html">
+        Configuración de estructura SAN
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Sincronización de la hora"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_time_synchronization.html">
+        Sincronización de la hora
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de la controladora de almacenamiento"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_storage_controller_setup.html">
+        Configuración de la controladora de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="API del conector de almacenamiento SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_sap_hana_storage_connector_api.html">
+        API del conector de almacenamiento SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración del host"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_host_setup.html">
+        Configuración del host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de pila de I/o para SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_i_o_stack_configuration_for_sap_hana.html">
+        Configuración de pila de I/o para SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Instalación del software SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_sap_hana_software_installation.html">
+        Instalación del software SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Añadir particiones de volúmenes de datos adicionales para sistemas de un solo host SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html">
+        Añadir particiones de volúmenes de datos adicionales para sistemas de un solo host SAP HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_where_to_find_additional_information.html">
+        Dónde encontrar información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualizar historial"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana_fas_fc_update_history.html">
+        Actualizar historial
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en IBM Power Systems y sistemas AFF de NetApp con NFS"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/saphana-ibm-aff-nfs_pdf_link.html">
+        SAP HANA en IBM Power Systems y sistemas AFF de NetApp con NFS
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP con Oracle en UNIX y NFS con ONTAP de NetApp"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/sap-oracle-snapman_pdf_link.html">
+        SAP con Oracle en UNIX y NFS con ONTAP de NetApp
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP con Microsoft SQL Server en Windows mediante ONTAP"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/bp/sap-sqls-sc_pdf_link.html">
+        SAP con Microsoft SQL Server en Windows mediante ONTAP
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup, restauración y recuperación ante desastres"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Backup, restauración y recuperación ante desastres</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación con SnapCenter"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación con SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup y recuperación de datos mediante Amazon FSX para ONTAP"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html">
+        Backup y recuperación de datos mediante Amazon FSX para ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-snapcenter-architecture.html">
+        Arquitectura SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-snapcenter-configuration.html">
+        Configuración de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Operaciones de backup de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-snapcenter-backup-operations.html">
+        Operaciones de backup de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup de volúmenes que no sean de datos"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-backup-of-non-data-volumes.html">
+        Backup de volúmenes que no sean de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Replicación de backups con SnapVault"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Replicación de backups con SnapVault</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-backup-replication-with-snapvault_overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configurar las relaciones de replicación en FSX para los sistemas de archivos ONTAP"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html">
+        Configurar las relaciones de replicación en FSX para los sistemas de archivos ONTAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Añada una SVM de backup a SnapCenter"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-add-a-backup-svm-to-snapcenter.html">
+        Añada una SVM de backup a SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Cree una nueva política de SnapCenter para la replicación de backups"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html">
+        Cree una nueva política de SnapCenter para la replicación de backups
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Añadir una política a la protección de recursos"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-add-a-policy-to-resource-protection.html">
+        Añadir una política a la protección de recursos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Cree un backup con la replicación"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-create-a-backup-with-replication.html">
+        Cree un backup con la replicación
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Restauración y recuperación desde el almacenamiento secundario"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-restore-and-recover-from-secondary-storage.html">
+        Restauración y recuperación desde el almacenamiento secundario
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional e historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/amazon-fsx-where-to-find-additional-information.html">
+        Dónde encontrar información adicional e historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup y recuperación de datos de SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Backup y recuperación de datos de SAP HANA con SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-architecture.html">
+        Arquitectura SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Solución de backup SAP HANA de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-sap-hana-backup-solution.html">
+        Solución de backup SAP HANA de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Conceptos y prácticas recomendadas de SnapCenter"
+      data-li-level="3#" 
+      class="  active "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-concepts-and-best-practices.html">
+        Conceptos y prácticas recomendadas de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de laboratorio utilizada para este informe"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-lab-setup-used-for-this-report.html">
+        Configuración de laboratorio utilizada para este informe
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html">
+        Configuración de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración inicial de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-initial-configuration.html">
+        Configuración inicial de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración específica de recursos de SnapCenter para backups de base de datos SAP HANA"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html">
+        Configuración específica de recursos de SnapCenter para backups de base de datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración específica de recursos de SnapCenter para backups de volúmenes sin datos"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html">
+        Configuración específica de recursos de SnapCenter para backups de volúmenes sin datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backups de bases de datos"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-database-backups.html">
+        Backups de bases de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Comprobación de integridad de bloques"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-block-integrity-check.html">
+        Comprobación de integridad de bloques
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Restauración y recuperación"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-restore-and-recovery.html">
+        Restauración y recuperación
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración y ajuste avanzados"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-advanced-configuration-and-tuning.html">
+        Configuración y ajuste avanzados
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional e historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-br-scs-where-to-find-additional-information.html">
+        Dónde encontrar información adicional e historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup y recuperación de datos de replicación de sistemas SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Backup y recuperación de datos de replicación de sistemas SAP HANA con SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general de la replicación de sistemas SAP HANA"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html">
+        Información general de la replicación de sistemas SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backups de Storage Snapshot y replicación de sistemas SAP"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html">
+        Backups de Storage Snapshot y replicación de sistemas SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Opciones de configuración de SnapCenter para la replicación de sistemas SAP"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html">
+        Opciones de configuración de SnapCenter para la replicación de sistemas SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de SnapCenter 4.6 mediante un grupo de recursos"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html">
+        Configuración de SnapCenter 4.6 mediante un grupo de recursos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de SnapCenter con un solo recurso"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html">
+        Configuración de SnapCenter con un solo recurso
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Restauración y recuperación a partir de un backup creado en el otro host"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html">
+        Restauración y recuperación a partir de un backup creado en el otro host
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-where-to-find-additional-information_overview.html">
+        Dónde encontrar información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-sr-scs-version-history.html">
+        Historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación ante desastres de SAP HANA con Azure NetApp Files"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Recuperación ante desastres de SAP HANA con Azure NetApp Files</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general sobre la protección de datos"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_data_protection_overview_overview.html">
+        Información general sobre la protección de datos
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Comparación de soluciones de recuperación tras siniestros"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_solution_comparison.html">
+        Comparación de soluciones de recuperación tras siniestros
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Replicación entre regiones ANF con SAP HANA"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Replicación entre regiones ANF con SAP HANA</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general sobre la replicación entre regiones con SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html">
+        Información general sobre la replicación entre regiones con SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Opciones de configuración para replicación entre regiones con SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_configuration_options_for_cross-region_replication_with_sap_hana.html">
+        Opciones de configuración para replicación entre regiones con SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Requisitos y prácticas recomendadas"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_requirements_and_best_practices.html">
+        Requisitos y prácticas recomendadas
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de laboratorio"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_lab_setup.html">
+        Configuración de laboratorio
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Pasos de configuración para la replicación entre regiones ANF"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html">
+        Pasos de configuración para la replicación entre regiones ANF
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monitorización de la replicación entre regiones de ANF"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_monitoring_anf_cross-region_replication.html">
+        Monitorización de la replicación entre regiones de ANF
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Pruebas de recuperación ante desastres"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Pruebas de recuperación ante desastres</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general de las pruebas de recuperación tras siniestros"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_testing_overview.html">
+        Descripción general de las pruebas de recuperación tras siniestros
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Prepare el host de destino"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_prepare_the_target_host.html">
+        Prepare el host de destino
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Crear nuevos volúmenes basados en backups de snapshots en el centro de recuperación ante desastres"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html">
+        Crear nuevos volúmenes basados en backups de snapshots en el centro de recuperación ante desastres
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monte los nuevos volúmenes en el host de destino"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html">
+        Monte los nuevos volúmenes en el host de destino
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación de base de datos de HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_hana_database_recovery.html">
+        Recuperación de base de datos de HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación tras fallos"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Recuperación tras fallos</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general sobre conmutación por error en recuperación ante desastres"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_disaster_recovery_failover_overview.html">
+        Información general sobre conmutación por error en recuperación ante desastres
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Prepare el host de destino"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_prepare_the_target_host_01.html">
+        Prepare el host de destino
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Rompa y elimine la paridad de replicación"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_break_and_delete_replication_peering.html">
+        Rompa y elimine la paridad de replicación
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Monte los volúmenes en el host de destino"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html">
+        Monte los volúmenes en el host de destino
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación de base de datos de HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_hana_database_recovery_01.html">
+        Recuperación de base de datos de HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualizar historial"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-anf_update_history.html">
+        Actualizar historial
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="La solución de NetApp"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-the-netapp-solution.html">
+        La solución de NetApp
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Arquitectura del servicio SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-snapcenter-service-architecture.html">
+        Arquitectura del servicio SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Solución de backup SAP HANA del servicio SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html">
+        Solución de backup SAP HANA del servicio SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Conceptos y prácticas recomendadas del servicio SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html">
+        Conceptos y prácticas recomendadas del servicio SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de laboratorio utilizada para este informe"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-lab-setup-used-for-this-report.html">
+        Configuración de laboratorio utilizada para este informe
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de la política de servicio de SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-snapcenter-service-policy-configuration.html">
+        Configuración de la política de servicio de SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de backup de la snapshot de servicio SnapCenter"
+      data-li-level="3" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Configuración de backup de la snapshot de servicio SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-snapcenter-service-snapshot-backup-configuration-overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de backup de backups de base de datos SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html">
+        Configuración de backup de backups de base de datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de backup de volúmenes que no pertenecen a datos SAP HANA"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html">
+        Configuración de backup de volúmenes que no pertenecen a datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de backup de volúmenes no globales de datos"
+      data-li-level="4#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html">
+        Configuración de backup de volúmenes no globales de datos
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backups de snapshots de la base de datos SAP HANA"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-sap-hana-database-snapshot-backups.html">
+        Backups de snapshots de la base de datos SAP HANA
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Backups basados en archivos y comprobación de la integridad de los bloques"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-file-based-backups-and-block-integrity-check.html">
+        Backups basados en archivos y comprobación de la integridad de los bloques
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Restauración y recuperación"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-restore-and-recovery.html">
+        Restauración y recuperación
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información adicional"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-additional-information.html">
+        Información adicional
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-backup-anf-version-history.html">
+        Historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación ante desastres de SAP HANA con replicación de almacenamiento"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-dr-sr_pdf_link.html">
+        Recuperación ante desastres de SAP HANA con replicación de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación y backup de SAP HANA mediante Snap Creator"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-bandr-sc_pdf_link.html">
+        Recuperación y backup de SAP HANA mediante Snap Creator
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Recuperación y backup de SAP HANA mediante el almacenamiento de NetApp y el software CommVault"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-commvault_pdf_link.html">
+        Recuperación y backup de SAP HANA mediante el almacenamiento de NetApp y el software CommVault
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="SAP HANA en la cabina All SAN de NetApp: SAN moderno, protección de datos y recuperación ante desastres"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/backup/saphana-san_pdf_link.html">
+        SAP HANA en la cabina All SAN de NetApp: SAN moderno, protección de datos y recuperación ante desastres
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Gestión del ciclo de vida"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Gestión del ciclo de vida</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Integración de la gestión de entornos SAP de NetApp con Ansible"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Integración de la gestión de entornos SAP de NetApp con Ansible</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Situaciones de clonación, copia y actualización del sistema SAP"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html">
+        Situaciones de clonación, copia y actualización del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Casos prácticos de actualización, copia y clonado del sistema"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html">
+        Casos prácticos de actualización, copia y clonado del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Integración de SAP Lama de NetApp con Ansible"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-netapp-sap-lama-integration-using-ansible.html">
+        Integración de SAP Lama de NetApp con Ansible
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Implementación de ejemplo"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-example-implementation.html">
+        Implementación de ejemplo
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema clonado"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-clone-system.html">
+        Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema clonado
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flujo de trabajo de desaprovisionamiento de SAP Lama: Destrucción del sistema"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html">
+        Flujo de trabajo de desaprovisionamiento de SAP Lama: Destrucción del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema de copia"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-copy-system.html">
+        Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema de copia
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flujo de trabajo de aprovisionamiento de SAP Lama: Actualización del sistema"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-sap-lama-provisioning-workflow-system-refresh.html">
+        Flujo de trabajo de aprovisionamiento de SAP Lama: Actualización del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Configuración de scripts de proveedor y libros de estrategia de Ansible"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html">
+        Configuración de scripts de proveedor y libros de estrategia de Ansible
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Conclusión"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/lama-ansible-conclusion.html">
+        Conclusión
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Introducción"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html">
+        Introducción
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Situaciones de copia, actualización y clonación del sistema SAP"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html">
+        Situaciones de copia, actualización y clonación del sistema SAP
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Casos de uso de actualización y clonado del sistema"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-use-cases-for-system-refresh-and-cloning.html">
+        Casos de uso de actualización y clonado del sistema
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general del flujo de trabajo de actualización del sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html">
+        Descripción general del flujo de trabajo de actualización del sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general del flujo de trabajo de copia de sistemas SAP con SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html">
+        Información general del flujo de trabajo de copia de sistemas SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Información general del flujo de trabajo de clonado de sistemas SAP con SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html">
+        Información general del flujo de trabajo de clonado de sistemas SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Flujos de trabajo de operaciones de actualización del sistema SAP HANA mediante backups de snapshots de almacenamiento"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html">
+        Flujos de trabajo de operaciones de actualización del sistema SAP HANA mediante backups de snapshots de almacenamiento
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Ejemplo de automatización de scripts"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-automation-example-scripts.html">
+        Ejemplo de automatización de scripts
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualización del sistema SAP HANA con SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html">
+        Actualización del sistema SAP HANA con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Clon del sistema SAP con SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-sap-system-clone-with-snapcenter.html">
+        Clon del sistema SAP con SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional e historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/sc-copy-clone-where-to-find-additional-information.html">
+        Dónde encontrar información adicional e historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy"
+      data-li-level="2" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Descripción general"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/libelle-sc-overview.html">
+        Descripción general
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualización del sistema SAP HANA con LSC y SnapCenter"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html">
+        Actualización del sistema SAP HANA con LSC y SnapCenter
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Actualización del sistema SAP HANA con LSC, AzAcSnap y Azure NetApp Files"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html">
+        Actualización del sistema SAP HANA con LSC, AzAcSnap y Azure NetApp Files
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Dónde encontrar información adicional e historial de versiones"
+      data-li-level="3#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/lifecycle/libelle-sc-where-to-find-additional-information.html">
+        Dónde encontrar información adicional e historial de versiones
+      </a></li></ul></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Integración del almacenamiento de NetApp con SAP Landscape Management"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="https://www.netapp.com/us/media/tr-4018.pdf">
+        Integración del almacenamiento de NetApp con SAP Landscape Management
+      </a></li></ul></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Resúmenes sobre las soluciones"
+      data-li-level="1" 
+      class="subfolders "
+    ><a href="#">
+        <div class="na-navbar-padding"> Resúmenes sobre las soluciones</div>
+      </a>
+      <ul style="display: none;">
+        <li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Gestión del ciclo de vida de SAP HANA"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/briefs/saphana-lm-sb_pdf_link.html">
+        Gestión del ciclo de vida de SAP HANA
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Backup y recuperación de datos de SAP HANA"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="https://www.netapp.com/us/media/sb-3965.pdf">
+        Backup y recuperación de datos de SAP HANA
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Recuperación ante desastres de SAP HANA"
+      data-li-level="2#" 
+      class=" "
+    ><a class="na-navbar-padding" href="https://www.netapp.com/us/media/sb-3968.pdf">
+        Recuperación ante desastres de SAP HANA
+      </a></li></ul></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Soluciones SAP de FlexPod"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="https://docs.netapp.com/us-en/flexpod/ent-db/index.html">
+        Soluciones SAP de FlexPod
+      </a></li><li 
+      data-pdf-exists="false" 
+      data-pdf-filename="Soluciones NetApp"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="https://docs.netapp.com/us-en/netapp-solutions/">
+        Soluciones NetApp
+      </a></li><li 
+      data-pdf-exists="true" 
+      data-pdf-filename="Avisos legales"
+      data-li-level="1#" 
+      class=" "
+    ><a class="na-navbar-padding" href="/es-es/netapp-solutions-sap/reference_legal_notices.html">
+        Avisos legales
+      </a></li></ul>
+</div>
+<script>
+  window.onscroll = () => {
+    const value = -40 - (document.body.scrollHeight - (window.innerHeight + document.scrollingElement.scrollTop));
+    
+    document.getElementById("sidebar-height").style.bottom = Math.max(0,value) + "px";
+};
+</script>
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+<script>$("#mysidebar li.active").parents('ul').css("display","block");</script>
+
+
+  </div>
+  
+
+  <div class="ie-content-pane n-doc__component-detail-content n-doc__component-detail-content--show-code">
+    <!-- Begin of page container --><article class="page-content" id="main">
+      <div class="ie-utility">
+  <button id="btn-sidebar-expand" onclick="showSidebar()"><img src="/es-es/netapp-solutions-sap/images/expand.png" alt="Expandir panel de navegación"></button>
+  <div class="ie-menu">
+    <div class="n-breadcrumb">
+      <ul class="n-breadcrumb__list">
+        <li class="n-breadcrumb__list-item">
+          <a href="https://docs.netapp.com">docs.netapp.com</a>
+        </li>
+        
+
+        
+
+        <li class="n-breadcrumb__list-item">
+          <a href="/es-es/netapp-solutions-sap/">NetApp&nbsp;Solutions&nbsp;SAP</a>
+        </li>
+
+      </ul>
+    </div>
+    <div style="clear: both"></div><!-- Main needs to have height -->
+  </div>
+</div>
+
+      <div class="ie-nmt-disclaimer">
+  <span>
+    <div class="ie-nmt-disclaimer-container">
+      <div class="ie-nmt-disclaimer-icon">
+        <svg class="luci-icon" aria-hidden="true">
+          <use xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#circle-info">
+        </svg>
+      </div>
+      <div class="ie-nmt-disclaimer-content">
+        <span> Se proporciona el idioma español mediante traducción automática para su comodidad. En caso de alguna inconsistencia, el inglés precede al español. </span>
+      </div>
+      <div style="clear:both;"></div>
+    </div>
+  </span>
+</div><div class="n-doc__component-detail-heading-wrap">
+  <h1 class="n-doc__component-detail-heading">Conceptos y prácticas recomendadas de SnapCenter</h1>
+</div>
+
+
+<p class="page-details">
+  
+    
+    <time datetime="2023-02-20 19:14:20 +0000">02/20/2023</time>
+    
+  
+
+<span>Colaboradores
+</span>
+
+
+</p>
+
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="saphana-br-scs-snapcenter-sap-hana-backup-solution.html">"Anterior: Solución de backup SAP HANA de SnapCenter."</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="opciones-y-conceptos-de-configuración-de-recursos-sap-hana">Opciones y conceptos de configuración de recursos SAP HANA</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Con SnapCenter, la configuración de recursos de base de datos SAP HANA puede realizarse con dos enfoques diferentes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Configuración manual de recursos.</strong> la información de recursos y espacio de almacenamiento de HANA se debe proporcionar manualmente.</p>
+</li>
+<li>
+<p><strong>Descubrimiento automático de recursos HANA.</strong> el descubrimiento automático simplifica la configuración de bases de datos HANA en SnapCenter y permite la restauración y recuperación automatizadas.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Es importante entender que solo se habilitan los recursos de bases de datos de HANA en SnapCenter que se detectan automáticamente para realizar restauraciones y recuperaciones automatizadas. Los recursos DE la base de datos DE HANA que se configuran manualmente en SnapCenter deben recuperarse manualmente después de una operación de restauración en SnapCenter.</p>
+</div>
+<div class="paragraph">
+<p>Por otro lado, la detección automática con SnapCenter no es compatible con todas las arquitecturas de HANA y las configuraciones de infraestructura. Por lo tanto, los entornos HANA pueden requerir un enfoque mixto en el cual algunos sistemas HANA (sistemas de varios hosts HANA) requieren una configuración de recursos manual y todos los demás pueden configurarse mediante detección automática.</p>
+</div>
+<div class="paragraph">
+<p>La detección automática y las restauraciones y recuperaciones automatizadas dependen de la capacidad para ejecutar comandos del sistema operativo en el host de la base de datos. Algunos ejemplos son la detección de huella de almacenamiento y sistema de archivos, y las operaciones de desmontaje, montaje o detección de LUN. Estas operaciones se ejecutan en el plugin de SnapCenter Linux, que se implementa automáticamente junto con el plugin de HANA. Por lo tanto, es necesario implementar el complemento HANA en el host de la base de datos para permitir la detección automática, así como la restauración y recuperación automatizadas. También es posible deshabilitar la detección automática después de la implementación del plugin de HANA en el host de la base de datos. En este caso, el recurso será un recurso configurado manualmente.</p>
+</div>
+<div class="paragraph">
+<p>La siguiente figura resume las dependencias. Encontrará más información sobre las opciones de puesta en marcha de HANA en la sección “Opciones de puesta en marcha para el complemento SAP HANA”.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image9.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Los complementos HANA y Linux actualmente, solo están disponibles para sistemas basados en Intel. Si las bases de datos de HANA se ejecutan en IBM Power Systems, se debe utilizar un host de plugin HANA central.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="arquitecturas-de-hana-compatibles-para-detección-automática-y-recuperación-automatizada">Arquitecturas de HANA compatibles para detección automática y recuperación automatizada</h3>
+<div class="paragraph">
+<p>Con SnapCenter, la detección automática, y la restauración y recuperación automatizadas son compatibles con la mayoría de las configuraciones de HANA, con la excepción de que varios sistemas de host de HANA requieren una configuración manual.</p>
+</div>
+<div class="paragraph">
+<p>La siguiente tabla muestra las configuraciones de HANA compatibles para la detección automática.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Plugin DE HANA instalado en:</th>
+<th class="tableblock halign-left valign-top">Arquitectura DE HANA</th>
+<th class="tableblock halign-left valign-top">Configuración del sistema HANA</th>
+<th class="tableblock halign-left valign-top">De almacenamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host de base de datos HANA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host único</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Contenedor único DE HANA</p>
+</li>
+<li>
+<p>Contenedores de bases de datos multitenant de SAP HANA (MDC) con uno o varios inquilinos</p>
+</li>
+<li>
+<p>Replicación de sistemas HANA</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Configuración básica con NFS</p>
+</li>
+<li>
+<p>Configuración básica con XFS y FC con o sin Linux Logical Volume Manager (LVM)</p>
+</li>
+<li>
+<p>VMware con montajes NFS de SO directo</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Los sistemas MDC DE HANA con varios inquilinos son compatibles para la detección automática, pero no para la restauración y la recuperación automatizadas con la versión de SnapCenter actual.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="arquitecturas-hana-compatibles-para-la-configuración-manual-de-recursos-de-hana">Arquitecturas HANA compatibles para la configuración manual de recursos de HANA</h3>
+<div class="paragraph">
+<p>Es posible configurar manualmente los recursos HANA para todas las arquitecturas HANA; sin embargo, requiere un host de complemento HANA central. El host del plugin central puede ser el propio servidor SnapCenter o un host Linux o Windows independiente.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Cuando el plugin de HANA se implementa en el host de la base de datos HANA, de forma predeterminada, el recurso se detecta automáticamente. Es posible deshabilitar la detección automática para hosts individuales, de modo que el plugin pueda ponerse en marcha; por ejemplo, en un host de base de datos con la replicación del sistema HANA activada y una versión de SnapCenter &lt; 4.6, donde no se admite la detección automática. Para obtener más información, consulte la sección <a href="saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto-discovery-on-the-HANA-plug-in-host">"“Deshabilitar la detección automática en el host del plugin de HANA.”"</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>La siguiente tabla muestra las configuraciones de HANA compatibles para la configuración manual de recursos de HANA.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Plugin DE HANA instalado en:</th>
+<th class="tableblock halign-left valign-top">Arquitectura DE HANA</th>
+<th class="tableblock halign-left valign-top">Configuración del sistema HANA</th>
+<th class="tableblock halign-left valign-top">De almacenamiento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host de plugin central (servidor SnapCenter o host Linux independiente)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Host único o múltiple</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Contenedor único DE HANA</p>
+</li>
+<li>
+<p>MDC DE HANA con uno o varios inquilinos</p>
+</li>
+<li>
+<p>Replicación de sistemas HANA</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Configuración básica con NFS</p>
+</li>
+<li>
+<p>Nativo con XFS y FC con o sin Linux LVM</p>
+</li>
+<li>
+<p>VMware con montajes NFS de SO directo</p>
+</li>
+</ul>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="opciones-de-implementación-para-el-complemento-sap-hana">Opciones de implementación para el complemento SAP HANA</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>En la siguiente figura, se muestra la vista lógica y la comunicación entre SnapCenter Server y las bases de datos SAP HANA.</p>
+</div>
+<div class="paragraph">
+<p>El servidor SnapCenter se comunica mediante el plugin de SAP HANA con las bases de datos SAP HANA. El complemento SAP HANA utiliza el software cliente hdbsql de SAP HANA para ejecutar comandos SQL en las bases de datos SAP HANA. El hdbuserstore de SAP HANA se utiliza para proporcionar las credenciales de usuario, el nombre de host y la información del puerto para acceder a las bases de datos SAP HANA.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image10.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+El complemento SAP HANA y el software cliente SAP hdbsql, que incluye la herramienta de configuración hdbuserstore, deben instalarse conjuntamente en el mismo host.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>El host puede ser el servidor de SnapCenter mismo, un host del plugin central independiente o los hosts individuales de bases de datos SAP HANA.</p>
+</div>
+<div class="sect2">
+<h3 id="snapcenter-server-de-alta-disponibilidad">SnapCenter Server de alta disponibilidad</h3>
+<div class="paragraph">
+<p>SnapCenter se puede establecer en una configuración de alta disponibilidad de dos nodos. En dicha configuración, se utiliza un equilibrador de carga (por ejemplo, F5) en un modo activo/pasivo utilizando una dirección IP virtual dirigida al host de SnapCenter activo. El repositorio de SnapCenter (la base de datos de MySQL) es replicado por SnapCenter entre los dos hosts para que los datos de SnapCenter estén siempre sincronizados.</p>
+</div>
+<div class="paragraph">
+<p>La alta disponibilidad del servidor SnapCenter no es compatible si el plugin HANA está instalado en el servidor SnapCenter. Si planea configurar SnapCenter en una configuración de alta disponibilidad, no instale el plugin HANA en el servidor SnapCenter. Puede encontrar más información sobre la alta disponibilidad de SnapCenter en este <a href="https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/How_to_configure_SnapCenter_Servers_for_high_availability_using_F5_Load_Balancer" target="_blank" rel="noopener">"Página de la base de conocimientos de NetApp"</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="snapcenter-server-como-host-de-plugin-de-hana-central">SnapCenter Server como host de plugin de HANA central</h3>
+<div class="paragraph">
+<p>La siguiente figura muestra una configuración en la que SnapCenter Server se utiliza como host de plugin central. El complemento SAP HANA y el software de cliente SAP hdbsql se instalan en el servidor SnapCenter.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image11.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Dado que el complemento HANA se puede comunicar con las bases de datos HANA gestionadas usando el hdbclient a través de la red, no es necesario instalar ningún componente de SnapCenter en los hosts individuales de la base de datos HANA. SnapCenter puede proteger las bases de datos de HANA mediante un host del complemento de HANA central en el que todas las claves de userstore están configuradas para las bases de datos gestionadas.</p>
+</div>
+<div class="paragraph">
+<p>Por otro lado, la automatización mejorada del flujo de trabajo para la detección automática, la automatización de la restauración y la recuperación, así como las operaciones de actualización del sistema SAP requieren la instalación de los componentes de SnapCenter en el host de la base de datos. Cuando se utiliza un host de un plugin de HANA central, estas funciones no están disponibles.</p>
+</div>
+<div class="paragraph">
+<p>Además, la alta disponibilidad del servidor SnapCenter con la función de alta disponibilidad integrada no se puede usar cuando el complemento HANA está instalado en el servidor SnapCenter. La alta disponibilidad se puede obtener usando VMware ha si el servidor SnapCenter se está ejecutando en un equipo virtual dentro de un clúster de VMware.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="un-host-separado-como-host-de-plugin-de-hana-central">Un host separado como host de plugin de HANA central</h3>
+<div class="paragraph">
+<p>En la siguiente figura, se muestra una configuración en la que un host Linux separado se usa como host de plugin central. En este caso, el complemento SAP HANA y el software de cliente SAP hdbsql se instalan en el host Linux.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+El host separado del plugin central también puede ser un host de Windows.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image12.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>La misma restricción en cuanto a la disponibilidad de funciones descrita en la sección anterior también se aplica a un host de plugin central independiente.</p>
+</div>
+<div class="paragraph">
+<p>Sin embargo, con esta opción de puesta en marcha, el servidor SnapCenter se puede configurar con la funcionalidad de alta disponibilidad incorporada. El host del plugin central también debe ser ha, por ejemplo, mediante una solución de clúster Linux.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="plugin-de-hana-implementado-en-hosts-de-base-de-datos-de-hana-individuales">Plugin DE HANA implementado en hosts de base de datos de HANA individuales</h3>
+<div class="paragraph">
+<p>La siguiente figura muestra una configuración en la cual el plugin de SAP HANA está instalado en cada host de base de datos SAP HANA.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image13.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p>Cuando el complemento HANA se instala en cada host de base de datos HANA individual, todas las funciones, como la detección automática y la restauración y recuperación automatizadas, están disponibles. Además, el servidor SnapCenter puede configurarse en una configuración de alta disponibilidad.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="puesta-en-marcha-mixta-del-complemento-de-hana">Puesta en marcha mixta del complemento de HANA</h3>
+<div class="paragraph">
+<p>Como se explicó al principio de esta sección, algunas configuraciones del sistema HANA, como varios sistemas de host, requieren un host de plugin centralizado. Por lo tanto, la mayoría de las configuraciones de SnapCenter requieren una puesta en marcha mixta del complemento HANA.</p>
+</div>
+<div class="paragraph">
+<p>NetApp recomienda implementar el plugin de HANA en el host de base de datos de HANA para todas las configuraciones del sistema HANA que se admiten para la detección automática. Otros sistemas HANA, como las configuraciones de varios hosts, deben gestionarse con el host de plugin de HANA central.</p>
+</div>
+<div class="paragraph">
+<p>Las dos figuras siguientes muestran implementaciones de plugins combinadas con el servidor SnapCenter o con un host Linux independiente como host de plugins centrales. La única diferencia entre estas dos puestas en marcha es la configuración de alta disponibilidad opcional.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image14.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image15.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resumen-y-recomendaciones">Resumen y recomendaciones</h3>
+<div class="paragraph">
+<p>En general, NetApp recomienda poner en marcha el complemento HANA en cada host SAP HANA para habilitar todas las funciones disponibles de SnapCenter HANA y mejorar la automatización del flujo de trabajo.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Los complementos HANA y Linux actualmente solo están disponibles para sistemas basados en Intel. Si las bases de datos de HANA se ejecutan en IBM Power Systems, se debe utilizar un host de plugin HANA central.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Para las configuraciones de HANA en las que no se admite la detección automática, como las configuraciones de varios hosts de HANA, se debe configurar un host del plugin de HANA central adicional. El host del complemento central puede ser el servidor de SnapCenter si se puede utilizar ha de VMware para alta disponibilidad de SnapCenter. Si piensa utilizar la funcionalidad de alta disponibilidad incorporada de SnapCenter, utilice un host de plugin de Linux independiente.</p>
+</div>
+<div class="paragraph">
+<p>En la tabla siguiente se resumen las distintas opciones de implementación.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Opción de implementación</th>
+<th class="tableblock halign-left valign-top">Dependencias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugin de host de plugin de HANA central instalado en el servidor SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros: * Configuración central de almacenamiento de usuario de HDB de complemento único HANA * no se requieren componentes de software SnapCenter en los hosts individuales de bases de datos de HANA * compatibilidad con todas las arquitecturas de HANA: * Configuración manual de recursos * recuperación manual * no se ejecuta soporte para la restauración de un solo inquilino * los pasos previos y posteriores a un script en el host del plugin central * alta disponibilidad de SnapCenter integrada no compatible * la combinación de SID y nombre de inquilino debe ser única en todas las bases de datos HANA gestionadas * Log La gestión de retención de backup está habilitada/deshabilitada para todas las bases de datos HANA gestionadas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugin de host de plugin de HANA central instalado en un servidor Linux o Windows independiente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pros: * Configuración central de almacenamiento de usuario de HDB de complemento único HANA * no se requieren componentes de software SnapCenter en hosts individuales de bases de datos HANA * compatibilidad con todas las arquitecturas HANA * SnapCenter integrada de alta disponibilidad compatible con funciones: * Configuración manual de recursos * recuperación manual * no se ejecuta soporte para la restauración de un solo inquilino * cualquier paso previo y posterior al script en el host del plugin central * la combinación de SID y nombre de inquilino debe ser única en todas las bases de datos HANA gestionadas * la gestión de retención de backup de registro habilitada/deshabilitada para todas las bases de datos gestionadas Bases de datos HANA</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Plugin de host de plugin de HANA individual instalado en el servidor de bases de datos HANA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ventajas: * Detección automática de recursos de HANA * restauración y recuperación automatizadas * restauración de un solo inquilino * automatización previa y posterior al script para la actualización del sistema SAP * compatible con alta disponibilidad de SnapCenter integrada * la gestión de la retención de backup de registro se puede habilitar o deshabilitar para cada ubicación de base de datos de HANA individual: * No es compatible con todas las arquitecturas HANA. Se requiere un host de plugin central adicional para varios sistemas host HANA. * El plugin de HANA debe ponerse en marcha en cada host de base de datos HANA</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="estrategia-de-protección-de-datos">Estrategia de protección de datos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Antes de configurar SnapCenter y el complemento SAP HANA, la estrategia de protección de datos se debe definir de acuerdo con los requisitos de objetivo de tiempo de recuperación y objetivo de punto de recuperación de los distintos sistemas SAP.</p>
+</div>
+<div class="paragraph">
+<p>Un enfoque común es definir tipos de sistemas como sistemas de producción, desarrollo, pruebas o entornos de pruebas. Normalmente, todos los sistemas SAP del mismo tipo tienen los mismos parámetros de protección de datos.</p>
+</div>
+<div class="paragraph">
+<p>Los parámetros que deben definirse son:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>¿Con qué frecuencia se debería ejecutar un backup de Snapshot?</p>
+</li>
+<li>
+<p>¿Cuánto tiempo se deberían conservar los backups de copias snapshot en el sistema de almacenamiento principal?</p>
+</li>
+<li>
+<p>¿Con qué frecuencia se debe ejecutar una comprobación de integridad de bloque?</p>
+</li>
+<li>
+<p>¿Deberían replicarse los principales backups en una ubicación de backup externa?</p>
+</li>
+<li>
+<p>¿Cuánto tiempo deberían guardarse los backups en el almacenamiento de backups externo?</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>En la siguiente tabla se muestra un ejemplo de parámetros de protección de datos para la producción, desarrollo y prueba del tipo de sistema. Para el sistema de producción se ha definido una alta frecuencia de backups, y los backups se replican en un centro de backup externo una vez al día. Los sistemas de prueba tienen menos requisitos y no tienen replicación de backups.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parámetros</th>
+<th class="tableblock halign-left valign-top">Sistemas de producción</th>
+<th class="tableblock halign-left valign-top">Sistemas de desarrollo</th>
+<th class="tableblock halign-left valign-top">Pruebas de sistemas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frecuencia de backup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cada 4 horas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cada 4 horas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cada 4 horas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retención primaria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 días</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 días</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 días</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comprobación de integridad de bloques</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Una vez a la semana</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Una vez a la semana</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replicación en centro de backup externo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Una vez al día</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Una vez al día</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retención de backups fuera de las instalaciones</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 semanas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 semanas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No aplicable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>En la siguiente tabla, se muestran las políticas que deben configurarse para los parámetros de protección de datos.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parámetros</th>
+<th class="tableblock halign-left valign-top">PolicyLocalSnap</th>
+<th class="tableblock halign-left valign-top">PolicyLocalSnapAndSnapVault</th>
+<th class="tableblock halign-left valign-top">PolicyBlockIntegrityCheck</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tipo de backup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basado en Snapshot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basado en Snapshot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basado en archivos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frecuencia de programación</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cada hora</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Todos los días</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Semanal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Retención primaria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recuento = 12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recuento = 3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recuento = 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replicación SnapVault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sí</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No aplicable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>La política <code>LocalSnapshot</code> Se usa para los sistemas de producción, desarrollo y prueba para cubrir los backups locales de Snapshot con una retención de dos días.</p>
+</div>
+<div class="paragraph">
+<p>En la configuración de protección de recursos, la programación se define de forma diferente para los tipos de sistema:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Producción.</strong> Horario cada 4 horas.</p>
+</li>
+<li>
+<p><strong>Desarrollo.</strong> Horario cada 4 horas.</p>
+</li>
+<li>
+<p><strong>Prueba.</strong> Horario cada 4 horas.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>La política <code>LocalSnapAndSnapVault</code> se utiliza en los sistemas de producción y desarrollo para cubrir la replicación diaria al almacenamiento de backup externo.</p>
+</div>
+<div class="paragraph">
+<p>En la configuración de protección de recursos, la programación se define para producción y desarrollo:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Producción.</strong> programar todos los días.</p>
+</li>
+<li>
+<p><strong>Desarrollo.</strong> Horario todos los días.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>La política <code>BlockIntegrityCheck</code> se utiliza en los sistemas de producción y desarrollo para cubrir la comprobación de integridad de bloques semanales mediante un backup basado en archivos.</p>
+</div>
+<div class="paragraph">
+<p>En la configuración de protección de recursos, la programación se define para producción y desarrollo:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>* Producción.* Horario cada semana.</p>
+</li>
+<li>
+<p><strong>Desarrollo.</strong> Horario cada semana.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Para cada base de datos SAP HANA individual que utilice la política de backup externa, se debe configurar una relación de protección en la capa de almacenamiento. La relación de protección define qué volúmenes se replican y la retención de los backups en el almacenamiento de backup externo.</p>
+</div>
+<div class="paragraph">
+<p>Con nuestro ejemplo, para cada sistema de producción y desarrollo, se define una retención de dos semanas en el almacenamiento de backup externo.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+En nuestro ejemplo, las políticas de protección y la retención para los recursos de la base de datos SAP HANA y los recursos de volúmenes sin datos no son diferentes.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="operaciones-de-backup">Operaciones de backup</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>SAP introdujo la compatibilidad de los backups de Snapshot para sistemas de varios inquilinos MDC con HANA 2.0 SPS4. SnapCenter admite operaciones de backup de Snapshot de sistemas MDC de HANA con varios inquilinos. SnapCenter también admite dos operaciones de restauración diferentes de un sistema MDC de HANA. Puede restaurar todo el sistema, la base de datos del sistema y todos los clientes, o bien restaurar un solo usuario. Existen algunos requisitos previos para permitir a SnapCenter ejecutar estas operaciones.</p>
+</div>
+<div class="paragraph">
+<p>En un sistema MDC, la configuración de tenant no es necesariamente estática. Es posible agregar inquilinos o eliminar inquilinos. SnapCenter no puede confiar en la configuración que se detecta cuando la base de datos HANA se añade a SnapCenter. SnapCenter debe saber qué inquilinos están disponibles en el momento específico en que se ejecuta la operación de backup.</p>
+</div>
+<div class="paragraph">
+<p>Para habilitar una operación de restauración de un solo usuario, SnapCenter debe saber qué inquilinos se incluyen en cada backup de Snapshot. Además, debe saber qué archivos y directorios pertenecen a cada inquilino incluido en el backup de Snapshot.</p>
+</div>
+<div class="paragraph">
+<p>Por lo tanto, con cada operación de backup, el primer paso del flujo de trabajo es obtener la información del inquilino. Esto incluye los nombres de arrendatario y la información de archivo y directorio correspondiente. Estos datos deben almacenarse en los metadatos de backups de Snapshot para poder admitir una única operación de restauración de usuarios. El siguiente paso es la operación de backup de Snapshot. Este paso incluye el comando SQL para activar el punto de guardado de backup de HANA, el backup de snapshot de almacenamiento y el comando SQL para cerrar la operación de Snapshot. Al usar el comando close, la base de datos de HANA actualiza el catálogo de backup de la base de datos del sistema y cada inquilino.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+SAP no admite las operaciones de backup de Snapshot para sistemas MDC cuando se detienen uno o varios inquilinos.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Para la gestión de retención de los backups de datos y la gestión del catálogo de backup de HANA, SnapCenter debe ejecutar las operaciones de eliminación de catálogo para la base de datos del sistema y todas las bases de datos de tenant que se identificaron en el primer paso. Del mismo modo para los backups de registros, el flujo de trabajo SnapCenter debe funcionar en cada inquilino que forme parte de la operación de backup.</p>
+</div>
+<div class="paragraph">
+<p>En la siguiente figura, se muestra información general sobre el flujo de trabajo de backup.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image16.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="sect2">
+<h3 id="flujo-de-trabajo-de-backup-para-backups-de-snapshot-de-la-base-de-datos-hana">Flujo de trabajo de backup para backups de Snapshot de la base de datos HANA</h3>
+<div class="paragraph">
+<p>SnapCenter realiza un backup de la base de datos SAP HANA en el siguiente orden:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SnapCenter lee la lista de inquilinos desde la base de datos HANA.</p>
+</li>
+<li>
+<p>SnapCenter lee los archivos y los directorios de cada inquilino desde la base de datos de HANA.</p>
+</li>
+<li>
+<p>La información del inquilino se almacena en los metadatos de SnapCenter para esta operación de backup.</p>
+</li>
+<li>
+<p>SnapCenter activa un punto de guardado de backup sincronizado global de SAP HANA para crear una imagen de base de datos coherente en la capa de persistencia.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Para un sistema tenant único o múltiple de SAP HANA MDC, se crea un punto de guardado de backup global sincronizado para la base de datos del sistema y para cada base de datos de tenant.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>SnapCenter crea copias Snapshot de almacenamiento para todos los volúmenes de datos configurados para el recurso. En nuestro ejemplo de una base de datos HANA de un único host, solo hay un volumen de datos. Con una base de datos de varios hosts SAP HANA, hay varios volúmenes de datos.</p>
+</li>
+<li>
+<p>SnapCenter registra el backup de Snapshot del almacenamiento en el catálogo de backup de SAP HANA.</p>
+</li>
+<li>
+<p>SnapCenter elimina el punto de guardado de backup de SAP HANA.</p>
+</li>
+<li>
+<p>SnapCenter inicia una actualización de SnapVault o SnapMirror para todos los volúmenes de datos configurados en el recurso.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Este paso solo se ejecuta si la política seleccionada incluye una replicación de SnapVault o SnapMirror.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>SnapCenter elimina las copias de Snapshot de almacenamiento y las entradas de backup en su base de datos, así como en el catálogo de backup de SAP HANA, según la política de retención definida para los backups en el almacenamiento principal. Las operaciones del catálogo de backup DE HANA se realizan para la base de datos del sistema y todos los inquilinos.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Si el backup sigue disponible en el almacenamiento secundario, no se elimina la entrada de catálogo SAP HANA.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>SnapCenter elimina todos los backups de registros del sistema de archivos y en el catálogo de backup de SAP HANA más antiguos que el backup de datos más antiguo identificado en el catálogo de backup de SAP HANA. Estas operaciones se realizan para la base de datos del sistema y todos los inquilinos.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Este paso solo se ejecuta si el mantenimiento del backup de registro no está deshabilitado.
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="flujo-de-trabajo-de-backup-para-operaciones-de-comprobación-de-integridad-de-bloques">Flujo de trabajo de backup para operaciones de comprobación de integridad de bloques</h3>
+<div class="paragraph">
+<p>SnapCenter ejecuta la comprobación de integridad de bloques en la siguiente secuencia:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SnapCenter lee la lista de inquilinos desde la base de datos HANA.</p>
+</li>
+<li>
+<p>SnapCenter activa una operación de backup basada en archivos para la base de datos del sistema y cada inquilino.</p>
+</li>
+<li>
+<p>SnapCenter elimina los backups basados en archivos de su base de datos, en el sistema de archivos y en el catálogo de backup de SAP HANA en función de la política de retención definida para las operaciones de comprobación de integridad de bloques. La eliminación de backup del sistema de archivos y las operaciones de catálogo de backup de HANA se realizan para la base de datos del sistema y todos los inquilinos.</p>
+</li>
+<li>
+<p>SnapCenter elimina todos los backups de registros del sistema de archivos y en el catálogo de backup de SAP HANA más antiguos que el backup de datos más antiguo identificado en el catálogo de backup de SAP HANA. Estas operaciones se realizan para la base de datos del sistema y todos los inquilinos.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Este paso solo se ejecuta si el mantenimiento del backup de registro no está deshabilitado.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="gestión-de-retención-de-backup-y-mantenimiento-de-backups-de-datos-y-registros">Gestión de retención de backup y mantenimiento de backups de datos y registros</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>La gestión de la retención de backup de datos y el mantenimiento de los backups de registros se pueden dividir en cinco áreas principales, incluida la gestión de retención de:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Backups locales en el almacenamiento primario</p>
+</li>
+<li>
+<p>Backups basados en archivos</p>
+</li>
+<li>
+<p>Backups en el almacenamiento secundario</p>
+</li>
+<li>
+<p>Backups de datos en el catálogo de backup de SAP HANA</p>
+</li>
+<li>
+<p>Los backups de registro en el catálogo de backup de SAP HANA y el sistema de archivos</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>En la siguiente figura, se proporciona información general sobre los diferentes flujos de trabajo y las dependencias de cada operación. En las siguientes secciones se describen detalladamente las diferentes operaciones.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image17.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+<div class="sect2">
+<h3 id="gestión-de-retención-de-backups-locales-en-el-almacenamiento-principal">Gestión de retención de backups locales en el almacenamiento principal</h3>
+<div class="paragraph">
+<p>SnapCenter realiza tareas de mantenimiento de backups de bases de datos SAP HANA y backups de volúmenes sin datos eliminando copias Snapshot en el almacenamiento principal y en el repositorio de SnapCenter según una retención definida en la política de backup de SnapCenter.</p>
+</div>
+<div class="paragraph">
+<p>La lógica de gestión de retención se ejecuta con cada flujo de trabajo de backup en SnapCenter.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Tenga en cuenta que SnapCenter gestiona la gestión de la retención individualmente tanto para backups programados como bajo demanda.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Los backups locales del almacenamiento primario también se pueden eliminar manualmente en SnapCenter.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gestión-de-retención-de-backups-basados-en-archivos">Gestión de retención de backups basados en archivos</h3>
+<div class="paragraph">
+<p>SnapCenter realiza tareas de mantenimiento de los backups basados en archivos mediante la eliminación de los backups en el sistema de archivos según una retención definida en la política de backup de SnapCenter.</p>
+</div>
+<div class="paragraph">
+<p>La lógica de gestión de retención se ejecuta con cada flujo de trabajo de backup en SnapCenter.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Tenga en cuenta que SnapCenter gestiona la gestión de la retención individualmente para backups programados o bajo demanda.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gestión-de-retención-de-backups-en-el-almacenamiento-secundario">Gestión de retención de backups en el almacenamiento secundario</h3>
+<div class="paragraph">
+<p>La gestión de retención de backups en el almacenamiento secundario es gestionada por ONTAP de acuerdo con la retención definida en la relación de protección de ONTAP.</p>
+</div>
+<div class="paragraph">
+<p>Para sincronizar estos cambios en el almacenamiento secundario del repositorio de SnapCenter, SnapCenter utiliza un trabajo de limpieza programado. Esta tarea de limpieza sincroniza todos los backups de almacenamiento secundario con el repositorio de SnapCenter para todos los plugins de SnapCenter y todos los recursos.</p>
+</div>
+<div class="paragraph">
+<p>De forma predeterminada, el trabajo de limpieza se programa una vez a la semana. Esta programación semanal genera un retraso con la eliminación de backups en SnapCenter y SAP HANA Studio en comparación con los backups que ya se han eliminado en el almacenamiento secundario. Para evitar esta incoherencia, los clientes pueden cambiar la programación por una mayor frecuencia, por ejemplo, una vez al día.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+El trabajo de limpieza también se puede activar manualmente para un recurso individual haciendo clic en el botón Refresh de la vista de topología del recurso.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Para obtener información detallada acerca de cómo adaptar la programación del trabajo de limpieza o cómo activar una actualización manual, consulte la sección <a href="saphana-br-scs-advanced-configuration-and-tuning.html#change-scheduling-frequency-of-backup-synchronization-with-off-site-backup-storage">"“Cambie la frecuencia de programación de la sincronización de copias de seguridad con el almacenamiento de copias de seguridad fuera de las instalaciones”."</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gestión-de-retención-de-backups-de-datos-dentro-del-catálogo-de-backup-de-sap-hana">Gestión de retención de backups de datos dentro del catálogo de backup de SAP HANA</h3>
+<div class="paragraph">
+<p>Cuando SnapCenter ha eliminado cualquier backup, snapshot local o basado en archivos, o si ha identificado la eliminación del backup en el almacenamiento secundario, este backup de datos también se elimina en el catálogo de backup de SAP HANA.</p>
+</div>
+<div class="paragraph">
+<p>Antes de eliminar la entrada del catálogo SAP HANA para un backup de Snapshot local en el almacenamiento principal, SnapCenter comprueba si el backup sigue existiendo en el almacenamiento secundario.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="gestión-de-retención-de-backups-de-registros">Gestión de retención de backups de registros</h3>
+<div class="paragraph">
+<p>La base de datos SAP HANA crea automáticamente backups de registro. Este backup de registro ejecuta crean archivos de backup para cada servicio SAP HANA individual en un directorio de backup configurado en SAP HANA.</p>
+</div>
+<div class="paragraph">
+<p>Los backups de registros más antiguos del último backup de datos ya no son necesarios para la recuperación futura y, por lo tanto, se pueden eliminar.</p>
+</div>
+<div class="paragraph">
+<p>SnapCenter realiza tareas de mantenimiento de los backups de archivos de registro en el nivel del sistema de archivos y del catálogo de backup SAP HANA mediante la ejecución de los pasos siguientes:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SnapCenter lee el catálogo de backup de SAP HANA para obtener el ID de backup del backup de Snapshot o basado en archivos más antiguo.</p>
+</li>
+<li>
+<p>SnapCenter elimina todos los backups de registros del catálogo SAP HANA y el sistema de archivos antiguos a este ID de backup.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+SnapCenter solo gestiona el mantenimiento de los backups creados por SnapCenter. Si se crean backups basados en archivos adicionales fuera de SnapCenter, debe asegurarse de que los backups basados en archivos se eliminen del catálogo de backup. Si un backup de datos de este tipo no se elimina manualmente del catálogo de backups, puede convertirse en el backup de datos más antiguo y los backups de registros más antiguos no se eliminan hasta que este backup basado en archivos se elimina.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="/us-en/netapp-solutions-sap/images/note.svg" alt="Nota">
+</td>
+<td class="content">
+Aunque se define una retención para backups bajo demanda en la configuración de políticas, el mantenimiento solo se realiza cuando se ejecuta otro backup bajo demanda. Por lo tanto, los backups bajo demanda suelen eliminarse manualmente en SnapCenter para asegurarse de que estos backups también se eliminan en el catálogo de backup de SAP HANA y que el mantenimiento del backup de registros no se basa en un backup antiguo bajo demanda.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>La gestión de retención del backup de registros está habilitada de forma predeterminada. Si es necesario, se puede desactivar tal como se describe en la sección <a href="saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto-discovery-on-the-HANA-plug-in-host">"“Deshabilitar la detección automática en el host del plugin de HANA.”"</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="requisitos-de-capacidad-para-backups-de-snapshot">Requisitos de capacidad para backups de Snapshot</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Debe tener en cuenta la tasa de cambio de bloque más alta en la capa de almacenamiento en relación con la tasa de cambio con las bases de datos tradicionales. Debido al proceso de combinación de tablas HANA del almacén de columnas, la tabla completa se escribe en el disco, no solo en los bloques modificados.</p>
+</div>
+<div class="paragraph">
+<p>Los datos de nuestra base de clientes muestran una tasa de cambio diaria entre el 20 % y el 50 % si se realizan varios backups de Snapshot durante el día. En el caso de SnapVault, si la replicación se realiza una sola vez al día, la tasa de cambio diaria normalmente es menor.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="operaciones-de-restauración-y-recuperación">Operaciones de restauración y recuperación</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="operaciones-de-restauración-con-snapcenter">Operaciones de restauración con SnapCenter</h3>
+<div class="paragraph">
+<p>Desde la perspectiva de la base de datos de HANA, SnapCenter admite dos operaciones de restauración diferentes.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Restauración del recurso completo.</strong> todos los datos del sistema HANA se restauran. Si el sistema HANA contiene uno o más inquilinos, se restauran los datos de la base de datos del sistema y los datos de todos los clientes.</p>
+</li>
+<li>
+<p><strong>Restaurar un solo inquilino.</strong> sólo se restauran los datos del arrendatario seleccionado.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Desde la perspectiva del almacenamiento, las operaciones de restauración anteriores deben ejecutarse de una forma diferente en función del protocolo de almacenamiento utilizado (NFS o SAN Fibre Channel), la protección de datos configurada (almacenamiento principal con o sin almacenamiento de backup externo), y el backup seleccionado que se utilizará para la operación de restauración (restauración desde el almacenamiento de backup principal o externo).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restauración-de-recursos-completos-desde-el-almacenamiento-primario">Restauración de recursos completos desde el almacenamiento primario</h3>
+<div class="paragraph">
+<p>Cuando se restaura el recurso completo desde el almacenamiento primario, SnapCenter admite dos funciones de ONTAP diferentes para ejecutar la operación de restauración. Puede elegir entre las siguientes dos funciones:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>SnapRestore basado en volumen.</strong> una SnapRestore basada en volumen revierte el contenido del volumen de almacenamiento al estado de la copia de seguridad de instantánea seleccionada.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Casilla de comprobación Volume Revert disponible para los recursos detectados automáticamente mediante NFS.</p>
+</li>
+<li>
+<p>Botón de opción Complete Resource para recursos configurados manualmente.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>SnapRestore basado en archivos.</strong> un SnapRestore basado en archivos, también conocido como Single File SnapRestore, restaura todos los archivos individuales (NFS) o todos los LUN (SAN).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Método de restauración predeterminado para recursos detectados automáticamente. Se puede cambiar con la casilla de comprobación Volume revert de NFS.</p>
+</li>
+<li>
+<p>Botón de opción de nivel de archivo para recursos configurados manualmente.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>En la siguiente tabla, se proporcionan comparación entre los diferentes métodos de restauración.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">SnapRestore basado en volúmenes</th>
+<th class="tableblock halign-left valign-top">SnapRestore basado en archivos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Velocidad de operación de restauración</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muy rápida, independientemente del tamaño del volumen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Operación de restauración muy rápida, pero utiliza un trabajo de copia en segundo plano en el sistema de almacenamiento, lo cual bloquea la creación de nuevos backups de Snapshot</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Historial de copias de seguridad de Snapshot</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restaurar a un backup de Snapshot anterior, elimina todos los backups de Snapshot más recientes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sin influencia</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Restauración de la estructura de directorio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">También se restaura la estructura del directorio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NFS: Solo restaura los archivos individuales, no la estructura de directorios. Si también se pierde la estructura de directorio, se debe crear manualmente antes de ejecutar la operación DE restauración SAN: También se restaura la estructura del directorio</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Recurso configurado con replicación al almacenamiento de backup externo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No se puede llevar a cabo una restauración basada en volúmenes en un backup de copia de Snapshot más antiguo que la copia de Snapshot utilizada para la sincronización de SnapVault</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Puede seleccionarse cualquier backup de Snapshot</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="restauración-de-recursos-completos-desde-el-almacenamiento-de-backup-externo">Restauración de recursos completos desde el almacenamiento de backup externo</h3>
+<div class="paragraph">
+<p>Una restauración desde el almacenamiento de backup externo siempre se ejecuta mediante una operación de restauración de SnapVault, donde todos los archivos o todos los LUN del volumen de almacenamiento se sobrescriben con el contenido del backup de Snapshot.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restauración-de-un-único-inquilino">Restauración de un único inquilino</h3>
+<div class="paragraph">
+<p>La restauración de un solo inquilino requiere una operación de restauración basada en archivos. Según el protocolo de almacenamiento utilizado, SnapCenter ejecuta diferentes flujos de trabajo de restauración.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>NFS:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento primario. Se ejecutan operaciones de SnapRestore basadas en archivos para todos los archivos de la base de datos de tenant.</p>
+</li>
+<li>
+<p>Almacenamiento de backup externo: Se ejecutan las operaciones de restauración de SnapVault para todos los archivos de la base de datos de tenant.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>SAN:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento primario. Clonar y conectar el LUN al host de la base de datos y copiar todos los archivos de la base de datos de tenant.</p>
+</li>
+<li>
+<p>Almacenamiento de backup externo. Clonar y conectar el LUN al host de la base de datos y copiar todos los archivos de la base de datos de tenant.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restauración-y-recuperación-de-sistemas-de-un-solo-contenedor-de-hana-detectados-automáticamente-y-de-un-solo-inquilino-de-mdc">Restauración y recuperación de sistemas de un solo contenedor de HANA detectados automáticamente y de un solo inquilino de MDC</h3>
+<div class="paragraph">
+<p>Los sistemas de un solo inquilino de HANA y MDC de HANA que se detectaron automáticamente están habilitados para restaurar y recuperar de forma automatizada con SnapCenter. Para estos sistemas HANA, SnapCenter admite tres flujos de trabajo diferentes de restauración y recuperación, como se muestra en la siguiente figura:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Un solo inquilino con recuperación manual.</strong> Si selecciona una operación de restauración de un solo inquilino, SnapCenter enumera todos los arrendatarios que están incluidos en la copia de seguridad de Snapshot seleccionada. Debe detener y recuperar manualmente la base de datos de tenant. La operación de restauración con SnapCenter se realiza con operaciones de SnapRestore de archivos individuales para operaciones de NFS, o clonado, montaje y copia en entornos SAN.</p>
+</li>
+<li>
+<p><strong>Recurso completo con recuperación automatizada.</strong> Si selecciona una operación de restauración de recursos completa y recuperación automatizada, el flujo de trabajo completo se automatiza con SnapCenter. SnapCenter admite hasta estado reciente, un momento específico o operaciones específicas de recuperación de backup. La operación de recuperación seleccionada se utiliza para el sistema y la base de datos de tenant.</p>
+</li>
+<li>
+<p><strong>Recurso completo con recuperación manual.</strong> Si selecciona sin recuperación, SnapCenter detiene la base de datos HANA y ejecuta las operaciones de sistema de archivos necesarias (desmontaje, montaje) y restauración. Debe recuperar el sistema y la base de datos de tenant manualmente.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image18.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restauración-y-recuperación-de-varios-sistemas-de-tenant-descubiertos-automáticamente-por-el-mdc-de-hana">Restauración y recuperación de varios sistemas de tenant descubiertos automáticamente por el MDC de HANA</h3>
+<div class="paragraph">
+<p>Aunque los sistemas MDC de HANA con múltiples inquilinos se pueden detectar automáticamente, la restauración y la recuperación automatizadas no son compatibles con la versión actual de SnapCenter. Para los sistemas MDC con múltiples inquilinos, SnapCenter admite dos flujos de trabajo diferentes de restauración y recuperación, como se muestra en la siguiente figura:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un solo inquilino con recuperación manual</p>
+</li>
+<li>
+<p>Recurso completo con recuperación manual</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Los flujos de trabajo son los mismos que se describen en la sección anterior.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image19.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="restauración-y-recuperación-de-recursos-hana-configurados-manualmente">Restauración y recuperación de recursos HANA configurados manualmente</h3>
+<div class="paragraph">
+<p>Los recursos HANA configurados manualmente no están habilitados para la restauración y la recuperación automatizadas. Asimismo, en el caso de sistemas MDC con uno o varios inquilinos, no se admite una operación de restauración de un solo inquilino.</p>
+</div>
+<div class="paragraph">
+<p>Para los recursos HANA configurados manualmente, SnapCenter solo admite la recuperación manual, como se muestra en la siguiente figura. El flujo de trabajo para la recuperación manual es el mismo que el descrito en las secciones anteriores.</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./../media/saphana-br-scs-image20.png" alt="Error: Falta la imagen gráfica"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="resumen-de-las-operaciones-de-restauración-y-recuperación">Resumen de las operaciones de restauración y recuperación</h3>
+<div class="paragraph">
+<p>La tabla siguiente resume las operaciones de restauración y recuperación en función de la configuración de recursos de HANA en SnapCenter.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Configuración de recursos de SnapCenter</th>
+<th class="tableblock halign-left valign-top">Opciones de restauración y recuperación</th>
+<th class="tableblock halign-left valign-top">Detenga la base de datos HANA</th>
+<th class="tableblock halign-left valign-top">Desmonte antes, monte después de la operación de restauración</th>
+<th class="tableblock halign-left valign-top">Operación de recuperación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto descubrió un tenant único de MDC.contenedor único</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Recurso completo con cualquiera de los dos</p>
+</li>
+<li>
+<p>Predeterminado (todos los archivos)</p>
+</li>
+<li>
+<p>Reversión de volumen (solo NFS a partir del almacenamiento principal)</p>
+</li>
+<li>
+<p>Recuperación automatizada seleccionada</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Recurso completo con cualquiera de los dos</p>
+</li>
+<li>
+<p>Predeterminado (todos los archivos)</p>
+</li>
+<li>
+<p>Reversión de volumen (solo NFS a partir del almacenamiento principal)</p>
+</li>
+<li>
+<p>No se ha seleccionado ninguna recuperación</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Restauración de inquilino</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No es obligatorio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto descubrió múltiples inquilinos MDC</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Recurso completo con cualquiera de los dos</p>
+</li>
+<li>
+<p>Predeterminado (todos los archivos)</p>
+</li>
+<li>
+<p>Reversión de volumen (solo NFS a partir del almacenamiento principal)</p>
+</li>
+<li>
+<p>No se admite la recuperación automatizada</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automatizado con SnapCenter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Restauración de inquilino</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No es obligatorio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Todos los recursos configurados manualmente</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="ulist">
+<ul>
+<li>
+<p>Completo recurso (= reversión de volumen, disponible solo para NFS y SAN desde el almacenamiento principal)</p>
+</li>
+<li>
+<p>Nivel de archivo (todos los archivos)</p>
+</li>
+<li>
+<p>No se admite la recuperación automatizada</p>
+</li>
+</ul>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manual</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="saphana-br-scs-lab-setup-used-for-this-report.html">"Siguiente: Configuración de laboratorio utilizada para este informe."</a></p>
+</div>
+</div>
+</div>
+</div>
+
+    </article>
+    <!-- Page Container -->
+  </div>
+
+  <div style="clear: both"></div><!-- Main needs to have height --></div>
+
+        </main>
+
+        <footer class="n-footer">
+  <div class="n-footer__bottom">
+    <div class="n-container">
+      <div class="n-footer__bottom-left">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/copyright/">© 2023 NetApp, Inc.</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/terms-of-use/">Términos y condiciones</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/privacy-policy/">Política de privacidad</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a href="https://www.netapp.com/company/legal/cookie-policy/">Política de Cookies</a>
+            </li>
+            <li class="n-footer__copyright-link">
+              <a class="ot-sdk-show-settings">Configuración de cookies</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="n-footer__bottom-right">
+        <div class="n-footer__copyright">
+          <ul class="n-footer__copyright-list">
+            <li class="n-footer__copyright-link">
+              <a target="_self" href="javascript:netapp_mailto()">Enviar comentarios sobre esta página</a>
+            </li>
+          </ul>
+        </div>
+        <div class="n-footer__social-links">
+          <ul class="n-footer__social-link-list">
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-blog" href="https://blog.netapp.com"
+                target="_blank" title="blog" alt="blog">
+                <span class="n-footer__social-link-text">blog</span>
+                <svg class="n-icon-blog n-footer__social-link-icon" aria-labelledby="title">
+                  <title>blog@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#blog"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-community" href="https://community.netapp.com/"
+                target="_blank" title="community" alt="community">
+                <span class="n-footer__social-link-text">community</span>
+                <svg class="n-icon-community n-footer__social-link-icon" aria-labelledby="title">
+                  <title>community@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#comments"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-twitter" href="https://twitter.com/netapp"
+                target="_blank" title="twitter" alt="twitter">
+                <span class="n-footer__social-link-text">twitter</span>
+                <svg class="n-icon-twitter n-footer__social-link-icon" aria-labelledby="title">
+                  <title>twitter@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#twitter"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-facebook" href="https://www.facebook.com/NetApp"
+                target="_blank" title="facebook" alt="facebook">
+                <span class="n-footer__social-link-text">facebook</span>
+                <svg class="n-icon-facebook n-footer__social-link-icon" aria-labelledby="title">
+                  <title>facebook@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#facebook"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-linkedin"
+                href="https://www.linkedin.com/company/netapp" target="_blank" title="linkedin" alt="linkedin">
+                <span class="n-footer__social-link-text">linkedin</span>
+                <svg class="n-icon-linkedin n-footer__social-link-icon" aria-labelledby="title">
+                  <title>linkedin@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#linkedin"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-youtube"
+                href="https://www.youtube.com/user/NetAppTV" target="_blank" title="youtube" alt="youtube">
+                <span class="n-footer__social-link-text">youtube</span>
+                <svg class="n-icon-youtube n-footer__social-link-icon" aria-labelledby="title">
+                  <title>youtube@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#youtube"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="n-footer__social-link-list-item">
+              <a class="n-footer__social-link" data-ntap-social="follow-slideshare"
+                href="https://www.slideshare.net/NetApp" target="_blank" title="slideshare" alt="slideshare">
+                <span class="n-footer__social-link-text">slideshare</span>
+                <svg class="n-icon-slideshare n-footer__social-link-icon" aria-labelledby="title">
+                  <title>slideshare@</title>
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xlink:href="/es-es/netapp-solutions-sap/common/svg/sprite.svg#slideshare"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+      </div><!-- Elasticsearch JS -->
+      <script type="text/javascript" src='/es-es/netapp-solutions-sap/js/bundle.js'></script>
+
+      <!-- Syntax Highlighting -->
+      <script type="text/javascript" src='/es-es/netapp-solutions-sap/js/prism.js'></script>
+      <script type="text/javascript" src='/es-es/netapp-solutions-sap/js/prism-curl.js'></script>
+    </div>
+    <script>
+      document.body.offsetWidth=1903;
+      cookieLaw = {}
+      cookieLaw.euCountry = "US";
+      cookieLaw.invoke = function(){return false;}
+    </script>
+    <script src='/es-es/netapp-solutions-sap/js/www-ntap.js'></script>
+    <script src='/es-es/netapp-solutions-sap/js/tabbed-blocks.js'></script>
+    <script src='/es-es/netapp-solutions-sap/js/sidebar.js'></script>
+  </body></html>
