@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-file-based-backup-operations-of-the-hana-database.html 
+keywords: assign policy, file-based backup, cba topology, sap hana studio 
+summary: En esta sección se describe cómo completar operaciones de backup basado en archivos de la base de datos HANA. 
+---
+= Operaciones de backup basadas en archivos de la base de datos de HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-the-hana-database.html["Anterior: Operaciones de backup basadas en Snapshot de la base de datos HANA."]
+
+[role="lead"]
+SAP recomienda combinar backups de SnapVault basados en almacenamiento con un backup basado en archivos semanal para ejecutar una comprobación de la integridad de los bloques. Cloud Backup para aplicaciones admite la ejecución de una comprobación de integridad de bloques mediante una política en la que se selecciona el backup basado en archivos como tipo de backup.
+
+Los backups basados en archivos también se usan para tener copias de backup secundarias además de los backups de Snapshot en el volumen de datos de HANA. Es posible usar estos backups basados en archivos para operaciones de restauración y recuperación en caso de pérdida completa del volumen de datos primario.
+
+Al programar backups con esta política, Cloud Backup para aplicaciones crea un backup de archivos SAP HANA estándar para el sistema y todas las bases de datos de tenant.
+
+
+
+== Asigne la política al sistema HANA
+
+Para activar los backups programados, debe asignarse la política de backup al sistema HANA.
+
+. Vaya a *asignar directiva* > *volumen de datos*.
++
+image:anf-cba-image48.png["Captura de pantalla del paso que se está realizando."]
+
+. Seleccione la directiva para copias de seguridad basadas en archivos y haga clic en *asignar*.
++
+image:anf-cba-image49.png["Captura de pantalla del paso que se está realizando."]
+
+. La política ahora está asignada al sistema HANA y se ejecutarán backups basados en archivos en función de la definición de la programación.
+
+
+
+
+== Cree un backup basado en archivos bajo demanda
+
+Para crear un backup de base de datos bajo demanda, lleve a cabo los siguientes pasos:
+
+. En la vista de consola CBA, seleccione On-Demand Backup – Data Volume en el menú contextual.
++
+image:anf-cba-image50.png["Captura de pantalla del paso que se está realizando."]
+
+. En el cuadro de diálogo On-Demand Backup, seleccione *Policy-based* o *One Time*.
++
+** Con *basado en políticas*, la copia de seguridad a petición se trata de la misma manera que las copias de seguridad programadas con respecto a la retención y la configuración anterior y posterior a la secuencia de comandos.
+** Con *una vez*, puede definir una retención específica, un nombre de copia de seguridad específico y scripts previos y posteriores específicos.
+
+
+. En nuestro ejemplo, seleccionamos la política basada en normativas y la retención se realizará como siguiente paso.
++
+image:anf-cba-image51.png["Captura de pantalla del paso que se está realizando."]
+
+. En la vista Supervisión de trabajos, puede ver los diferentes pasos del flujo de trabajo, el tiempo de ejecución de los pasos y el tiempo de ejecución total de la operación.
++
+image:anf-cba-image52.png["Captura de pantalla del paso que se está realizando."]
+
++
+image:anf-cba-image53.png["Captura de pantalla del paso que se está realizando."]
+
+
+
+
+
+== Revise la información de backup basado en archivos en la vista de topología CBA
+
+Cloud Backup para aplicaciones no muestra los backups basados en archivos del mismo modo que los backups basados en copias de Snapshot. En su lugar, solo se muestra el último backup basado en archivos. El éxito o el fallo de los backups basados en archivos se pueden ver en la vista Job Monitor.
+
+image:anf-cba-image54.png["Captura de pantalla del paso que se está realizando."]
+
+
+
+== Revise la información de backup basado en archivos en el sistema de archivos
+
+Una comprobación correcta de integridad de bloque crea archivos de backup de datos SAP HANA estándar. CBA utiliza la ruta de backup que se ha configurado en la base de datos HANA para las operaciones de backup de datos basadas en archivos. La convención de nomenclatura sigue la configuración de la política de backup para el backup basado en archivos.
+
+....
+vm-pr1:/hanabackup/PR1/file # ls -al *
+DB_PR1:
+total 3355880
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     155648 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys   83894272 Jan  3 10:11 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_2_1
+-rw-r----- 1 pr1adm sapsys 1627398144 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_3_1
+SYSTEMDB:
+total 3092672
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     159744 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys 1577066496 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_1_1
+vm-pr1:/hanabackup/PR1/file #
+....
+
+
+== Revise la información de backup basado en archivos en SAP HANA Studio
+
+El catálogo de backup de SAP HANA muestra entradas tanto para las bases de datos del sistema como para las de tenant. Las siguientes figuras muestran la copia de seguridad basada en archivos CBA en el catálogo de copia de seguridad de la base de datos del sistema y de la base de datos del arrendatario.
+
+image:anf-cba-image55.png["Las siguientes figuras muestran la copia de seguridad basada en archivos CBA en el catálogo de copia de seguridad de la base de datos del sistema."]
+
+image:anf-cba-image56.png["Las siguientes figuras muestran la copia de seguridad basada en archivos CBA en el catálogo de copia de seguridad de la base de datos de tenant."]
+
+link:anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html["Next: Operaciones de backup basadas en Snapshot de volúmenes sin datos."]

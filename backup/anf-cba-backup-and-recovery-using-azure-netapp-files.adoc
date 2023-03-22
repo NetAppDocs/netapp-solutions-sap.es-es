@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-backup-and-recovery-using-azure-netapp-files.html 
+keywords: runtime, backup, recovery, restore, recover 
+summary: 'La tecnología Snapshot de Azure NetApp Files (ANF) se puede utilizar para crear backups de base de datos en segundos. El tiempo necesario para crear una copia Snapshot es independiente del tamaño de la base de datos porque la copia Snapshot no mueve bloques de datos físicos en la plataforma de almacenamiento. Además, el uso de la tecnología Snapshot no afecta al rendimiento del sistema SAP en vivo.' 
+---
+= Backup y recuperación de datos mediante Azure NetApp Files
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-overview.html["Anterior: Descripción general."]
+
+[role="lead"]
+La tecnología Snapshot de Azure NetApp Files (ANF) se puede utilizar para crear backups de base de datos en segundos. El tiempo necesario para crear una copia Snapshot es independiente del tamaño de la base de datos porque la copia Snapshot no mueve bloques de datos físicos en la plataforma de almacenamiento. Además, el uso de la tecnología Snapshot no afecta al rendimiento del sistema SAP en vivo. Por tanto, puede programar la creación de copias Snapshot sin tener en cuenta los períodos de actividad en lote o con picos de carga. SAP en los clientes de ANF suelen programar varios backups Snapshot en línea durante el día; por ejemplo, cada cuatro o seis horas es común. Estos backups de Snapshot suelen conservarse de tres a cinco días en el sistema de almacenamiento principal antes de quitarse.
+
+Las copias Snapshot también proporcionan ventajas importantes para las operaciones de recuperación y restauración. Una operación de reversión de volumen permite restaurar una base de datos completa a un momento específico, según las copias Snapshot disponibles. Estos procesos de restauración se completan en pocos segundos, independientemente del tamaño de la base de datos. Debido a que se crean varios backups Snapshot online durante el día, el tiempo necesario para el proceso de recuperación se reduce significativamente en comparación con un método de backup tradicional. Dado que una operación de restauración se puede realizar con una copia Snapshot que tiene sólo unas horas de antigüedad (en lugar de hasta 24 horas), deben aplicarse menos registros de transacciones. Por lo tanto, el RTO se reduce a varios minutos en lugar de las varias horas necesarias para los backups de un solo ciclo convencionales.
+
+Los backups de copias snapshot se almacenan en el mismo sistema de disco que los datos activos en línea. Por ello, NetApp recomienda utilizar los backups de copias snapshot como suplemento en lugar de como sustituto para los backups en una ubicación secundaria. La mayoría de las acciones de restauración y recuperación se gestionan mediante una operación de reversión de volumen en el sistema de almacenamiento principal. Solo son necesarias las restauraciones desde una ubicación secundaria si el sistema de almacenamiento primario que contiene las copias snapshot está dañado. Puede utilizar la ubicación secundaria si es necesario restaurar un backup que ya no esté disponible desde una copia Snapshot.
+
+Puede realizar un backup de a una ubicación secundaria utilizando backups basados en archivos HANA adicionales. Estos backups basados en ficheros se pueden programar con una frecuencia mucho menor y, por lo tanto, tienen menos efecto en el rendimiento del sistema de producción.
+
+
+
+== Tiempo de ejecución de las operaciones de backup y restauración de Snapshot
+
+La siguiente figura muestra HANA Studio de un cliente mediante operaciones de backup de Snapshot. La imagen muestra que se realiza un backup de la base de datos de HANA (con un tamaño aproximado de 4 TB) en 1 minuto y 20 segundos con la tecnología de backup de Snapshot y más de 4 horas con una operación de backup basada en archivos.
+
+La parte más grande del tiempo de ejecución general del flujo de trabajo de backup es el tiempo necesario para ejecutar la operación de punto de guardado de backup de HANA, y este paso depende de la carga de la base de datos de HANA. El propio backup de los snapshots de almacenamiento siempre finaliza en un par de segundos.
+
+image:anf-cba-image1.png["En esta figura, se muestra el uso de HANA Studio de un cliente mediante operaciones de backup de Snapshot."]
+
+
+
+== Comparación de objetivos de tiempo de recuperación
+
+Esta sección proporciona una comparación de objetivos de tiempo de recuperación (RTO) de backups de Snapshot basados en archivos y en almacenamiento. El objetivo de tiempo de recuperación se define con la suma del tiempo necesario para restaurar, recuperar e iniciar la base de datos.
+
+
+
+=== Tiempo necesario para restaurar las bases de datos
+
+Con un backup basado en archivos, el tiempo de restauración depende del tamaño de la infraestructura de backup y base de datos, que define la velocidad de restauración en megabytes por segundo. Por ejemplo, si la infraestructura admite una operación de restauración a una velocidad de 250 Mbps, se tarda aproximadamente 4.5 horas en restaurar una base de datos de 4 TB de tamaño en la persistencia.
+
+Con los backups de copias de Snapshot de almacenamiento, el tiempo de restauración es independiente del tamaño de la base de datos y siempre está dentro del rango de un par de segundos.
+
+
+
+=== Tiempo necesario para iniciar la base de datos
+
+El tiempo de inicio de la base de datos depende del tamaño de la base de datos y del tiempo necesario para cargar los datos en la memoria. En los siguientes ejemplos, se supone que los datos se pueden cargar con 1000 Mbps. Cargar 4 TB en la memoria tarda aproximadamente 1 hora y 10 minutos. La hora de inicio es la misma para las operaciones de recuperación y restauración basadas en archivos y en Snapshot.
+
+
+NOTE: Con Azure NetApp Files, el rendimiento del volumen se puede ajustar dinámicamente. Antes de iniciar HANA, es posible aumentar el rendimiento del volumen de datos de HANA y disminuir a un valor de operación día a día después del inicio de la base de datos de HANA.
+
+
+
+=== Tiempo necesario para recuperar las bases de datos
+
+El tiempo de recuperación depende de la cantidad de registros que se deben aplicar después de la restauración. Este número viene determinado por la frecuencia con la que se realizan backups de datos.
+
+Con los backups de datos basados en archivos, la programación de backup suele ser una vez al día. Por lo general, no es posible aumentar la frecuencia de backup, ya que el backup reduce el rendimiento de producción. Por lo tanto, en el peor de los casos, todos los registros que se escribieron durante el día deben aplicarse durante la recuperación de avance.
+
+Los backups de snapshots normalmente se programan con una mayor frecuencia debido a que no influyen en el rendimiento de la base de datos de SAP HANA. Por ejemplo, si los backups de Snapshot se programan cada seis horas, el tiempo de recuperación sería, en el peor de los casos, la cuarta parte del tiempo de recuperación de un backup basado en archivos (6 horas / 24 horas = 0.25).
+
+La siguiente figura muestra una comparación de las operaciones de restauración y recuperación con un backup diario basado en archivos y backups de Snapshot con diferentes programaciones.
+
+Las dos primeras barras muestran que, incluso con un único backup de Snapshot al día, la restauración y la recuperación se reducen al 43% debido a la velocidad de la operación de restauración desde un backup de Snapshot. Si se crean varios backups Snapshot diarios, es posible reducir aún más el tiempo de ejecución, ya que es necesario aplicar menos registros durante la recuperación futura.
+
+La siguiente figura también muestra que tiene más sentido realizar entre cuatro y seis backups Snapshot al día, ya que una mayor frecuencia no tiene una gran influencia en el tiempo de ejecución general.
+
+image:anf-cba-image2.png["Esta figura muestra una comparación de las operaciones de restauración y recuperación con un backup diario basado en archivos y backups de copias Snapshot con diferentes programaciones."]
+
+link:anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html["Siguiente: Casos de uso y valor de operaciones de clonado y backup aceleradas."]

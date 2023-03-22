@@ -1,0 +1,212 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-restore-and-recovery-from-snapshot-backup.html 
+keywords: restore, recovery, operation, system database 
+summary: Esta sección describe cómo realizar una restauración y recuperación desde un backup de Snapshot. 
+---
+= Restaurar y recuperar desde un backup de Snapshot
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html["Anterior: Operaciones de backup basadas en Snapshot de volúmenes globales sin datos."]
+
+[role="lead"]
+La siguiente sección describe los flujos de trabajo de restauración y recuperación de un sistema un solo inquilino de un solo host MDC de HANA. Las diferencias para un sistema de varios hosts están resaltadas. Los ejemplos muestran SAP HANA Studio como una herramienta para ejecutar la recuperación manual. También puede utilizar declaraciones de SAP HANA Cockpit o HANA SQL para las operaciones de recuperación.
+
+Para restaurar y recuperar un sistema de un solo inquilino de SAP HANA MDC mediante SAP HANA Studio y Cloud Backup para aplicaciones, realice los pasos siguientes:
+
+. Prepare el proceso de restauración y recuperación con SAP HANA Studio:
++
+.. Seleccione *Recover System Database* y confirme el apagado del sistema SAP HANA.
+.. Seleccione el tipo de recuperación y la ubicación del backup de registro.
++
+Se muestra la lista de backups de los datos.
+
+.. Seleccione el backup correspondiente para ver el ID de backup externo.
+
+
+. Desmonte los volúmenes de datos de HANA.
+. Lleve a cabo el proceso de restauración con Cloud Backup para aplicaciones:
++
+.. En la vista Backup, seleccione el backup que coincida con el campo External backup ID o comment de SAP HANA Studio.
+.. Para iniciar la operación de restauración, seleccione *Restaurar* en el menú contextual.
+
+
+. Montar los volúmenes de datos de HANA.
+. Ejecute el proceso de recuperación de la base de datos del sistema con SAP HANA Studio:
++
+.. Haga clic en *Actualizar* en la lista de copia de seguridad y seleccione la copia de seguridad disponible para recuperación (indicada con un icono verde).
+.. Inicie la operación de recuperación.
++
+Una vez finalizada la operación de recuperación, se inicia la base de datos del sistema.
+
+
+
+. Ejecute el proceso de recuperación de la base de datos de tenant con SAP HANA Studio:
++
+.. Seleccione *recuperar base de datos de arrendatario* y seleccione el arrendatario que desea recuperar.
+.. Seleccione el tipo de recuperación y la ubicación del backup de registro.
+
+
+. Se muestra una lista de backups de datos. Dado que el volumen de datos ya se ha restaurado, el backup de inquilinos indica que está disponible (en verde).
++
+.. Seleccione el backup e inicie el proceso de recuperación. Una vez que finaliza el proceso de recuperación, la base de datos de tenant se inicia automáticamente.
+
+
+
+
+Se muestra una lista de backups de datos. Dado que el volumen de datos ya se ha restaurado, el backup de inquilinos indica que está disponible (en verde). Seleccione el backup e inicie el proceso de recuperación. Una vez que finaliza el proceso de recuperación, la base de datos de tenant se inicia automáticamente.
+
+Los siguientes pasos describen las operaciones de restauración y recuperación del sistema HANA PR1.
+
+
+
+== Prepare la operación de restauración y recuperación
+
+. Para iniciar la recuperación de la base de datos del sistema en SAP HANA Studio, vaya a *copia de seguridad y recuperación* > *recuperación de la base de datos del sistema*.
++
+image:anf-cba-image79.png["Captura de pantalla del paso que se está realizando."]
+
++
+image:anf-cba-image80.png["Captura de pantalla del paso que se está realizando."]
+
+. Seleccione el tipo de recuperación y haga clic en *Siguiente*.
++
+image:anf-cba-image81.png["Captura de pantalla del paso que se está realizando."]
+
+. Proporcione la ubicación del catálogo de copias de seguridad y haga clic en *Siguiente*.
++
+image:anf-cba-image82.png["Captura de pantalla del paso que se está realizando."]
+
+. Se muestra una lista de backups disponibles en función del contenido del catálogo de backup de HANA. Elija la copia de seguridad necesaria y anote el ID de copia de seguridad externa: Por ejemplo, la copia de seguridad más reciente.
++
+image:anf-cba-image83.png["Captura de pantalla del paso que se está realizando."]
+
+. Desmonte todos los volúmenes de datos.
++
+....
+umount /hana/data/PR1/mnt00001
+....
++
+
+NOTE: Para un sistema host múltiple de SAP HANA, debe desmontar todos los volúmenes de datos de cada host.
+
+
+
+
+
+== Restaure la base de datos de HANA
+
+. Para iniciar la operación de restauración, en la vista de backup, seleccione el backup, que también se muestra en HANA Studio y seleccione Restore en el menú contextual.
++
+image:anf-cba-image84.png["Captura de pantalla del paso que se está realizando."]
+
+. En el siguiente paso, puede ofrecer scripts previos y posteriores para la operación de restauración.
++
+image:anf-cba-image85.png["Captura de pantalla del paso que se está realizando."]
+
++
+El registro de trabajos de backup en cloud para aplicaciones muestra el progreso de la operación de restauración.
+
++
+image:anf-cba-image86.png["Captura de pantalla del paso que se está realizando."]
+
+. Espere a que finalice el proceso de restauración y monte el volumen de datos.
++
+....
+mount /hana/data/SP1/mnt00001
+....
++
+
+NOTE: Para un sistema host múltiple de SAP HANA, debe montar todos los volúmenes de datos en cada host.
+
+
+
+
+
+== Recuperar la base de datos del sistema
+
+. Para actualizar la lista de backups disponibles, vaya a SAP HANA Studio y haga clic en Refresh. El backup que se restauró con Cloud Backup para aplicaciones se muestra con un icono verde en la lista de backups. Seleccione el backup y haga clic en Next.
++
+image:anf-cba-image87.png["Captura de pantalla del paso que se está realizando."]
+
+. Proporcionar la ubicación de los backups de registros. Haga clic en *Siguiente*.
++
+image:anf-cba-image88.png["Captura de pantalla del paso que se está realizando."]
+
+. Seleccione otros ajustes según sea necesario. Asegúrese de que no esté seleccionada la opción utilizar copias de seguridad delta. Haga clic en *Siguiente*.
++
+image:anf-cba-image89.png["Captura de pantalla del paso que se está realizando."]
+
+. Revise la configuración de recuperación y haga clic en *Finalizar*.
++
+image:anf-cba-image90.png["Captura de pantalla del paso que se está realizando."]
+
+. Se inicia el proceso de recuperación. Espere hasta que finalice la recuperación de la base de datos del sistema.
++
+image:anf-cba-image91.png["Captura de pantalla del paso que se está realizando."]
+
+
+
+
+
+== Recupere la base de datos de tenant
+
+. En SAP HANA Studio, seleccione la entrada para la base de datos del sistema y vaya a *Backup and Recovery* > *Recover Tenant Database*.
++
+image:anf-cba-image92.png["Captura de pantalla del paso que se está realizando."]
+
+. Seleccione el arrendatario que desea recuperar y haga clic en *Siguiente*.
++
+image:anf-cba-image93.png["Captura de pantalla del paso que se está realizando."]
+
+. Especifique el tipo de recuperación y haga clic en Next.
++
+image:anf-cba-image94.png["Captura de pantalla del paso que se está realizando."]
+
+. Confirme la ubicación del catálogo de copias de seguridad y haga clic en *Siguiente*.
++
+image:anf-cba-image95.png["Captura de pantalla del paso que se está realizando."]
+
+. Confirme que la base de datos de tenant está sin conexión. Haga clic en OK para continuar.
++
+image:anf-cba-image96.png["Captura de pantalla del paso que se está realizando."]
+
++
+Como la restauración del volumen de datos se ha producido antes de la recuperación de la base de datos del sistema, el backup de inquilino está disponible de inmediato.
+
+. Seleccione la copia de seguridad resaltada en verde y haga clic en *Siguiente*.
++
+image:anf-cba-image97.png["Captura de pantalla del paso que se está realizando."]
+
+. Confirme la ubicación de la copia de seguridad del registro y haga clic en *Siguiente*.
++
+image:anf-cba-image98.png["Captura de pantalla del paso que se está realizando."]
+
+. Seleccione otros ajustes según sea necesario. Asegúrese de que *Use Delta backups* no está seleccionado. Haga clic en *Siguiente*.
++
+image:anf-cba-image99.png["Captura de pantalla del paso que se está realizando."]
+
+. Revise la configuración de recuperación e inicie el proceso de recuperación de la base de datos de arrendatarios haciendo clic en *Finalizar*.
++
+image:anf-cba-image100.png["Captura de pantalla del paso que se está realizando."]
+
+. Espere hasta que termine la recuperación y se inicie la base de datos de tenant.
++
+image:anf-cba-image101.png["Captura de pantalla del paso que se está realizando."]
+
++
+El sistema SAP HANA está listo para funcionar.
+
++
+
+NOTE: Para un sistema MDC de SAP HANA con varios inquilinos, debe repetir los pasos 16 a 25 para cada inquilino.
+
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Siguiente: Operaciones de backup con replicación de sistemas HANA."]

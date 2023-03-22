@@ -1,0 +1,73 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-backup-operations-with-hana-multiple-host-systems.html 
+keywords: system replication, cba, hsr, multiple host, standby host 
+summary: En esta sección se describe cómo realizar operaciones de backup con la replicación del sistema HANA. 
+---
+= Operaciones de backup con sistemas de varios hosts de HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Anterior: Operaciones de backup con replicación de sistemas HANA."]
+
+
+
+= Operaciones de backup con sistemas de varios hosts de HANA
+
+La base de datos HANA ejecuta backups de Snapshot de la misma manera que para sistemas de host único. Los comandos SQL de la operación de backup deben activarse en la base de datos del sistema, y el punto de guardado del backup HANA se crea para todos los nodos de trabajo de HANA, de modo que todos los volúmenes de datos de cada nodo sean consistentes. En el siguiente paso, se deben ejecutar las operaciones de snapshot de almacenamiento en cada volumen de datos.
+
+
+
+== Sistemas de varios hosts HANA sin host en espera
+
+Un sistema de varios hosts HANA sin un host en espera se configura en CBA de manera similar a un sistema de un solo host HANA.
+
+. El plugin de HANA se debe instalar en el nodo de trabajo, donde se está ejecutando el servidor de nombres HANA y la base de datos del sistema. Los nodos de trabajo que ejecutan los servidores de índices no requieren el complemento HANA.
+. La clave de almacenamiento de usuario HDB está configurada para la base de datos del sistema de la misma manera que para un sistema de un solo host HANA.
+. En la configuración del espacio de almacenamiento, se deben añadir todos los volúmenes de datos del sistema HANA.
++
+En el ejemplo siguiente, se agregarían volúmenes Data1, Data2 y Data3.
+
++
+
+NOTE: Los volúmenes de datos de cada host HANA se deben montar en cada host del mismo modo que la configuración de un host en espera. Cloud Backup para aplicaciones crea una lista de los archivos que se incluyen en el backup y, por lo tanto, debe tener acceso a todos los volúmenes que pertenecen al sistema HANA. La lista de archivos es necesaria para las operaciones de restauración de archivos individuales cuando la replicación entre regiones ANF o el backup ANF están habilitados.
+
++
+image:anf-cba-image111.png["Esta figura muestra cómo debe instalarse un complemento HANA en nodos de trabajo donde se ejecuta el servidor Nameserver/SystemDB."]
+
+
+
+
+
+== Sistemas de varios hosts HANA con host en espera
+
+Con la versión CBA actual, los sistemas de varios hosts de HANA con un host en espera se admiten con la suposición de que, tras una conmutación por error del servidor de nombres al host en espera, el host fallido se reinicia y, a continuación, se obtiene la misma configuración del sistema operativo, los montajes del sistema de archivos y el complemento HANA.
+
+Se configura un sistema HANA con varios hosts con host en espera en CBA con los siguientes pasos.
+
+. El plugin de HANA debe instalarse en el nodo de trabajo, donde se está ejecutando el servidor de nombres HANA/base de datos del sistema.
+. La clave de almacenamiento de usuario HDB está configurada con dos hosts, la base de datos del sistema (host del servidor de nombres) y el host en espera. Las cadenas host:Port de la configuración de claves CBA deben estar separadas con punto y coma, y la lista debe comenzar y terminar con comillas dobles. A continuación, el cliente hdbsql comienza con la primera entrada de la clave de almacenamiento de usuario e intenta conectarse a la base de datos. Si la entrada no funciona, se utiliza la siguiente entrada. Por lo tanto, es importante configurar el host primario del servidor de nombres como el primero y el host en espera como la segunda entrada en la clave de almacenamiento de usuario.
++
+image:anf-cba-image112.png["Esta captura de pantalla muestra la pantalla Añadir tienda de usuarios con la información adecuada cumplimentada."]
+
+. Todos los volúmenes de datos del sistema HANA deben añadirse a la configuración del espacio de almacenamiento.
++
+En el ejemplo que se muestra en la siguiente figura, sería necesario agregar volúmenes Data1 y Data2.
+
++
+image:anf-cba-image113.png["En esta figura se muestra cómo agregar Data1 y Data2 a los servidores de nombres de trabajo y al modo en espera."]
+
+
+
+En caso de una conmutación por error del servidor de nombres al host en espera, se supone que el host fallido se reinicia en un lapso corto y se produce con la misma configuración que antes. En este caso, el complemento HANA y los componentes del almacén de usuario hdbsql y hdb están disponibles y se pueden seguir utilizando para operaciones de copia de seguridad.
+
+Con la configuración del almacén de usuario descrita anteriormente, el cliente hdbsql utiliza ahora la segunda entrada de host que apunta al host actual del servidor de nombres y ejecuta las operaciones de copia de seguridad.
+
+image:anf-cba-image114.png["En esta figura, se muestra cómo se reinicia el equipo virtual donde se ha producido el fallo y actúa como host en espera después de una conmutación por error al host en espera."]
+
+link:anf-cba-where-to-find-additional-information-and-version-history.html["Siguiente: Dónde encontrar información adicional e historial de versiones."]

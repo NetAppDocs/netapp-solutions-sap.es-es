@@ -1,0 +1,205 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-overview-of-installation-and-configuration-steps.html 
+keywords: bluexp, hana host, backup user, hana system database 
+summary: En esta sección se describe la instalación y configuración de todos los componentes de esta solución. 
+---
+= Descripción general de los pasos de instalación y configuración
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-cloud-backup-for-applications-architecture.html["Anterior: Arquitectura de backup en cloud para aplicaciones."]
+
+[role="lead"]
+Los pasos de instalación y configuración necesarios se pueden dividir en tres áreas.
+
+* Instalación y configuración de componentes de BlueXP de NetApp.
++
+Deben realizarse una vez durante la configuración inicial de la solución de protección de datos.
+
+* Pasos de preparación en el host HANA y la base de datos.
++
+Debe realizarse para cada base de datos HANA, que debe estar protegida por CBA.
+
+* Pasos de configuración en Cloud Backup para aplicaciones.
++
+Debe realizarse para cada base de datos HANA, que debe estar protegida por CBA.
+
+
+
+
+
+== Instalación y configuración de componentes de BlueXP de NetApp
+
+La instalación y configuración de los componentes de BlueXP de NetApp se describen en https://docs.netapp.com/us-en/cloud-manager-backup-restore/concept-protect-cloud-app-data-to-cloud.html["Proteja los datos de aplicaciones nativas del cloud | Documentación de NetApp"^].
+
+. Regístrese en BlueXP y configure una cuenta de NetApp.
+. Implemente el conector BlueXP en su Azure vNet.
+. Crear el entorno de trabajo para Azure NetApp Files en BlueXP.
+
+
+image:anf-cba-image5.png["Esta imagen muestra la arquitectura de la solución descrita en esta sección."]
+
+
+
+== Pasos de preparación en el host HANA y la base de datos
+
+. Instalación de JAVA 11 en el host HANA. Se debe instalar Java 11 (64 bits) Oracle Java o OpenJDK en los hosts de bases de datos de HANA.
+. Implemente el plugin CBA HANA en el host HANA como se describe en link:https://docs.netapp.com/us-en/cloud-manager-backup-restore/task-deploy-snapcenter-plugin-for-sap-hana.html["Implemente Cloud Backup para aplicaciones el plugin para SAP HANA | Documentación de NetApp"].
+. Cree un usuario de backup en la base de datos del sistema HANA, tal como se describe en el capítulo siguiente.
+
+
+
+
+== Pasos de configuración en Cloud Backup para aplicaciones
+
+. Añada un host HANA a Cloud Backup para aplicaciones.
++
+.. Configuración de claves de almacenamiento de usuario HANA.
+.. Configuración del espacio de almacenamiento.
+
+
+. Cree y asigne políticas de backup para el sistema HANA.
++
+.. Operaciones de backup basadas en Snapshot.
+.. Operaciones de backup basado en archivos.
+
+
+. Configurar las operaciones de backup de volúmenes que no son de datos.
++
+.. Configuración del espacio de almacenamiento.
+.. Cree y asigne una política de backup.
+
+
+. Configuración de operaciones de backup globales no de volúmenes de datos.
++
+.. Configuración de detalles del sistema.
+.. Configuración del espacio de almacenamiento.
+.. Cree y asigne una política de backup.
+
+
+
+
+En los siguientes capítulos se describen detalladamente los pasos de configuración de backup en el cloud para aplicaciones.
+
+
+
+== Cree un usuario de backup en la base de datos del sistema HANA
+
+NetApp recomienda configurar un usuario de base de datos dedicado en la base de datos de HANA para ejecutar las operaciones de backup con CBA. En el segundo paso, una clave de almacenamiento de usuario de SAP HANA está configurada para este usuario de backup. Esta clave de almacenamiento de usuario se utiliza en la configuración del complemento SAP HANA para backup en cloud para aplicaciones. La figura siguiente muestra SAP HANA Studio a través del cual puede crear el usuario de backup.
+
+Los privilegios necesarios son los siguientes:
+
+* administrador de backups
+* catálogo leído
+* administrador de backup de bases de datos
+* operador de recuperación de bases de datos
+
+
+Para un sistema MDC de SAP HANA, debe crear el usuario en la base de datos del sistema porque todos los comandos de backup para el sistema y las bases de datos de tenant se ejecutan mediante la base de datos del sistema.
+
+image:anf-cba-image10.png["Esta captura de pantalla muestra dónde crear un usuario en la base de datos del sistema."]
+
+
+
+== Añada el sistema HANA a Cloud Backup para aplicación
+
+. En BlueXP, seleccione *Protección* > *copia de seguridad y recuperación* > *aplicaciones.*
++
+image:anf-cba-image11.png["Esta captura de pantalla muestra el lienzo de BlueXP con la ruta correcta a las aplicaciones mostradas."]
+
+. Las siguientes capturas de pantalla muestran el flujo de trabajo al añadir el primer sistema HANA. Si ya hay sistemas añadidos a Cloud Backup para aplicaciones, la pantalla inicial es una vista de panel con un botón *Agregar sistema* para agregar un sistema HANA adicional. En ese caso, el paso 5 es el primer paso. Haga clic en *detectar aplicación*.
++
+image:anf-cba-image12.png["Esta captura de pantalla muestra el flujo de trabajo al añadir el primer sistema HANA."]
+
+. Haga clic en *Cloud Native*.
++
+image:anf-cba-image13.png["Esta captura de pantalla muestra la página de selección nativa híbrida frente a la nube."]
+
+. Haga clic en *SAP HANA*.
++
+image:anf-cba-image14.png["Esta captura de pantalla muestra la página de selección nativa híbrida frente a la nube."]
+
+. En la pantalla System Details, seleccione el tipo de sistema: HANA un contenedor único o contenedor de base de datos multitenant. Proporcione el SID del sistema HANA e introduzca texto libre como nombre del sistema.
++
+Las siguientes capturas de pantalla muestran la configuración de un sistema SAP HANA PR1.
+
++
+image:anf-cba-image15.png["Esta captura de pantalla muestra la configuración de un sistema SAP HANA PR1."]
+
+. Haga clic en *Add Plug-in host* para añadir el host de la base de datos HANA. Generalmente, se usa un nombre de host. Las direcciones IP también funcionan. Puerto `8145` Es el puerto predeterminado del plugin de HANA que se instaló en el host de base de datos HANA. Si no se realizaron cambios durante la instalación del plugin, el puerto predeterminado es válido.
++
+
+NOTE: Para un sistema de varios hosts de HANA, solo necesita añadir el host donde se ejecuta la base de datos del sistema.
+
++
+image:anf-cba-image16.png["Esta captura de pantalla muestra la pantalla de selección de Host del complemento."]
+
+. Para añadir una clave de almacenamiento de usuario de base de datos HANA, haga clic en *Agregar clave de almacenamiento de usuario*.
++
+Introduzca la información para configurar la clave de almacenamiento de usuario para la base de datos HANA. Puede proporcionar cualquier nombre como nombre de clave. Los detalles del sistema incluyen la dirección IP y el puerto para comunicarse con la base de datos del sistema mediante el cliente hdbsql. Para un puerto del sistema SAP HANA MDC `3<instanceNo>13` Es el puerto estándar para el acceso SQL a la base de datos del sistema.
+
++
+Debe introducir el nombre de usuario y la contraseña para el usuario de la base de datos en la base de datos del sistema que se configuró anteriormente. Cloud Backup para aplicaciones crea automáticamente una clave de almacenamiento de usuario mediante esta información y utiliza la clave para comunicarse con la base de datos HANA.
+
++
+image:anf-cba-image17.png["Esta captura de pantalla muestra la pantalla de selección Agregar clave de almacenamiento de usuario."]
+
+. En el host HANA, puede comprobar si la clave funciona ejecutando los siguientes comandos:
++
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbuserstore list
+DATA FILE       : /usr/sap/PR1/pr1adm/.hdb/vm-pr1/SSFS_HDB.DAT
+KEY FILE        : /usr/sap/PR1/pr1adm/.hdb/vm-pr1/SSFS_HDB.KEY
+KEY PR1KEY
+  ENV : 10.0.1.20:30113
+  USER: SNAPSHOT
+KEY PR1SAPDBCTRL
+  ENV : vm-pr1:30113
+  USER: SAPDBCTRL
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbsql -U PR1KEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql SYSTEMDB=>
+....
+. Haga clic en *Siguiente* para finalizar la configuración de Detalles del sistema.
++
+image:anf-cba-image18.png["Esta captura de pantalla muestra la pantalla Detalles del sistema."]
+
+. Haga clic en *Add Storage* para configurar el espacio de almacenamiento de la base de datos de HANA.
++
+image:anf-cba-image19.png["Esta captura de pantalla muestra el botón Añadir almacenamiento en la pantalla espacio de almacenamiento."]
+
+. Introduzca la información para los volúmenes de almacenamiento del sistema HANA.
+. Seleccione el entorno de trabajo y la cuenta de NetApp que se utiliza para los volúmenes ANF del sistema HANA. Seleccione el volumen de datos de su sistema HANA. En nuestro ejemplo, así es `PR1_data_mnt00001`.
++
+
+NOTE: Para un sistema de varios hosts SAP HANA, debe seleccionar los volúmenes de datos de todos los hosts HANA que pertenecen al sistema.
+
++
+image:anf-cba-image20.png["Esta captura de pantalla muestra la pantalla de selección Agregar espacio de almacenamiento."]
+
+. Haga clic en *Siguiente* para añadir el espacio de almacenamiento.
++
+image:anf-cba-image21.png["Esta captura de pantalla muestra cómo añadir el espacio físico de almacenamiento."]
+
+. Revise la configuración y haga clic en *Agregar sistema*.
++
+image:anf-cba-image22.png["Esta captura de pantalla muestra cómo añadir el sistema de almacenamiento."]
+
++
+image:anf-cba-image23.png["Esta captura de pantalla muestra el resultado."]
+
+
+
+El sistema HANA ahora se ha añadido a Cloud Backup para aplicaciones. Como paso siguiente, debe configurar las operaciones de backup.
+
+image:anf-cba-image24.png["Esta captura de pantalla muestra dónde configurar las operaciones de backup."]
+
+link:anf-cba-create-backup-policies.html["Siguiente: Cree políticas de backup."]

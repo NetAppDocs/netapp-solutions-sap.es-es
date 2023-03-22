@@ -1,0 +1,97 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-create-backup-policies.html 
+keywords: policy, snapshot, backups, file-based 
+summary: Las políticas suelen configurarse de manera independiente del recurso y pueden ser usadas por varias bases de datos SAP HANA. Una configuración mínima típica consiste en una política de backups de snapshot cada hora y una política de comprobación semanal de la integridad de bloques mediante un backup basado en archivos. 
+---
+= Cree políticas de backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-overview-of-installation-and-configuration-steps.html["Anterior: Descripción general de los pasos de instalación y configuración."]
+
+[role="lead"]
+Como se ha visto anteriormente, las políticas suelen configurarse independientemente del recurso y pueden usarlas varias bases de datos SAP HANA. Una configuración mínima típica consta de las dos directivas siguientes:
+
+* Política para backups Snapshot cada hora: Por ejemplo, `SnapshotEvery4Hours`.
+* Política para la comprobación semanal de la integridad de los bloques mediante un backup basado en archivos, por ejemplo, `WeeklyBlockIntegrityCheck`.
+
+
+En las secciones siguientes se describe la configuración de estas dos directivas.
+
+
+
+== Crear una política para backups basados en Snapshot
+
+. Vaya a *Configuración* > *políticas* para crear una nueva directiva.
++
+image:anf-cba-image25.png["Esta captura de pantalla muestra la pantalla BlueXP  Backup and Recovery  aplicaciones  sistema."]
+
+. Haga clic en *Crear directiva*.
++
+image:anf-cba-image26.png["Esta captura de pantalla muestra la pantalla que contiene el botón CREATE Policy."]
+
+. Configure el formato del nombre de la snapshot.
++
+NetApp recomienda añadir información adicional al nombre de la copia Snapshot para facilitar la identificación dentro del catálogo de backup de HANA.
+
++
+
+NOTE: En una configuración HSR, también debe agregar el nombre del sistema al formato del nombre. Por supuesto, debe configurar los nombres de sistema del host primario y secundario de manera que el nombre incluya el rol o el nombre de host: Por ejemplo, `SID-HSR-Primary` o. `SID-HSR-Secondary`. Con este enfoque, puede identificar fácilmente qué host creó el backup en el catálogo de backup de HANA.
+
++
+image:anf-cba-image27.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. Se ha completado el campo Directiva de nombre."]
+
+. Configure las programaciones. En nuestro ejemplo, ejecutamos los backups de Snapshot cada 4 horas y mantenemos los backups durante 3 días.
++
+image:anf-cba-image28.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. Se muestra la programación."]
+
+. Opcionalmente, puede añadir scripts previos y posteriores que se ejecuten con la operación de backup.
++
+Los scripts se ejecutan en el host de la base de datos HANA. Consulte también https://docs.netapp.com/us-en/cloud-manager-backup-restore/task-backup-cloud-native-sap-hana-data.html["Realizar backup de la base de datos SAP HANA nativa del cloud | Documentación de NetApp"^].
+
++
+image:anf-cba-image29.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. Se muestran los campos Pre y post script."]
+
+. Ahora se crea la política para los backups basados en Snapshot.
++
+image:anf-cba-image30.png["Esta captura de pantalla muestra la pantalla políticas de  copia de seguridad y recuperación de aplicaciones  de BlueXP. La creación de directivas se muestra como completa."]
+
+
+
+
+
+== Cree una política para backups basados en archivos
+
+. Seleccione *Crear directiva*.
++
+image:anf-cba-image31.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva."]
+
+. En la pantalla Create Policy, proporcione un nombre para la política, un tipo de backup, una convención de nomenclatura de backup y los detalles de programación y retención.
++
+image:anf-cba-image32.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. La información básica de la política se llena."]
+
+. En nuestro ejemplo, configuramos una copia de seguridad semanal cada domingo y una retención de una *copia para conservar*.
++
+
+NOTE: “1” es el número más bajo que se puede configurar para *copias para conservar*. Esto significa que siempre tiene al menos un backup basado en archivos en el sistema de archivos. Durante la ejecución del siguiente backup basado en archivos, se necesita el doble de capacidad, ya que el backup más antiguo se elimina después de crear el nuevo.
+
++
+image:anf-cba-image33.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. Se muestra la programación semanal."]
+
+. Opcionalmente, puede añadir scripts previos y posteriores, que se ejecuten con la operación de backup.
++
+image:anf-cba-image34.png["Esta captura de pantalla muestra la pantalla BlueXP  copia de seguridad y recuperación  aplicaciones  Crear directiva. Se indican los campos previos y posteriores."]
+
+. La lista de políticas de backup ahora muestra una política para los backups de Snapshot y otra para los backups basados en archivos.
++
+image:anf-cba-image35.png["La creación de la política ha finalizado."]
+
+
+
+link:anf-cba-snapshot-based-backup-operations-of-the-hana-database.html["Next: Operaciones de backup basadas en snapshots de la base de datos HANA."]
