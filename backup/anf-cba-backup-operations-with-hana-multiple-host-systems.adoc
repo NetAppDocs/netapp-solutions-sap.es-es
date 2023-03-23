@@ -15,10 +15,6 @@ summary: En esta sección se describe cómo realizar operaciones de backup con l
 
 link:anf-cba-backup-operations-with-hana-system-replication.html["Anterior: Operaciones de backup con replicación de sistemas HANA."]
 
-
-
-= Operaciones de backup con sistemas de varios hosts de HANA
-
 La base de datos HANA ejecuta backups de Snapshot de la misma manera que para sistemas de host único. Los comandos SQL de la operación de backup deben activarse en la base de datos del sistema, y el punto de guardado del backup HANA se crea para todos los nodos de trabajo de HANA, de modo que todos los volúmenes de datos de cada nodo sean consistentes. En el siguiente paso, se deben ejecutar las operaciones de snapshot de almacenamiento en cada volumen de datos.
 
 
