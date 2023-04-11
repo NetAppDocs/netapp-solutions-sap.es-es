@@ -4,7 +4,7 @@ permalink: backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-
 keywords: system upgrade, backups, restore 
 summary: La ejecución de backups es una parte fundamental de cualquier estrategia de protección de datos. Las copias de seguridad se programan regularmente para asegurarse de que puede recuperarse de fallos del sistema. Este es el caso de uso más obvio, pero también hay otras tareas de gestión del ciclo de vida de SAP para las que acelerar las operaciones de backup y recuperación de datos es crucial. 
 ---
-= Información general sobre casos de uso y valor de operaciones de backup y clonado aceleradas
+= Casos de uso y valor de operaciones de backup y clonado aceleradas
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
