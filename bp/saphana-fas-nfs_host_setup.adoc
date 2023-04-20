@@ -231,7 +231,7 @@ Con ONTAP 9, el tamaño de transferencia de NFS se puede configurar hasta 1 MB. 
 | Parámetro común | NFSv3 | NFSv4 | Tamaño de transferencia de NFS con ONTAP 9 | Tamaño de transferencia de NFS con ONTAP 8 
 
 
-| rw, bg, hard, timeo=600, noatime, | vers=3,nolock, | vers=4,minorversion=1,lock | rsize=1048576,wsize=262144, | rsize=65536,wsize=65536, 
+| rw, bg, hard, timeo=600, noatime, | nfsvers=3,nolock, | nfsvers=4,1, bloqueo | rsize=1048576,wsize=262144, | rsize=65536,wsize=65536, 
 |===
 
 NOTE: Para mejorar el rendimiento de lectura con NFSv3, NetApp le recomienda utilizar `nconnect=n` mount Option, que está disponible con SUSE Linux Enterprise Server 12 SP4 o posterior y RedHat Enterprise Linux (RHEL) 8.3 o posterior.
