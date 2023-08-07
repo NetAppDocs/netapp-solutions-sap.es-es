@@ -15,11 +15,16 @@ summary: 'La familia de productos de sistemas AFF de NetApp ha sido certificada 
 
 Nils Bauer y Marco Schön, NetApp
 
-La familia de productos de sistemas AFF de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). El sistema de almacenamiento empresarial certificado se caracteriza por el software ONTAP de NetApp.
+Las familias de productos NetApp AFF A-Series y la serie C de AFF han sido certificadas para su uso con SAP HANA en proyectos de integración personalizada del centro de datos (TDI).
 
 Esta certificación es válida para los siguientes modelos:
 
 * AFF A150, AFF A220, AFF A250, AFF A300, AFF A320 AFF A400, AFF A700s, AFF A700, AFF A800 y AFF A900
+* AFF C250, AFF C400, AFF C800
++
+
+NOTE: NetApp AFF C-Series requiere NetApp OMTAP 9.13.1 o posterior
+
 
 
 Puede encontrar una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA en la https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["Directorio de hardware de SAP HANA certificado y compatible"^].
