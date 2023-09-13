@@ -25,9 +25,9 @@ SAP HANA es compatible con la deduplicación inline, la deduplicación inline, l
 
 
 
-== Cifrado de volúmenes de NetApp
+== Cifrado de volúmenes de NetApp y agregados
 
-El uso del cifrado de volúmenes de NetApp (NVE) es compatible con SAP HANA.
+El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.
 
 
 

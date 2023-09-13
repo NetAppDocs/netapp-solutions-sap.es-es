@@ -27,9 +27,9 @@ No se admite la habilitación de las funciones de eficiencia del almacenamiento 
 
 
 
-== Cifrado de volúmenes de NetApp
+== Cifrado de volúmenes de NetApp y agregados
 
-El uso de NetApp Volume Encryption (NVE) es compatible con SAP HANA.
+El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.
 
 
 
