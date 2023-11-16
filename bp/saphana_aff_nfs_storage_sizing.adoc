@@ -65,7 +65,7 @@ NOTE: Este cálculo es independiente de la controladora de almacenamiento utiliz
 
 === Bandeja NS224 NVMe
 
-El número mínimo de 12 SSD NVMe para la primera bandeja admite hasta 16 hosts SAP HANA. Una bandeja completamente llena (24 SSD) admite hasta 48 hosts SAP HANA. Lo mismo se aplica a los discos internos de un sistema AFF A800.
+El número mínimo de 12 SSD NVMe para la primera bandeja admite hasta 18 hosts SAP HANA. Una bandeja completamente llena (24 SSD) admite hasta 48 hosts SAP HANA. Lo mismo se aplica a los discos internos de un sistema AFF A800.
 
 
 NOTE: Añadir más bandejas de discos no aumenta la cantidad máxima de hosts SAP HANA que puede admitir una controladora de almacenamiento.
