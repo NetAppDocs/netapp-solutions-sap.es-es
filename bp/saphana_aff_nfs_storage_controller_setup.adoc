@@ -343,17 +343,8 @@ NOTE: El ID de dominio de NFSv4 debe configurarse con el mismo valor en todos lo
 
 NOTE: Si utiliza NFSV4.1, pNFS puede activarse y utilizarse.
 
-Establezca la hora de concesión de NFSv4 en la SVM (tal como se muestra en la siguiente tabla) si se utilizan varios sistemas host de SAP HANA.
-
-|===
-| Acción | Comando 
-
-
-| Configure el tiempo de concesión de NFSv4 | establezca advanced nfs modify -vserver <vserver_name> -v4-lease-segundos 10 set admin 
-|===
-A partir de HANA 2.0 SPS4, HANA proporciona parámetros para controlar el comportamiento de la conmutación al nodo de respaldo. En lugar de configurar el tiempo de concesión en el nivel SVM, NetApp recomienda usar estos parámetros de HANA.
-
-Los parámetros se encuentran dentro `nameserver.ini` tal como se muestra en la siguiente tabla. Mantenga el intervalo de reintento predeterminado de 10 segundos dentro de estas secciones.
+Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de respaldo automática de host, los parámetros de conmutación por error deben ajustarse dentro `nameserver.ini` tal como se muestra en la siguiente tabla.
+Mantenga el intervalo de reintento predeterminado de 10 segundos en estas secciones.
 
 |===
 | Sección en nameserver.ini | Parámetro | Valor 
