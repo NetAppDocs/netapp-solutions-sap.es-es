@@ -13,8 +13,7 @@ summary: Los volúmenes nuevos ahora pueden montarse en el host de destino, seg�
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html["Anterior: Creación de nuevos volúmenes basados en backups de snapshots en el sitio de recuperación ante desastres."]
-
+[role="lead"]
 Los nuevos volúmenes ahora pueden montarse en el host de destino, según el `/etc/fstab` archivo creado anteriormente.
 
 ....
@@ -40,4 +39,3 @@ tmpfs                                               1641748        0      164174
 10.0.2.4:/PR1-shared-sm-dest-clone/usr-sap-PR1 107377048320 11204096 107365844224   1% /usr/sap/PR1
 10.0.2.4:/hanabackup-sm-dest-clone             107379429120 35293440 107344135680   1% /hanabackup
 ....
-link:saphana-dr-anf_hana_database_recovery.html["Siguiente: Recuperación de base de datos DE HANA."]

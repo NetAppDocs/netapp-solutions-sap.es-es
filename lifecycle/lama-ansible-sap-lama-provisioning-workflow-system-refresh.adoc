@@ -13,8 +13,6 @@ summary: Durante el flujo de trabajo de actualización, es necesario eliminar el
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Anterior: Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema de copia."]
-
 [role="lead"]
 En la siguiente figura, se destacan los principales pasos ejecutados con el flujo de trabajo de actualización del sistema.
 
@@ -31,5 +29,3 @@ image:lama-ansible-image51.png["Esta captura de pantalla muestra la vista del si
 De nuevo, nada difiere en las pantallas de entrada del estándar y la ejecución del flujo de trabajo se puede iniciar desde la pantalla de resumen.
 
 image:lama-ansible-image52.png["Esta captura de pantalla muestra la pantalla del sistema de actualización, incluidos los datos básicos del sistema que se van a actualizar y la selección del sistema de destino."]
-
-link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html["Siguiente: Configuración de scripts de proveedores y libros de estrategia de Ansible."]

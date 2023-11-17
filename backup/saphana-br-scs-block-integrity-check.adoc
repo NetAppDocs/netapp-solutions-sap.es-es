@@ -13,8 +13,7 @@ summary: SAP recomienda combinar backups de SnapVault basados en almacenamiento 
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-database-backups.html["Anterior: Backups de base de datos."]
-
+[role="lead"]
 SAP recomienda combinar backups de SnapVault basados en almacenamiento con un backup basado en archivos semanal para ejecutar una comprobación de la integridad de los bloques. SnapCenter permite ejecutar una comprobación de integridad de bloque mediante una política en la que se selecciona el backup basado en archivos como tipo de backup.
 
 Al programar backups con esta política, SnapCenter crea un backup de archivos SAP HANA estándar para las bases de datos del sistema y del inquilino.
@@ -91,4 +90,3 @@ drwxr-xr-- 4 ss1adm sapsys       4096 Nov 19 05:11 ..
 -rw-r----- 1 ss1adm sapsys     159744 Nov 23 08:46 SnapCenter_SnapCenter_BlockIntegrityCheck_Weekly_11-23-2019_06.00.07.8397_databackup_0_1
 -rw-r----- 1 ss1adm sapsys 1577066496 Nov 23 08:46 SnapCenter_SnapCenter_BlockIntegrityCheck_Weekly_11-23-2019_06.00.07.8397_databackup_1_1
 ....
-link:saphana-br-scs-restore-and-recovery.html["Siguiente: Restauración y recuperación."]

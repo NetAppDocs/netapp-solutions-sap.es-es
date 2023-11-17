@@ -13,8 +13,6 @@ summary: Debido al gran número de opciones disponibles para las configuraciones
 :imagesdir: ./../media/
 
 
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Anterior: Integración de SAP Lama de NetApp con Ansible."]
-
 Debido al gran número de opciones disponibles para las configuraciones de sistemas y almacenamiento, se debe utilizar el ejemplo de implementación como plantilla para los requisitos individuales de configuración y configuración del sistema.
 
 
@@ -119,5 +117,3 @@ Puede encontrar más información sobre el uso de ganchos personalizados en http
 Para activar el flujo de trabajo de aprovisionamiento personalizado para el sistema de origen, debe adaptarse en la configuración. Debe seleccionarse la casilla de verificación *usar proceso de aprovisionamiento personalizado* con la definición de aprovisionamiento personalizada correspondiente.
 
 image:lama-ansible-image16.png["Captura de pantalla de la pantalla de detalles del sistema de la configuración de SAP Lama  Systems La casilla de verificación usar proceso de aprovisionamiento personalizado está marcada."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Siguiente: Flujo de trabajo de aprovisionamiento de SAP Lama: Clone el sistema."]

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: backup/saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html 
 keywords:  
-summary:  
+summary: Debe conocer los conceptos y las prácticas recomendadas del servicio de SnapCenter. Por ejemplo, existen diversas políticas que deben configurarse para las operaciones de backup. 
 ---
 = Conceptos y prácticas recomendadas del servicio SnapCenter
 :hardbreaks:
@@ -13,7 +13,8 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html["Anterior: Solución de backup SAP HANA del servicio SnapCenter."]
+[role="lead"]
+Debe conocer los conceptos y las prácticas recomendadas del servicio de SnapCenter. Por ejemplo, existen diversas políticas que deben configurarse para las operaciones de backup.
 
 
 
@@ -220,5 +221,3 @@ NOTE: No se puede desactivar la gestión de retención de backup de registros co
 == Requisitos de capacidad para backups de Snapshot
 
 Debe tener en cuenta la tasa de cambio de bloque más alta en la capa de almacenamiento en relación con la tasa de cambio con las bases de datos tradicionales. Debido al proceso de combinación de tablas HANA del almacén de columnas, la tabla completa se escribe en el disco, no solo en los bloques modificados. Los datos de nuestra base de clientes muestran una tasa de cambio diaria entre el 20 % y el 50 % si se realizan varios backups de Snapshot durante el día.
-
-link:saphana-backup-anf-lab-setup-used-for-this-report.html["Siguiente: Configuración de laboratorio utilizada para este informe."]

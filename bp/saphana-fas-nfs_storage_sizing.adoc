@@ -13,8 +13,7 @@ summary: En la siguiente sección se ofrece una descripción general de las cons
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_architecture.html["Anterior: Arquitectura."]
-
+[role="lead"]
 En la siguiente sección se ofrece una descripción general de las consideraciones de rendimiento y capacidad necesarias para configurar un sistema de almacenamiento para SAP HANA.
 
 
@@ -217,5 +216,3 @@ El tamaño de la RAM, el tamaño de los datos netos del disco de cada host SAP H
 La siguiente figura resume el proceso de dimensionamiento.
 
 image:saphana-fas-nfs_image9.jpg["Error: Falta la imagen gráfica"]
-
-link:saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html["Siguiente: Instalación y configuración de la infraestructura."]

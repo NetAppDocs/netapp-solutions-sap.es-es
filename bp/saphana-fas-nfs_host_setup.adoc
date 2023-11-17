@@ -13,8 +13,7 @@ summary: Todos los pasos descritos en esta sección son válidos tanto para los 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_storage_controller_setup.html["Anterior: Configuración de la controladora de almacenamiento."]
-
+[role="lead"]
 Todos los pasos descritos en esta sección son válidos tanto para los entornos SAP HANA en servidores físicos como para SAP HANA que se ejecuten en VMware vSphere.
 
 
@@ -277,5 +276,3 @@ sapcc-hana-tst-06:/ # cat /etc/fstab
 ....
 . Ejecución `mount –a` para montar los sistemas de archivos en todos los hosts.
 
-
-link:saphana-fas-nfs_sap_hana_installation_preparations_for_nfsv4.html["Siguiente: Preparativos para la instalación de SAP HANA para NFSv4."]

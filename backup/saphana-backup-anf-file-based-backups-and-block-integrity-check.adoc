@@ -13,8 +13,7 @@ summary: SAP recomienda combinar backups snapshot basados en almacenamiento con 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Anterior: Backups de snapshots de la base de datos SAP HANA."]
-
+[role="lead"]
 SAP recomienda combinar backups snapshot basados en almacenamiento con un backup semanal basado en archivos para ejecutar una comprobación de la integridad de los bloques. El servicio SnapCenter admite la ejecución de una comprobación de integridad de bloques mediante una política en la que se selecciona el backup basado en archivos como tipo de backup.
 
 Los backups basados en archivos también se usan para tener copias de backup secundarias además de los backups Snapshot en el volumen de datos de HANA. Es posible usar estos backups basados en archivos para operaciones de restauración y recuperación en caso de pérdida completa del volumen de datos primario.
@@ -52,5 +51,3 @@ drwxr-x--- 4 pr1adm sapsys       4096 Jan 31 18:59 ..
 == Restauración y recuperación con backups basados en archivos
 
 Debe realizar una operación de restauración y recuperación de un backup basado en archivos fuera de SnapCenter mediante las operaciones de recuperación estándar de HANA con HANA Studio o HANA Cockpit.
-
-link:saphana-backup-anf-restore-and-recovery.html["Siguiente: Restauración y recuperación."]

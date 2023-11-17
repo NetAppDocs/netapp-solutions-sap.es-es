@@ -13,8 +13,7 @@ summary: Para implementar una estrategia de recuperación ante desastres eficaz,
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Anterior: Monitorización de la replicación entre regiones de ANF."]
-
+[role="lead"]
 Para implementar una estrategia de recuperación ante desastres eficaz, es necesario probar el flujo de trabajo requerido. Las pruebas demuestran si la estrategia funciona y si la documentación interna es suficiente, y también permiten a los administradores entrenar sobre los procedimientos necesarios.
 
 ANF Cross-Region Replication permite realizar pruebas de recuperación ante desastres sin poner en riesgo el objetivo de tiempo de recuperación ni el objetivo de punto de recuperación. Es posible realizar pruebas de recuperación ante desastres sin interrumpir la replicación de datos.
@@ -39,5 +38,3 @@ Para realizar pruebas de recuperación ante desastres, complete los siguientes p
 Las siguientes subsecciones describen estos pasos con detalle.
 
 image:saphana-dr-anf_image18.png["Error: Falta la imagen gráfica"]
-
-link:saphana-dr-anf_prepare_the_target_host.html["Siguiente: Prepare el host de destino."]

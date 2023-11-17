@@ -13,8 +13,7 @@ summary: En esta sección se describen los pasos de preparación necesarios en e
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_disaster_recovery_failover_overview.html["Anterior: Recuperación tras fallos."]
-
+[role="lead"]
 En esta sección se describen los pasos de preparación necesarios en el servidor que se usa para la conmutación al nodo de respaldo de recuperación ante desastres.
 
 Durante el funcionamiento normal, el host de destino se suele utilizar para otros fines, por ejemplo, como un sistema de garantía de calidad o prueba de HANA. Por lo tanto, la mayoría de los pasos descritos deben ejecutarse al ejecutar las pruebas de recuperación tras fallos de desastres. Por otro lado, los archivos de configuración pertinentes, como `/etc/fstab` y.. `/usr/sap/sapservices`, puede prepararse y luego ponerse en producción simplemente copiando el archivo de configuración. El procedimiento de conmutación por error de recuperación ante desastres garantiza que los archivos de configuración pertinentes preparados estén configurados correctamente.
@@ -111,4 +110,3 @@ vm-pr1:~ # cat /etc/fstab
 # HANA file and log backup destination
 10.0.2.4:/hanabackup-sm-dest    /hanabackup nfs   rw,vers=3,hard,timeo=600,rsize=262144,wsize=262144,nconnect=8,bg,noatime,nolock 0 0
 ....
-link:saphana-dr-anf_break_and_delete_replication_peering.html["Siguiente: Rompa y elimine la paridad de replicación."]

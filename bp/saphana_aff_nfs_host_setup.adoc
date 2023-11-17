@@ -13,8 +13,7 @@ summary: Todos los pasos para configurar el host descritos en esta sección son 
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_storage_controller_setup.html["Anterior: Configuración de la controladora de almacenamiento."]
-
+[role="lead"]
 Todos los pasos para configurar el host descritos en esta sección son válidos tanto para los entornos SAP HANA en servidores físicos como para SAP HANA ejecutado en VMware vSphere.
 
 
@@ -276,5 +275,3 @@ stlrx300s8-5:/ # cat /etc/fstab
 ....
 . Ejecución `mount –a` para montar los sistemas de archivos en todos los hosts.
 
-
-link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["Siguiente: Preparativos para la instalación de SAP HANA para NFSv4."]

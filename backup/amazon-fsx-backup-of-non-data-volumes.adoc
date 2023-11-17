@@ -13,9 +13,10 @@ summary: El backup de volúmenes que no sean de datos es una parte integrada de 
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-snapcenter-backup-operations.html["Anterior: Operaciones de backup de SnapCenter."]
+[role="lead"]
+El backup de volúmenes que no sean de datos es una parte integrada de SnapCenter y del complemento SAP HANA.
 
-El backup de volúmenes que no sean de datos es una parte integrada de SnapCenter y del complemento SAP HANA. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento determinado, siempre y cuando los recursos de instalación de la base de datos y los registros requeridos sigan estando disponibles.
+Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento determinado, siempre y cuando los recursos de instalación de la base de datos y los registros requeridos sigan estando disponibles.
 
 Para la recuperación tras situaciones en las que se deben restaurar otros archivos distintos de datos, NetApp recomienda desarrollar una estrategia de backup adicional para los volúmenes que no sean de datos a fin de aumentar el backup de base de datos SAP HANA. En función de los requisitos específicos, el backup de volúmenes que no pertenecen a datos puede diferir en la configuración de frecuencia de programación y retención, por lo que debe tenerse en cuenta la frecuencia con la que se modifican los archivos que no son de datos. Por ejemplo, el volumen HANA `/hana/shared` Contiene ejecutables, pero también archivos de seguimiento SAP HANA. Aunque los ejecutables solo cambian cuando se actualiza la base de datos SAP HANA, es posible que los archivos de seguimiento de SAP HANA necesiten una frecuencia de backup mayor para permitir el análisis de situaciones problemáticas con SAP HANA.
 
@@ -153,5 +154,3 @@ SnapCenter ejecuta la operación de restauración y recuperación. Este ejemplo 
 image:amazon-fsx-image75.png["Error: Falta la imagen gráfica"]
 
 
-
-link:amazon-fsx-backup-replication-with-snapvault_overview.html["Siguiente: Descripción general - Backup Replication with SnapVault."]

@@ -13,7 +13,8 @@ summary: En esta sección se describe la configuración de red de almacenamiento
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_infrastructure_setup_and_configuration_overview.html["Anterior: Instalación y configuración de la infraestructura."]
+[role="lead"]
+En esta sección se describe la configuración de red de almacenamiento dedicado para los hosts SAP HANA.
 
 Use las siguientes directrices al configurar la red:
 
@@ -53,5 +54,3 @@ Como se muestra en la figura anterior, cada nodo SAP HANA utiliza un grupo de pu
 NOTE: LRO (descarga de recepción grande) debe estar desactivado para las interfaces usadas para el tráfico NFS. Para obtener todas las demás directrices de configuración de red, consulte las guías de prácticas recomendadas de VMware correspondientes para SAP HANA.
 
 image:saphana_aff_nfs_image12.png["Error: Falta la imagen gráfica"]
-
-link:saphana_aff_nfs_time_synchronization.html["Next: Sincronización de hora."]

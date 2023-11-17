@@ -13,8 +13,7 @@ summary: Esta sección proporciona una descripción paso a paso de las diferente
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-automation-example-scripts.html["Anterior: Secuencias de comandos de ejemplo de automatización."]
-
+[role="lead"]
 En la siguiente sección se proporciona una descripción paso a paso de las diferentes opciones de operación de actualización del sistema de una base de datos SAP HANA.
 
 
@@ -601,4 +600,3 @@ PolicyName         :
 Clone delete job has been finshed.
 PS C:\NetApp>
 ....
-link:sc-copy-clone-sap-system-clone-with-snapcenter.html["Siguiente: Clon del sistema SAP con SnapCenter."]

@@ -13,8 +13,7 @@ summary: Para poder configurar la replicación de volúmenes, es necesario reali
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_lab_setup.html["Anterior: Configuración de laboratorio."]
-
+[role="lead"]
 Para poder configurar la replicación de volúmenes, es necesario realizar algunos pasos de preparación en el centro de recuperación ante desastres.
 
 * Una cuenta de NetApp debe estar disponible y configurada con la misma suscripción de Azure que el origen.
@@ -91,5 +90,3 @@ NOTE: El ID del volumen de destino se puede copiar desde la pantalla Propiedades
 image:saphana-dr-anf_image13.png["Error: Falta la imagen gráfica"]
 
 Se deben realizar los mismos pasos para el volumen de backup compartido de HANA y de registros.
-
-link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Siguiente: Monitorización de la replicación entre regiones de ANF."]

@@ -13,7 +13,8 @@ summary: En esta sección se describe cómo configurar un sistema para la instal
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_sap_hana_data_volume_size.html["Anterior: Tamaño del volumen de datos de SAP HANA."]
+[role="lead"]
+En esta sección se describe cómo configurar un sistema para la instalación del software SAP HANA en sistemas de un solo host y varios.
 
 
 
@@ -83,5 +84,3 @@ Enter Installation Path [/hana/shared]:
 ....
 . Compruebe que la herramienta de instalación instaló todos los componentes seleccionados en todos los hosts de trabajo y en espera.
 
-
-link:saphana_aff_nfs_adding_additional_data_volume_partitions.html["Siguiente: Adición de particiones de volumen de datos adicionales."]

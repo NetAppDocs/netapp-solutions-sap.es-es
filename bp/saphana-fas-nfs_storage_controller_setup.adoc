@@ -13,8 +13,7 @@ summary: En esta sección se describe la configuración del sistema de almacenam
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_time_synchronization.html["Anterior: Sincronización de hora."]
-
+[role="lead"]
 En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de ONTAP correspondientes.
 
 
@@ -375,5 +374,3 @@ Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de res
 == Montar los volúmenes en el espacio de nombres y establecer las políticas de exportación
 
 Cuando se crea un volumen, este se debe montar en el espacio de nombres. En este documento, asumimos que el nombre de la ruta de unión es el mismo que el nombre del volumen. De manera predeterminada, el volumen se exporta con la política predeterminada. La política de exportación puede adaptarse si es necesario.
-
-link:saphana-fas-nfs_host_setup.html["Siguiente: Configuración del host."]

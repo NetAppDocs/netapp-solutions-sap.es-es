@@ -13,8 +13,7 @@ summary: A partir de SAP HANA 2.0 SPS4, se pueden configurar particiones de vol�
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_sap_hana_software_installation.html["Anterior: Instalación del software SAP HANA."]
-
+[role="lead"]
 A partir de SAP HANA 2.0 SPS4, se pueden configurar particiones de volúmenes de datos adicionales. Esto le permite configurar dos o más volúmenes para el volumen de datos de una base de datos de inquilinos SAP HANA y escalar más allá de los límites de tamaño y rendimiento de un único volumen.
 
 
@@ -219,5 +218,3 @@ Ejecute la siguiente sentencia SQL en la base de datos de tenant para agregar un
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 image:saphana_aff_nfs_image18.jpg["Error: Falta la imagen gráfica"]
-
-link:saphana_aff_nfs_where_to_find_additional_information.html["Siguiente: Dónde encontrar información adicional."]

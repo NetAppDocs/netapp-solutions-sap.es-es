@@ -13,8 +13,7 @@ summary: 'La versión 4 y posteriores de NFS requieren la autenticación de usua
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_host_setup.html["Anterior: Configuración del host."]
-
+[role="lead"]
 La versión 4 y posteriores de NFS requieren la autenticación de usuario. Esta autenticación se puede lograr mediante una herramienta de gestión de usuarios central, como un servidor de protocolo ligero de acceso a directorios (LDAP) o con cuentas de usuarios locales. En las siguientes secciones se describe cómo configurar las cuentas de usuario locales.
 
 El usuario de administración `<sidadm>` y la `sapsys` El grupo debe crearse manualmente en los hosts SAP HANA y las controladoras de almacenamiento antes de que comience la instalación del software SAP HANA.
@@ -56,4 +55,3 @@ Además, establezca el identificador de grupo de la raíz del usuario UNIX de la
 ....
 vserver services unix-user modify -vserver <vserver> -user root -primary-gid 0
 ....
-link:saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html["Siguiente: Configuración de pila de I/o para SAP HANA."]

@@ -13,8 +13,7 @@ summary: El backup de volúmenes que no forman parte del servicio SnapCenter es 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html["Anterior: Configuración de backup de backups de la base de datos SAP HANA."]
-
+[role="lead"]
 El backup de volúmenes que no forman parte del servicio SnapCenter es una parte integrada. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento dado a condición de que los recursos de instalación de la base de datos y los registros necesarios sigan estando disponibles.
 
 Para la recuperación tras situaciones en las que se deben restaurar otros archivos sin datos, NetApp recomienda desarrollar una estrategia de backup adicional para estos volúmenes a fin de aumentar el backup de la base de datos SAP HANA. En función de los requisitos específicos, el backup de volúmenes que no pertenecen a datos puede diferir en la configuración de frecuencia de programación y retención, por lo que se debe considerar la frecuencia con la que se modifican los archivos. Por ejemplo, el volumen HANA `/hana/shared` Contiene ejecutables, pero también archivos de seguimiento SAP HANA. Aunque los ejecutables solo cambian cuando se actualiza la base de datos SAP HANA, los archivos de seguimiento de SAP HANA pueden necesitar una frecuencia de backup más alta para permitir el análisis de situaciones problemáticas con SAP HANA.
@@ -57,5 +56,3 @@ image:saphana-backup-anf-image37.png["Error: Falta la imagen gráfica"]
 image:saphana-backup-anf-image38.png["Error: Falta la imagen gráfica"]
 
 
-
-link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Siguiente: Configuración de backup de volúmenes globales sin datos."]

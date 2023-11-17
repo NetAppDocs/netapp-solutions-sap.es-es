@@ -13,8 +13,7 @@ summary: La documentación también contiene información sobre las configuracio
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_sap_hana_storage_connector_api.html["Anterior: API del conector de almacenamiento SAP HANA."]
-
+[role="lead"]
 Antes de configurar el host, debe descargar NetApp SAN Host Utilities en el http://mysupport.netapp.com/["Soporte de NetApp"^] Site y se instalan en los servidores HANA. La documentación de Host Utility incluye información sobre software adicional que es necesario instalar, según el HBA FCP utilizado.
 
 La documentación también contiene información sobre las configuraciones de multivía específicas de la versión de Linux utilizada. Este documento cubre los pasos de configuración necesarios para SLES 15 y Red Hat Enterprise Linux 7.6 o superior, como se describe en https://library.netapp.com/ecm/ecm_download_file/ECMLP2547958["Guía de instalación y configuración de Linux Host Utilities 7.1"^].
@@ -384,5 +383,3 @@ stlrx300s8-6:/ # cat /etc/fstab
 
 . Para montar los sistemas de archivos, ejecute el `mount –a` en cada host.
 
-
-link:saphana_fas_fc_i_o_stack_configuration_for_sap_hana.html["Siguiente: Configuración de pila de I/o para SAP HANA."]

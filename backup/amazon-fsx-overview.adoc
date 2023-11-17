@@ -20,5 +20,3 @@ Este informe técnico proporciona las mejores prácticas para la protección de 
 Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias, como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción.
 
 Los períodos definidos para los procesos de backup se reducen, mientras que la cantidad total de datos objeto de backup es cada vez mayor. Por lo tanto, es difícil encontrar una hora en la que se pueden realizar backups con un efecto mínimo en los procesos empresariales. El tiempo necesario para restaurar y recuperar los sistemas SAP es una preocupación, ya que deben minimizarse el tiempo de inactividad para la producción SAP y los sistemas que no son de producción para reducir los costes empresariales.
-
-link:amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html["Siguiente: Backup y recuperación de datos con Amazon FSX para ONTAP."]

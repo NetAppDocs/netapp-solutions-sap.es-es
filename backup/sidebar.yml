@@ -34,7 +34,7 @@ entries:
       url: "/backup/amazon-fsx-create-a-backup-with-replication.html"
     - title: Restauración y recuperación desde el almacenamiento secundario
       url: "/backup/amazon-fsx-restore-and-recover-from-secondary-storage.html"
-  - title: Dónde encontrar información adicional e historial de versiones
+  - title: Dónde encontrar información adicional
     url: "/backup/amazon-fsx-where-to-find-additional-information.html"
 - title: Backup y recuperación de datos de SAP HANA con SnapCenter
   type: solutions
@@ -67,7 +67,7 @@ entries:
     url: "/backup/saphana-br-scs-restore-and-recovery.html"
   - title: Configuración y ajuste avanzados
     url: "/backup/saphana-br-scs-advanced-configuration-and-tuning.html"
-  - title: Dónde encontrar información adicional e historial de versiones
+  - title: Dónde encontrar información adicional
     url: "/backup/saphana-br-scs-where-to-find-additional-information.html"
 - title: Backup y recuperación de datos de replicación de sistemas SAP HANA con SnapCenter
   type: solutions
@@ -87,8 +87,6 @@ entries:
     url: "/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html"
   - title: Dónde encontrar información adicional
     url: "/backup/saphana-sr-scs-where-to-find-additional-information_overview.html"
-  - title: Historial de versiones
-    url: "/backup/saphana-sr-scs-version-history.html"
 - title: Recuperación ante desastres de SAP HANA con Azure NetApp Files
   type: solutions
   entries:
@@ -136,8 +134,6 @@ entries:
       url: "/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html"
     - title: Recuperación de base de datos de HANA
       url: "/backup/saphana-dr-anf_hana_database_recovery_01.html"
-  - title: Actualizar historial
-    url: "/backup/saphana-dr-anf_update_history.html"
 - title: Recuperación ante desastres de SAP HANA con replicación de almacenamiento
   url: "/backup/saphana-dr-sr_pdf_link.html"
 - title: Recuperación y backup de SAP HANA mediante Snap Creator

@@ -13,8 +13,7 @@ summary: En esta sección se describe cómo añadir una política a la protecci�
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html["Anterior: Cree una nueva política de SnapCenter para la replicación de backup."]
-
+[role="lead"]
 Debe añadir la nueva política a la configuración de protección de recursos de HANA, como se muestra en la siguiente figura.
 
 image:amazon-fsx-image86.png["Error: Falta la imagen gráfica"]
@@ -22,5 +21,3 @@ image:amazon-fsx-image86.png["Error: Falta la imagen gráfica"]
 En nuestra configuración se define un programa diario.
 
 image:amazon-fsx-image87.png["Error: Falta la imagen gráfica"]
-
-link:amazon-fsx-create-a-backup-with-replication.html["Siguiente: Cree un backup con la replicación."]

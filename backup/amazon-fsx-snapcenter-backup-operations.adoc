@@ -13,7 +13,8 @@ summary: En esta sección se describe cómo crear un backup de Snapshot bajo dem
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-snapcenter-configuration.html["Anterior: Configuración de SnapCenter."]
+[role="lead"]
+Puede crear un backup de Snapshot bajo demanda y una operación de comprobación de integridad de bloques bajo demanda.
 
 
 
@@ -119,4 +120,3 @@ drwxr-xr-x 4 pfxadm sapsys       4096 Feb 21 15:02 ..
 -rw-r----- 1 pfxadm sapsys 3825213440 Feb 22 12:55 SnapCenter_SnapCenter_hana-1_BlockIntegrityCheck_Weekly_02-22-2022_12.55.18.7966_databackup_1_1
 hana-1:~ #
 ....
-link:amazon-fsx-backup-of-non-data-volumes.html["Siguiente: Backup de volúmenes que no pertenecen a datos."]

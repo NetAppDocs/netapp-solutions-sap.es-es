@@ -13,7 +13,8 @@ summary: A continuación figuran los requisitos para la instalación del softwar
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_i_o_stack_configuration_for_sap_hana.html["Anterior: Configuración de pila de I/o para SAP HANA."]
+[role="lead"]
+A continuación figuran los requisitos para la instalación del software SAP HANA.
 
 
 
@@ -143,5 +144,3 @@ Enter Installation Path [/hana/shared]:
 Enter Local Host Name [sapcc-hana-tst-03]:
 ....
 Compruebe que la herramienta de instalación instaló todos los componentes seleccionados en todos los hosts de trabajo y en espera.
-
-link:saphana_fas_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html["Siguiente: Añadir particiones de volúmenes de datos adicionales para sistemas SAP HANA de un solo host."]

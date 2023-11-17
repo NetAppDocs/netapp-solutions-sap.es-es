@@ -13,8 +13,7 @@ summary: La validación de la solución se ha realizado con un sistema SAP HANA 
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_requirements_and_best_practices.html["Anterior: Requisitos y prácticas recomendadas."]
-
+[role="lead"]
 La validación de la solución se ha realizado con un sistema SAP HANA de un solo host. La herramienta de backup Microsoft AzAcSnap Snapshot para ANF se ha utilizado para configurar los backups de Snapshot coherentes con las aplicaciones de HANA. Se configuraron todos un volumen de datos diario, un backup de registros cada hora y una replicación de volúmenes compartidos. Las pruebas de recuperación ante desastres y la conmutación por error se validaron con un punto de guardado y con operaciones de recuperación adelante.
 
 En la configuración de laboratorio se han utilizado las siguientes versiones de software:
@@ -45,5 +44,3 @@ image:saphana-dr-anf_image8.png["Error: Falta la imagen gráfica"]
 La siguiente figura muestra el catálogo de backup de SAP HANA.
 
 image:saphana-dr-anf_image9.png["Error: Falta la imagen gráfica"]
-
-link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Siguiente: Pasos de configuración para la replicación entre regiones de ANF."]

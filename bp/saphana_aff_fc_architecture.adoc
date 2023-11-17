@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana_aff_fc_introduction.html["Anterior: TR-4436 - SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel."]
-
+[role="lead"]
 Los hosts SAP HANA están conectados a controladoras de almacenamiento mediante una infraestructura FCP redundante y un software multivía. Se necesita una infraestructura de switch FCP redundante para proporcionar conectividad de host a almacenamiento de SAP HANA con tolerancia a fallos en caso de fallo del switch o del adaptador de bus de host (HBA). Debe configurarse la división en zonas adecuada en el switch para permitir que todos los hosts HANA lleguen a las LUN requeridas en las controladoras de almacenamiento.
 
 Los diferentes modelos de la familia de productos AFF pueden combinarse y emparejarse en la capa de almacenamiento para permitir el crecimiento y las distintas necesidades de rendimiento y capacidad. El número máximo de hosts SAP HANA que se pueden conectar al sistema de almacenamiento se define según los requisitos de rendimiento de SAP HANA y el modelo de controladora de NetApp utilizado. El número de bandejas de discos necesarias solo está determinado por los requisitos de capacidad y rendimiento de los sistemas SAP HANA.
@@ -96,5 +95,3 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
 
 image:saphana_aff_fc_image7.png["Error: Falta la imagen gráfica"]
-
-link:saphana_aff_fc_storage_sizing.html["Siguiente: Ajuste de tamaño del almacenamiento."]

@@ -13,8 +13,6 @@ summary: En este capítulo trataremos brevemente las diferencias entre el flujo 
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Anterior: Flujo de trabajo de desaprovisionamiento de SAP Lama: Destrucción del sistema."]
-
 [role="lead"]
 En la siguiente figura, se destacan los pasos principales ejecutados con el flujo de trabajo de copia del sistema.
 
@@ -57,5 +55,3 @@ image:lama-ansible-image47.png["Esta captura de pantalla muestra la pantalla de 
 Se debe adoptar manualmente para ejecutar el paso de preenlace durante el proceso de destrucción del sistema porque se establece una restricción y se impediría la ejecución.
 
 image:lama-ansible-image48.png["Esta captura de pantalla muestra la pantalla de sistemas Lama junto con los detalles del sistema y la casilla de verificación usar proceso personalizado está activada."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Siguiente: Flujo de trabajo de aprovisionamiento de SAP Lama: Actualizar el sistema."]

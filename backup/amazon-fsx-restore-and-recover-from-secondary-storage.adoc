@@ -13,8 +13,7 @@ summary: En esta sección se describe cómo restaurar y recuperar datos desde el
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-create-a-backup-with-replication.html["Anterior: Cree un backup con replicación."]
-
+[role="lead"]
 Para restaurar y recuperar el sistema desde el almacenamiento secundario, siga estos pasos:
 
 Para recuperar la lista de todos los backups del almacenamiento secundario, en la vista SnapCenter Topology, haga clic en Vault copies, seleccione un backup y haga clic en Restore.
@@ -26,5 +25,3 @@ El cuadro de diálogo de restauración muestra las ubicaciones secundarias.
 image:amazon-fsx-image93.png["Error: Falta la imagen gráfica"]
 
 Otros pasos para la restauración y recuperación son idénticos a los que se encontraban previamente para un backup con Snapshot en el almacenamiento primario.
-
-link:amazon-fsx-where-to-find-additional-information.html["Siguiente: Dónde encontrar información adicional e historial de versiones."]

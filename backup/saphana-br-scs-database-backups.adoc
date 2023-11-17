@@ -13,8 +13,7 @@ summary: En SnapCenter, los backups de bases de datos normalmente se ejecutan me
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html["Anterior: Configuración específica para recursos de SnapCenter para backups de volúmenes sin datos."]
-
+[role="lead"]
 En SnapCenter, los backups de bases de datos normalmente se ejecutan mediante las programaciones definidas en la configuración de protección de recursos de cada base de datos HANA.
 
 El backup de bases de datos bajo demanda se puede realizar mediante la interfaz gráfica de usuario de SnapCenter, una línea de comandos de PowerShell o las API DE REST.
@@ -115,5 +114,3 @@ image:saphana-br-scs-image93.png["Error: Falta la imagen gráfica"]
 
 . En SAP HANA Studio, el nuevo backup se puede ver en el catálogo de backup. El mismo nombre de backup en SnapCenter también se utiliza en el campo comment y EBID del catálogo de backups.
 
-
-link:saphana-br-scs-block-integrity-check.html["Siguiente: Comprobación de integridad de bloques."]

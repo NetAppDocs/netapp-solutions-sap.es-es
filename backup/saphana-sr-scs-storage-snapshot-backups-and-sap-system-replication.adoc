@@ -13,8 +13,7 @@ summary: Las operaciones de backup siempre se realizan en el host SAP HANA princ
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-sap-hana-system-replication-overview.html["Anterior: Información general sobre la replicación de sistemas SAP HANA."]
-
+[role="lead"]
 Las operaciones de backup siempre se realizan en el host SAP HANA principal. Los comandos SQL necesarios para la operación de backup no pueden realizarse en el host SAP HANA secundario.
 
 Para las operaciones de backup de SAP HANA, los hosts SAP HANA primarios y secundarios son una entidad única. Comparten el mismo catálogo de backup SAP HANA y utilizan los backups para la restauración y la recuperación, independientemente de si el backup se creó en el host SAP HANA principal o secundario.
@@ -30,5 +29,3 @@ Cuando se realiza una conmutación por error al host 2, el host 2 se convierte e
 El backup creado en el host 2 se puede restaurar directamente en la capa de almacenamiento. Si se debe usar un backup creado en el host 1, se debe copiar el backup del volumen de almacenamiento del host 1 al volumen de almacenamiento del host 2. La recuperación futura utiliza los backups de registros de ambos hosts.
 
 image:saphana-sr-scs-image4.png["Error: Falta la imagen gráfica"]
-
-link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Siguiente: Opciones de configuración de SnapCenter para la replicación de sistemas SAP."]

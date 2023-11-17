@@ -13,7 +13,8 @@ summary: Los siguientes son pasos para la recuperación de la base de datos de H
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_mount_the_volumes_at_the_target_host.html["Anterior: Monte los volúmenes en el host de destino."]
+[role="lead"]
+Los siguientes son pasos para la recuperación de la base de datos de HANA.
 
 Inicie los servicios SAP necesarios.
 
@@ -122,5 +123,3 @@ Backup '/mnt/log-backup/SYSTEMDB/log_backup_0_0_0_0.1589289811148' successfully 
 La comprobación debe ejecutarse para los archivos de backup de registros más recientes del sistema y la base de datos de tenant.
 
 Si la `hdbbackupcheck` la herramienta informa de un error acerca de los backups de registros más recientes, es necesario eliminar o eliminar el último conjunto de backups de registros.
-
-link:saphana-dr-anf_update_history.html["Siguiente: Historial de actualizaciones."]

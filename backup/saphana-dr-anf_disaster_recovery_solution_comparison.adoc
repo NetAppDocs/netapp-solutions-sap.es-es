@@ -13,8 +13,7 @@ summary: Una completa solución de recuperación ante desastres debe permitir a 
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_data_protection_overview_overview.html["Anterior: Recuperación ante desastres de SAP HANA con información general de Azure NetApp Files."]
-
+[role="lead"]
 Una completa solución de recuperación ante desastres debe permitir a los clientes recuperarse de un fallo completo del sitio principal. Por lo tanto, los datos deben transferirse a un sitio secundario y es necesario contar con una infraestructura completa para ejecutar los sistemas SAP HANA de producción necesarios en caso de un fallo en el sitio. En función de los requisitos de disponibilidad de la aplicación y del tipo de desastre del que se desea proteger, debe considerarse una solución de recuperación tras desastres de dos o tres instalaciones.
 
 La figura siguiente muestra una configuración típica en la que los datos se replican de forma síncrona dentro de la misma región de Azure en una segunda zona de disponibilidad. La corta distancia le permite replicar los datos de forma síncrona para lograr un objetivo de punto de recuperación de cero (normalmente se utiliza para proporcionar alta disponibilidad).
@@ -139,4 +138,3 @@ La tabla siguiente muestra una comparación entre las soluciones de recuperació
 
 | Pruebas de DR sin que ello afecte ni al RTO ni al RPO | Sí | No | No 
 |===
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Siguiente: ANF replicación entre regiones con SAP HANA."]

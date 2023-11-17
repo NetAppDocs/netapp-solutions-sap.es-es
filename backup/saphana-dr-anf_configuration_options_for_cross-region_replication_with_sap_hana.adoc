@@ -13,8 +13,7 @@ summary: La siguiente figura muestra las relaciones de replicación de volúmene
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Anterior: ANF Cross-Region Replication con SAP HANA."]
-
+[role="lead"]
 La siguiente figura muestra las relaciones de replicación de volúmenes para un sistema SAP HANA mediante la replicación entre regiones de ANF. Con la replicación entre regiones de ANF, los datos HANA y el volumen compartido de HANA se deben replicar. Si solo se replica el volumen de datos de HANA, los valores típicos de RPO se encuentran en el intervalo de un día. Si se requieren valores de RPO menores, los backups de registros de HANA también se deben replicar para la recuperación futura.
 
 
@@ -51,4 +50,3 @@ Con la versión actual de la replicación entre regiones, sólo se pueden selecc
 
 | Recuperación de avance | NA | +Logs de las últimas 24 horas + programación Snapshot (por ejemplo, 6 horas)+ | +Logs de las últimas 24 horas + programación Snapshot (por ejemplo, 6 horas)+ 
 |===
-link:saphana-dr-anf_requirements_and_best_practices.html["Siguiente: Requisitos y prácticas recomendadas."]

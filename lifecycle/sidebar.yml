@@ -55,7 +55,7 @@ entries:
     url: "/lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html"
   - title: Clon del sistema SAP con SnapCenter
     url: "/lifecycle/sc-copy-clone-sap-system-clone-with-snapcenter.html"
-  - title: Dónde encontrar información adicional e historial de versiones
+  - title: Dónde encontrar información adicional
     url: "/lifecycle/sc-copy-clone-where-to-find-additional-information.html"
 - title: Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy
   type: solutions
@@ -66,7 +66,7 @@ entries:
     url: "/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html"
   - title: Actualización del sistema SAP HANA con LSC, AzAcSnap y Azure NetApp Files
     url: "/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html"
-  - title: Dónde encontrar información adicional e historial de versiones
+  - title: Dónde encontrar información adicional
     url: "/lifecycle/libelle-sc-where-to-find-additional-information.html"
 - title: Integración del almacenamiento de NetApp con SAP Landscape Management
   url: https://www.netapp.com/us/media/tr-4018.pdf

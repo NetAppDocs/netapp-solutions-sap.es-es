@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/lama-ansible-conclusion.html 
-keywords: conclusion, additional information, version history 
+keywords: conclusion, additional information 
 summary: La integración de un marco de automatización moderno como Ansible en los flujos de trabajo de aprovisionamiento de SAP Lama proporciona a los clientes una solución flexible para abordar los requisitos de infraestructura estándar o más complejos. 
 ---
 = Conclusión
@@ -12,8 +12,6 @@ summary: La integración de un marco de automatización moderno como Ansible en 
 :linkattrs: 
 :imagesdir: ./../media/
 
-
-link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html["Anterior: Configuración de scripts de proveedor y libros de estrategia de Ansible."]
 
 [role="lead"]
 La integración de un marco de automatización moderno como Ansible en los flujos de trabajo de aprovisionamiento de SAP Lama proporciona a los clientes una solución flexible para abordar los requisitos de infraestructura estándar o más complejos.
@@ -69,14 +67,3 @@ https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e
 https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]
 
 
-
-
-
-== Historial de versiones
-
-|===
-| Versión | Fecha | Historial de versiones del documento 
-
-
-| Versión 1.0 | Enero de 2023 | Versión inicial 
-|===

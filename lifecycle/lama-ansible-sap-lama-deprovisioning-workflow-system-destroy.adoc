@@ -13,8 +13,6 @@ summary: Para retirar un sistema clonado, se debe detener y preparar con antelac
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Anterior: Flujo de trabajo de aprovisionamiento de SAP Lama: Clone el sistema."]
-
 [role="lead"]
 En la siguiente figura, se destacan los principales pasos ejecutados con el flujo de trabajo de destrucción del sistema.
 
@@ -54,5 +52,3 @@ image:lama-ansible-image38.png["Esta captura de pantalla muestra el progreso del
 image:lama-ansible-image39.png["Esta captura de pantalla muestra la página de registro del flujo de trabajo de destrucción del sistema."]
 
 
-
-link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Siguiente: Flujo de trabajo de aprovisionamiento de SAP Lama: Sistema de copia."]

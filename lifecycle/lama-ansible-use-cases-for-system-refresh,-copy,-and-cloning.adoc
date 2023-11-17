@@ -13,13 +13,10 @@ summary: Hay varios escenarios en los que los datos de un sistema de origen debe
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html["Anterior: Procesos de clonado, copia y actualización del sistema SAP."]
+[role="lead"]
+Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual.
 
-
-
-== Actualización de datos de sistemas de control de calidad, pruebas, filtrado o formación
-
-Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual. Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
+Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
 
 image:lama-ansible-image2.png["Esta imagen muestra el flujo de trabajo medioambiental desde el entorno de desarrollo principal hasta las divisiones de proyecto temporales, los sistemas de reparación, los sistemas de formación y los sistemas sanbox. Muestra dónde se usan las funciones Actualizar sistema, copia de sistema y clonado de sistema para estos distintos fines."]
 
@@ -52,5 +49,3 @@ La replicación de almacenamiento con SnapMirror permite ejecutar pruebas de rec
 SAP Lama puede usar para organizar el procedimiento de prueba completo; también se encarga de la delimitación de red, el mantenimiento de host de destino, etc.
 
 image:lama-ansible-image5.png["En esta imagen, se muestra la relación entre los sistemas de almacenamiento NetApp en el centro de datos principal, el centro de datos de recuperación ante desastres local y el centro de datos de recuperación ante desastres remoto. Están conectados tanto por SnapMirror síncrono como por relaciones de SnapMirror asíncrono."]
-
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Siguiente: Integración de SAP Lama de NetApp con Ansible."]

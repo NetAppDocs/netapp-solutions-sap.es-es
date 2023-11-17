@@ -13,8 +13,6 @@ summary: En esta sección, pasamos por todo el flujo de trabajo de clonado del s
 :imagesdir: ./../media/
 
 
-link:lama-ansible-example-implementation.html["Anterior: Ejemplo de implementación."]
-
 [role="lead"]
 En la siguiente figura, se destacan los pasos principales que se ejecutan con el flujo de trabajo del clon del sistema.
 
@@ -84,5 +82,3 @@ image:lama-ansible-image31.png["Más información de registro"]
 
 
 Una vez completado el flujo de trabajo, el sistema SAP clonado se prepara, inicia y está listo para su uso.
-
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Siguiente: Flujo de trabajo de desaprovisionamiento de SAP Lama: Destrucción del sistema."]

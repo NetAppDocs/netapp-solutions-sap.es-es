@@ -13,9 +13,10 @@ summary: 'Según la configuración de recuperación ante desastres (con o sin re
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_prepare_the_target_host.html["Anterior: Preparar el host de destino."]
+[role="lead"]
+Según la configuración de recuperación ante desastres (con o sin replicación de backup de registros), deben crearse dos o tres volúmenes nuevos basados en backups de snapshots. En ambos casos, se debe crear un nuevo volumen de datos y el volumen compartido de HANA.
 
-Según la configuración de recuperación ante desastres (con o sin replicación de backup de registros), deben crearse dos o tres volúmenes nuevos basados en backups de snapshots. En ambos casos, se debe crear un nuevo volumen de datos y el volumen compartido de HANA. Es necesario crear un nuevo volumen del volumen de backup de registros si también se replican los datos del backup de registros. En nuestro ejemplo, el volumen de backup de datos y registros se ha replicado en el centro de recuperación ante desastres. Los siguientes pasos utilizan el Portal de Azure.
+Es necesario crear un nuevo volumen del volumen de backup de registros si también se replican los datos del backup de registros. En nuestro ejemplo, el volumen de backup de datos y registros se ha replicado en el centro de recuperación ante desastres. Los siguientes pasos utilizan el Portal de Azure.
 
 . Se selecciona uno de los backups de snapshot consistentes con las aplicaciones como origen del nuevo volumen del volumen de datos de HANA. La opción Restore to New Volume está seleccionada para crear un nuevo volumen según el backup de snapshot.
 +
@@ -51,5 +52,3 @@ image:saphana-dr-anf_image25.png["Error: Falta la imagen gráfica"]
 NOTE: Si se utiliza un pool de capacidad con un nivel de bajo rendimiento, los volúmenes se deben mover ahora a un pool de capacidad que ofrezca el rendimiento requerido.
 
 Ahora están disponibles los tres volúmenes nuevos y se pueden montar en el host de destino.
-
-link:saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html["Siguiente: Monte los nuevos volúmenes en el host de destino."]

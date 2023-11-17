@@ -13,8 +13,7 @@ summary: En esta sección se describe cómo crear un backup con replicación.
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-add-a-policy-to-resource-protection.html["Anterior: Añadir una política a la protección de recursos."]
-
+[role="lead"]
 Se crea un backup del mismo modo que con una copia Snapshot local.
 
 Para crear un backup con replicación, seleccione la política que incluye la replicación de backup y haga clic en Backup.
@@ -58,5 +57,3 @@ image:amazon-fsx-image90.png["Error: Falta la imagen gráfica"]
 En SnapCenter, puede ver una lista de los backups replicados haciendo clic en Vault copies en la vista de topología.
 
 image:amazon-fsx-image91.png["Error: Falta la imagen gráfica"]
-
-link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Siguiente: Restauración y recuperación desde el almacenamiento secundario."]

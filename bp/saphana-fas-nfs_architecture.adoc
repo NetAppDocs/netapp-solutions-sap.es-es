@@ -13,9 +13,10 @@ summary: Los hosts SAP HANA están conectados a controladoras de almacenamiento 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_introduction.html["Anterior: SAP HANA en sistemas All Flash FAS de NetApp con guía de configuración NFS."]
+[role="lead"]
+Los hosts SAP HANA están conectados a controladoras de almacenamiento mediante una infraestructura de red 10 GbE redundante o más rápida. La comunicación de datos entre los hosts SAP HANA y las controladoras de almacenamiento se basa en el protocolo NFS.
 
-Los hosts SAP HANA están conectados a controladoras de almacenamiento mediante una infraestructura de red 10 GbE redundante o más rápida. La comunicación de datos entre los hosts SAP HANA y las controladoras de almacenamiento se basa en el protocolo NFS. Se recomienda utilizar una infraestructura de conmutación redundante para proporcionar conectividad entre el host SAP HANA con tolerancia a fallos en caso de fallo del switch o de la tarjeta de interfaz de red (NIC). Los switches pueden agregar rendimiento de puerto individual con canales de puerto para que aparezcan como una única entidad lógica en el nivel de host.
+Se recomienda utilizar una infraestructura de conmutación redundante para proporcionar conectividad entre el host SAP HANA con tolerancia a fallos en caso de fallo del switch o de la tarjeta de interfaz de red (NIC). Los switches pueden agregar rendimiento de puerto individual con canales de puerto para que aparezcan como una única entidad lógica en el nivel de host.
 
 Los diferentes modelos de la familia de productos FAS pueden combinarse y emparejarse en la capa de almacenamiento para permitir el crecimiento y las distintas necesidades de rendimiento y capacidad. El número máximo de hosts SAP HANA que se pueden conectar al sistema de almacenamiento se define según los requisitos de rendimiento de SAP HANA y el modelo de controladora de NetApp utilizado. El número de bandejas de discos necesarias solo está determinado por los requisitos de capacidad y rendimiento de los sistemas SAP HANA. En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad (ha) de almacenamiento.
 
@@ -98,5 +99,3 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles si se produce una conmutación por error ante desastres.
 
 image:saphana-fas-nfs_image8.png["Error: Falta la imagen gráfica"]
-
-link:saphana-fas-nfs_storage_sizing.html["Siguiente: Ajuste de tamaño del almacenamiento."]

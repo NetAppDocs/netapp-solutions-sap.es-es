@@ -13,8 +13,5 @@ summary: Debe sincronizar la hora entre las controladoras de almacenamiento y lo
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_san_fabric_setup.html["Anterior: Configuración de la estructura DE SAN."]
-
+[role="lead"]
 Debe sincronizar la hora entre las controladoras de almacenamiento y los hosts de la base de datos SAP HANA. Debe definirse el mismo servidor de tiempo para todas las controladoras de almacenamiento y todos los hosts SAP HANA.
-
-link:saphana_fas_fc_storage_controller_setup.html["Siguiente: Configuración de la controladora de almacenamiento."]

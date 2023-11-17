@@ -13,8 +13,7 @@ summary: En esta sección se describen los flujos de trabajo de restauración y 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Anterior: Backups basados en archivos y comprobación de integridad de bloques."]
-
+[role="lead"]
 La siguiente sección describe los flujos de trabajo de restauración y recuperación de un sistema de un solo inquilino de MDC de HANA. Se describen las diferencias para un sistema host múltiple.
 
 Los ejemplos muestran SAP HANA Studio como una herramienta para ejecutar la recuperación manual. También puede utilizar declaraciones de SAP HANA Cockpit o HANA SQL para las operaciones de recuperación.
@@ -178,5 +177,3 @@ El sistema SAP HANA está listo para funcionar.
 
 
 Para un sistema MDC de SAP HANA con varios inquilinos, debe repetir los pasos 15 a 24 para cada inquilino.
-
-link:saphana-backup-anf-additional-information.html["Siguiente: Dónde encontrar información adicional."]

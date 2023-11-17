@@ -13,7 +13,8 @@ summary: En esta sección se describen las áreas cubiertas por la solución de 
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-architecture.html["Anterior: Arquitectura de servicio de SnapCenter."]
+[role="lead"]
+En esta sección se describen las áreas cubiertas por la solución de backup del servicio SnapCenter.
 
 
 
@@ -108,5 +109,3 @@ El servicio SnapCenter es compatible con las siguientes arquitecturas y versione
 NOTE: SAP con HANA 2.0 SP1 ha introducido soporte de backup de copias Snapshot para sistemas MDC.y HANA 2.0 SPS4 para sistemas multi-tenant.
 
 No se admite la combinación de backups de Snapshot de datos con el servicio SnapCenter y backups de registros con una solución de backint. Los backups de registros deben configurarse para que se escriban en un sistema de archivos.
-
-link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html["Siguiente: Conceptos y prácticas recomendadas del servicio SnapCenter."]

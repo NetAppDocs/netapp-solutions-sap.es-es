@@ -13,8 +13,7 @@ summary: Los pasos necesarios para realizar una actualización de sistema SAP HA
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Anterior: Descripción general del flujo de trabajo de clonado del sistema SAP con SnapCenter."]
-
+[role="lead"]
 Los pasos necesarios para realizar una actualización de sistema SAP HANA dependen de la configuración de inquilino del sistema de origen y el nombre de inquilino necesario en el sistema de destino, como se muestra en la siguiente figura.
 
 Dado que el nombre de arrendatario está configurado en la base de datos del sistema, el nombre de arrendatario del sistema de origen también está disponible en el sistema de destino después de la recuperación de la base de datos del sistema. Por lo tanto, el inquilino del sistema de destino sólo puede recuperarse con el mismo nombre que el arrendatario de origen, como se muestra en la opción 1 de la siguiente figura. Si el nombre del arrendatario en el sistema de destino debe ser diferente, el arrendatario primero debe ser recuperado con el mismo nombre que el arrendatario de origen y, a continuación, cambiado el nombre al nombre de arrendatario de destino requerido. Esta es la opción 2 de la siguiente figura.
@@ -29,5 +28,3 @@ image:sc-copy-clone-image11.png["Error: Falta la imagen gráfica"]
 Esta figura muestra el indicador de configuración para la instalación inicial de un solo inquilino de MDC.
 
 image:sc-copy-clone-image12.png["Error: Falta la imagen gráfica"]
-
-link:sc-copy-clone-automation-example-scripts.html["Siguiente: Ejemplos de scripts de automatización."]

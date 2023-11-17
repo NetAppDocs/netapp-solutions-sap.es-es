@@ -13,8 +13,7 @@ summary: En esta sección se describe cómo integrar los SC con SnapCenter de Ne
 :imagesdir: ./../media/
 
 
-link:libelle-sc-overview.html["Anterior: Descripción general."]
-
+[role="lead"]
 En esta sección se describe cómo integrar los SC con SnapCenter de NetApp. La integración entre LSC y SnapCenter admite todas las bases de datos admitidas por SAP. No obstante, debemos diferenciar entre SAP AnyDB y SAP HANA porque SAP HANA ofrece un host de comunicación central que no está disponible para SAP AnyDB.
 
 La instalación predeterminada del agente SnapCenter y del complemento de base de datos para SAP AnyDB es una instalación local del agente SnapCenter, además del complemento de base de datos correspondiente para el servidor de bases de datos.
@@ -246,5 +245,3 @@ image:libelle-sc-image21.png["Error: Falta la imagen gráfica"]
 En la siguiente figura se muestran las dos tareas `NTAP_SYSTEM_CLONE_CP` y.. `NTAP_MNT_RECOVERY_CP` cuando se utiliza un host de comunicación central. Como puede ver, la creación de una copia Snapshot, un clon, el montaje del volumen clonado en el servidor de la base de datos de destino y la restauración y recuperación de la base de datos de destino tardaron aproximadamente 12 minutos. Esto es más o menos el mismo tiempo necesario para llevar a cabo estos pasos cuando se utiliza una instalación estándar. De nuevo, la tecnología Snapshot y FlexClone de NetApp permiten realizar estas tareas de forma rápida y constante, independientemente del tamaño de la base de datos de origen.
 
 image:libelle-sc-image22.png["Error: Falta la imagen gráfica"]
-
-link:libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html["Siguiente: Actualización del sistema SAP HANA con LSC, AzAcSnap y Azure NetApp Files."]

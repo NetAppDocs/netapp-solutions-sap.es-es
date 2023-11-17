@@ -13,13 +13,10 @@ summary: SnapCenter es una plataforma unificada y escalable destinada a la prote
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html["Anterior: Backup y recuperación de datos con Amazon FSX para ONTAP."]
+[role="lead"]
+SnapCenter es una plataforma unificada y escalable destinada a la protección de datos coherente con las aplicaciones. SnapCenter proporciona control y supervisión centralizados, a la vez que delega la capacidad para que los usuarios gestionen trabajos de backup, restauración y clonado específicos de aplicaciones. Con SnapCenter, los administradores de bases de datos y almacenamiento conocen una única herramienta para gestionar los backups, las restauraciones de datos y las operaciones de clonado para diferentes aplicaciones y bases de datos.
 
-
-
-== Información general de SnapCenter
-
-SnapCenter es una plataforma unificada y escalable destinada a la protección de datos coherente con las aplicaciones. SnapCenter proporciona control y supervisión centralizados, a la vez que delega la capacidad para que los usuarios gestionen trabajos de backup, restauración y clonado específicos de aplicaciones. Con SnapCenter, los administradores de bases de datos y almacenamiento conocen una única herramienta para gestionar los backups, las restauraciones de datos y las operaciones de clonado para diferentes aplicaciones y bases de datos. SnapCenter gestiona los datos a través de terminales en el Data Fabric con la tecnología de NetApp. Puede utilizar SnapCenter para replicar datos entre entornos locales, entre entornos locales y el cloud, y entre clouds privados, híbridos o públicos.
+SnapCenter gestiona los datos a través de terminales en el Data Fabric con la tecnología de NetApp. Puede utilizar SnapCenter para replicar datos entre entornos locales, entre entornos locales y el cloud y entre clouds privados, híbridos o públicos.
 
 
 
@@ -205,5 +202,3 @@ FSX para sistemas de archivos ONTAP:
 
 
 image:amazon-fsx-image8.png["Error: Falta la imagen gráfica"]
-
-link:amazon-fsx-snapcenter-configuration.html["Siguiente: Configuración de SnapCenter."]

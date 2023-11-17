@@ -46,5 +46,3 @@ La replicación del sistema se puede configurar con la replicación asíncrona s
 En relación con los requisitos de backup, debe poder crear backups durante el funcionamiento normal en el centro de datos 1 y durante la recuperación ante desastres en el centro de datos 2. Hay una infraestructura de backup independiente disponible en los centros de datos 1 y 2, y las operaciones de backup se activan como parte de la recuperación ante desastres. La infraestructura de backup no suele estar compartida y no es posible realizar una operación de restauración de un backup creado en el otro centro de datos.
 
 image:saphana-sr-scs-image2.png["Error: Falta la imagen gráfica"]
-
-link:saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html["Siguiente: Backups de Storage Snapshot y replicación de sistemas SAP."]

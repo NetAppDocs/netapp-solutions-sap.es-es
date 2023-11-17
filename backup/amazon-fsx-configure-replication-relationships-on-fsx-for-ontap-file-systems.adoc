@@ -13,8 +13,7 @@ summary: En esta sección se describe cómo establecer la paridad de FSX para si
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-replication-with-snapvault_overview.html["Anterior: Descripción general - Backup Replication with SnapVault."]
-
+[role="lead"]
 Puede encontrar información adicional sobre las opciones de configuración de SnapMirror en la documentación de ONTAP en https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-replication-workflow-concept.html["Flujo de trabajo de replicación de SnapMirror (netapp.com)"^].
 
 * FSX de origen para el sistema de archivos ONTAP: `FsxId00fa9e3c784b6abbb`
@@ -170,4 +169,3 @@ sapcc-hana-svm:PFX_data_mnt00001
                               Snapmirrored
                                       Idle           -         true    -
 ....
-link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Siguiente: Añada una SVM de backup a SnapCenter."]

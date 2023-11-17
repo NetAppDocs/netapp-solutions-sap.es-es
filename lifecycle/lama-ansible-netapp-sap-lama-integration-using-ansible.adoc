@@ -13,8 +13,6 @@ summary: El enfoque de integración usa los enlaces de aprovisionamiento y opera
 :imagesdir: ./../media/
 
 
-link:lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html["Anterior: Casos de uso para actualización, copia y clonado del sistema."]
-
 [role="lead"]
 El enfoque de integración usa los enlaces de aprovisionamiento y operaciones personalizados de SAP Lama en combinación con los libros de estrategia de Ansible para la gestión del almacenamiento de NetApp. En la siguiente figura se muestra una descripción general de alto nivel de la configuración en el lado Lama, así como los componentes correspondientes de la implementación de ejemplo.
 
@@ -31,5 +29,3 @@ Puede encontrar más información sobre los módulos de Ansible de NetApp y las 
 * https://www.ansible.com/integrations/infrastructure/netapp["Módulos Ansible de NetApp"^]
 * https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/bf6b3e43340a4cbcb0c0f3089715c068.html["Documentación de SAP Lama: Definiciones de proveedores"^]
 
-
-link:lama-ansible-example-implementation.html["Siguiente: Ejemplo de implementación."]

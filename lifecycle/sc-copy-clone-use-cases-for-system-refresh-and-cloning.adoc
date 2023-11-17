@@ -13,13 +13,10 @@ summary: Hay varios escenarios en los que los datos de un sistema de origen debe
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html["Anterior: Situaciones de copia, actualización y clonación del sistema SAP."]
+[role="lead"]
+Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual.
 
-
-
-== Actualización de datos de sistemas de control de calidad, pruebas, filtrado o formación
-
-Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual. Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
+Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
 
 En la siguiente figura se describen las operaciones de actualización, copia y clonación de los sistemas SAP.
 
@@ -64,5 +61,3 @@ La figura siguiente muestra las pruebas de recuperación tras desastres.
 image:sc-copy-clone-image6.png["Error: Falta la imagen gráfica"]
 
 En el informe técnico se puede encontrar una descripción detallada paso a paso http://www.netapp.com/us/media/tr-4646.pdf["Recuperación ante desastres de SAP HANA con replicación de almacenamiento"^].
-
-link:sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html["Siguiente: Descripción general del flujo de trabajo de actualización del sistema SAP con SnapCenter."]

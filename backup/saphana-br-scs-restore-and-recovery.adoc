@@ -13,8 +13,7 @@ summary: Las siguientes secciones describen los flujos de trabajo de restauraci�
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-block-integrity-check.html["Anterior: Comprobación de integridad de bloque."]
-
+[role="lead"]
 Las siguientes secciones describen los flujos de trabajo de restauración y recuperación de tres situaciones diferentes y configuraciones de ejemplo.
 
 * Restauración y recuperación automatizadas:
@@ -534,5 +533,3 @@ El sistema SAP HANA está listo para funcionar.
 NOTE: Para un sistema MDC de SAP HANA con varios inquilinos, debe repetir los pasos 20–29 para cada inquilino.
 
 
-
-link:saphana-br-scs-advanced-configuration-and-tuning.html["Siguiente: Configuración y ajuste avanzados."]

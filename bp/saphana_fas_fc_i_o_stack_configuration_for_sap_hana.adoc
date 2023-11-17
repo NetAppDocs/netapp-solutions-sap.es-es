@@ -13,8 +13,7 @@ summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar 
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_host_setup.html["Anterior: Configuración del host."]
-
+[role="lead"]
 A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para el sistema de archivos y almacenamiento utilizado.
 
 NetApp ha realizado pruebas de rendimiento para definir los valores ideales. En la siguiente tabla se enumeran los valores óptimos tal como se han deducido de las pruebas de rendimiento.
@@ -65,4 +64,3 @@ python setParameter.py -set=SYSTEM/global.ini/fileio/async_read_submit=on
 python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_active=on
 python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_blocks=all
 ....
-link:saphana_fas_fc_sap_hana_software_installation.html["Siguiente: Instalación del software SAP HANA."]

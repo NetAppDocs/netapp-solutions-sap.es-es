@@ -13,12 +13,7 @@ summary: Las tres siguientes capturas de pantalla muestran el estado de replicac
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Anterior: Pasos de configuración para la replicación entre regiones de ANF."]
-
-
-
-== Estado de replicación
-
+[role="lead"]
 Las tres siguientes capturas de pantalla muestran el estado de replicación de los datos, el backup de registros y los volúmenes compartidos.
 
 El tiempo de retraso de replicación de volúmenes es un valor útil para entender las expectativas de RPO. Por ejemplo, la replicación del volumen de backup de registros muestra un tiempo de demora máximo de 58 minutos, lo que significa que el objetivo de punto de recuperación máximo tiene el mismo valor.
@@ -47,5 +42,3 @@ Con cada actualización de replicación del volumen de origen al de destino, tod
 NOTE: En el volumen de origen y destino, también se crean copias Snapshot de SnapMirror, que se utilizan para realizar operaciones de actualización de sincronización y replicación. Estas copias Snapshot no son coherentes con las aplicaciones desde el punto de vista de la base de datos de HANA; solo se pueden utilizar las copias snapshot coherentes con las aplicaciones creadas a través de AzaCSnap para las operaciones de recuperación de HANA.
 
 image:saphana-dr-anf_image17.png["Error: Falta la imagen gráfica"]
-
-link:saphana-dr-anf_disaster_recovery_testing_overview.html["Siguiente: Pruebas de recuperación ante desastres."]

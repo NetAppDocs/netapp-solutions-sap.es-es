@@ -13,8 +13,7 @@ summary: SnapCenter 4.6 admite la detección automática para los sistemas HANA 
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Anterior: Opciones de configuración de SnapCenter para la replicación de sistemas SAP."]
-
+[role="lead"]
 SnapCenter 4.6 admite la detección automática para los sistemas HANA configurados con la replicación de sistemas HANA. SnapCenter 4.6 incluye la lógica para identificar hosts HANA primarios y secundarios durante las operaciones de backup y también gestiona la gestión de retención en ambos hosts HANA. Además, la restauración y recuperación automatizadas ahora también están disponibles para los entornos de replicación de sistemas HANA.
 
 
@@ -161,5 +160,3 @@ image:saphana-sr-scs-image26.png["Error: Falta la imagen gráfica"]
 Las operaciones de restauración y recuperación de una configuración de grupos de recursos de SnapCenter 4.6 son idénticas a la configuración de replicación sin sistema que se haya detectado automáticamente. Todas las opciones de restauración y recuperación automatizada están disponibles. Si quiere más información, consulte el informe técnico https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
 
 Una operación de restauración a partir de un backup que se creó en el otro host se describe en la sección link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Restauración y recuperación a partir de un backup creado en el otro host"].
-
-link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html["Siguiente: Configuración de SnapCenter con un solo recurso."]

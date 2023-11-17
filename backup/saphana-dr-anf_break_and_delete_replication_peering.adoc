@@ -13,8 +13,7 @@ summary: En caso de conmutación al nodo de respaldo ante desastres, es necesari
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_prepare_the_target_host_01.html["Anterior: Preparar el host de destino."]
-
+[role="lead"]
 En caso de conmutación al nodo de respaldo ante desastres, es necesario desactivar los volúmenes objetivo para que el host objetivo pueda montar los volúmenes para operaciones de lectura y escritura.
 
 
@@ -36,5 +35,3 @@ Después de la operación de reversión de volumen, el volumen de datos se basa 
 
 
 NOTE: Si se utiliza un pool de capacidad con un nivel de bajo rendimiento, los volúmenes ahora deben moverse a un pool de capacidad que pueda proporcionar el rendimiento requerido.
-
-link:saphana-dr-anf_mount_the_volumes_at_the_target_host.html["Siguiente: Monte los volúmenes en el host de destino."]

@@ -13,8 +13,7 @@ summary: El backup de volúmenes que no forman parte de datos es una parte integ
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html["Anterior: Configuración específica de recursos de SnapCenter para backups de bases de datos SAP HANA."]
-
+[role="lead"]
 El backup de volúmenes que no forman parte de datos es una parte integrada del complemento SAP HANA. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento determinado, siempre y cuando los recursos de instalación de la base de datos y los registros requeridos sigan estando disponibles.
 
 Para la recuperación tras situaciones en las que se deben restaurar otros archivos distintos de datos, NetApp recomienda desarrollar una estrategia de backup adicional para los volúmenes que no sean de datos a fin de aumentar el backup de base de datos SAP HANA. En función de los requisitos específicos, el backup de volúmenes que no pertenecen a datos puede diferir en la configuración de frecuencia de programación y retención, por lo que debe tenerse en cuenta la frecuencia con la que se modifican los archivos que no son de datos. Por ejemplo, el volumen HANA `/hana/shared` Contiene ejecutables, pero también archivos de seguimiento SAP HANA. Aunque los ejecutables solo cambian cuando se actualiza la base de datos SAP HANA, es posible que los archivos de seguimiento de SAP HANA necesiten una frecuencia de backup mayor para permitir el análisis de situaciones problemáticas con SAP HANA.
@@ -87,5 +86,3 @@ SSC de NetApp y SAP Lama pueden crear copias de Snapshot bajo demanda directamen
 NOTE: En las operaciones de backup normales, NetApp no recomienda incluir el volumen de registros. Si restaura el volumen de registro desde un backup, sobrescribe los últimos registros de recuperación activos y evita que la recuperación de la base de datos se recupere en el último estado reciente.
 
 Los grupos de recursos SnapCenter satisfacen todos estos requisitos. SnapCenter configura tres recursos: Un recurso cada uno para el volumen de datos, el volumen de registro y el volumen compartido. Los recursos se colocan en un grupo de recursos y se definen entonces la protección en el nivel del grupo de recursos. En la protección del grupo de recursos, el nombre de Snapshot personalizado debe definirse con VCM al principio.
-
-link:saphana-br-scs-database-backups.html["Siguiente: Backups de bases de datos."]

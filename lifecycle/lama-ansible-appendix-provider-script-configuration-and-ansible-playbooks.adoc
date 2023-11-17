@@ -13,8 +13,6 @@ summary: Durante la puesta en marcha de ejemplo y la ejecución del flujo de tra
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Anterior: Flujo de trabajo de aprovisionamiento de AP Lama: Actualización del sistema."]
-
 [role="lead"]
 Durante la puesta en marcha de ejemplo y la ejecución del flujo de trabajo en esta documentación, se utilizan los siguientes archivos de configuración del proveedor, scripts de ejecución y libros de estrategia de Ansible.
 
@@ -518,4 +516,3 @@ ontapservers:
    snapshotpostfix: " _snap_20221115"
    clonepostfix: "_clone_20221115"
 ....
-link:lama-ansible-conclusion.html["Siguiente: Conclusión."]

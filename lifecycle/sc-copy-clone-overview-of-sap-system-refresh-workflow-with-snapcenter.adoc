@@ -13,8 +13,7 @@ summary: SnapCenter ofrece flujos de trabajo que le permiten gestionar clones de
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-use-cases-for-system-refresh-and-cloning.html["Anterior: Casos de uso para actualización y clonado del sistema."]
-
+[role="lead"]
 SnapCenter ofrece flujos de trabajo que le permiten gestionar clones de conjuntos de datos desde cualquier backup de Snapshot existente. Este conjunto de datos clonado, un volumen FlexClone, se puede usar para aprovisionar rápidamente un volumen de datos HANA desde un sistema de origen y adjuntarlo a un sistema de destino. Por lo tanto, es perfecto para ejecutar operaciones de actualización del sistema para sistemas de control de calidad, pruebas, pruebas simuladas o formación.
 
 Los flujos de trabajo de clonado de SnapCenter gestionan todas las operaciones necesarias en la capa de almacenamiento y se pueden ampliar usando scripts para ejecutar operaciones específicas de host y de base de datos de HANA. En este documento, utilizamos un script para ejecutar operaciones de montaje y desmontaje en el host de destino y en las operaciones de recuperación y apagado de bases de datos HANA. Los flujos de trabajo de SnapCenter con una mayor automatización usando la gestión de scripts todas las operaciones de la base de datos HANA necesarias, pero no cubren ningún paso de posprocesamiento de SAP necesario. El posprocesamiento SAP se debe realizar de forma manual o con herramientas de terceros.
@@ -56,5 +55,3 @@ En la siguiente figura, se muestra una descripción general del flujo de trabajo
 image:sc-copy-clone-image8.png["Error: Falta la imagen gráfica"]
 
 La sección link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["“Actualización del sistema SAP HANA con SnapCenter”"] proporciona una descripción detallada paso a paso de ambos flujos de trabajo de la actualización del sistema.
-
-link:sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html["Siguiente: Descripción general del flujo de trabajo de copia del sistema SAP con SnapCenter."]
