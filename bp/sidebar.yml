@@ -45,8 +45,6 @@ entries:
     url: "/bp/saphana_aff_nfs_storage_sizing.html"
   - title: Instalación y configuración de la infraestructura
     entries:
-    - title: Descripción general de la configuración y la instalación de la infraestructura
-      url: "/bp/saphana_aff_nfs_infrastructure_setup_and_configuration_overview.html"
     - title: Configuración de red
       url: "/bp/saphana_aff_nfs_network_setup.html"
     - title: Sincronización de la hora
@@ -78,8 +76,6 @@ entries:
     url: "/bp/saphana-fas-nfs_storage_sizing.html"
   - title: Instalación y configuración de la infraestructura
     entries:
-    - title: Descripción general de la configuración y la instalación de la infraestructura
-      url: "/bp/saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html"
     - title: Configuración de red
       url: "/bp/saphana-fas-nfs_network_setup.html"
     - title: Sincronización de la hora
