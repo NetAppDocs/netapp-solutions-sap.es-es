@@ -13,8 +13,6 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_where_to_find_additional_information.html["Anterior: Dónde encontrar información adicional."]
-
 Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
 
 [cols="25,25,50"]

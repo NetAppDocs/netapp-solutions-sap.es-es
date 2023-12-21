@@ -4,7 +4,7 @@ permalink: lifecycle/libelle-sc-where-to-find-additional-information.html
 keywords:  
 summary:  
 ---
-= Dónde encontrar información adicional
+= Dónde encontrar información adicional e historial de versiones
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -21,3 +21,14 @@ Si quiere más información sobre el contenido de este documento, consulte los s
 https://docs.netapp.com["https://docs.netapp.com"^]
 
 
+
+
+
+== Historial de versiones
+
+|===
+| Versión | Fecha | Historial de versiones del documento 
+
+
+| Versión 1.0 | Abril de 2022 | Versión inicial. 
+|===
