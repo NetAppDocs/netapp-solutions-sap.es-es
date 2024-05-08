@@ -27,14 +27,14 @@ En este informe técnico solo se describe cómo mejorar la solución de backup y
 
 == Arquitectura de backup y recuperación de datos de BlueXP
 
-El backup y la recuperación de datos de BlueXP es una solución SaaS que proporciona funcionalidades de protección de datos para aplicaciones que se ejecutan en el almacenamiento on-premises de NetApp en el cloud. Ofrece una protección de SAP HANA eficiente y coherente con las aplicaciones y basada en políticas con el almacenamiento de NetApp. Además, el backup y recuperación de datos de BlueXP ofrece control y supervisión centralizados, a la vez que delegan la capacidad de que los usuarios gestionen operaciones de backup y restauración específicas de aplicaciones.
+El backup y la recuperación de datos de BlueXP es una solución SaaS que proporciona funcionalidades de protección de datos para aplicaciones que se ejecutan en el almacenamiento en las instalaciones de NetApp en el cloud. Ofrece una protección de SAP HANA eficiente y coherente con las aplicaciones y basada en políticas con el almacenamiento de NetApp. Además, el backup y recuperación de datos de BlueXP ofrece control y supervisión centralizados, a la vez que delegan la capacidad de que los usuarios gestionen operaciones de backup y restauración específicas de aplicaciones.
 
-El backup y la recuperación de BlueXP se ejecuta como SaaS en NetApp BlueXP y aprovecha el marco y la interfaz de usuario. El marco de trabajo del entorno de trabajo de BlueXP se utiliza para configurar y gestionar las credenciales para el almacenamiento local y el servidor NetApp SnapCenter en NetApp ONTAP.
+El backup y la recuperación de BlueXP se ejecuta como SaaS en NetApp BlueXP y aprovecha el marco y la interfaz de usuario. El marco de entorno de trabajo de BlueXP se utiliza para configurar y gestionar las credenciales para el almacenamiento en las instalaciones y el servidor NetApp SnapCenter basado en NetApp ONTAP.
 
-Es necesario poner en marcha un conector BlueXP en la red virtual del cliente. Se requiere una conexión entre el entorno local y el entorno en la nube, como una conexión VPN de sitio a sitio. La comunicación entre los componentes SaaS de NetApp y el entorno del cliente se realiza exclusivamente a través del conector. El conector ejecuta las operaciones de almacenamiento utilizando las API de gestión de ONTAP y SnapCenter.
+Es necesario poner en marcha un conector BlueXP en la red virtual del cliente. Se requiere una conexión entre el entorno local y el entorno cloud, como una conexión VPN de sitio a sitio. La comunicación entre los componentes SaaS de NetApp y el entorno del cliente se realiza exclusivamente a través del conector. El conector ejecuta las operaciones de almacenamiento utilizando las API de gestión de ONTAP y SnapCenter.
 
-La transferencia de datos entre el almacenamiento en las instalaciones y el depósito de cloud está protegida integral con cifrado AES de 256 bits en reposo, cifrado TLS/HTTPS en tránsito y compatibilidad con claves gestionadas por el cliente (CMK). +
-Los datos del backup se almacenan en un estado WORM inalterable e indeleble. La única forma de acceder a los datos desde el almacenamiento de objetos consiste en restaurarlos en un almacenamiento basado en NetApp ONTAP, incluido NetApp CVO.
+La transferencia de datos entre el almacenamiento en las instalaciones y el bucket de cloud está protegida integral con cifrado AES de 256 bits en reposo, cifrado TLS/HTTPS en tránsito y compatibilidad con claves gestionadas por el cliente (CMK). +
+Los datos de los que se ha realizado un BACKUP pueden almacenarse en un estado WORM inalterable e indeleble. La única forma de acceder a los datos desde el almacenamiento de objetos consiste en restaurarlos en un almacenamiento basado en NetApp ONTAP, incluido NetApp CVO.
 
 image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Descripción generierte,width=624,height=450"]
 
@@ -43,7 +43,7 @@ image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis
 == Descripción general de los pasos de instalación y configuración
 
 Los pasos de instalación y configuración necesarios se pueden dividir en tres áreas. +
-Un requisito previo es que la configuración de backup de SAP HANA se haya configurado en Snap Center de NetApp. Para configurar Snap Center para SAP HANA, desde el primer lugar hacia el https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html["Configuración de SnapCenter (netapp.com)"].
+Un requisito previo es que la configuración de backup de SAP HANA se haya configurado en Snap Center de NetApp. Para configurar Snap Center para SAP HANA, consulte el https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html["Configuración de SnapCenter (netapp.com)"].
 
 . Instalación y configuración de componentes de BlueXP de NetApp.
 +
@@ -69,7 +69,7 @@ La instalación y configuración de los componentes de BlueXP de NetApp se descr
 . Pon en marcha el conector BlueXP en tu entorno. La descripción está disponible en https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-connectors.html["Obtenga información sobre conectores | Documentación de NetApp"].
 . Añade/compra una licencia de Cloud Backup en BlueXP: https://docs.netapp.com/us-en/cloud-manager-backup-restore/task-licensing-cloud-backup.html[].
 . Crea un entorno de trabajo para el entorno on-premises de NetApp y tu destino en la nube en BlueXP añadiendo tu almacenamiento on-premises.
-. Crea una nueva relación de almacén de objetos para el almacenamiento on-premises en un bucket de AWS S3.
+. Cree una nueva relación de almacén de objetos para el almacenamiento local en un bucket de AWS S3.
 . Configure el recurso del sistema SAP HANA en SnapCenter.
 . Añada Snap Center a su entorno de trabajo.
 . Crear una política para su entorno.

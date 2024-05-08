@@ -17,7 +17,7 @@ summary: En esta sección se describe cómo configurar el entorno de trabajo, c�
 
 == Crear entorno de trabajo para BlueXP
 
-Añada el sistema de almacenamiento de sus instalaciones al entorno de trabajo.
+Añada el sistema de almacenamiento local al entorno de trabajo.
 
 . En el menú de la izquierda, seleccione *Almacenamiento* -> *Lienzo* -> *Mi entorno de trabajo*.
 . Pulse *+ Añadir entorno de trabajo*. +
@@ -36,7 +36,7 @@ image:hana-hycl-back-image6.jpeg["Ein Bild, das Diagramm enthält. Descripción 
 
 == Cree una relación entre el sistema de almacenamiento en las instalaciones y un cubo de almacenamiento de objetos
 
-La relación entre el almacenamiento local y el bloque de S3 se realiza mediante la creación de un backup para un volumen o la activación de un backup de una aplicación. Si se debe utilizar una VPN existente de sitio a sitio para transferir los datos de las instalaciones a S3, es necesario usar una copia de seguridad de volumen para crear la relación entre el almacenamiento local y el bloque S3 conforme se deben utilizar los extremos de VPC. +
+La relación entre el almacenamiento local y el bloque de S3 se realiza mediante la creación de un backup para un volumen o la activación de un backup de una aplicación. Si se debe utilizar una VPN existente de sitio a sitio para transferir los datos de on-premises a S3, es necesario usar una copia de seguridad de volumen para crear la relación entre el almacenamiento on-premises y el bloque S3 conforme se necesitan utilizar extremos de VPC. +
 Durante la creación de esta documentación, el flujo de trabajo de backup de aplicaciones no ofrece elegir extremos de VPC para acceder a bloques de S3. +
 Consulte https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html["Extremos de puerta de enlace para Amazon S3: Nube privada virtual de Amazon"] Cómo configurar extremos de VPC para S3 en su VPC.
 
@@ -55,7 +55,7 @@ image:hana-hycl-back-image12.jpeg["hana-hycl-back-image12,width=624,height=305"]
 . *Continuar*, si existe una política existente. +
 image:hana-hycl-back-image11.jpeg["hana-hycl-back-image11,width=624,height=304"]
 . Marque la opción *Backup* y elija su proveedor de copia de seguridad deseado. En este ejemplo AWS. +
-Mantenga la opción seleccionada para las políticas ya existentes. +
+Mantenga la opción activada para políticas ya existentes. +
 Desactive las opciones que no desee utilizar. +
 image:hana-hycl-back-image13.jpeg["Ein Bild, das Text, Software, Computersymbol, Webseite enthält. Descripción generierte,width=624,height=306"]
 . Cree un nuevo depósito o elija uno existente. Proporcione la configuración de su cuenta de AWS, la región, su clave de acceso y la clave secreta. Pulse *Siguiente*. +
@@ -106,7 +106,7 @@ image:hana-hycl-back-image28.jpeg["Ein Bild, das Text enthält. Descripción gen
 
 == Crear una política de backup para backup de aplicaciones
 
-. Elija *Polices* en el menú de configuración. +
+. Elija *Políticas* dentro del menú de configuración. +
 image:hana-hycl-back-image29.jpeg["hana-hycl-back-image29,width=624,height=316"]
 . Cree una nueva política, si lo desea, haga clic en *Crear política*. +
 image:hana-hycl-back-image30.jpeg["hana-hycl-back-image30,width=624,height=316"]

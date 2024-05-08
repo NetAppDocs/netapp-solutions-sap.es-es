@@ -21,9 +21,9 @@ Una restauración desde el backup solo se puede llevar a cabo en un sistema de a
 . Haga clic en *Ver detalles* correspondiente a la base de datos que desea restaurar. +
 image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38,width=624,height=305"]
 . Seleccione la copia de seguridad deseada y elija Storage Export. +
-image:hana-hycl-back-image39.jpeg["Ein Bild, das Text, Captura de pantalla, Software, Computersymbol enthält. Descripción generierte,width=624,height=308"]
+image:hana-hycl-back-image39.jpeg["anchura = 624 mm, altura = 308 mm"]
 . Proporcione las opciones deseadas: +
-image:hana-hycl-back-image40.jpeg["Ein Bild, das Text, Captura de pantalla, Software, Computersymbol enthält. Descripción generierte,width=624,height=308"]
+image:hana-hycl-back-image40.jpeg["anchura = 624 mm, altura = 308 mm"]
 +
 .. Para el entorno NAS, especifique el FQDN o la dirección IP del host al que se van a exportar los volúmenes restaurados del almacén de objetos.
 .. Para el entorno SAN, especifique los iniciadores del host al que se van a asignar las LUN de los volúmenes restaurados desde el almacén de objetos.
