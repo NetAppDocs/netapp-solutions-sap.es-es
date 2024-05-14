@@ -467,7 +467,6 @@
   <block id="8290e539e87b39f4743f2a941a37d00d" category="doc">TR-4435: SAP HANA en sistemas AFF de NetApp con NFS: Guía de configuración</block>
   <block id="ccc35786789b66e9752e6f8cde933754" category="paragraph">Nils Bauer y Marco Schön, NetApp</block>
   <block id="af01ac16ca42b9b924b834a3199131e9" category="paragraph">Esta certificación es válida para los siguientes modelos:</block>
-  <block id="17f31b52b49dfe7dec5229f7caf638c6" category="list-text">AFF A150, AFF A220, AFF A250, AFF A300, AFF A320 AFF A400, AFF A700s, AFF A700, AFF A800 y AFF A900</block>
   <block id="130c9ce9d2909449cb229a98c66f9d29" category="inline-link">Directorio de hardware de SAP HANA certificado y compatible</block>
   <block id="152277675a8ef46c12f1dc91f2f53ede" category="paragraph">Puede encontrar una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA en la<block ref="a3976abaebe3520fd66c465c4d7747d7" category="inline-link-rx"></block>.</block>
   <block id="18cab9085e2115741cf08f1964299a5a" category="paragraph">En este documento se describen los requisitos de configuración de ONTAP para la versión 3 del protocolo NFS (NFSv3) o la versión 4 del protocolo NFS (NFSv4.1).</block>
@@ -547,7 +546,6 @@
   <block id="088c8c258db90c09658a39d2839f52b0" category="doc">TR-4384: Guía de configuración del protocolo Fibre Channel para SAP HANA en sistemas FAS de NetApp</block>
   <block id="3582e9217fbd3de24b2e5ecfb0fc97b4" category="paragraph">Nils Bauer y Marco Schoen, NetApp</block>
   <block id="e4509a748ae3ce7cb528662f2f9f7e10" category="paragraph">La certificación es válida para los siguientes modelos:</block>
-  <block id="9b340c29d45c75265853d640bc6a1e05" category="list-text">FAS2720, FAS2750, FAS8200, FAS8300, FAS8700, FAS9000 Y FAS9500</block>
   <block id="42eb56ae1e83db3afce70f056a668205" category="inline-link">Directorio de hardware de SAP HANA certificado y compatible</block>
   <block id="bc3bbc9b5df10cfc4c9d9747e9b15e4f" category="paragraph">Si desea obtener una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA, consulte<block ref="2585df8f0f74fb3d91dc9a930fa3213b" category="inline-link-rx"></block>.</block>
   <block id="b448d121930edfc4a956027d7533c403" category="paragraph">En este documento se describen las configuraciones FAS que utilizan el protocolo Fibre Channel (FCP).</block>
@@ -968,10 +966,8 @@
   <block id="25c6d04f8538068cb7dacb7934148082" category="paragraph">Cada nodo SAP HANA utiliza un grupo de puertos dedicado en el switch distribuido de VMware. Este grupo de puertos permite una calidad de servicio mejorada y la asignación dedicada de tarjetas de interfaz de red física (NIC) en los hosts ESX. Para utilizar NIC físicas dedicadas a la vez que se conservan las capacidades de alta disponibilidad si se produce un error en el NIC, el NIC físico dedicado se configura como un enlace ascendente activo. Las NIC adicionales se configuran como enlaces ascendentes en espera en la configuración de equipos y recuperación tras fallos del grupo de puertos SAP HANA. Además, deben habilitarse las tramas gigantes (MTU 9,000) para terminar en switches físicos y virtuales. Además, desactive el control de flujo en todos los puertos ethernet que se utilizan para el tráfico de almacenamiento en servidores, switches y sistemas de almacenamiento. En la siguiente figura se muestra un ejemplo de dicha configuración.</block>
   <block id="360be069cd1171b76a16517180e58f5d" category="paragraph"><block ref="360be069cd1171b76a16517180e58f5d" category="inline-image-macro-rx" type="image"></block></block>
   <block id="a1f3bfe21fa4a014b71cdb6f5c22ed48" category="summary">La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). El sistema de almacenamiento empresarial certificado se caracteriza por el software ONTAP de NetApp.</block>
-  <block id="ea2a5017e6cdb7eff470cc58152d6c96" category="doc">TR-4290: SAP HANA en sistemas FAS de NetApp con la guía de configuración de NFS</block>
   <block id="3ba2c0f2dd07fd36730e20b6bcba3d0a" category="paragraph">Actualmente, esta certificación solo es válida para los siguientes modelos:</block>
   <block id="ae9c01e101eba86b0e6ff092df062fae" category="inline-link">El directorio de hardware de SAP HANA está certificado y compatible</block>
-  <block id="ecf911b27dfacab49658bef695c01f50" category="list-text">FAS2720, FAS2750, FAS8300, FAS8700, FAS9000, Y FAS9500. Puede encontrar una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA en la<block ref="b94cf00a6e18ec3712e81f808581c042" category="inline-link-rx"></block>.</block>
   <block id="45bb1f13b573370e5659e113eaa6e2a7" category="paragraph">En este documento se describen los requisitos de configuración de ONTAP para el protocolo NFS versión 3 (NFSv3) o la versión 4 (NFSv4.1).</block>
   <block id="134a6ecca2c7d98e325ad00ee461d25a" category="admonition">La configuración descrita en este documento es necesaria para alcanzar los KPI de SAP HANA necesarios y el mejor rendimiento para SAP HANA. El cambio de cualquier configuración o el uso de funciones que no figuran en este documento puede provocar una degradación del rendimiento o un comportamiento inesperado, y solo debe realizarse si así lo indica el soporte de NetApp.</block>
   <block id="c79fca4f33a4c23e62509e315c7a3415" category="paragraph">Las guías de configuración de los sistemas FAS de NetApp que utilizan FCP y para sistemas AFF que utilizan NFS o FC pueden encontrarse en los enlaces siguientes:</block>
@@ -4398,12 +4394,9 @@
   <block id="f7d09d43174d21d3203d6472d2543dc2" category="section-title">Cifrado de volúmenes de NetApp y agregados</block>
   <block id="381cfdf4e70ff7173296a764c78e97ae" category="paragraph">El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.</block>
   <block id="5d10dd356a9d8604eaed291a9dfeb67e" category="section-title">Cifrado de volúmenes de NetApp y agregados</block>
-  <block id="8e1ca12077e9e911e038655a0c678e91" category="paragraph">El número mínimo de 12 SSD NVMe para la primera bandeja admite hasta 18 hosts SAP HANA. Una bandeja completamente llena admite hasta 48 hosts SAP HANA.</block>
-  <block id="664e3eacf73f74d7628f38588ee009f2" category="paragraph">El número mínimo de 12 SSD NVMe para la primera bandeja admite hasta 18 hosts SAP HANA. Una bandeja completamente llena (24 SSD) admite hasta 48 hosts SAP HANA. Lo mismo se aplica a los discos internos de un sistema AFF A800.</block>
   <block id="2976619a79e897d24427ec6796aa4a70" category="paragraph">Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de respaldo automática de host, los parámetros de conmutación por error deben ajustarse dentro<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> tal como se muestra en la siguiente tabla.
 Mantenga el intervalo de reintento predeterminado de 10 segundos en estas secciones.</block>
   <block id="73d4ace7e434b8709f5a930ad845d6d6" category="paragraph">Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de respaldo automática de host, los parámetros de conmutación por error deben ajustarse dentro<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> tal como se muestra en la siguiente tabla. Mantenga el intervalo de reintento predeterminado de 10 segundos dentro de estas secciones.</block>
-  <block id="724e5b34aefa3c5cafe7d5d30b9a4beb" category="list-text">AFF A150, AFF A250, AFF A400, AFF A800 y AFF A900</block>
   <block id="f24901db79bd7adbcfdc97deb6526be7" category="list-text">ASA A250, ASA A400, ASA A800, ASA A900</block>
   <block id="7165d8e624155bf7a4889b98927f605c" category="list-text">ASA C250, ASA C400, ASA C800</block>
   <block id="ba7dc8a883957fda819c429f468dc4d0" category="admonition">NetApp AFF y la serie C de ASA requieren NetApp ONTAP 9.13.1 o posterior</block>
@@ -4674,4 +4667,17 @@ Desactive las opciones que no desee utilizar. +
 <block ref="7b0ca447499fc4df8de2cc9ab6e63840" category="inline-image-macro-rx" type="image"></block></block>
   <block id="75f1821bffac2198de5f906db81d5550" category="list-text">Proporcione las opciones deseadas: +
 <block ref="498181ee050d357f4660daf5619ff189" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="da23b0ab6fe420fd37a4807b59fb7b31" category="paragraph">Un SSD de NVMe (datos) admite hasta 5 hosts SAP HANA. Los SSD y los hosts SAP HANA deben distribuirse de igual manera entre las dos controladoras de almacenamiento.
+Lo mismo se aplica a los discos NVMe internos de los sistemas AFF A800, AFF A70 y AFF A90.</block>
+  <block id="89579d729fbef030eb0080e68e88f112" category="paragraph">Un SSD de NVMe (datos) admite hasta 5 hosts SAP HANA.
+Los SSD y los hosts SAP HANA deben distribuirse de igual manera entre las dos controladoras de almacenamiento.
+Lo mismo se aplica a los discos NVMe internos de los sistemas AFF A800, AFF A70 y AFF A90.</block>
+  <block id="aa73ef84825182521094d3998757610f" category="list-text">AFF A150, AFF A250, AFF A400, AFF A70, AFF A800, AFF A90, AFF A900, AFF A1K</block>
+  <block id="9c485d8d0a0f2d60633001b05d342eed" category="doc">Guía de configuración de SAP HANA en sistemas NetApp FAS con NFS</block>
+  <block id="fca506837272f34f78a90c0996a60efd" category="list-text">FAS2750, FAS2820, FAS8300, FAS8700 Y FAS9500. Puede encontrar una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA en la<block ref="b94cf00a6e18ec3712e81f808581c042" category="inline-link-rx"></block>.</block>
+  <block id="b7bda169ccba06e8cbcf02ba0fab5928" category="doc">Guía de configuración de SAP HANA en sistemas NetApp FAS con protocolo Fibre Channel</block>
+  <block id="73961a76af53f6ae0a515ec774963fc8" category="list-text">FAS2750, FAS2820, FAS8300, FAS8700, FAS9500</block>
+  <block id="a56f5f8ccd94f38be4e8a0f1faf81823" category="doc">SAP HANA en sistemas NetApp AFF con NFS: Guía de configuración de</block>
+  <block id="ef6ac0da06e1bd8eabd965442ae5668d" category="paragraph">Marco Schön, NetApp</block>
+  <block id="47e4a9a1322865b7fd49caaf0207408a" category="list-text">AFF A150, AFF A250, AFF A400, AFF A70, AFF A800, AFF A900, AFF A90, AFF A1K</block>
 </blocks>
