@@ -26,6 +26,12 @@ No se admiten las funciones de eficiencia del almacenamiento en una configuraci�
 
 
 
+== Volúmenes de NetApp FlexGroup
+
+El uso de volúmenes de NetApp FlexGroup no es compatible con SAP HANA. Debido a la arquitectura de SAP HANA, el uso de FlexGroup Volumes no ofrece ningún beneficio y puede dar lugar a problemas de rendimiento.
+
+
+
 == Cifrado de volúmenes de NetApp y agregados
 
 El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.

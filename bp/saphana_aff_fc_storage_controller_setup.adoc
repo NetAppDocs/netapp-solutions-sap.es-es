@@ -24,6 +24,12 @@ SAP HANA es compatible con la deduplicación inline, la deduplicación inline, l
 
 
 
+== Volúmenes de NetApp FlexGroup
+
+El uso de volúmenes de NetApp FlexGroup no es compatible con SAP HANA. Debido a la arquitectura de SAP HANA, el uso de FlexGroup Volumes no ofrece ningún beneficio y puede dar lugar a problemas de rendimiento.
+
+
+
 == Cifrado de volúmenes de NetApp y agregados
 
 El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.
@@ -42,7 +48,7 @@ Las grandes I/o de escritura tienen el mayor efecto en el rendimiento del sistem
 
 
 
-=== FabricPool de NetApp
+== FabricPool de NetApp
 
 La tecnología FabricPool de NetApp no debe utilizarse para sistemas de archivos primarios activos en sistemas SAP HANA. Esto incluye los sistemas de archivos para el área de datos y registro así como el `/hana/shared` sistema de archivos. Si lo hace, el rendimiento es impredecible, especialmente durante la inicio de un sistema SAP HANA.
 
