@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-considerations-for-sap-hana-system-refresh-operations-using-snapshot-backups.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y bases de datos de SAP HANA, combinando una protección eficiente de datos integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP. 
+---
+= Consideraciones sobre las operaciones de actualización del sistema SAP HANA mediante backups de snapshots de almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+
+
+== Nombre(s) de inquilino en el sistema de destino
+
+Los pasos necesarios para realizar una actualización del sistema SAP HANA dependen de la configuración del inquilino del sistema de origen y del nombre de inquilino necesario en el sistema de destino, como se muestra en la siguiente figura.
+
+Dado que el nombre de arrendatario está configurado en la base de datos del sistema, el nombre de arrendatario del sistema de origen también está disponible en el sistema de destino después de la recuperación de la base de datos del sistema. Por lo tanto, el arrendatario en el sistema de destino solo se puede recuperar con el mismo nombre que el arrendatario de origen, como se muestra en la opción 1. Si el nombre del arrendatario en el sistema de destino debe ser diferente, el arrendatario primero debe ser recuperado con el mismo nombre que el arrendatario de origen y, a continuación, cambiado el nombre al nombre de arrendatario de destino requerido. Esta es la opción 2.
+
+Una excepción de esta regla es un sistema SAP HANA con un único inquilino, donde el nombre del inquilino es idéntico al SID del sistema. Esta configuración es la predeterminada después de una instalación inicial de SAP HANA. Esta configuración específica está marcada por la base de datos SAP HANA. En este caso, la recuperación de inquilinos en el sistema de destino puede ejecutarse con el nombre de usuario del sistema de destino, que debe ser también idéntica al SID del sistema del sistema de destino. Este flujo de trabajo se muestra en la opción 3.
+
+
+NOTE: Tan pronto como se ejecuta una operación de creación, cambio de nombre o borrado de inquilino en el sistema de origen, la base de datos SAP HANA elimina este indicador de configuración. Por lo tanto, aunque la configuración se haya vuelto a inquilino = SID, el indicador ya no estará disponible y la excepción relativa a la recuperación de inquilinos con el flujo de trabajo 3 ya no es posible. En este caso, la opción 2 es el flujo de trabajo necesario.
+
+image:sc-copy-clone-image10.png[""]
+
+image:sc-copy-clone-image11.png[""]
+
+
+
+== Flujo de trabajo de actualización del sistema con cifrado SAP HANA habilitado
+
+Cuando se activa el cifrado de persistencia de SAP HANA, se necesitan pasos adicionales para poder recuperar la base de datos SAP HANA en el sistema de destino.
+
+En el sistema de origen, es necesario crear una copia de seguridad de las claves raíz de cifrado para la base de datos del sistema, así como para todas las bases de datos de arrendatarios. Los archivos de copia de seguridad deben copiarse en el sistema de destino y las claves raíz deben importarse del backup antes de que se ejecute la operación de recuperación.
+
+Consulte también https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Guía de administración de SAP HANA"].
+
+
+
+=== Copia de seguridad de claves raíz
+
+Siempre se requiere una copia de seguridad de las claves raíz, si se han realizado cambios en las claves raíz. El comando BACKUP requiere dbid como parámetro CLI. Los dbid se pueden identificar utilizando la siguiente sentencia SQL.
+
+image:sc-copy-clone-image12.png[""]
+
+La declaración de SQL y otra documentación están disponibles en la Guía del administrador de SAP HANA en https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Realizar una copia de seguridad de las claves raíz | Portal de ayuda de SAP"] los siguientes pasos que ilustran las operaciones necesarias para un sistema HANA con un solo usuario SS1 y se ejecutan en el sistema de origen.
+
+. Establezca la contraseña de copia de seguridad para las bases de datos del sistema y del inquilino (SS1) (si aún no se ha hecho).
+
+
+....
+hdbsql SYSTEMDB=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 3658.128 msec; server time 3657.967 msec)
+hdbsql SYSTEMDB=>
+hdbsql SS1=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 2424.236 msec; server time 2424.010 msec)
+hdbsql SS1=>
+....
+. Crear copia de seguridad de claves raíz para bases de datos de sistema e inquilino (SS1).
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type='ALL'
+Exporting root key backup for database SYSTEMDB (DBID: 1) to /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SS1.rkb --dbid=3 --type='ALL'
+Exporting root key backup for database SS1 (DBID: 3) to /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+....
+. Validar backups de clave raíz (opcional)
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> ls -al root*
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 07:00 root-key-backup-SS1-SS1.rkb
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 06:54 root-key-backup-SS1-SYSTEMDB.rkb
+ss1adm@hana-1:/usr/sap/SS1/home>
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SS1.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SYSTEMDB.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+....
+
+
+=== Importación de claves raíz en el sistema de destino
+
+La importación de las claves raíz es necesaria inicialmente para la primera operación de refrescamiento del sistema. Si las claves raíz no se cambian en el sistema de origen, no se requiere ninguna importación adicional. El comando import requiere dbid como parámetro CLI. Los dbid se pueden identificar de la misma manera que se describe para la copia de seguridad de la clave raíz.
+
+. En nuestra configuración, las claves raíz se copian del sistema de origen a un recurso compartido NFS
+
+
+....
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb /mnt/sapcc-share/SAP-System-Refresh/
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb /mnt/sapcc-share/SAP-System-Refresh/
+....
+. Las claves raíz ahora se pueden importar usando hdbnsutil. El dbid para la base de datos del sistema y del inquilino se debe proporcionar con el comando. La contraseña de copia de seguridad también es necesaria.
+
+
+....
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type=ALL
+Please Enter the password:
+Importing root keys for DBID: 1 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb --dbid=3 --type=ALL Please Enter the password:
+Importing root keys for DBID: 3 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+done.
+qs1adm@hana-7:/usr/sap/QS1/HDB11>
+....
+
+
+=== Importación de clave raíz, si dbid no existe en el destino
+
+Como se describe en el capítulo anterior, el dbid es necesario para importar la clave raíz para el sistema y todas las bases de datos de arrendatario. Mientras que la base de datos del sistema siempre tiene dbid=0, las bases de datos del inquilino pueden tener diferentes dbid.
+
+image:sc-copy-clone-image13.png[""]
+
+La salida anterior muestra dos inquilinos con dbid=3 y dbid=4. Si el sistema de destino aún no ha alojado un arrendatario con dbid=4, la importación de la clave raíz fallará. En ese caso, debe recuperar primero la base de datos del sistema y luego importar la clave para el inquilino con dbid=4.

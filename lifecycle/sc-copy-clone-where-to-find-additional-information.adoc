@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/sc-copy-clone-where-to-find-additional-information.html 
-keywords:  
-summary:  
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y bases de datos de SAP HANA, combinando una protección eficiente de datos integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP. 
 ---
 = Dónde encontrar información adicional e historial de versiones
 :hardbreaks:
@@ -13,39 +13,20 @@ summary:
 :imagesdir: ./../media/
 
 
-[role="lead"]
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:
 
-* TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter
-+
-https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html"^]
-
-* https://www.netapp.com/us/media/tr-4018.pdf["TR-4018: Integración de los sistemas ONTAP de NetApp con SAP Landscape Management"^]
-+
-https://www.netapp.com/us/media/tr-4018.pdf["https://www.netapp.com/us/media/tr-4018.pdf"^]
-
-* https://www.netapp.com/us/media/tr-4646.pdf["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"^]
-+
-https://www.netapp.com/us/media/tr-4646.pdf["https://www.netapp.com/us/media/tr-4646.pdf"^]
-
-* TR-4436: SAP HANA en sistemas All Flash FAS de NetApp con el protocolo Fibre Channel
-+
-https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html["https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html"^]
-
-* TR-4435: SAP HANA en sistemas All Flash FAS de NetApp con NFS
-+
-https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html"^]
-
-* Página de productos de las soluciones de software SAP de NetApp
-+
-http://www.netapp.com/us/solutions/applications/sap/index.aspx["http://www.netapp.com/us/solutions/applications/sap/index.aspx"^]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/["Aplicaciones empresariales SAP y soluciones de bases de datos SAP HANA (netapp.com)"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html["TR-4436: SAP HANA en sistemas All Flash FAS de NetApp con el protocolo Fibre Channel"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["TR-4435: SAP HANA en sistemas All Flash FAS de NetApp con NFS"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/amazon-fsx-overview.html["TR-4926: SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación de datos con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/lama-ansible-introduction.html["TR-4953: Integración de la gestión de entorno SAP de NetApp con Ansible"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["TR-4929: Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy (netapp.com)"]
+* https://fieldportal.netapp.com/explore/699265?popupstate=%7B%22state%22:%22app.notebook%22,%22srefParams%22:%7B%22source%22:3,%22sourceId%22:968639,%22notebookId%22:2565224,%22assetComponentId%22:2558241%7D%7D["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y clonado de flujos de trabajo con ALPACA y NetApp SnapCenter"]
+* https://fieldportal.netapp.com/explore/699265?popupstate=%7B%22state%22:%22app.notebook%22,%22srefParams%22:%7B%22source%22:3,%22sourceId%22:968639,%22notebookId%22:2565224,%22assetComponentId%22:2558241%7D%7D["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y flujos de trabajo de clonación con Avantra y NetApp SnapCenter"]
 
 
-
-
-
-== Historial de versiones
-
+[cols="21%,20%,59%"]
 |===
 | Versión | Fecha | Historial de versiones del documento 
 
@@ -53,9 +34,15 @@ http://www.netapp.com/us/solutions/applications/sap/index.aspx["http://www.netap
 | Versión 1.0 | Febrero de 2018 | Versión inicial. 
 
 
-| Versión 2.0 | Febrero de 2021 | Reescriba la información que cubra SnapCenter 4.3 y las secuencias de comandos de automatización mejoradas.
-Nueva descripción de los flujos de trabajo para las operaciones de actualización del sistema y clonado del sistema. 
+| Versión 2.0 | Febrero de 2021  a| 
+Reescriba la información que cubra SnapCenter 4.3 y las secuencias de comandos de automatización mejoradas. + Nueva descripción del flujo de trabajo para la actualización del sistema y las operaciones de clonación del sistema.
 
 
-| Versión 3.0 | Mayo de 2022 | Flujo de trabajo actualizado para SnapCenter 4.6 P1. 
+
+| Versión 3.0 | Mayo de 2022 | Adaptado al cambio de flujo de trabajo con SnapCenter 4,6 P1 
+
+
+| Versión 4.0 | Julio de 2024  a| 
+El documento cubre los sistemas NetApp en las instalaciones, FSX para ONTAP y Azure NetApp Files + Nueva SnapCenter 5,0 operaciones montadas y desmontadas durante la creación y eliminación de clones de flujos de trabajo + pasos específicos añadidos para SAN Fibre Channel + pasos específicos añadidos para Azure NetApp Files + script adaptado y simplificado `sc-system-refresh` + pasos necesarios incluidos para SAP HANA habilitado cifrado de volúmenes
+
 |===

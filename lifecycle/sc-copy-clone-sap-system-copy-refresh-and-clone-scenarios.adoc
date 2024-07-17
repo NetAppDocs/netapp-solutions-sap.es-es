@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: lifecycle/sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html 
-keywords: sap system refresh, system copy, system clone, 
-summary: El término copia del sistema SAP se utiliza a menudo como sinónimo de tres procesos diferentes, actualización del sistema SAP, copia del sistema SAP o operaciones de clonado del sistema SAP. Es importante distinguir entre las distintas operaciones, ya que los flujos de trabajo y los casos de uso son distintos en cada una. 
+permalink: lifecycle/sc-copy-clone-sap-system-copy-refresh-and-clone-scenarios.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y bases de datos de SAP HANA, combinando una protección eficiente de datos integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP. 
 ---
 = Situaciones de copia, actualización y clonación del sistema SAP
 :hardbreaks:
@@ -13,7 +13,6 @@ summary: El término copia del sistema SAP se utiliza a menudo como sinónimo de
 :imagesdir: ./../media/
 
 
-[role="lead"]
 El término copia del sistema SAP se utiliza a menudo como sinónimo de tres procesos diferentes: Actualización del sistema SAP, copia del sistema SAP o operaciones de clonación del sistema SAP. Es importante distinguir entre las distintas operaciones, ya que los flujos de trabajo y los casos de uso son distintos en cada una.
 
 * *Actualización del sistema SAP.* una actualización del sistema SAP es una actualización de un sistema SAP de destino existente con datos de un sistema SAP de origen. El sistema de destino suele formar parte de un entorno de transporte SAP, por ejemplo, un sistema de garantía de calidad que se actualiza con los datos del sistema de producción. El nombre de host, el número de instancia y el SID son diferentes para los sistemas de origen y de destino.
@@ -21,10 +20,6 @@ El término copia del sistema SAP se utiliza a menudo como sinónimo de tres pro
 * *Clon del sistema SAP.* un clon del sistema SAP es un clon idéntico de un sistema SAP de origen. Los clones del sistema SAP se suelen utilizar para hacer frente a daños lógicos o para probar escenarios de recuperación ante desastres. Con una operación de clonado del sistema, el nombre de host, el número de instancia y el SID siguen siendo los mismos. Por lo tanto, es importante establecer una adecuada delimitación de red para que el sistema de destino se asegure de que no existe comunicación con el entorno de producción.
 
 
-En la siguiente figura, se muestran los pasos principales que deben realizarse durante una actualización del sistema, una copia del sistema o una operación de clonado del sistema. Los cuadros azules indican los pasos que se pueden automatizar con SnapCenter, mientras que los recuadros verdes indican los pasos que deben realizarse fuera de SnapCenter, ya sea manualmente o mediante herramientas de terceros.
+La siguiente figura muestra los pasos principales que se deben llevar a cabo durante una actualización del sistema, una copia del sistema o una operación de clonado del sistema. Los cuadros azules indican los pasos que se pueden automatizar con SnapCenter, mientras que los cuadros grises indican los pasos que se deben realizar fuera de SnapCenter, ya sea manualmente o mediante herramientas de terceros.
 
-Las tres operaciones pueden automatizarse totalmente con SAP Lama y NetApp Storage Services Connector. Para obtener más información, consulte https://www.netapp.com/us/media/tr-4018.pdf["Integración de los sistemas ONTAP de NetApp con SAP Landscape Management"^].
-
-NetApp también ha trabajado con Libelle https://www.libelle.com["www.libelle.com"^] Para integrar el clonado de SnapCenter con Libelle SystemCopy para automatizar el procesamiento previo y posterior de SAP. Puede encontrar una descripción detallada de la solución en link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy"^].
-
-image:sc-copy-clone-image2.png["Error: Falta la imagen gráfica"]
+image:sc-copy-clone-image2.png[""]
