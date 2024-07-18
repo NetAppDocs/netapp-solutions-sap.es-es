@@ -18,12 +18,9 @@ Una restauración desde el backup solo se puede llevar a cabo en un sistema de a
 
 . En la interfaz de usuario de BlueXP, haz clic en   *Protección* > *Copia de seguridad y recuperación* > *Aplicaciones* y elige Híbrido.
 . En  el campo *Filtrar por*, selecciona el filtro *Tipo* y en el menú desplegable selecciona *HANA*.
-. Haga clic en *Ver detalles* correspondiente a la base de datos que desea restaurar. +
-image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38,width=624,height=305"]
-. Seleccione la copia de seguridad deseada y elija Storage Export. +
-image:hana-hycl-back-image39.jpeg["anchura = 624 mm, altura = 308 mm"]
-. Proporcione las opciones deseadas: +
-image:hana-hycl-back-image40.jpeg["anchura = 624 mm, altura = 308 mm"]
+. Haga clic en *Ver detalles* correspondiente a la base de datos que desea restaurar. + imagen::hana-hycl-back-image38.jpeg[hana-hycl-back-image38,width=624,height=305]
+. Seleccione la copia de seguridad deseada y elija Storage Export. + imagen::hana-hycl-back-image39.jpeg[width=624,height=308]
+. Proporcione las opciones deseadas: + imagen::hana-hycl-back-image40.jpeg[width=624,height=308]
 +
 .. Para el entorno NAS, especifique el FQDN o la dirección IP del host al que se van a exportar los volúmenes restaurados del almacén de objetos.
 .. Para el entorno SAN, especifique los iniciadores del host al que se van a asignar las LUN de los volúmenes restaurados desde el almacén de objetos.
@@ -33,8 +30,5 @@ image:hana-hycl-back-image40.jpeg["anchura = 624 mm, altura = 308 mm"]
 . Si no hay suficiente espacio en el almacenamiento de origen o el almacenamiento de origen está inactivo, selecciona *Cambiar ubicación de almacenamiento*.
 . Si selecciona *Cambiar ubicación de almacenamiento*, puede agregar un sufijo al volumen de destino. Si no ha seleccionado la casilla de comprobación,  se agrega de forma predeterminada *_restore* al volumen de destino. Haga clic en *Siguiente*.
 . Si seleccionó Cambiar ubicación de almacenamiento, especifique los detalles de la ubicación de almacenamiento alternativa donde se almacenarán los datos restaurados del almacén de objetos en la página de asignación de almacenamiento y haga clic en *Siguiente*.
-. Revise los detalles y haga clic en *Restaurar*. +
-image:hana-hycl-back-image41.jpeg["hana-hycl-back-image41,width=624,height=309"] +
- +
-Esta operación solo hace la exportación de almacenamiento del backup restaurado para el host determinado. Debe montar manualmente el sistema de archivos en el host y activar la base de datos. Después de utilizar el volumen, el administrador de almacenamiento puede eliminar el volumen del clúster de ONTAP.
+. Revise los detalles y haga clic en *Restaurar*. + image::hana-hycl-back-image41.jpeg[hana-hycl-back-image41,width=624,height=309] + + Esta operación solo realiza la exportación de almacenamiento de la copia de seguridad restaurada para el host dado. Debe montar manualmente el sistema de archivos en el host y activar la base de datos. Después de utilizar el volumen, el administrador de almacenamiento puede eliminar el volumen del clúster de ONTAP.
 

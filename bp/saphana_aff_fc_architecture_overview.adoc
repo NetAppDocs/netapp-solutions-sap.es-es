@@ -19,7 +19,7 @@ Los diferentes modelos de la familia de productos AFF pueden combinarse y empare
 
 En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad de almacenamiento.
 
-image:saphana_aff_fc_image2.png["Error: Falta la imagen gráfica"]
+image::saphana_aff_fc_image2.png[Error: Falta la imagen gráfica]
 
 Esta arquitectura se puede escalar en dos dimensiones:
 
@@ -29,8 +29,8 @@ Esta arquitectura se puede escalar en dos dimensiones:
 
 La siguiente figura muestra un ejemplo de configuración en el que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de los 16 hosts SAP HANA. Según los requisitos de rendimiento totales, debe añadir conexiones FC adicionales a las controladoras de almacenamiento.
 
-image:saphana_aff_fc_image3.png["Error: Falta la imagen gráfica"]
+image::saphana_aff_fc_image3.png[Error: Falta la imagen gráfica]
 
 Independientemente del sistema AFF puesto en marcha, el panorama SAP HANA también se puede escalar agregando controladoras de almacenamiento certificadas para cumplir con la densidad de nodos deseada, como se muestra en la siguiente figura.
 
-image:saphana_aff_fc_image4.png["Error: Falta la imagen gráfica"]
+image::saphana_aff_fc_image4.png[Error: Falta la imagen gráfica]

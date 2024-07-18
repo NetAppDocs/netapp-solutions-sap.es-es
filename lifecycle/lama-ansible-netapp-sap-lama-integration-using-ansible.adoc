@@ -16,7 +16,7 @@ summary: El enfoque de integración usa los enlaces de aprovisionamiento y opera
 [role="lead"]
 El enfoque de integración usa los enlaces de aprovisionamiento y operaciones personalizados de SAP Lama en combinación con los libros de estrategia de Ansible para la gestión del almacenamiento de NetApp. En la siguiente figura se muestra una descripción general de alto nivel de la configuración en el lado Lama, así como los componentes correspondientes de la implementación de ejemplo.
 
-image:lama-ansible-image6.png["Se trata de una imagen bastante compleja con tres cajas etiquetadas como SAP Lama, nodo de control Ansible y almacenamiento de NetApp. Cada cuadro contiene los pasos de proceso respectivos que tienen lugar en cada nivel."]
+image::lama-ansible-image6.png[Se trata de una imagen bastante compleja con tres cajas etiquetadas como SAP Lama, nodo de control Ansible y almacenamiento de NetApp. Cada cuadro contiene los pasos de proceso respectivos que tienen lugar en cada nivel.]
 
 Se utiliza un host central que actúa como nodo de control de Ansible para ejecutar las solicitudes de SAP Lama y para activar las operaciones de almacenamiento de NetApp mediante los libros de estrategia de Ansible. Los componentes del agente de host de SAP deben instalarse en este host para que el host se pueda usar como puerta de enlace de comunicación con SAP Lama.
 

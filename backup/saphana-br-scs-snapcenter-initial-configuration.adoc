@@ -35,7 +35,7 @@ Las siguientes secciones describen los pasos de configuración inicial.
 
 . Inicie sesión en la interfaz gráfica de usuario del servidor de SnapCenter.
 +
-image:saphana-br-scs-image23.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image23.png[Error: Falta la imagen gráfica]
 
 . Seleccione almacenamiento sistemas.
 +
@@ -43,7 +43,7 @@ image:saphana-br-scs-image23.png["Error: Falta la imagen gráfica"]
 NOTE: En la pantalla, puede seleccionar el tipo de sistema de almacenamiento que puede ser ONTAP SVM o ONTAP Clusters. Si configura los sistemas de almacenamiento en el nivel de SVM, debe tener una LIF de gestión configurada para cada SVM. Como alternativa, puede utilizar un acceso de gestión de SnapCenter en el nivel de clúster. La gestión de SVM se utiliza en el siguiente ejemplo.
 
 +
-image:saphana-br-scs-image24.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image24.png[Error: Falta la imagen gráfica]
 
 . Haga clic en New para añadir un sistema de almacenamiento y proporcionar el nombre de host y las credenciales necesarios.
 +
@@ -51,7 +51,7 @@ image:saphana-br-scs-image24.png["Error: Falta la imagen gráfica"]
 NOTE: No se requiere que el usuario de SVM sea el usuario de vsadmin, tal como se muestra en la captura de pantalla. Generalmente, un usuario está configurado en la SVM y asignó los permisos necesarios para ejecutar operaciones de backup y restauración. Puede encontrar más detalles sobre los privilegios necesarios en la http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["Guía de instalación de SnapCenter"^] En la sección titulada “privilegios mínimos de ONTAP requeridos”.
 
 +
-image:saphana-br-scs-image25.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image25.png[Error: Falta la imagen gráfica]
 
 . Haga clic en más opciones para configurar la plataforma de almacenamiento.
 +
@@ -62,11 +62,11 @@ La plataforma de almacenamiento puede ser FAS, AFF, ONTAP Select o Cloud Volumes
 NOTE: Para los sistemas que se utilizan como destino de SnapVault o SnapMirror, seleccione el icono Secondary.
 
 +
-image:saphana-br-scs-image26.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image26.png[Error: Falta la imagen gráfica]
 
 . Añada sistemas de almacenamiento adicionales según sea necesario. En nuestro ejemplo, se ha añadido un almacenamiento adicional de backup externo y un sistema de almacenamiento de recuperación ante desastres.
 +
-image:saphana-br-scs-image27.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image27.png[Error: Falta la imagen gráfica]
 
 
 
@@ -76,22 +76,22 @@ image:saphana-br-scs-image27.png["Error: Falta la imagen gráfica"]
 
 . Vaya a Configuración, seleccione credenciales y haga clic en New.
 +
-image:saphana-br-scs-image28.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image28.png[Error: Falta la imagen gráfica]
 
 . Proporcione las credenciales del usuario que se usan para instalaciones de plugins en sistemas Linux.
 +
-image:saphana-br-scs-image29.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image29.png[Error: Falta la imagen gráfica]
 
 . Proporcione las credenciales para el usuario que se usan para instalaciones de plugins en sistemas Windows.
 +
-image:saphana-br-scs-image30.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image30.png[Error: Falta la imagen gráfica]
 
 +
 En la siguiente figura se muestran las credenciales configuradas.
 
 
 
-image:saphana-br-scs-image31.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image31.png[Error: Falta la imagen gráfica]
 
 
 
@@ -104,17 +104,17 @@ NOTE: El plugin de SAP HANA requiere Java de 64 bits, versión 1.8. Java se debe
 
 . Vaya a hosts y haga clic en Add.
 +
-image:saphana-br-scs-image32.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image32.png[Error: Falta la imagen gráfica]
 
 . Proporcione la información del host requerida. Haga clic en Submit.
 +
-image:saphana-br-scs-image33.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image33.png[Error: Falta la imagen gráfica]
 
 +
 En la siguiente figura, se muestran todos los hosts configurados una vez que se pone en marcha el plugin para HANA.
 
 +
-image:saphana-br-scs-image34.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image34.png[Error: Falta la imagen gráfica]
 
 
 
@@ -161,31 +161,31 @@ En las siguientes secciones se describe la configuración de estas tres directiv
 
 . Vaya a Configuración > Directivas y haga clic en Nuevo.
 +
-image:saphana-br-scs-image35.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image35.png[Error: Falta la imagen gráfica]
 
 . Escriba el nombre de la política y una descripción. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image36.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image36.png[Error: Falta la imagen gráfica]
 
 . Seleccione el tipo de backup as Snapshot Based y seleccione Hourly for schedule frequency.
 +
-image:saphana-br-scs-image37.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image37.png[Error: Falta la imagen gráfica]
 
 . Configurar las opciones de retención para backups bajo demanda.
 +
-image:saphana-br-scs-image38.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image38.png[Error: Falta la imagen gráfica]
 
 . Configurar los ajustes de retención para los backups programados.
 +
-image:saphana-br-scs-image39.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image39.png[Error: Falta la imagen gráfica]
 
 . Configure las opciones de replicación. En este caso, no se ha seleccionado ninguna actualización de SnapVault o SnapMirror.
 +
-image:saphana-br-scs-image40.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image40.png[Error: Falta la imagen gráfica]
 
 . En la página Summary, haga clic en Finish.
 +
-image:saphana-br-scs-image41.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image41.png[Error: Falta la imagen gráfica]
 
 
 
@@ -196,19 +196,19 @@ image:saphana-br-scs-image41.png["Error: Falta la imagen gráfica"]
 . Vaya a Configuración > Directivas y haga clic en Nuevo.
 . Escriba el nombre de la política y una descripción. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image42.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image42.png[Error: Falta la imagen gráfica]
 
 . Establezca el tipo de backup en Snapshot Based y la frecuencia de programación en Daily.
 +
-image:saphana-br-scs-image43.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image43.png[Error: Falta la imagen gráfica]
 
 . Configurar las opciones de retención para backups bajo demanda.
 +
-image:saphana-br-scs-image44.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image44.png[Error: Falta la imagen gráfica]
 
 . Configurar los ajustes de retención para los backups programados.
 +
-image:saphana-br-scs-image45.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image45.png[Error: Falta la imagen gráfica]
 
 . Seleccione Actualizar SnapVault después de crear una copia Snapshot local.
 +
@@ -216,11 +216,11 @@ image:saphana-br-scs-image45.png["Error: Falta la imagen gráfica"]
 NOTE: La etiqueta de la política secundaria debe ser la misma que la etiqueta de SnapMirror en la configuración de protección de datos en la capa de almacenamiento. Consulte la sección link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#configuration-of-data-protection-to-off-site-backup-storage["“Configuración de la protección de datos en almacenamiento de backup externo”."]
 
 +
-image:saphana-br-scs-image46.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image46.png[Error: Falta la imagen gráfica]
 
 . En la página Summary, haga clic en Finish.
 +
-image:saphana-br-scs-image47.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image47.png[Error: Falta la imagen gráfica]
 
 
 
@@ -231,28 +231,28 @@ image:saphana-br-scs-image47.png["Error: Falta la imagen gráfica"]
 . Vaya a Configuración > Directivas y haga clic en Nuevo.
 . Escriba el nombre de la política y una descripción. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image48.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image48.png[Error: Falta la imagen gráfica]
 
 . Establezca el tipo de backup en File-based y la frecuencia de programación en Weekly.
 +
-image:saphana-br-scs-image49.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image49.png[Error: Falta la imagen gráfica]
 
 . Configurar las opciones de retención para backups bajo demanda.
 +
-image:saphana-br-scs-image50.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image50.png[Error: Falta la imagen gráfica]
 
 . Configurar los ajustes de retención para los backups programados.
 +
-image:saphana-br-scs-image50.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image50.png[Error: Falta la imagen gráfica]
 
 . En la página Summary, haga clic en Finish.
 +
-image:saphana-br-scs-image51.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image51.png[Error: Falta la imagen gráfica]
 
 +
 En la siguiente figura, se muestra un resumen de las políticas configuradas.
 
 +
-image:saphana-br-scs-image52.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image52.png[Error: Falta la imagen gráfica]
 
 

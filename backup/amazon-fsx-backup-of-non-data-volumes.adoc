@@ -30,46 +30,46 @@ Siga estos pasos para configurar recursos de volúmenes sin datos:
 
 . En la pestaña Resources, seleccione Non-Data-Volume y, a continuación, haga clic en Add SAP HANA Database.
 +
-image:amazon-fsx-image60.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image60.png[Error: Falta la imagen gráfica]
 
 . En el paso uno del cuadro de diálogo Add SAP HANA Database, en la lista Resource Type, seleccione Non-data Volumes. Especifique un nombre para el recurso y el SID asociado y el host del plugin de SAP HANA que desee usar para el recurso y, a continuación, haga clic en Next.
 +
-image:amazon-fsx-image61.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image61.png[Error: Falta la imagen gráfica]
 
 . Añada la SVM y el volumen de almacenamiento como espacio físico de almacenamiento y, a continuación, haga clic en Next.
 +
-image:amazon-fsx-image62.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image62.png[Error: Falta la imagen gráfica]
 
 . Para guardar la configuración, en el paso de resumen, haga clic en Finalizar.
 +
-image:amazon-fsx-image63.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image63.png[Error: Falta la imagen gráfica]
 
 +
 El nuevo volumen sin datos se añade a SnapCenter. Haga doble clic en el nuevo recurso para ejecutar la protección de recursos.
 
 +
-image:amazon-fsx-image64.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image64.png[Error: Falta la imagen gráfica]
 
 +
 La protección de recursos se realiza del mismo modo que se describe antes con un recurso de base de datos HANA.
 
 . Ahora puede ejecutar una copia de seguridad haciendo clic en Backup Now.
 +
-image:amazon-fsx-image65.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image65.png[Error: Falta la imagen gráfica]
 
 . Seleccione la política e inicie la operación de backup.
 +
-image:amazon-fsx-image66.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image66.png[Error: Falta la imagen gráfica]
 
 
 
 El registro de trabajos de SnapCenter muestra los pasos del flujo de trabajo individual.
 
-image:amazon-fsx-image67.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image67.png[Error: Falta la imagen gráfica]
 
 El nuevo backup ahora se puede ver en la vista de recursos del recurso del volumen no relacionado con datos.
 
-image:amazon-fsx-image68.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image68.png[Error: Falta la imagen gráfica]
 
 
 
@@ -119,38 +119,38 @@ Para realizar una operación de restauración manual, siga estos pasos:
 
 . Seleccione un backup en SnapCenter que se usará para la operación de restauración.
 +
-image:amazon-fsx-image69.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image69.png[Error: Falta la imagen gráfica]
 
 . Seleccione el ámbito y el tipo de restauración.
 +
 El escenario estándar para los sistemas de un solo inquilino MDC de HANA es utilizar un recurso completo con reversión de volumen. Para un sistema MDC de HANA con varios inquilinos, puede que desee restaurar solo un tenant. Para obtener más información sobre la restauración de un solo inquilino, consulte https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-restore-and-recovery.html["Restauración y recuperación (netapp.com)"^].
 
 +
-image:amazon-fsx-image70.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image70.png[Error: Falta la imagen gráfica]
 
 . Seleccione Recovery Scope y proporcione la ubicación para backup de registros y backup de catálogo.
 +
 SnapCenter utiliza la ruta predeterminada o las rutas modificadas en el archivo HANA global.ini para rellenar previamente las ubicaciones de backup de registros y catálogos.
 
 +
-image:amazon-fsx-image71.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image71.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos previos a la restauración opcionales.
 +
-image:amazon-fsx-image72.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image72.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos posteriores a la restauración opcionales.
 +
-image:amazon-fsx-image73.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image73.png[Error: Falta la imagen gráfica]
 
 . Para iniciar la operación de restauración y recuperación, haga clic en Finish.
 +
-image:amazon-fsx-image74.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image74.png[Error: Falta la imagen gráfica]
 
 +
 SnapCenter ejecuta la operación de restauración y recuperación. Este ejemplo muestra los detalles de la tarea de restauración y recuperación.
 
 +
-image:amazon-fsx-image75.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image75.png[Error: Falta la imagen gráfica]
 
 

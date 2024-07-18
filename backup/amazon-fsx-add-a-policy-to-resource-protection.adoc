@@ -16,8 +16,8 @@ summary: En esta sección se describe cómo añadir una política a la protecci�
 [role="lead"]
 Debe añadir la nueva política a la configuración de protección de recursos de HANA, como se muestra en la siguiente figura.
 
-image:amazon-fsx-image86.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image86.png[Error: Falta la imagen gráfica]
 
 En nuestra configuración se define un programa diario.
 
-image:amazon-fsx-image87.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image87.png[Error: Falta la imagen gráfica]

@@ -20,7 +20,7 @@ La protección de datos se puede configurar con el software SnapCenter de NetApp
 * Un único recurso de SnapCenter para ambos hosts SAP HANA mediante una dirección IP virtual.
 
 
-image:saphana-sr-scs-image5.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image5.png[Error: Falta la imagen gráfica]
 
 A partir de SnapCenter 4.6, SnapCenter admite la detección automática de sistemas HANA configurados en una relación de replicación del sistema HANA. Cada host se configura usando su dirección IP física (nombre de host) y su volumen de datos individual en la capa de almacenamiento. Los dos recursos de SnapCenter se combinan en un grupo de recursos, y SnapCenter identifica automáticamente qué host es primario o secundario y ejecuta las operaciones de backup necesarias en consecuencia. La gestión de retención de Snapshot y los backups basados en archivos creados por SnapCenter se realiza en ambos hosts para garantizar que los backups antiguos también se eliminan en el host secundario actual.
 

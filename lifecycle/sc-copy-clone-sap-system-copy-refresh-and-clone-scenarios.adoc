@@ -22,4 +22,4 @@ El término copia del sistema SAP se utiliza a menudo como sinónimo de tres pro
 
 La siguiente figura muestra los pasos principales que se deben llevar a cabo durante una actualización del sistema, una copia del sistema o una operación de clonado del sistema. Los cuadros azules indican los pasos que se pueden automatizar con SnapCenter, mientras que los cuadros grises indican los pasos que se deben realizar fuera de SnapCenter, ya sea manualmente o mediante herramientas de terceros.
 
-image:sc-copy-clone-image2.png[""]
+image::sc-copy-clone-image2.png[clon de copia sc image2]

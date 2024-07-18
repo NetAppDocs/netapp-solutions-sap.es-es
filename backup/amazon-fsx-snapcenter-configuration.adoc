@@ -42,7 +42,7 @@ Los privilegios necesarios se cambian con la versión HANA 2.0 SPS5: Administrad
 
 Para un sistema MDC de SAP HANA, debe crear el usuario en la base de datos del sistema porque todos los comandos de backup para el sistema y las bases de datos de tenant se ejecutan mediante la base de datos del sistema.
 
-image:amazon-fsx-image9.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image9.png[Error: Falta la imagen gráfica]
 
 El siguiente comando se utiliza para la configuración del almacén de usuarios con el `<sid>adm` usuario:
 
@@ -90,31 +90,31 @@ Siga estos pasos para configurar el almacenamiento en SnapCenter.
 
 . En la interfaz de usuario de SnapCenter, seleccione Storage Systems.
 +
-image:amazon-fsx-image10.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image10.png[Error: Falta la imagen gráfica]
 
 +
 Puede seleccionar el tipo de sistema de almacenamiento que puede ser ONTAP SVM o ONTAP Clusters. En el ejemplo siguiente, se selecciona la gestión de SVM.
 
 +
-image:amazon-fsx-image11.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image11.png[Error: Falta la imagen gráfica]
 
 . Para añadir un sistema de almacenamiento y proporcionar el nombre de host y las credenciales necesarios, haga clic en New.
 +
 No se requiere que el usuario de SVM sea el usuario de vsadmin, como se muestra en la siguiente figura. Generalmente, un usuario está configurado en la SVM y asignó los permisos necesarios para ejecutar operaciones de backup y restauración. Para obtener información sobre los privilegios necesarios, consulte http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["Guía de instalación de SnapCenter"^] En la sección titulada “privilegios mínimos de ONTAP requeridos”.
 
 +
-image:amazon-fsx-image12.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image12.png[Error: Falta la imagen gráfica]
 
 . Para configurar la plataforma de almacenamiento, haga clic en más opciones.
 . Seleccione All Flash FAS como el sistema de almacenamiento para garantizar que la licencia, que forma parte de FSX para ONTAP, esté disponible para SnapCenter.
 +
-image:amazon-fsx-image13.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image13.png[Error: Falta la imagen gráfica]
 
 +
 La SVM `sapcc-hana-svm` Ahora está configurado en SnapCenter.
 
 +
-image:amazon-fsx-image14.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image14.png[Error: Falta la imagen gráfica]
 
 
 
@@ -126,11 +126,11 @@ Para habilitar SnapCenter a fin de implementar los plugins necesarios en los hos
 
 . Vaya a Configuración, seleccione credenciales y haga clic en New.
 +
-image:amazon-fsx-image15.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image15.png[Error: Falta la imagen gráfica]
 
 . En la configuración de laboratorio, configuramos un nuevo usuario,  `snapcenter`, En el host HANA que se utiliza para la implementación del plugin. Debe habilitar sudo prvileges, como se muestra en la siguiente figura.
 +
-image:amazon-fsx-image16.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image16.png[Error: Falta la imagen gráfica]
 
 
 
@@ -164,15 +164,15 @@ Para añadir el host SAP HANA, siga estos pasos:
 
 . En la pestaña del host, haga clic en Add.
 +
-image:amazon-fsx-image17.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image17.png[Error: Falta la imagen gráfica]
 
 . Proporcione información del host y seleccione el plugin de SAP HANA que se va a instalar. Haga clic en Submit.
 +
-image:amazon-fsx-image18.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image18.png[Error: Falta la imagen gráfica]
 
 . Confirme la huella.
 +
-image:amazon-fsx-image19.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image19.png[Error: Falta la imagen gráfica]
 
 +
 La instalación de HANA y el plugin de Linux se inicia automáticamente. Cuando termina la instalación, la columna de estado del host muestra Configure VMware Plug-in. SnapCenter detecta si el plugin de SAP HANA está instalado en un entorno virtualizado. Puede ser un entorno de VMware o un entorno de un proveedor de cloud público. En este caso, SnapCenter muestra una advertencia para configurar el hipervisor.
@@ -181,19 +181,19 @@ La instalación de HANA y el plugin de Linux se inicia automáticamente. Cuando 
 Puede eliminar el mensaje de advertencia mediante los pasos siguientes.
 
 +
-image:amazon-fsx-image20.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image20.png[Error: Falta la imagen gráfica]
 
 +
 .. En la pestaña Configuración, seleccione Configuración global.
 .. Para la configuración del hipervisor, seleccione VMs have iSCSI Direct Attached Disks or NFS for All the hosts y actualice la configuración.
 +
-image:amazon-fsx-image21.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image21.png[Error: Falta la imagen gráfica]
 
 +
 La pantalla ahora muestra el plugin de Linux y el plugin de HANA con el estado ejecutando.
 
 +
-image:amazon-fsx-image22.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image22.png[Error: Falta la imagen gráfica]
 
 
 
@@ -221,35 +221,35 @@ Siga estos pasos para configurar las políticas de backup de Snapshot.
 
 . Vaya a Configuración > Directivas y haga clic en Nuevo.
 +
-image:amazon-fsx-image23.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image23.png[Error: Falta la imagen gráfica]
 
 . Escriba el nombre de la política y una descripción. Haga clic en Siguiente.
 +
-image:amazon-fsx-image24.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image24.png[Error: Falta la imagen gráfica]
 
 . Seleccione el tipo de backup as Snapshot Based y seleccione Hourly for schedule frequency.
 +
 La programación se configura más adelante con la configuración de protección de recursos HANA.
 
 +
-image:amazon-fsx-image25.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image25.png[Error: Falta la imagen gráfica]
 
 . Configurar las opciones de retención para backups bajo demanda.
 +
-image:amazon-fsx-image26.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image26.png[Error: Falta la imagen gráfica]
 
 . Configure las opciones de replicación. En este caso, no se ha seleccionado ninguna actualización de SnapVault o SnapMirror.
 +
-image:amazon-fsx-image27.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image27.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image28.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image28.png[Error: Falta la imagen gráfica]
 
 
 
 La nueva directiva está configurada ahora.
 
-image:amazon-fsx-image29.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image29.png[Error: Falta la imagen gráfica]
 
 
 
@@ -260,22 +260,22 @@ Siga estos pasos para configurar la directiva de comprobación de integridad de 
 . Vaya a Configuración > Directivas y haga clic en Nuevo.
 . Escriba el nombre de la política y una descripción. Haga clic en Siguiente.
 +
-image:amazon-fsx-image30.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image30.png[Error: Falta la imagen gráfica]
 
 . Establezca el tipo de backup en File-based y la frecuencia de programación en Weekly. La programación se configura más adelante con la configuración de protección de recursos HANA.
 +
-image:amazon-fsx-image31.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image31.png[Error: Falta la imagen gráfica]
 
 . Configurar las opciones de retención para backups bajo demanda.
 +
-image:amazon-fsx-image32.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image32.png[Error: Falta la imagen gráfica]
 
 . En la página Summary, haga clic en Finish.
 +
-image:amazon-fsx-image33.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image33.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image34.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image34.png[Error: Falta la imagen gráfica]
 
 
 
@@ -290,63 +290,63 @@ Después de la instalación del plugin, el proceso de detección automática del
 También es posible activar el proceso de detección automática manualmente dentro de la pantalla Recursos. Para ello, haga clic en Refresh Resources.
 
 +
-image:amazon-fsx-image35.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image35.png[Error: Falta la imagen gráfica]
 
 . Proporcione la clave de almacenamiento de usuarios para la base de datos HANA.
 +
-image:amazon-fsx-image36.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image36.png[Error: Falta la imagen gráfica]
 
 +
 El proceso de detección automática de segundo nivel comienza en el cual se detectan los datos de inquilinos y la información sobre la huella de almacenamiento.
 
 +
-image:amazon-fsx-image37.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image37.png[Error: Falta la imagen gráfica]
 
 . En la pestaña Resources, haga doble clic en el recurso para configurar la protección de recursos.
 +
-image:amazon-fsx-image38.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image38.png[Error: Falta la imagen gráfica]
 
 . Configure un formato de nombre personalizado para la copia de Snapshot.
 +
 NetApp recomienda utilizar un nombre de copia de Snapshot personalizado para identificar fácilmente qué backups se han creado con qué tipo de normativa y programación. Al añadir el tipo de programación al nombre de la copia de Snapshot, es posible distinguir entre backups programados y bajo demanda. La `schedule name` la cadena de backups bajo demanda está vacía, mientras que las copias de seguridad programadas incluyen la cadena `Hourly`, `Daily`, `or Weekly`.
 
 +
-image:amazon-fsx-image39.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image39.png[Error: Falta la imagen gráfica]
 
 . No es necesario realizar ningún ajuste específico en la página Configuración de la aplicación. Haga clic en Siguiente.
 +
-image:amazon-fsx-image40.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image40.png[Error: Falta la imagen gráfica]
 
 . Seleccione las políticas que desea añadir al recurso.
 +
-image:amazon-fsx-image41.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image41.png[Error: Falta la imagen gráfica]
 
 . Defina la programación de la política de comprobación de integridad de bloques.
 +
 En este ejemplo, se establece una vez por semana.
 
 +
-image:amazon-fsx-image42.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image42.png[Error: Falta la imagen gráfica]
 
 . Defina la programación para la política de Snapshot local.
 +
 En este ejemplo, se establece para cada 6 horas.
 
 +
-image:amazon-fsx-image43.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image43.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image44.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image44.png[Error: Falta la imagen gráfica]
 
 . Proporcione información acerca de las notificaciones por correo electrónico.
 +
-image:amazon-fsx-image45.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image45.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image46.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image46.png[Error: Falta la imagen gráfica]
 
 
 
 La configuración de recursos HANA ahora se completa y puede ejecutar backups.
 
-image:amazon-fsx-image47.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image47.png[Error: Falta la imagen gráfica]

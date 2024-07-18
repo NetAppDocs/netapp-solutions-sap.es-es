@@ -30,7 +30,7 @@ En la siguiente figura se muestra un flujo de trabajo típico de alto nivel del 
 
 El sistema se puede utilizar como prueba o sistema de control de calidad. Cuando se solicita una nueva actualización del sistema, el flujo de trabajo se reinicia con el paso 2. Todos los volúmenes clonados restantes se deben eliminar manualmente.
 
-image:libelle-sc-image23.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image23.png[Error: Falta la imagen gráfica]
 
 
 
@@ -44,7 +44,7 @@ Deben cumplirse los siguientes requisitos previos.
 
 En general, hay dos opciones de implementación para AzAcSnap, como se muestra en la siguiente imagen.
 
-image:libelle-sc-image24.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image24.png[Error: Falta la imagen gráfica]
 
 AzAcSnap se puede instalar y ejecutar en un equipo virtual central de Linux para el que todos los archivos de configuración de la base de datos se almacenan de forma centralizada y AzAcSnap tiene acceso a todas las bases de datos (a través del cliente hdbsql) y a las claves de almacenamiento de usuarios HANA configuradas para todas estas bases de datos. Con una implementación descentralizada, AzAcSnap se instala individualmente en cada host de base de datos donde normalmente sólo se almacena la configuración de la base de datos local. Ambas opciones de implementación son compatibles con la integración de LSC. No obstante, seguimos un enfoque híbrido en la configuración de laboratorio de este documento. AzAcSnap se instaló en un recurso compartido de NFS central junto con todos los archivos de configuración de DB. Este recurso compartido de instalación central se montó en todas las máquinas virtuales en `/mnt/software/AZACSNAP/snapshot-tool`. La ejecución de la herramienta se llevó a cabo localmente en los equipos virtuales de la base de datos.
 
@@ -54,7 +54,7 @@ AzAcSnap se puede instalar y ejecutar en un equipo virtual central de Linux para
 
 Las implementaciones de Libelle SystemCopy constan de los siguientes componentes:
 
-image:libelle-sc-image25.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image25.png[Error: Falta la imagen gráfica]
 
 * *LSC Master.* como su nombre indica, este es el componente maestro que controla el flujo de trabajo automático de una copia de sistema basada en Libelle.
 * *Trabajador LSC.* un trabajador LSC normalmente se ejecuta en el sistema SAP de destino y ejecuta los scripts necesarios para la copia automática del sistema.
@@ -65,7 +65,7 @@ La GUI Libelle SystemCopy (LSC) debe estar instalada en una VM adecuada. En esta
 
 Una vez instalado el LSC, la configuración básica de la base de datos de origen y destino debe realizarse de acuerdo con las directrices del LSC. Las siguientes imágenes muestran la configuración del entorno de laboratorio para este documento. Consulte la siguiente sección para obtener detalles sobre el origen y los sistemas SAP de destino.
 
-image:libelle-sc-image26.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image26.png[Error: Falta la imagen gráfica]
 
 También debe configurar una lista de tareas estándar adecuada para los sistemas SAP. Para obtener más detalles acerca de la instalación y configuración del LSC, consulte el manual de usuario del LSC que forma parte del paquete de instalación del LSC.
 
@@ -85,7 +85,7 @@ La configuración de laboratorio está compuesta por un sistema SAP de origen y 
 
 La siguiente imagen muestra la configuración del laboratorio.
 
-image:libelle-sc-image27.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image27.png[Error: Falta la imagen gráfica]
 
 Contiene los siguientes sistemas, versiones de software y volúmenes Azure NetApp Files:
 
@@ -107,7 +107,7 @@ Contiene los siguientes sistemas, versiones de software y volúmenes Azure NetAp
 
 Antes de poder ejecutar la primera actualización del sistema SAP, debe integrar las operaciones de almacenamiento basado en clonado y copia de Snapshot de Azure NetApp Files ejecutadas por AzAcSnap. También debe ejecutar un script auxiliar para iniciar y detener la base de datos, así como montar o desmontar los volúmenes de Azure NetApp Files. Todas las tareas necesarias se realizan como tareas personalizadas en LSC como parte de la fase de copia. La siguiente imagen muestra las tareas personalizadas en la lista de tareas de LSC.
 
-image:libelle-sc-image28.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image28.png[Error: Falta la imagen gráfica]
 
 Las cinco tareas de copia se describen aquí con más detalle. En algunas de estas tareas, una secuencia de comandos de ejemplo `sc-system-refresh.sh` Se utiliza para automatizar aún más la operación de recuperación de base de datos SAP HANA requerida y el montaje y desmontaje de los volúmenes de datos. La secuencia de comandos utiliza una `LSC: success` Mensaje en la salida del sistema para indicar una ejecución correcta a LSC. Puede encontrar más información sobre las tareas personalizadas y los parámetros disponibles en el manual del usuario del LSC y en la guía del desarrollador del LSC. Todas las tareas de este entorno de laboratorio se ejecutan en el equipo virtual de la base de datos de destino.
 
@@ -144,7 +144,7 @@ sudo /mnt/software/scripts/sc-system-refresh/sc-system-refresh.sh shutdown $_sys
 ....
 El script `sc-system-refresh.sh` toma dos parámetros, el `shutdown` Y el SID de la base de datos, para detener la base de datos SAP HANA mediante sapcontrol. La salida del sistema se redirige al archivo de registro LSC estándar. Como se ha mencionado anteriormente, un `LSC: success` el mensaje se utiliza para indicar que la ejecución se ha realizado correctamente.
 
-image:libelle-sc-image29.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image29.png[Error: Falta la imagen gráfica]
 
 
 
@@ -175,7 +175,7 @@ NOTE: Debido a que no se puede cambiar la salida del comando AzAcSnap, el valor 
 
 La figura siguiente muestra el mensaje AzAcSnap restore to new volume Success.
 
-image:libelle-sc-image30.png["Error: Falta la imagen gráfica"]
+image::libelle-sc-image30.png[Error: Falta la imagen gráfica]
 
 
 
@@ -209,34 +209,34 @@ En esta sección, un ejemplo de operación de actualización de sistemas de labo
 
 Se han creado copias snapshot regulares y bajo demanda para la base de datos de origen P01, como se indica en el catálogo de backup.
 
-image:libelle-sc-image31.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image31.jpg[Error: Falta la imagen gráfica]
 
 Para la operación de actualización, se utilizó la última copia de seguridad del 12 de marzo. En la sección de detalles de backup, se muestra el ID de backup externo (EBID) de este backup. Este es el nombre de la copia Snapshot del backup de copia Snapshot correspondiente en el volumen de datos de Azure NetApp Files, como se muestra en la siguiente imagen.
 
-image:libelle-sc-image32.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image32.jpg[Error: Falta la imagen gráfica]
 
 Para iniciar la operación de actualización, seleccione la configuración correcta en la GUI de LSC y, a continuación, haga clic en Iniciar ejecución.
 
-image:libelle-sc-image33.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image33.jpg[Error: Falta la imagen gráfica]
 
 LSC comienza a ejecutar las tareas de la fase de comprobación seguidas de las tareas configuradas de la fase previa.
 
-image:libelle-sc-image34.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image34.jpg[Error: Falta la imagen gráfica]
 
 Como último paso de la fase previa, se detiene el sistema SAP de destino. En la siguiente fase de copia, se ejecutan los pasos descritos en la sección anterior. En primer lugar, la base de datos SAP HANA de destino se detiene y el volumen Azure NetApp Files antiguo se desasocia del sistema operativo.
 
-image:libelle-sc-image35.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image35.jpg[Error: Falta la imagen gráfica]
 
 A continuación, la tarea ZAZACSNAPRESTORE crea un nuevo volumen como clon a partir de la copia Snapshot existente del sistema P01. En las dos imágenes siguientes se muestran los registros de la tarea en la interfaz gráfica de usuario de LSC y el volumen Azure NetApp Files clonado en el portal de Azure.
 
-image:libelle-sc-image36.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image36.jpg[Error: Falta la imagen gráfica]
 
-image:libelle-sc-image37.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image37.jpg[Error: Falta la imagen gráfica]
 
 Este volumen nuevo se monta después en el host de la base de datos de destino, y la base de datos del sistema y la base de datos de tenant se recuperan usando la copia de Snapshot que contiene. Una vez que la recuperación se realiza correctamente, la base de datos SAP HANA se inicia de forma automática. Este inicio de la base de datos SAP HANA ocupa la mayor parte del tiempo de la fase de copia. Los pasos restantes normalmente terminan en unos pocos segundos o unos minutos, independientemente del tamaño de la base de datos. En la siguiente imagen se muestra cómo se recupera la base de datos del sistema mediante secuencias de comandos de recuperación python proporcionadas por SAP.
 
-image:libelle-sc-image38.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image38.jpg[Error: Falta la imagen gráfica]
 
 Después de la fase de copia, LSC continúa con todos los pasos definidos de la fase posterior. Cuando el proceso de actualización del sistema finaliza por completo, el sistema de destino vuelve a funcionar y puede utilizarse completamente. Con este sistema de laboratorio, el tiempo de ejecución total del sistema SAP fue de aproximadamente 25 minutos, de los cuales la fase de copia consumió apenas menos de 5 minutos.
 
-image:libelle-sc-image39.jpg["Error: Falta la imagen gráfica"]
+image::libelle-sc-image39.jpg[Error: Falta la imagen gráfica]

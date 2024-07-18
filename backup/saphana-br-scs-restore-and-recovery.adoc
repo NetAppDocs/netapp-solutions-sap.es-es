@@ -109,10 +109,10 @@ En esta sección se proporcionan los pasos para la operación de restauración y
 NOTE: Puede seleccionar la opción de restauración desde el almacenamiento de backup principal o desde un almacenamiento de backup externo.
 
 +
-image:saphana-br-scs-image96.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image96.png[Error: Falta la imagen gráfica]
 
 +
-image:saphana-br-scs-image97.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image97.png[Error: Falta la imagen gráfica]
 
 . Seleccione el ámbito y el tipo de restauración.
 +
@@ -126,19 +126,19 @@ Las opciones de tipo de restauración para restaurar desde el almacenamiento pri
 NOTE: La opción Volume Revert solo está disponible para las operaciones de restauración desde el almacenamiento primario con NFS.
 
 +
-image:saphana-br-scs-image98.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image98.png[Error: Falta la imagen gráfica]
 
 +
 Las opciones de tipo de restauración para restaurar desde el almacenamiento de backup externo.
 
 +
-image:saphana-br-scs-image99.jpeg["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image99.jpeg[Error: Falta la imagen gráfica]
 
 +
 Las opciones de tipo de restauración para restaurar desde un almacenamiento principal con Fibre Channel SAN.
 
 +
-image:saphana-br-scs-image100.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image100.png[Error: Falta la imagen gráfica]
 
 . Seleccione Recovery Scope y proporcione la ubicación para backup de registros y backup de catálogo.
 +
@@ -146,27 +146,27 @@ image:saphana-br-scs-image100.png["Error: Falta la imagen gráfica"]
 NOTE: SnapCenter utiliza la ruta predeterminada o las rutas modificadas en el archivo HANA global.ini para rellenar previamente las ubicaciones de backup de registros y catálogos.
 
 +
-image:saphana-br-scs-image101.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image101.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos prerestore opcionales.
 +
-image:saphana-br-scs-image102.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image102.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos posteriores a la restauración opcionales.
 +
-image:saphana-br-scs-image103.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image103.png[Error: Falta la imagen gráfica]
 
 . Introduzca la configuración de correo electrónico opcional.
 +
-image:saphana-br-scs-image104.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image104.png[Error: Falta la imagen gráfica]
 
 . Para iniciar la operación de restauración, haga clic en Finalizar.
 +
-image:saphana-br-scs-image105.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image105.png[Error: Falta la imagen gráfica]
 
 . SnapCenter ejecuta la operación de restauración y recuperación. Este ejemplo muestra los detalles de la tarea de restauración y recuperación.
 +
-image:saphana-br-scs-image106.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image106.png[Error: Falta la imagen gráfica]
 
 
 
@@ -214,7 +214,7 @@ hdbsql SYSTEMDB=>
 ....
 . Seleccione un backup en SnapCenter que se usará para la operación de restauración.
 +
-image:saphana-br-scs-image107.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image107.png[Error: Falta la imagen gráfica]
 
 . Seleccione el arrendatario que desea restaurar.
 +
@@ -222,35 +222,35 @@ image:saphana-br-scs-image107.png["Error: Falta la imagen gráfica"]
 NOTE: SnapCenter muestra una lista con todos los inquilinos que se incluyen en el backup seleccionado.
 
 +
-image:saphana-br-scs-image108.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image108.png[Error: Falta la imagen gráfica]
 
 +
 SnapCenter 4.3 no admite la recuperación de un solo inquilino. No hay ninguna recuperación preseleccionada y no se puede cambiar.
 
 +
-image:saphana-br-scs-image109.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image109.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos prerestore opcionales.
 +
-image:saphana-br-scs-image110.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image110.png[Error: Falta la imagen gráfica]
 
 . Introduzca los comandos posteriores a la restauración opcionales.
 +
-image:saphana-br-scs-image111.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image111.png[Error: Falta la imagen gráfica]
 
 . Introduzca la configuración de correo electrónico opcional.
 +
-image:saphana-br-scs-image112.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image112.png[Error: Falta la imagen gráfica]
 
 . Para iniciar la operación de restauración, haga clic en Finalizar.
 +
-image:saphana-br-scs-image113.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image113.png[Error: Falta la imagen gráfica]
 
 +
 SnapCenter ejecuta la operación de restauración. Este ejemplo muestra los detalles del trabajo de restauración.
 
 +
-image:saphana-br-scs-image114.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image114.png[Error: Falta la imagen gráfica]
 
 +
 
@@ -290,44 +290,44 @@ sm1adm@hana-2:/usr/sap/SM1/HDB00>
 ....
 . Inicie la recuperación con HANA Studio.
 +
-image:saphana-br-scs-image115.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image115.png[Error: Falta la imagen gráfica]
 
 . Seleccione el inquilino.
 +
-image:saphana-br-scs-image116.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image116.png[Error: Falta la imagen gráfica]
 
 . Seleccione el tipo de recuperación.
 +
-image:saphana-br-scs-image117.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image117.png[Error: Falta la imagen gráfica]
 
 . Proporcione la ubicación del catálogo de copias de seguridad.
 +
-image:saphana-br-scs-image118.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image118.png[Error: Falta la imagen gráfica]
 
 +
-image:saphana-br-scs-image119.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image119.png[Error: Falta la imagen gráfica]
 
 +
 Dentro del catálogo de backup, el backup restaurado se resalta con un icono verde. El ID de backup externo muestra el nombre de backup que se seleccionó anteriormente en SnapCenter.
 
 . Seleccione la entrada con el icono verde y haga clic en Siguiente.
 +
-image:saphana-br-scs-image120.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image120.png[Error: Falta la imagen gráfica]
 
 . Proporcionar la ubicación del backup de registros.
 +
-image:saphana-br-scs-image121.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image121.png[Error: Falta la imagen gráfica]
 
 . Seleccione los ajustes restantes según sea necesario.
 +
-image:saphana-br-scs-image122.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image122.png[Error: Falta la imagen gráfica]
 
 . Inicie la operación de recuperación de inquilinos.
 +
-image:saphana-br-scs-image123.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image123.png[Error: Falta la imagen gráfica]
 
 +
-image:saphana-br-scs-image124.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image124.png[Error: Falta la imagen gráfica]
 
 
 
@@ -381,26 +381,26 @@ En la siguiente sección se describen los pasos de las operaciones de restauraci
 
 . En SAP HANA Studio, seleccione la opción recover System Database para iniciar la recuperación de la base de datos del sistema.
 +
-image:saphana-br-scs-image125.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image125.png[Error: Falta la imagen gráfica]
 
 . Haga clic en OK para apagar la base de datos SAP HANA.
 +
-image:saphana-br-scs-image126.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image126.png[Error: Falta la imagen gráfica]
 
 +
 El sistema SAP HANA se apaga y se inicia el asistente de recuperación.
 
 . Seleccione el tipo de recuperación y haga clic en Next.
 +
-image:saphana-br-scs-image127.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image127.png[Error: Falta la imagen gráfica]
 
 . Proporcione la ubicación del catálogo de copias de seguridad y haga clic en Siguiente.
 +
-image:saphana-br-scs-image128.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image128.png[Error: Falta la imagen gráfica]
 
 . Se muestra una lista de backups disponibles en función del contenido del catálogo de backup. Elija la copia de seguridad necesaria y anote el ID de copia de seguridad externa: En nuestro ejemplo, la copia de seguridad más reciente.
 +
-image:saphana-br-scs-image129.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image129.png[Error: Falta la imagen gráfica]
 
 . Desmonte todos los volúmenes de datos.
 +
@@ -417,7 +417,7 @@ NOTE: En una configuración de varios hosts de SAP HANA con FC, la operación de
 
 . Desde la interfaz gráfica de usuario de SnapCenter, seleccione la vista de topología de recursos y seleccione el backup que debe restaurarse; en nuestro ejemplo, el backup principal más reciente. Haga clic en el icono Restaurar para iniciar la restauración.
 +
-image:saphana-br-scs-image130.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image130.png[Error: Falta la imagen gráfica]
 
 +
 Se iniciará el asistente SnapCenter restore.
@@ -427,38 +427,38 @@ Se iniciará el asistente SnapCenter restore.
 Seleccione Complete Resource para utilizar una restauración basada en volúmenes.
 
 +
-image:saphana-br-scs-image131.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image131.png[Error: Falta la imagen gráfica]
 
 . Seleccione nivel de archivo y todo para utilizar una operación SnapRestore de archivo único para todos los archivos.
 +
-image:saphana-br-scs-image132.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image132.png[Error: Falta la imagen gráfica]
 
 +
 
 NOTE: Para una restauración a nivel de archivo de un sistema host SAP HANA varios, seleccione todos los volúmenes.
 
 +
-image:saphana-br-scs-image133.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image133.png[Error: Falta la imagen gráfica]
 
 . (Opcional) especifique los comandos que se deben ejecutar desde el plugin de SAP HANA que se ejecuta en el host del plugin de HANA central. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image134.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image134.png[Error: Falta la imagen gráfica]
 
 . Especifique los comandos opcionales y haga clic en Next.
 +
-image:saphana-br-scs-image135.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image135.png[Error: Falta la imagen gráfica]
 
 . Especifique la configuración de notificación para que SnapCenter pueda enviar un correo electrónico de estado y un registro de trabajos. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image136.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image136.png[Error: Falta la imagen gráfica]
 
 . Revise el resumen y haga clic en Finish para iniciar la restauración.
 +
-image:saphana-br-scs-image137.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image137.png[Error: Falta la imagen gráfica]
 
 . Se inicia el trabajo de restauración y el registro de trabajos se puede mostrar haciendo doble clic en la línea de registro del panel de actividades.
 +
-image:saphana-br-scs-image138.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image138.png[Error: Falta la imagen gráfica]
 
 . Espere hasta que finalice el proceso de restauración. En cada host de base de datos, monte todos los volúmenes de datos. En nuestro ejemplo, solo se debe volver a montar un volumen en el host de la base de datos.
 +
@@ -467,63 +467,63 @@ mount /hana/data/SP1/mnt00001
 ....
 . Vaya a SAP HANA Studio y haga clic en Refresh para actualizar la lista de backups disponibles. El backup que se restauró con SnapCenter se muestra con un icono verde en la lista de backups. Seleccione el backup y haga clic en Next.
 +
-image:saphana-br-scs-image139.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image139.png[Error: Falta la imagen gráfica]
 
 . Proporcionar la ubicación de los backups de registros. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image140.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image140.png[Error: Falta la imagen gráfica]
 
 . Seleccione otros ajustes según sea necesario. Asegúrese de que no esté seleccionada la opción utilizar copias de seguridad delta. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image141.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image141.png[Error: Falta la imagen gráfica]
 
 . Revise la configuración de recuperación y haga clic en Finish.
 +
-image:saphana-br-scs-image142.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image142.png[Error: Falta la imagen gráfica]
 
 . Se inicia el proceso de recuperación. Espere hasta que finalice la recuperación de la base de datos del sistema.
 +
-image:saphana-br-scs-image143.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image143.png[Error: Falta la imagen gráfica]
 
 . En SAP HANA Studio, seleccione la entrada de la base de datos del sistema e inicie Backup Recovery - recover tenant Database.
 +
-image:saphana-br-scs-image144.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image144.png[Error: Falta la imagen gráfica]
 
 . Seleccione el inquilino que desea recuperar y haga clic en Siguiente.
 +
-image:saphana-br-scs-image145.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image145.png[Error: Falta la imagen gráfica]
 
 . Especifique el tipo de recuperación y haga clic en Next.
 +
-image:saphana-br-scs-image146.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image146.png[Error: Falta la imagen gráfica]
 
 . Confirme la ubicación del catálogo de backup y haga clic en Next.
 +
-image:saphana-br-scs-image147.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image147.png[Error: Falta la imagen gráfica]
 
 . Confirme que la base de datos de tenant está sin conexión. Haga clic en OK para continuar.
 +
-image:saphana-br-scs-image148.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image148.png[Error: Falta la imagen gráfica]
 
 . Como la restauración del volumen de datos se ha producido antes de la recuperación de la base de datos del sistema, el backup de inquilino está disponible de inmediato. Seleccione el backup resaltado en verde y haga clic en Next.
 +
-image:saphana-br-scs-image149.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image149.png[Error: Falta la imagen gráfica]
 
 . Confirme la ubicación del backup de registros y haga clic en Next.
 +
-image:saphana-br-scs-image150.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image150.png[Error: Falta la imagen gráfica]
 
 . Seleccione otros ajustes según sea necesario. Asegúrese de que no esté seleccionada la opción utilizar copias de seguridad delta. Haga clic en Siguiente.
 +
-image:saphana-br-scs-image151.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image151.png[Error: Falta la imagen gráfica]
 
 . Revise la configuración de recuperación e inicie el proceso de recuperación de la base de datos de tenant haciendo clic en Finish.
 +
-image:saphana-br-scs-image152.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image152.png[Error: Falta la imagen gráfica]
 
 . Espere hasta que termine la recuperación y se inicie la base de datos de tenant.
 +
-image:saphana-br-scs-image153.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image153.png[Error: Falta la imagen gráfica]
 
 +
 El sistema SAP HANA está listo para funcionar.

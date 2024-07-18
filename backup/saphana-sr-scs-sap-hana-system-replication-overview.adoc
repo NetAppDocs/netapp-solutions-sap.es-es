@@ -35,7 +35,7 @@ Desde la perspectiva de requisito de backup, debe poder crear backups independie
 
 El resto de este documento se centra en operaciones de backup con la replicación de sistemas SAP configurada como solución de alta disponibilidad.
 
-image:saphana-sr-scs-image1.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image1.png[Error: Falta la imagen gráfica]
 
 
 
@@ -45,4 +45,4 @@ La replicación del sistema se puede configurar con la replicación asíncrona s
 
 En relación con los requisitos de backup, debe poder crear backups durante el funcionamiento normal en el centro de datos 1 y durante la recuperación ante desastres en el centro de datos 2. Hay una infraestructura de backup independiente disponible en los centros de datos 1 y 2, y las operaciones de backup se activan como parte de la recuperación ante desastres. La infraestructura de backup no suele estar compartida y no es posible realizar una operación de restauración de un backup creado en el otro centro de datos.
 
-image:saphana-sr-scs-image2.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image2.png[Error: Falta la imagen gráfica]

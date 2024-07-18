@@ -20,33 +20,33 @@ Es necesario crear un nuevo volumen del volumen de backup de registros si tambi�
 
 . Se selecciona uno de los backups de snapshot consistentes con las aplicaciones como origen del nuevo volumen del volumen de datos de HANA. La opción Restore to New Volume está seleccionada para crear un nuevo volumen según el backup de snapshot.
 +
-image:saphana-dr-anf_image19.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image19.png[Error: Falta la imagen gráfica]
 
 . El nuevo nombre de volumen y la cuota se deben proporcionar en la interfaz de usuario de.
 +
-image:saphana-dr-anf_image20.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image20.png[Error: Falta la imagen gráfica]
 
 . En la ficha de protocolo, se configuran la ruta de acceso y la directiva de exportación del archivo.
 +
-image:saphana-dr-anf_image21.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image21.png[Error: Falta la imagen gráfica]
 
 . La pantalla Crear y revisar resume la configuración.
 +
-image:saphana-dr-anf_image22.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image22.png[Error: Falta la imagen gráfica]
 
 . Ahora se ha creado un nuevo volumen según el backup de snapshot de HANA.
 +
-image:saphana-dr-anf_image23.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image23.png[Error: Falta la imagen gráfica]
 
 
 
 Ahora deben realizarse los mismos pasos para el volumen de backup compartido de HANA y de registros, como se muestra en las siguientes dos capturas de pantalla. Como no se han creado otras copias de Snapshot para el volumen de backup compartido y de registros de HANA, se debe seleccionar la copia de Snapshot de SnapMirror más reciente como origen del nuevo volumen. Se trata de datos no estructurados, y la copia Snapshot de SnapMirror puede utilizarse para este caso práctico.
 
-image:saphana-dr-anf_image24.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image24.png[Error: Falta la imagen gráfica]
 
 La siguiente captura de pantalla muestra el volumen compartido de HANA restaurado en el nuevo volumen.
 
-image:saphana-dr-anf_image25.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image25.png[Error: Falta la imagen gráfica]
 
 
 NOTE: Si se utiliza un pool de capacidad con un nivel de bajo rendimiento, los volúmenes se deben mover ahora a un pool de capacidad que ofrezca el rendimiento requerido.

@@ -32,4 +32,4 @@ Para ejecutar la recuperación tras fallos, lleve a cabo los siguientes pasos:
 
 En las siguientes subsecciones se describen estos pasos con detalle, y la siguiente figura describe las pruebas de recuperación tras fallos en caso de desastre.
 
-image:saphana-dr-anf_image26.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image26.png[Error: Falta la imagen gráfica]

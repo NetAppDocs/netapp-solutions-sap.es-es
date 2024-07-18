@@ -27,11 +27,11 @@ Se ha creado un backup en T1 en el host 1. Se ha realizado una conmutación por 
 . Se inicia el host 1 y se inicia automáticamente una resincronización de replicación del sistema del host 1.
 
 
-image:saphana-sr-scs-image48.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image48.png[Error: Falta la imagen gráfica]
 
 En la siguiente figura, se muestra el catálogo de backup de SAP HANA y se destaca el backup, creado en el host 1, que se utilizó para la operación de restauración y recuperación.
 
-image:saphana-sr-scs-image49.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image49.png[Error: Falta la imagen gráfica]
 
 La operación de restauración conlleva los siguientes pasos:
 
@@ -42,7 +42,7 @@ La operación de restauración conlleva los siguientes pasos:
 
 En SnapCenter, se selecciona el backup y se inicia la operación de clonado.
 
-image:saphana-sr-scs-image50.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image50.png[Error: Falta la imagen gráfica]
 
 Debe proporcionar el servidor de clonado y la dirección IP de exportación de NFS.
 
@@ -51,11 +51,11 @@ NOTE: En una configuración de recurso único de SnapCenter, el plugin de SAP HA
 
 + en una configuración de SnapCenter con recursos independientes, el host de la base de datos HANA se selecciona como servidor de clones y se utiliza un script de montaje para montar el clon en el host de destino.
 
-image:saphana-sr-scs-image51.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image51.png[Error: Falta la imagen gráfica]
 
 Para determinar la ruta de unión necesaria para montar el volumen clonado, compruebe el registro de trabajos del trabajo de clonado, como se muestra en la siguiente figura.
 
-image:saphana-sr-scs-image52.png["Error: Falta la imagen gráfica"]
+image::saphana-sr-scs-image52.png[Error: Falta la imagen gráfica]
 
 Ahora el volumen clonado puede montarse.
 

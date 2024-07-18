@@ -46,7 +46,7 @@ El host `sap-lnx49` Se utilizó como objetivo para las operaciones de clonado de
 
 Se utilizaron diferentes sistemas SAP (HNA como origen y HN2 como destino) para las operaciones de copia y actualización del sistema, ya que se habilitó Post Copy Automation (PCA) allí.
 
-image:lama-ansible-image7.png["Esta imagen muestra los distintos agentes de host SAP y cómo interactúan con el sistema de almacenamiento de NetApp a través de montajes NFS. La instancia de SAP Lama también está representada."]
+image::lama-ansible-image7.png[Esta imagen muestra los distintos agentes de host SAP y cómo interactúan con el sistema de almacenamiento de NetApp a través de montajes NFS. La instancia de SAP Lama también está representada.]
 
 En la configuración de laboratorio se utilizaron las siguientes versiones de software:
 
@@ -70,19 +70,19 @@ En la configuración de laboratorio se utilizaron las siguientes versiones de so
 
 La definición del proveedor se lleva a cabo en Automation Studio de SAP Lama como se muestra en la siguiente captura de pantalla. La implementación de ejemplo utiliza una sola definición de proveedor que se utiliza para diferentes pasos de aprovisionamiento personalizados y enlaces de operaciones como se explicó anteriormente.
 
-image:lama-ansible-image8.png["Captura de pantalla de definiciones de proveedores de SAP en la interfaz gráfica de usuario de SAP Lama."]
+image::lama-ansible-image8.png[Captura de pantalla de definiciones de proveedores de SAP en la interfaz gráfica de usuario de SAP Lama.]
 
 El proveedor `netapp_clone` se define como el script `netapp_clone.sh` Registrado en el agente host de SAP. El agente del host SAP se ejecuta en el host central `sap-jump`, Que también actúa como nodo de control Ansible.
 
-image:lama-ansible-image9.png["Captura de pantalla de la definición de proveedor individual denominada netapp_clone en la pestaña General. Muestra la sección Resumen, la sección usado para y la sección Opciones."]
+image::lama-ansible-image9.png[Captura de pantalla de la definición de proveedor individual denominada netapp_clone en la pestaña General. Muestra la sección Resumen, la sección usado para y la sección Opciones.]
 
 La ficha *utilizado en* muestra para qué operaciones personalizadas se utiliza el proveedor. La configuración para el aprovisionamiento personalizado *NetAppClone* y los ganchos personalizados *Delete NetAppClone* y *Delete NetAppClone Refresh* se muestran en los capítulos siguientes.
 
-image:lama-ansible-image10.png["Captura de pantalla de la sección utilizada con una lista de operaciones personalizadas que utilizan la definición. En este ejemplo, vea Delete NetAppClone, Delete NetAppClone Refresh y NetAppClone."]
+image::lama-ansible-image10.png[Captura de pantalla de la sección utilizada con una lista de operaciones personalizadas que utilizan la definición. En este ejemplo, vea Delete NetAppClone, Delete NetAppClone Refresh y NetAppClone.]
 
 Los parámetros *ClonePostFix* y *SnapPostFix* se solicitan durante la ejecución del flujo de trabajo de aprovisionamiento y se utilizan para los nombres de volúmenes Snapshot y FlexClone.
 
-image:lama-ansible-image11.png["Captura de pantalla de la sección parámetros con una lista de dos parámetros: CLonePostFix y SnapPostFix."]
+image::lama-ansible-image11.png[Captura de pantalla de la sección parámetros con una lista de dos parámetros: CLonePostFix y SnapPostFix.]
 
 
 
@@ -90,7 +90,7 @@ image:lama-ansible-image11.png["Captura de pantalla de la sección parámetros c
 
 En la configuración de aprovisionamiento personalizada de SAP Lama, el proveedor de clientes descrito anteriormente se utiliza para sustituir los pasos del flujo de trabajo de aprovisionamiento *Clone Volumes* y *PostCloneVolumes*.
 
-image:lama-ansible-image12.png["Captura de pantalla de la pantalla de configuración de aprovisionamiento personalizado. En la lista de procesos, CloneVolumes y FinalizeCloneVolumes."]
+image::lama-ansible-image12.png[Captura de pantalla de la pantalla de configuración de aprovisionamiento personalizado. En la lista de procesos, CloneVolumes y FinalizeCloneVolumes.]
 
 
 
@@ -98,15 +98,15 @@ image:lama-ansible-image12.png["Captura de pantalla de la pantalla de configurac
 
 Si un sistema se elimina con el flujo de trabajo de destrucción del sistema, el gancho *Delete NetAppClone* se utiliza para llamar a la definición del proveedor `netapp_clone`. El enlace *Delete NetApp Clone Refresh* se utiliza durante el flujo de trabajo de actualización del sistema porque la instancia se conserva durante la ejecución.
 
-image:lama-ansible-image13.png["Captura de pantalla de ganchos personalizados que contiene los ganchos personalizados Delete NetAppClone Refresh y Delete NetAppClone."]
+image::lama-ansible-image13.png[Captura de pantalla de ganchos personalizados que contiene los ganchos personalizados Delete NetAppClone Refresh y Delete NetAppClone.]
 
 Es importante configurar *utilizar Mount Data XML* para el gancho personalizado, de modo que SAP Lama proporciona la información de la configuración del punto de montaje al proveedor.
 
-image:lama-ansible-image14.png["Captura de pantalla de Delete NetAppClone General con la opción \"Use Mount Data XML yes\" resaltada."]
+image::lama-ansible-image14.png[Captura de pantalla de la pantalla Delete NetAppClone General con]
 
 Para asegurarse de que el enlace personalizado sólo se utiliza y ejecuta cuando el sistema se creó con un flujo de trabajo de aprovisionamiento personalizado, se agrega la siguiente restricción.
 
-image:lama-ansible-image15.png["Captura de pantalla de la página Delete NetAppClone limitations. Contiene una única restricción denominada Nombre de proceso de clon personalizado (estático)."]
+image::lama-ansible-image15.png[Captura de pantalla de la página Delete NetAppClone limitations. Contiene una única restricción denominada Nombre de proceso de clon personalizado (estático).]
 
 Puede encontrar más información sobre el uso de ganchos personalizados en https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/139eca2f925e48738a20dbf0b56674c5.html["Documentación de SAP Lama"^].
 
@@ -116,4 +116,4 @@ Puede encontrar más información sobre el uso de ganchos personalizados en http
 
 Para activar el flujo de trabajo de aprovisionamiento personalizado para el sistema de origen, debe adaptarse en la configuración. Debe seleccionarse la casilla de verificación *usar proceso de aprovisionamiento personalizado* con la definición de aprovisionamiento personalizada correspondiente.
 
-image:lama-ansible-image16.png["Captura de pantalla de la pantalla de detalles del sistema de la configuración de SAP Lama  Systems La casilla de verificación usar proceso de aprovisionamiento personalizado está marcada."]
+image::lama-ansible-image16.png[Captura de pantalla de la pantalla de detalles del sistema de la configuración de SAP Lama &GT; Systems&GT; La casilla de verificación usar proceso de aprovisionamiento personalizado está marcada.]

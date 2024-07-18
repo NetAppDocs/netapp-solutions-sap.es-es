@@ -16,7 +16,7 @@ Al ejecutar SAP HANA en Azure NetApp Files (ANF), los clientes acceden a funcion
 
 Para desarrollar una normativa completa de recuperación ante desastres, los clientes deben comprender los requisitos de las aplicaciones empresariales y las capacidades técnicas que necesitan para la protección de datos y la recuperación ante desastres. En la figura siguiente se ofrece información general sobre la protección de datos.
 
-image:saphana-dr-anf_image2.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image2.png[Error: Falta la imagen gráfica]
 
 
 

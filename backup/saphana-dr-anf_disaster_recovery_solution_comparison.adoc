@@ -22,7 +22,7 @@ Además, los datos también se replican de forma asíncrona en una región secun
 
 En este documento se tratan las distintas opciones de implantación de una solución de recuperación ante desastres en dos regiones.
 
-image:saphana-dr-anf_image3.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image3.png[Error: Falta la imagen gráfica]
 
 
 
@@ -52,7 +52,7 @@ La siguiente figura muestra la configuración de una solución de recuperación 
 
 La figura siguiente muestra la replicación del sistema SAP HANA.
 
-image:saphana-dr-anf_image4.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image4.png[Error: Falta la imagen gráfica]
 
 
 
@@ -86,7 +86,7 @@ Los servidores en los sitios de recuperación de desastres pueden usarse como si
 
 ANF Cross-Region Replication le permite probar el flujo de trabajo de recuperación ante desastres sin que ello afecte al RPO ni al RTO. Esto se logra mediante la creación de clones de volúmenes y la conexión de estos al servidor de pruebas de recuperación ante desastres.
 
-image:saphana-dr-anf_image5.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image5.png[Error: Falta la imagen gráfica]
 
 
 

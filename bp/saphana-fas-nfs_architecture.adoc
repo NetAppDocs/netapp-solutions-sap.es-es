@@ -20,11 +20,11 @@ Se recomienda utilizar una infraestructura de conmutación redundante para propo
 
 Los diferentes modelos de la familia de productos FAS pueden combinarse y emparejarse en la capa de almacenamiento para permitir el crecimiento y las distintas necesidades de rendimiento y capacidad. El número máximo de hosts SAP HANA que se pueden conectar al sistema de almacenamiento se define según los requisitos de rendimiento de SAP HANA y el modelo de controladora de NetApp utilizado. El número de bandejas de discos necesarias solo está determinado por los requisitos de capacidad y rendimiento de los sistemas SAP HANA. En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad (ha) de almacenamiento.
 
-image:saphana-fas-nfs_image2.png["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image2.png[Error: Falta la imagen gráfica]
 
 La figura siguiente muestra un ejemplo de uso de VMware vSphere como capa de virtualización.
 
-image:saphana-fas-nfs_image3.jpg["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image3.jpg[Error: Falta la imagen gráfica]
 
 La arquitectura se puede escalar en dos dimensiones:
 
@@ -34,11 +34,11 @@ La arquitectura se puede escalar en dos dimensiones:
 
 La siguiente figura muestra una configuración de ejemplo en la que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de 16 hosts SAP HANA. En función de los requisitos de rendimiento totales, deben añadirse conexiones 10 GbE (o más rápidas) a las controladoras de almacenamiento.
 
-image:saphana-fas-nfs_image4.png["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image4.png[Error: Falta la imagen gráfica]
 
 Además de ser independiente del sistema FAS puesto en marcha, el entorno SAP HANA también puede escalarse añadiendo cualquiera de las controladoras de almacenamiento certificadas para cumplir con la densidad de nodos deseada (la siguiente figura).
 
-image:saphana-fas-nfs_image5.png["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image5.png[Error: Falta la imagen gráfica]
 
 
 
@@ -52,7 +52,7 @@ La tecnología SnapMirror de NetApp permite replicar copias de Snapshot creadas 
 
 Puede realizarse un backup de los registros de la base de datos directamente en el almacenamiento secundario mediante un montaje NFS, como se muestra en la siguiente figura.
 
-image:saphana-fas-nfs_image6.jpg["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image6.jpg[Error: Falta la imagen gráfica]
 
 Los backups Snapshot basados en almacenamiento proporcionan importantes ventajas en comparación con los backups basados en archivos convencionales. Estas ventajas incluyen, entre otras:
 
@@ -88,7 +88,7 @@ Los servidores en los sitios de recuperación de desastres pueden usarse como si
 
 Ambos métodos de replicación permiten ejecutar pruebas del flujo de trabajo de recuperación ante desastres sin que ello afecte al objetivo de punto de recuperación ni al objetivo de tiempo de recuperación. Los volúmenes FlexClone se crean en el sistema de almacenamiento y se conectan a los servidores de prueba de recuperación ante desastres.
 
-image:saphana-fas-nfs_image7.png["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image7.png[Error: Falta la imagen gráfica]
 
 La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacenamiento secundario no se completa por ningún motivo, las operaciones de I/o de la aplicación fallan, lo cual garantiza que los sistemas de almacenamiento primario y secundario sean idénticos. Las operaciones de I/o de la aplicación en el principal se reanudan solo después de que la relación de SnapMirror vuelva al estado de InSync. Si falla el almacenamiento primario, se pueden reanudar las operaciones de I/o de la aplicación en el almacenamiento secundario después de una conmutación por error, sin pérdida de datos. En el modo StrictSync, el objetivo de punto de recuperación siempre es cero.
 
@@ -98,4 +98,4 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles si se produce una conmutación por error ante desastres.
 
-image:saphana-fas-nfs_image8.png["Error: Falta la imagen gráfica"]
+image::saphana-fas-nfs_image8.png[Error: Falta la imagen gráfica]

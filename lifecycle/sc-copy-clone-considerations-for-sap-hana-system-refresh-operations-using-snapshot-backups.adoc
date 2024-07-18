@@ -26,9 +26,9 @@ Una excepción de esta regla es un sistema SAP HANA con un único inquilino, don
 
 NOTE: Tan pronto como se ejecuta una operación de creación, cambio de nombre o borrado de inquilino en el sistema de origen, la base de datos SAP HANA elimina este indicador de configuración. Por lo tanto, aunque la configuración se haya vuelto a inquilino = SID, el indicador ya no estará disponible y la excepción relativa a la recuperación de inquilinos con el flujo de trabajo 3 ya no es posible. En este caso, la opción 2 es el flujo de trabajo necesario.
 
-image:sc-copy-clone-image10.png[""]
+image::sc-copy-clone-image10.png[clon de copia sc image10]
 
-image:sc-copy-clone-image11.png[""]
+image::sc-copy-clone-image11.png[clon de copia sc image11]
 
 
 
@@ -46,7 +46,7 @@ Consulte también https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83
 
 Siempre se requiere una copia de seguridad de las claves raíz, si se han realizado cambios en las claves raíz. El comando BACKUP requiere dbid como parámetro CLI. Los dbid se pueden identificar utilizando la siguiente sentencia SQL.
 
-image:sc-copy-clone-image12.png[""]
+image::sc-copy-clone-image12.png[clon de copia sc image12]
 
 La declaración de SQL y otra documentación están disponibles en la Guía del administrador de SAP HANA en https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Realizar una copia de seguridad de las claves raíz | Portal de ayuda de SAP"] los siguientes pasos que ilustran las operaciones necesarias para un sistema HANA con un solo usuario SS1 y se ejecutan en el sistema de origen.
 
@@ -126,6 +126,6 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 
 Como se describe en el capítulo anterior, el dbid es necesario para importar la clave raíz para el sistema y todas las bases de datos de arrendatario. Mientras que la base de datos del sistema siempre tiene dbid=0, las bases de datos del inquilino pueden tener diferentes dbid.
 
-image:sc-copy-clone-image13.png[""]
+image::sc-copy-clone-image13.png[clon de copia sc image13]
 
 La salida anterior muestra dos inquilinos con dbid=3 y dbid=4. Si el sistema de destino aún no ha alojado un arrendatario con dbid=4, la importación de la clave raíz fallará. En ese caso, debe recuperar primero la base de datos del sistema y luego importar la clave para el inquilino con dbid=4.

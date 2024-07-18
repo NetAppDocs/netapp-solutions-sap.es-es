@@ -31,7 +31,7 @@ Los enfoques tradicionales de la gestión del ciclo de vida de SAP para aprovisi
 
 Las soluciones NetApp para la optimización de la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y base de datos de SAP HANA, y combinan la protección de datos integrada en las aplicaciones eficiente con el aprovisionamiento flexible de sistemas de pruebas de SAP, como se muestra en la siguiente figura. Estas soluciones están disponibles para SAP HANA ejecutándose en las instalaciones o en el cloud en Azure NetApp Files (ANF) o Amazon FSx para NetApp ONTAP (FSx para ONTAP).
 
-image:sc-copy-clone-image1.png[""]
+image::sc-copy-clone-image1.png[clon de copia sc image1]
 
 
 

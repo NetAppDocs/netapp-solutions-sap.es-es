@@ -28,4 +28,4 @@ Los plugins personalizados de SnapCenter permiten crear plugins propios y proteg
 
 La siguiente figura muestra los componentes de SnapCenter.
 
-image:saphana-br-scs-image6.png["Error: Falta la imagen gráfica"]
+image::saphana-br-scs-image6.png[Error: Falta la imagen gráfica]

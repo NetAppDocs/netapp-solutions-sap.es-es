@@ -45,7 +45,7 @@ El flujo de trabajo de actualización del sistema SAP con SnapCenter consta de c
 
 
 
-image:sc-copy-clone-image7.png[""]
+image::sc-copy-clone-image7.png[clon de copia sc image7]
 
 En la mayoría de los casos, los sistemas de prueba/control de calidad objetivo se utilizan durante al menos un par de semanas. Dado que el volumen FlexClone está bloqueando la copia Snapshot del volumen del sistema de origen, esta copia Snapshot requerirá una capacidad adicional en función de la tasa de cambio de bloque del volumen del sistema de origen. Para sistemas de origen de producción con una tasa de cambio media del 20 % al día, la copia Snapshot bloqueada llegará al 100 % transcurridos 5 días. Por lo tanto, NetApp recomienda dividir el volumen FlexClone inmediatamente o transcurridos un par de días si el clon se basa en un sistema de origen de producción. La operación de división de clones no utiliza en bloque el volumen clonado y, por lo tanto, puede realizarse en cualquier momento mientras la base de datos HANA está en uso.
 
@@ -87,6 +87,6 @@ NOTE: El volumen de datos antiguo, que se dividió anteriormente, se debe elimin
 
 
 
-image:sc-copy-clone-image8.png[""]
+image::sc-copy-clone-image8.png[clon de copia sc image8]
 
 La sección link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["“Actualización del sistema SAP HANA con SnapCenter”"] proporciona una descripción detallada paso a paso de ambos flujos de trabajo de la actualización del sistema.

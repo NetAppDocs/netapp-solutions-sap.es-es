@@ -37,4 +37,4 @@ Para realizar pruebas de recuperación ante desastres, complete los siguientes p
 
 Las siguientes subsecciones describen estos pasos con detalle.
 
-image:saphana-dr-anf_image18.png["Error: Falta la imagen gráfica"]
+image::saphana-dr-anf_image18.png[Error: Falta la imagen gráfica]

@@ -18,14 +18,14 @@ Para añadir una SVM de backup a SnapCenter, siga estos pasos:
 
 . Configure la SVM donde el volumen de destino de SnapVault se encuentra en SnapCenter.
 +
-image:amazon-fsx-image76.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image76.png[Error: Falta la imagen gráfica]
 
 . En la ventana More Options, seleccione All Flash FAS como la plataforma y seleccione Secondary.
 +
-image:amazon-fsx-image77.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image77.png[Error: Falta la imagen gráfica]
 
 
 
 La SVM ya está disponible en SnapCenter.
 
-image:amazon-fsx-image78.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image78.png[Error: Falta la imagen gráfica]

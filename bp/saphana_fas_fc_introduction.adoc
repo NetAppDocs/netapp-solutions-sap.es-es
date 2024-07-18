@@ -39,7 +39,7 @@ En un entorno de varios hosts de SAP HANA, se utiliza el conector de almacenamie
 
 Las controladoras de almacenamiento FAS de NetApp cuentan con certificación para el programa de integración personalizada del centro de datos (TDI) de SAP HANA mediante los protocolos NFS (NAS) y Fibre Channel (SAN). Pueden ponerse en marcha en cualquier escenario de SAP HANA, como SAP Business Suite en HANA, S/4HANA, BW/4HANA o SAP Business Warehouse en HANA en configuraciones de un solo host o de varios hosts. Cualquier servidor certificado para su uso con SAP HANA se puede combinar con la solución de almacenamiento certificada. Consulte la siguiente figura para ver una descripción general de la arquitectura.
 
-image:saphana_fas_fc_image1.png["Error: Falta la imagen gráfica"]
+image::saphana_fas_fc_image1.png[Error: Falta la imagen gráfica]
 
 Para obtener más información sobre los requisitos previos y las recomendaciones para los sistemas SAP HANA productivos, consulte el siguiente recurso:
 

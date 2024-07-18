@@ -28,21 +28,21 @@ La vista de topología de recursos proporciona información general de todos los
 
 . En la fila superior, seleccione el icono Back up Now para iniciar un backup bajo demanda.
 +
-image:amazon-fsx-image48.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image48.png[Error: Falta la imagen gráfica]
 
 . En la lista desplegable, seleccione la política de backup `LocalSnap`Y, a continuación, haga clic en copia de seguridad para iniciar la copia de seguridad bajo demanda.
 +
-image:amazon-fsx-image49.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image49.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image50.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image50.png[Error: Falta la imagen gráfica]
 
 +
 Se muestra un registro de los cinco trabajos anteriores en el área actividad en la parte inferior de la vista de topología.
 
 . Los detalles del trabajo se muestran al hacer clic en la línea de actividad del trabajo en el área actividad. Es posible abrir un registro de trabajos detallado si se hace clic en View Logs
 +
-image:amazon-fsx-image51.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image51.png[Error: Falta la imagen gráfica]
 
 +
 Cuando termina el backup, se muestra una entrada nueva en la vista de topología. Los nombres de los backups siguen la misma convención de nomenclatura que el nombre de Snapshot definido en la sección link:amazon-fsx-snapcenter-configuration.html#configure-and-protect-a-hana-resource["“Configurar y proteger un recurso HANA”."]
@@ -51,16 +51,16 @@ Cuando termina el backup, se muestra una entrada nueva en la vista de topología
 Debe cerrar y volver a abrir la vista de topología para ver la lista de backups actualizada.
 
 +
-image:amazon-fsx-image52.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image52.png[Error: Falta la imagen gráfica]
 
 +
 En el catálogo de backup de SAP HANA, el nombre del backup de SnapCenter se almacena como un `Comment` también campo `External Backup ID (EBID)`. Esto se muestra en la siguiente figura para la base de datos del sistema y en la siguiente figura para la base de datos de tenant PFX.
 
 +
-image:amazon-fsx-image53.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image53.png[Error: Falta la imagen gráfica]
 
 +
-image:amazon-fsx-image54.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image54.png[Error: Falta la imagen gráfica]
 
 
 
@@ -82,19 +82,19 @@ sapcc-hana-svm::>
 
 Una operación de comprobación de integridad de bloque bajo demanda se ejecuta de la misma manera que una tarea de backup de Snapshot. Para ello, se selecciona la política BlockIntegrityCheck. Al programar backups con esta política, SnapCenter crea un backup de archivos SAP HANA estándar para las bases de datos del sistema y del inquilino.
 
-image:amazon-fsx-image55.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image55.png[Error: Falta la imagen gráfica]
 
-image:amazon-fsx-image56.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image56.png[Error: Falta la imagen gráfica]
 
 SnapCenter no muestra la comprobación de integridad de bloques del mismo modo que los backups basados en copias de Snapshot. En su lugar, la tarjeta de resumen muestra la cantidad de backups basados en archivos y el estado del backup anterior.
 
-image:amazon-fsx-image57.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image57.png[Error: Falta la imagen gráfica]
 
 El catálogo de backup de SAP HANA muestra entradas tanto para las bases de datos del sistema como para las de tenant. Las siguientes figuras muestran la comprobación de integridad de bloques SnapCenter en el catálogo de copias de seguridad del sistema y de la base de datos de inquilinos.
 
-image:amazon-fsx-image58.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image58.png[Error: Falta la imagen gráfica]
 
-image:amazon-fsx-image59.png["Error: Falta la imagen gráfica"]
+image::amazon-fsx-image59.png[Error: Falta la imagen gráfica]
 
 Una comprobación correcta de integridad de bloque crea archivos de backup de datos SAP HANA estándar. SnapCenter usa la ruta de backup que se ha configurado con la base de datos HANA para las operaciones de backup de datos basadas en archivos.
 
