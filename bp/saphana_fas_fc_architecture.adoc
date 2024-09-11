@@ -20,7 +20,7 @@ En la capa de almacenamiento se pueden utilizar diferentes modelos de la familia
 
 En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad de almacenamiento.
 
-image::saphana_fas_fc_image2.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image2.png[saphana FAS fc image2]
 
 Esta arquitectura se puede escalar en dos dimensiones:
 
@@ -30,11 +30,11 @@ Esta arquitectura se puede escalar en dos dimensiones:
 
 La siguiente figura muestra un ejemplo de configuración en el que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de los 16 hosts SAP HANA. Según los requisitos de rendimiento totales, debe añadir conexiones FC adicionales a las controladoras de almacenamiento.
 
-image::saphana_fas_fc_image3.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image3.png[saphana FAS fc image3]
 
 Independientemente del modelo de almacenamiento del sistema FAS puesto en marcha, el panorama SAP HANA también se puede escalar agregando controladoras de almacenamiento, como se muestra en la siguiente figura.
 
-image::saphana_fas_fc_image4.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image4.png[saphana FAS fc image4]
 
 
 
@@ -48,7 +48,7 @@ Mediante el software SnapVault de NetApp, las copias Snapshot que se crearon en 
 
 Puede realizarse un backup de los registros de la base de datos directamente en el almacenamiento secundario mediante un montaje NFS, como se muestra en la siguiente figura.
 
-image::saphana_fas_fc_image5.jpg[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image5.jpg[saphana FAS fc image5]
 
 Los backups de SnapVault basados en almacenamiento proporcionan importantes ventajas en comparación con los backups basados en archivos. Estas ventajas incluyen las siguientes:
 
@@ -58,7 +58,7 @@ Los backups de SnapVault basados en almacenamiento proporcionan importantes vent
 * Replicación con gestión eficiente del espacio y del ancho de banda en el almacenamiento secundario en función de los cambios de bloque
 
 
-Si quiere más información sobre la solución de backup y recuperación de datos de SAP HANA mediante SnapCenter, consulte https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
+Para obtener información detallada acerca de la solución de backup y recuperación de SAP HANA con SnapCenter, consulte https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
 
 
 
@@ -66,7 +66,7 @@ Si quiere más información sobre la solución de backup y recuperación de dato
 
 La recuperación ante desastres de SAP HANA se puede llevar a cabo en la capa de bases de datos mediante la replicación de sistemas SAP o en la capa de almacenamiento mediante tecnologías de replicación del almacenamiento. La siguiente sección ofrece información general sobre las soluciones de recuperación ante desastres basadas en la replicación de almacenamiento.
 
-Si desea obtener información detallada sobre la solución de recuperación ante desastres de SAP HANA mediante SnapCenter, consulte https://www.netapp.com/pdf.html?item=/media/19384-tr-4616.pdf["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"^].
+Para obtener información detallada sobre la solución de recuperación ante desastres SAP HANA con SnapCenter, consulte https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-sr_pdf_link.html["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"^].
 
 
 
@@ -84,7 +84,7 @@ Los servidores en los sitios de DR pueden usarse como sistemas de desarrollo y p
 
 Ambos métodos de replicación permiten ejecutar pruebas del flujo de trabajo de recuperación ante desastres sin que ello afecte al objetivo de punto de recuperación ni al objetivo de tiempo de recuperación. Los volúmenes FlexClone se crean en el almacenamiento y se conectan a los servidores de pruebas de recuperación ante desastres.
 
-image::saphana_fas_fc_image6.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image6.png[saphana FAS fc image6]
 
 La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacenamiento secundario no se completa por ningún motivo, las operaciones de I/o de la aplicación fallan, lo cual garantiza que los sistemas de almacenamiento primario y secundario sean idénticos. Las operaciones de I/o de la aplicación en el principal se reanudan solo después de que la relación de SnapMirror vuelva al estado InSync. Si falla el almacenamiento primario, se pueden reanudar las operaciones de I/o de la aplicación en el almacenamiento secundario después de una conmutación por error sin pérdida de datos. En el modo StrictSync, el objetivo de punto de recuperación siempre es cero.
 
@@ -94,4 +94,4 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El clúster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para cargas de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
 
-image::saphana_fas_fc_image7.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image7.png[saphana FAS fc image7]

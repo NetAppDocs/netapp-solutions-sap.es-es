@@ -34,7 +34,7 @@ La siguiente figura muestra HANA Studio de un cliente mediante operaciones de ba
 
 La parte más grande del tiempo de ejecución general del flujo de trabajo de backup es el tiempo necesario para ejecutar la operación de punto de guardado de backup de HANA, y este paso depende de la carga de la base de datos de HANA. El propio backup de los snapshots de almacenamiento siempre finaliza en un par de segundos.
 
-image::amazon-fsx-image1.png[Error: Falta la imagen gráfica]
+image::amazon-fsx-image1.png[amazon fsx image1]
 
 
 
@@ -72,7 +72,7 @@ Las dos primeras barras muestran que, incluso con un único backup de Snapshot a
 
 La siguiente figura también muestra que tiene más sentido realizar entre cuatro y seis backups Snapshot al día, ya que una mayor frecuencia ya no tiene una gran influencia en el tiempo de ejecución general.
 
-image::amazon-fsx-image2.png[Error: Falta la imagen gráfica]
+image::amazon-fsx-image2.png[amazon fsx image2]
 
 
 
@@ -84,7 +84,7 @@ La actualización del sistema SAP HANA es un ejemplo de dónde un backup bajo de
 
 Otro ejemplo de caso de uso sería un ciclo de prueba típico, en el que las pruebas deben realizarse en varias iteraciones con conjuntos de datos o parámetros diferentes. Al aprovechar las operaciones rápidas de backup y restauración, se pueden crear fácilmente puntos de guardado en el ciclo de pruebas y restablecer el sistema a cualquiera de estos puntos de guardado anteriores si falla una prueba o es necesario repetirla. Esto permite que las pruebas finalicen antes o permite realizar más pruebas al mismo tiempo y mejorar los resultados de las pruebas.
 
-image::amazon-fsx-image3.png[Error: Falta la imagen gráfica]
+image::amazon-fsx-image3.png[amazon fsx image3]
 
 Cuando se han implementado backups de Snapshot, pueden utilizarse para abordar varios otros casos prácticos, los cuales requieren copias de una base de datos HANA. Con FSX para ONTAP, puede crear un volumen nuevo basado en el contenido de cualquier backup de Snapshot disponible. El tiempo de ejecución de esta operación es de unos segundos, independientemente del tamaño del volumen.
 
@@ -94,4 +94,4 @@ El segundo caso de uso es la creación de un sistema de reparación, que se util
 
 El último caso de uso es la capacidad de ejecutar una prueba de conmutación al nodo de respaldo de recuperación ante desastres sin detener la replicación y, por lo tanto, sin influir en el objetivo de punto de recuperación (RPO) y el objetivo de tiempo de recuperación del ajuste de recuperación ante desastres. Cuando se usa FSX para la replicación de SnapMirror de NetApp de ONTAP para replicar los datos en el centro de recuperación ante desastres, los backups Snapshot de producción están disponibles también en el centro de recuperación ante desastres y se pueden usar para crear un nuevo volumen para la prueba de la recuperación ante desastres.
 
-image::amazon-fsx-image4.png[Error: Falta la imagen gráfica]
+image::amazon-fsx-image4.png[amazon fsx image4]

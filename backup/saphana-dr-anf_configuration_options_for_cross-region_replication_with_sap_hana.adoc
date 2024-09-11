@@ -28,7 +28,7 @@ En caso de conmutación por error ante desastres, la relación de replicación d
 
 La siguiente figura muestra las opciones de configuración de HANA para la replicación entre regiones.
 
-image::saphana-dr-anf_image6.png[Error: Falta la imagen gráfica]
+image::saphana-dr-anf_image6.png[saphana dr y image6]
 
 Con la versión actual de la replicación entre regiones, sólo se pueden seleccionar programaciones fijas y el usuario no puede definir el tiempo real de actualización de la replicación. Los horarios disponibles son diarios, cada hora y cada 10 minutos. Con estas opciones de programación, tiene sentido usar dos configuraciones diferentes según los requisitos del objetivo de punto de recuperación: La replicación de volúmenes de datos sin la replicación de backup de registros y el backup de registros con programaciones diferentes, cada hora o cada 10 minutos. El objetivo de punto de recuperación más bajo posible es de unos 20 minutos. En la tabla siguiente se resumen las opciones de configuración y los valores resultantes de RPO y RTO.
 

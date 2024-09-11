@@ -88,7 +88,7 @@ Se puede conectar un máximo de una bandeja de discos a una pila SAS para propor
 
 NOTE: Con la bandeja de discos DS224C, se puede utilizar el cableado SAS de ruta cuádruple, pero no es necesario.
 
-image::saphana_aff_nfs_image13.png[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image13.png[image13 de saphana AFF]
 
 
 
@@ -96,7 +96,7 @@ image::saphana_aff_nfs_image13.png[Error: Falta la imagen gráfica]
 
 Cada bandeja de discos NS224 NVMe se conecta utilizando dos puertos de 100 GbE por controladora. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2, como se describe en el capítulo sobre configuración de agregados, también se utiliza para la bandeja de discos NS224. La siguiente figura muestra la conexión de la bandeja de discos con una unidad NVMe.
 
-image::saphana_aff_nfs_image14.jpg[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image14.jpg[image14 de saphana AFF]
 
 
 
@@ -106,7 +106,7 @@ En general, debe configurar dos agregados por controladora, independientemente d
 
 La siguiente imagen muestra una configuración de 12 hosts SAP HANA que se ejecutan en una bandeja SAS de 12 GB configurada con ADPv2. Seis hosts SAP HANA están conectados a cada controladora de almacenamiento. Se configuran cuatro agregados separados, dos en cada controladora de almacenamiento. Cada agregado está configurado con 11 discos con nueve particiones de datos y dos particiones de disco de paridad. Para cada controladora, hay dos particiones de repuesto disponibles.
 
-image::saphana_aff_nfs_image15.jpg[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image15.jpg[image15 de saphana AFF]
 
 
 
@@ -154,7 +154,7 @@ NOTE: Si solo se usa una controladora de almacenamiento de un par de alta dispon
 
 NOTE: Si los volúmenes de registros y datos se almacenan en la misma controladora, el acceso del servidor al almacenamiento debe realizarse con dos LIF diferentes: Una LIF para acceder al volumen de datos y la otra para acceder al volumen de registro.
 
-image::saphana_aff_nfs_image16.jpg[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image16.jpg[image16 de saphana AFF]
 
 Para cada host SAP HANA, un volumen de datos, un volumen de registro y un volumen de para `/hana/shared` están configurados. La siguiente tabla muestra un ejemplo de configuración para sistemas SAP HANA de un solo host.
 
@@ -199,7 +199,7 @@ NOTE: Si solo se usa una controladora de almacenamiento de una pareja de alta di
 
 NOTE: Si los volúmenes de registros y datos se almacenan en la misma controladora, el acceso del servidor al almacenamiento debe realizarse con dos LIF diferentes: Una LIF para acceder al volumen de datos y otra para acceder al volumen de registro.
 
-image::saphana_aff_nfs_image17.jpg[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image17.jpg[image17 de saphana AFF]
 
 Para cada host SAP HANA, se crean un volumen de datos y un volumen de registro. La `/hana/shared` El volumen lo utilizan todos los hosts del sistema SAP HANA. En la siguiente tabla se muestra un ejemplo de configuración para un sistema SAP HANA de varios hosts con cuatro hosts activos.
 

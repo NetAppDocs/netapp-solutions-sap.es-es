@@ -48,7 +48,7 @@ NOTE: Los privilegios necesarios se modificaron con la versión HANA 2.0 SPS5: A
 
 NOTE: Para un sistema MDC de SAP HANA, el usuario debe crearse en la base de datos del sistema porque todos los comandos de backup para el sistema y las bases de datos de tenant se ejecutan mediante la base de datos del sistema.
 
-image::saphana-br-scs-image53.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image53.png[saphana br scs image53]
 
 Debe configurarse una clave de almacén de usuarios en el host del complemento HANA, en el que estén instalados el complemento SAP HANA y el cliente SAP hdbsql.
 
@@ -163,7 +163,7 @@ En la siguiente figura, se muestra la relación de protección configurada para 
 
 NOTE: La programación de la relación debe establecerse en ninguna, ya que SnapCenter activa la actualización de SnapVault.
 
-image::saphana-br-scs-image54.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image54.png[saphana br scs image54]
 
 La siguiente figura muestra la política de protección. La política de protección utilizada para la relación de protección define la etiqueta de SnapMirror, así como la retención de backups en el almacenamiento secundario. En nuestro ejemplo, la etiqueta utilizada es `Daily`, y la retención se establece en 5.
 
@@ -173,7 +173,7 @@ NOTE: La etiqueta de SnapMirror en la política que se va a crear debe coincidir
 
 NOTE: La retención de backups en el almacenamiento de backups fuera de las instalaciones se define en la política y está controlada por ONTAP.
 
-image::saphana-br-scs-image55.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image55.png[saphana br scs image55]
 
 
 
@@ -203,18 +203,18 @@ El host del plugin de HANA en nuestro ejemplo es el servidor SnapCenter.
 La clave hdbuserstore debe coincidir con la clave que se configuró para la base de datos HANA SS2. En nuestro ejemplo es SS2KEY.
 
 +
-image::saphana-br-scs-image56.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image56.png[saphana br scs image56]
 
 +
 
 NOTE: Para un sistema SAP HANA de varios hosts, debe incluir las claves hdbuserstore para todos los hosts, como se muestra en la siguiente figura. SnapCenter intentará conectarse con la primera clave de la lista y continuará con el otro caso, por si la primera clave no funcione. Esto es necesario para admitir la conmutación por error de HANA en un sistema de varios hosts con hosts de trabajo y en espera.
 
 +
-image::saphana-br-scs-image57.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image57.png[saphana br scs image57]
 
 .. Seleccione los datos requeridos para el sistema de almacenamiento (SVM) y el nombre del volumen.
 +
-image::saphana-br-scs-image58.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image58.png[saphana br scs image58]
 
 +
 
@@ -225,14 +225,14 @@ NOTE: Para obtener una configuración SAN Fibre Channel, también es necesario s
 NOTE: Para un sistema host múltiple SAP HANA, se deben seleccionar todos los volúmenes de datos del sistema SAP HANA, como se muestra en la siguiente figura.
 
 +
-image::saphana-br-scs-image59.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image59.png[saphana br scs image59]
 
 +
 Se muestra la pantalla de resumen de la configuración de recursos.
 
 .. Haga clic en Finish para añadir la base de datos SAP HANA.
 +
-image::saphana-br-scs-image60.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image60.png[saphana br scs image60]
 
 .. Cuando finalice la configuración del recurso, realice la configuración de la protección de recursos como se describe en la sección “<<Configuración de protección de recursos>>.”
 
@@ -251,17 +251,17 @@ NOTE: El plugin de SAP HANA requiere Java de 64 bits, versión 1.8. Java se debe
 . En la pestaña del host, haga clic en Add.
 . Proporcione información del host y seleccione el plugin de SAP HANA que se va a instalar. Haga clic en Submit.
 +
-image::saphana-br-scs-image61.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image61.png[saphana br scs image61]
 
 . Confirme la huella.
 +
-image::saphana-br-scs-image62.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image62.png[saphana br scs image62]
 
 +
 La instalación del plugin de HANA y el plugin de Linux se inicia de forma automática. Cuando termina la instalación, la columna de estado del host muestra ejecutando. La pantalla también muestra que el plugin de Linux se ha instalado junto con el plugin de HANA.
 
 +
-image::saphana-br-scs-image63.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image63.png[saphana br scs image63]
 
 +
 Después de la instalación del plugin, el proceso de detección automática del recurso HANA se inicia de forma automática. En la pantalla Recursos, se crea un recurso nuevo, que se Marca como bloqueado con el icono de candado rojo.
@@ -272,21 +272,21 @@ Después de la instalación del plugin, el proceso de detección automática del
 NOTE: También es posible activar el proceso de detección automática manualmente en la pantalla Resources, haciendo clic en Refresh Resources.
 
 +
-image::saphana-br-scs-image64.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image64.png[saphana br scs image64]
 
 . Proporcione la clave de almacenamiento de usuarios para la base de datos HANA.
 +
-image::saphana-br-scs-image65.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image65.png[saphana br scs image65]
 
 +
 El proceso de detección automática de segundo nivel comienza en el cual se detectan los datos de inquilinos y la información sobre la huella de almacenamiento.
 
 . Haga clic en Details para revisar la información de configuración de los recursos HANA en la vista de topología de los recursos.
 +
-image::saphana-br-scs-image66.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image66.png[saphana br scs image66]
 
 +
-image::saphana-br-scs-image67.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image67.png[saphana br scs image67]
 
 +
 Cuando finalice la configuración de los recursos, la configuración de protección de recursos debe ejecutarse tal como se describe en la sección siguiente.
@@ -318,41 +318,41 @@ En la configuración mostrada en la siguiente figura, los nombres de backup y co
 NOTE: Aunque se define una retención para backups bajo demanda en la configuración de políticas, el mantenimiento solo se realiza cuando se ejecuta otro backup bajo demanda. Por lo tanto, los backups bajo demanda suelen eliminarse manualmente en SnapCenter para asegurarse de que estos backups también se eliminan en el catálogo de backup de SAP HANA y que el mantenimiento del backup de registros no se basa en un backup antiguo bajo demanda.
 
 +
-image::saphana-br-scs-image68.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image68.png[saphana br scs image68]
 
 
 
 . No es necesario realizar ningún ajuste específico en la página Configuración de la aplicación. Haga clic en Siguiente.
 +
-image::saphana-br-scs-image69.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image69.png[saphana br scs image69]
 
 . Seleccione las políticas que desea añadir al recurso.
 +
-image::saphana-br-scs-image70.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image70.png[saphana br scs image70]
 
 . Defina la programación para la política LocalSnap (en este ejemplo, cada cuatro horas).
 +
-image::saphana-br-scs-image71.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image71.png[saphana br scs image71]
 
 . Defina la programación para la política LocalSnapAndSnapVault (en este ejemplo, una vez por día).
 +
-image::saphana-br-scs-image72.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image72.png[saphana br scs image72]
 
 . Defina el programa de la política de comprobación de integridad de bloques (en este ejemplo, una vez a la semana).
 +
-image::saphana-br-scs-image73.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image73.png[saphana br scs image73]
 
 . Proporcione información acerca de las notificaciones por correo electrónico.
 +
-image::saphana-br-scs-image74.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image74.png[saphana br scs image74]
 
 . En la página Summary, haga clic en Finish.
 +
-image::saphana-br-scs-image75.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image75.png[saphana br scs image75]
 
 . Ahora los backups bajo demanda se pueden crear en la página Topology. Los backups programados se ejecutan según la configuración.
 +
-image::saphana-br-scs-image76.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image76.png[saphana br scs image76]
 
 
 
@@ -396,4 +396,4 @@ Si un host de Linux separado se utiliza como host del plugin de HANA central, de
 
 La siguiente figura muestra el comando Post Quiesce dentro de la pantalla de configuración de protección de recursos.
 
-image::saphana-br-scs-image77.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image77.png[saphana br scs image77]

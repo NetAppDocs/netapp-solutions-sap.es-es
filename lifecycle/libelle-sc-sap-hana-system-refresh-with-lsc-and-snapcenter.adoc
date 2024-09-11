@@ -49,7 +49,7 @@ Los clientes de SAP saben que los pasos manuales coloreados en verde en la sigui
 
 En la siguiente figura, se ofrece información general sobre el procedimiento general de actualización del sistema SAP basado en SnapCenter.
 
-image::libelle-sc-image1.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image1.png[libelle sc image1]
 
 
 
@@ -61,27 +61,27 @@ Deben cumplirse los siguientes requisitos previos:
 * El back-end de almacenamiento debe configurarse correctamente en SnapCenter, como se muestra en la siguiente imagen.
 
 
-image::libelle-sc-image2.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image2.png[libelle sc image2]
 
 Las dos siguientes imágenes cubren la instalación estándar en la que el agente de SnapCenter y el complemento SAP HANA se instalan localmente en cada servidor de bases de datos.
 
 El agente de SnapCenter y el plugin de base de datos adecuado deben instalarse en la base de datos de origen.
 
-image::libelle-sc-image3.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image3.png[libelle sc image3]
 
 El agente de SnapCenter y el plugin de base de datos adecuado deben instalarse en la base de datos de destino.
 
-image::libelle-sc-image4.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image4.png[libelle sc image4]
 
 La siguiente imagen representa la puesta en marcha central de un host de comunicación en el que el agente SnapCenter, el complemento SAP HANA y el cliente de base de datos SAP HANA están instalados en un servidor centralizado (como el servidor SnapCenter) para gestionar varios sistemas SAP HANA del panorama.
 
 El agente SnapCenter, el plugin de base de datos SAP HANA y el cliente de base de datos HANA se deben instalar en el host de comunicación central.
 
-image::libelle-sc-image5.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image5.png[libelle sc image5]
 
 El backup de la base de datos de origen debe configurarse correctamente en SnapCenter para que la copia Snapshot se pueda crear correctamente.
 
-image::libelle-sc-image6.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image6.png[libelle sc image6]
 
 El maestro LSC y el trabajador LSC deben estar instalados en el entorno SAP. En esta implementación, también instalamos el maestro de LSC en el servidor SnapCenter y el trabajador de LSC en el servidor de base de datos SAP de destino, que se debe actualizar. En la siguiente sección “<<Configuración de laboratorio>>.”
 
@@ -107,7 +107,7 @@ En esta sección se describe un ejemplo de arquitectura configurado en un centro
 
 La siguiente figura muestra una instalación estándar en la que el agente SnapCenter junto con el complemento de base de datos se instaló localmente en el servidor de origen y de base de datos de destino. En la configuración de laboratorio, instalamos el complemento SAP HANA. Además, el trabajador de LSC también se instaló en el servidor de destino. Para simplificar y reducir el número de servidores virtuales, instalamos el maestro LSC en el servidor SnapCenter. En la siguiente figura, se muestra la comunicación entre los diferentes componentes.
 
-image::libelle-sc-image7.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image7.png[libelle sc image7]
 
 
 
@@ -115,7 +115,7 @@ image::libelle-sc-image7.png[Error: Falta la imagen gráfica]
 
 La siguiente figura muestra la configuración mediante un host de comunicación central. En esta configuración, el agente SnapCenter junto con el plugin de SAP HANA y el cliente de base de datos HANA se instalaron en un servidor dedicado. En esta configuración, utilizamos el servidor SnapCenter para instalar el host de comunicación central. Además, el trabajador de LSC se instaló de nuevo en el servidor de destino. Para simplificar y reducir el número de servidores virtuales, decidimos también instalar el maestro LSC en el servidor SnapCenter. La comunicación entre los diferentes componentes se ilustra en la siguiente figura.
 
-image::libelle-sc-image8.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image8.png[libelle sc image8]
 
 
 
@@ -139,7 +139,7 @@ En lugar de direcciones IP, nombres de host o nombres de dominio completos tambi
 
 La siguiente imagen muestra la configuración de LSC del maestro, trabajador, satélite, fuente SAP, destino SAP, base de datos de origen y base de datos de destino.
 
-image::libelle-sc-image9.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image9.png[libelle sc image9]
 
 Para la integración principal, debemos volver a separar los pasos de configuración en la instalación estándar y la instalación utilizando un host de comunicación central.
 
@@ -151,11 +151,11 @@ En esta sección se describen los pasos de configuración necesarios cuando se u
 
 La siguiente imagen muestra la configuración de tareas LSC en la fase de copia.
 
-image::libelle-sc-image10.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image10.png[libelle sc image10]
 
 La siguiente imagen resalta la configuración del `NTAP_SYSTEM_CLONE` proceso. Puesto que ejecuta un script de PowerShell, este script de Windows PowerShell se ejecuta en el sistema satélite. En este caso, se trata del servidor SnapCenter con el maestro LSC instalado que también actúa como un sistema satélite.
 
-image::libelle-sc-image11.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image11.png[libelle sc image11]
 
 Dado que LSC debe estar al tanto de si la operación de copia Snapshot, clonado y recuperación se ha realizado correctamente, debe definir al menos dos tipos de código de retorno. Un código es para una ejecución correcta del script, y el otro código es para una ejecución fallida del script, como se muestra en la siguiente imagen.
 
@@ -163,11 +163,11 @@ Dado que LSC debe estar al tanto de si la operación de copia Snapshot, clonado 
 * `LSC:ERROR` si la ejecución ha fallado, se debe escribir desde la secuencia de comandos a la salida estándar.
 
 
-image::libelle-sc-image12.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image12.png[libelle sc image12]
 
 La siguiente imagen muestra parte del script de PowerShell que se debe ejecutar para ejecutar un backup basado en Snapshot en el sistema de la base de datos de origen y un clon en el sistema de la base de datos de destino. La secuencia de comandos no está diseñada para ser completa. En su lugar, el script muestra cómo la integración entre LSC y SnapCenter puede verse y lo fácil que es configurarlo.
 
-image::libelle-sc-image13.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image13.png[libelle sc image13]
 
 Dado que la secuencia de comandos se ejecuta en el maestro LSC (que también es un sistema satélite), el maestro LSC en el servidor SnapCenter debe ejecutarse como un usuario de Windows que tenga los permisos adecuados para ejecutar las operaciones de copia de seguridad y clonación en SnapCenter. Para verificar si el usuario tiene el permiso apropiado, el usuario debe poder ejecutar una copia Snapshot y un clon en la interfaz de usuario de SnapCenter.
 
@@ -183,11 +183,11 @@ Para la integración entre LSC y SnapCenter utilizando un host de comunicación 
 * * NTAP_MNT_RECOVER_CP.* esta tarea detiene el sistema SAP de destino y la base de datos SAP HANA, desmonta los volúmenes antiguos y, a continuación, monta los volúmenes clonados de almacenamiento recién creados basados en los parámetros que fueron pasados desde la tarea anterior `NTAP_SYSTEM_CLONE_CP`. A continuación, se restaura y recupera la base de datos SAP HANA de destino.
 
 
-image::libelle-sc-image14.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image14.png[libelle sc image14]
 
 La siguiente imagen resalta la configuración de la tarea `NTAP_SYSTEM_CLONE_CP`. Se trata del script de Windows PowerShell que se ejecuta en el sistema por satélite. En este caso, el sistema satélite es el servidor SnapCenter con el maestro LSC instalado.
 
-image::libelle-sc-image15.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image15.png[libelle sc image15]
 
 Como LSC debe saber si la operación de copia Snapshot y clonación se ha realizado correctamente, debe definir al menos dos tipos de código de retorno: Un código de retorno para una ejecución correcta del script y el otro para una ejecución fallida del script, como se muestra en la imagen siguiente.
 
@@ -195,11 +195,11 @@ Como LSC debe saber si la operación de copia Snapshot y clonación se ha realiz
 * `LSC:ERROR` debe escribirse desde el script a la salida estándar si la ejecución falló.
 
 
-image::libelle-sc-image16.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image16.png[libelle sc image16]
 
 La siguiente imagen muestra parte del script de PowerShell que se debe ejecutar para ejecutar una copia Snapshot y un clon con el agente SnapCenter en el host de comunicación central. La secuencia de comandos no está pensada para estar completa. En su lugar, el script se utiliza para mostrar cómo la integración entre LSC y SnapCenter puede verse y lo fácil que es configurarlo.
 
-image::libelle-sc-image17.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image17.png[libelle sc image17]
 
 Como se ha mencionado anteriormente, debe pasar el nombre del volumen clonado a la siguiente tarea `NTAP_MNT_RECOVER_CP` para montar el volumen clonado en el servidor de destino. El nombre del volumen clonado, también conocido como ruta de unión, se almacena en la variable `$JunctionPath`. La entrega a una tarea de LSC posterior se logra a través de una variable de LSC personalizada.
 
@@ -210,7 +210,7 @@ Dado que la secuencia de comandos se ejecuta en el maestro LSC (que también es 
 
 En la siguiente figura se destaca la configuración de la tarea `NTAP_MNT_RECOVER_CP`. Como queremos ejecutar una secuencia de comandos Shell de Linux, se trata de una secuencia de comandos ejecutada en el sistema de base de datos de destino.
 
-image::libelle-sc-image18.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image18.png[libelle sc image18]
 
 Dado que el LSC debe estar consciente del montaje de los volúmenes clonados y si la restauración y recuperación de la base de datos de destino se realizó correctamente, debemos definir al menos dos tipos de código de retorno. Un código es para una ejecución correcta del script y uno es para una ejecución fallida del script, como se muestra en la siguiente figura.
 
@@ -218,7 +218,7 @@ Dado que el LSC debe estar consciente del montaje de los volúmenes clonados y s
 * `LSC:ERROR` debe escribirse desde el script a la salida estándar si la ejecución falló.
 
 
-image::libelle-sc-image19.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image19.png[libelle sc image19]
 
 En la siguiente figura, se muestra parte del script Linux Shell que se utilizó para detener la base de datos de destino, desmontar el volumen antiguo, montar el volumen clonado, y restaurar y recuperar la base de datos de destino. En la tarea anterior, la ruta de unión se escribió en una variable LSC. El siguiente comando lee esta variable LSC y almacena el valor en `$JunctionPath` Variable de la secuencia de comandos del shell de Linux.
 
@@ -230,7 +230,7 @@ El trabajador del LSC en el sistema de destino se ejecuta como `<sidaadm>`, pero
 ....
 hn6adm ALL=(root) NOPASSWD:/usr/local/bin/H06/central_plugin_host_wrapper_script.sh
 ....
-image::libelle-sc-image20.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image20.png[libelle sc image20]
 
 
 
@@ -240,8 +240,8 @@ Ahora que se han llevado a cabo todas las tareas de integración necesarias entr
 
 La siguiente figura muestra la tarea `NTAP`_`SYSTEM`_`CLONE` en una instalación estándar. Como puede ver, la creación de una copia Snapshot y un clon, el montaje del volumen clonado en el servidor de la base de datos de destino y la restauración y recuperación de la base de datos de destino tardaron aproximadamente 14 minutos. Sorprendentemente, con Snapshot y la tecnología FlexClone de NetApp, la duración de esta tarea es prácticamente la misma, independientemente del tamaño de la base de datos de origen.
 
-image::libelle-sc-image21.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image21.png[libelle sc image21]
 
 En la siguiente figura se muestran las dos tareas `NTAP_SYSTEM_CLONE_CP` y.. `NTAP_MNT_RECOVERY_CP` cuando se utiliza un host de comunicación central. Como puede ver, la creación de una copia Snapshot, un clon, el montaje del volumen clonado en el servidor de la base de datos de destino y la restauración y recuperación de la base de datos de destino tardaron aproximadamente 12 minutos. Esto es más o menos el mismo tiempo necesario para llevar a cabo estos pasos cuando se utiliza una instalación estándar. De nuevo, la tecnología Snapshot y FlexClone de NetApp permiten realizar estas tareas de forma rápida y constante, independientemente del tamaño de la base de datos de origen.
 
-image::libelle-sc-image22.png[Error: Falta la imagen gráfica]
+image::libelle-sc-image22.png[libelle sc image22]

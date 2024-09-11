@@ -39,7 +39,7 @@ En un entorno de varios hosts de SAP HANA, se utiliza el conector de almacenamie
 
 Las controladoras de almacenamiento FAS de NetApp cuentan con certificación para el programa de integración personalizada del centro de datos (TDI) de SAP HANA mediante los protocolos NFS (NAS) y Fibre Channel (SAN). Pueden ponerse en marcha en cualquier escenario de SAP HANA, como SAP Business Suite en HANA, S/4HANA, BW/4HANA o SAP Business Warehouse en HANA en configuraciones de un solo host o de varios hosts. Cualquier servidor certificado para su uso con SAP HANA se puede combinar con la solución de almacenamiento certificada. Consulte la siguiente figura para ver una descripción general de la arquitectura.
 
-image::saphana_fas_fc_image1.png[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image1.png[saphana FAS fc image1]
 
 Para obtener más información sobre los requisitos previos y las recomendaciones para los sistemas SAP HANA productivos, consulte el siguiente recurso:
 
@@ -57,7 +57,6 @@ También se admiten asignaciones de dispositivos sin formato (RDM), almacenes de
 Para obtener más información sobre el uso de vSphere con SAP HANA, consulte los siguientes enlaces:
 
 * https://wiki.scn.sap.com/wiki/display/VIRTUALIZATION/SAP+HANA+on+VMware+vSphere["SAP HANA en VMware vSphere - virtualización - Wiki de la comunidad"^]
-* http://www.vmware.com/files/pdf/SAP_HANA_on_vmware_vSphere_best_practices_guide.pdf["Prácticas recomendadas y recomendaciones para puestas en marcha de escalado vertical de SAP HANA en VMware vSphere"^]
-* http://www.vmware.com/files/pdf/sap-hana-scale-out-deployments-on-vsphere.pdf["Prácticas recomendadas y recomendaciones para puestas en marcha de escalado horizontal de SAP HANA en VMware vSphere"^]
+* https://core.vmware.com/resource/sap-hana-vmware-vsphere-best-practices-and-reference-architecture-guide#introduction["Prácticas recomendadas de SAP HANA en VMware vSphere y guía de arquitectura de referencia"^]
 * https://launchpad.support.sap.com/["2161991 - Directrices de configuración de VMware vSphere - SAP ONE Support Launchpad (se requiere inicio de sesión)"^]
 

@@ -215,4 +215,4 @@ El tamaño de la RAM, el tamaño de los datos netos del disco de cada host SAP H
 
 La siguiente figura resume el proceso de dimensionamiento.
 
-image::saphana_fas_fc_image8.jpg[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image8.jpg[saphana FAS fc image8]

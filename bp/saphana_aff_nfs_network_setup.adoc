@@ -33,7 +33,7 @@ En la capa de almacenamiento, se configuran cuatro conexiones activas para propo
 
 En la capa de almacenamiento, se configura un dominio de retransmisión con un tamaño de MTU de 9000 y se añaden todas las interfaces físicas necesarias a este dominio de retransmisión. Este método asigna automáticamente estas interfaces físicas al mismo grupo de recuperación tras fallos. Todas las interfaces lógicas (LIF) asignadas a estas interfaces físicas se añaden a este grupo de conmutación por error.
 
-image::saphana_aff_nfs_image10.png[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image10.png[image10 de saphana AFF]
 
 En general, también es posible utilizar grupos de interfaces de alta disponibilidad en los servidores (enlaces) y los sistemas de almacenamiento (por ejemplo, el protocolo de control de agregación de enlaces [LACP] e igroups). Con los grupos de interfaces de alta disponibilidad, compruebe que la carga está distribuida por igual entre todas las interfaces del grupo. La distribución de la carga depende de la funcionalidad de la infraestructura del conmutador de red.
 
@@ -46,11 +46,11 @@ NOTE: Según el número de hosts SAP HANA y la velocidad de conexión utilizada,
 
 Una configuración y un diseño de red adecuados son cruciales, ya que todos los datos para las instancias de SAP HANA, incluidos los datos críticos para el rendimiento y los volúmenes de registros para la base de datos, se proporcionan a través de NFS en esta solución. Se utiliza una red de almacenamiento dedicada para separar el tráfico NFS del tráfico de comunicación y acceso de usuarios entre los nodos SAP HANA. Cada nodo SAP HANA requiere una conexión de red dedicada redundante con un ancho de banda mínimo de 10 GB. También se admite un mayor ancho de banda. Esta red debe ampliarse de extremo a extremo desde la capa de almacenamiento, hasta el switch de red e informática hasta el sistema operativo invitado alojado en VMware vSphere. Además de la infraestructura de conmutación física, se utiliza un switch distribuido de VMware (VDS) para proporcionar un rendimiento y una gestión adecuados del tráfico de red en la capa del hipervisor.
 
-image::saphana_aff_nfs_image11.png[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image11.png[image11 de saphana AFF]
 
 Como se muestra en la figura anterior, cada nodo SAP HANA utiliza un grupo de puertos dedicado en el switch distribuido de VMware. Este grupo de puertos permite una calidad de servicio mejorada y la asignación dedicada de tarjetas de interfaz de red física (NIC) en los hosts ESX. Para utilizar NIC físicas dedicadas a la vez que se conservan las funcionalidades de alta disponibilidad en caso de fallo del NIC, el NIC físico dedicado se configura como enlace ascendente activo. Las NIC adicionales se configuran como enlaces ascendentes en espera en la configuración de equipos y recuperación tras fallos del grupo de puertos SAP HANA. Además, deben habilitarse las tramas gigantes (MTU 9,000) para terminar en switches físicos y virtuales. Además, desactive el control de flujo en todos los puertos ethernet que se utilizan para el tráfico de almacenamiento en servidores, switches y sistemas de almacenamiento. En la siguiente figura se muestra un ejemplo de dicha configuración.
 
 
 NOTE: LRO (descarga de recepción grande) debe estar desactivado para las interfaces usadas para el tráfico NFS. Para obtener todas las demás directrices de configuración de red, consulte las guías de prácticas recomendadas de VMware correspondientes para SAP HANA.
 
-image::saphana_aff_nfs_image12.png[Error: Falta la imagen gráfica]
+image::saphana_aff_nfs_image12.png[image12 de saphana AFF]

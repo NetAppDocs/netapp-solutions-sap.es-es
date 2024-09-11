@@ -116,6 +116,6 @@ Para agregar una partición de datos adicional a la base de datos de tenant, lle
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 +
-image::saphana_fas_fc_image28.jpg[Error: Falta la imagen gráfica]
+image::saphana_fas_fc_image28.jpg[saphana FAS fc image28]
 
 

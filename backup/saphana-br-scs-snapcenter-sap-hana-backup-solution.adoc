@@ -81,7 +81,7 @@ NOTE: SnapCenter se encarga de la retención en el almacenamiento principal, mie
 
 En la siguiente figura, se muestra información general de la configuración de backup de registros y bases de datos, donde los backups de registros se escriben en un montaje NFS del almacenamiento de backup externo.
 
-image::saphana-br-scs-image7.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image7.png[saphana br scs image7]
 
 Al ejecutar un backup de Snapshot basado en el almacenamiento de volúmenes que no son de datos, SnapCenter realiza las siguientes tareas:
 
@@ -121,4 +121,4 @@ SnapCenter es compatible con las siguientes arquitecturas y versiones de SAP HAN
 
 A partir de la versión 4.6, SnapCenter admite la detección automática de sistemas HANA configurados en una relación de replicación del sistema HANA. Cada host se configura usando su dirección IP física (nombre de host) y su volumen de datos individual en la capa de almacenamiento. Los dos recursos de SnapCenter se combinan en un grupo de recursos; SnapCenter identifica automáticamente qué host es primario o secundario y, a continuación, ejecuta las operaciones de backup necesarias según corresponda. La gestión de retención de Snapshot y los backups basados en archivos creados con SnapCenter se realiza en ambos hosts para garantizar que los backups antiguos también se eliminan en el host secundario actual. La siguiente figura muestra una descripción general de alto nivel. Puede encontrar una descripción detallada de la configuración y el funcionamiento de sistemas HANA habilitados para la replicación del sistema HANA en SnapCenter en https://www.netapp.com/us/media/tr-4719.pdf["TR-4719 replicación de sistemas SAP HANA, backup y recuperación con SnapCenter"^].
 
-image::saphana-br-scs-image8.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image8.png[saphana br scs image8]

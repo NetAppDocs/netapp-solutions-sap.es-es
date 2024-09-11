@@ -22,7 +22,7 @@ La configuración de SnapCenter se puede separar en dos áreas principales:
 
 En la siguiente figura, se proporciona información general sobre los componentes de configuración y sus dependencias. Los cuadros verdes muestran los pasos de configuración que deben realizarse fuera de SnapCenter; los cuadros azules muestran los pasos que se realizan mediante la GUI de SnapCenter.
 
-image::saphana-br-scs-image22.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image22.png[saphana br scs image22]
 
 Con la configuración inicial, se instalan y configuran los siguientes componentes:
 

@@ -37,48 +37,48 @@ Desde una perspectiva de alto nivel, debe realizar los siguientes pasos para con
 . Cree un grupo de recursos, incluidos tanto los hosts como configurar la protección.
 
 
-image::saphana-sr-scs-image6.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image6.png[saphana sr scs image6]
 
 Después de instalar el plugin de SnapCenter HANA en ambos hosts HANA, los sistemas HANA se muestran en la vista de recursos de SnapCenter de la misma manera que otros recursos de detección automática. A partir de SnapCenter 4.6, se muestra una columna adicional que muestra el estado de la replicación del sistema HANA (habilitada/deshabilitada, primaria/secundaria).
 
-image::saphana-sr-scs-image7.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image7.png[saphana sr scs image7]
 
 Al hacer clic en el recurso, SnapCenter solicita la clave de almacenamiento de usuario de HANA para el sistema HANA.
 
-image::saphana-sr-scs-image8.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image8.png[saphana sr scs image8]
 
 Se ejecutan pasos adicionales de detección automática y SnapCenter muestra los detalles del recurso. Con SnapCenter 4.6, el estado de la replicación del sistema y el servidor secundario se muestran en esta vista.
 
-image::saphana-sr-scs-image9.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image9.png[saphana sr scs image9]
 
 Tras realizar los mismos pasos para el segundo recurso HANA, se completa el proceso de detección automática y ambos recursos HANA se configuran en SnapCenter.
 
-image::saphana-sr-scs-image10.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image10.png[saphana sr scs image10]
 
 Para los sistemas habilitados con replicación del sistema HANA, debe configurar un grupo de recursos de SnapCenter, incluidos ambos recursos de HANA.
 
-image::saphana-sr-scs-image11.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image11.png[saphana sr scs image11]
 
 NetApp recomienda usar un formato de nombre personalizado para el nombre de Snapshot, que debe incluir el nombre de host, la política y la programación.
 
-image::saphana-sr-scs-image12.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image12.png[saphana sr scs image12]
 
 Debe añadir ambos hosts HANA al grupo de recursos.
 
-image::saphana-sr-scs-image13.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image13.png[saphana sr scs image13]
 
 Las políticas y las programaciones se configuran para el grupo de recursos.
 
 
 NOTE: La retención definida en la política se usa en ambos hosts HANA. Si, por ejemplo, se define una retención de 10 en la política, la suma de los backups de ambos hosts se usa como criterios para la eliminación de un backup. SnapCenter elimina el backup más antiguo de forma independiente si se creó en el host primario o secundario actual.
 
-image::saphana-sr-scs-image14.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image14.png[saphana sr scs image14]
 
 La configuración del grupo de recursos ahora termina y se pueden ejecutar los backups.
 
-image::saphana-sr-scs-image15.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image15.png[saphana sr scs image15]
 
-image::saphana-sr-scs-image16.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image16.png[saphana sr scs image16]
 
 
 
@@ -86,38 +86,38 @@ image::saphana-sr-scs-image16.png[Error: Falta la imagen gráfica]
 
 Cuando se ejecuta una operación de backup del grupo de recursos, SnapCenter identifica el host primario y solo activa un backup en el host primario. Esto significa que solo se hará copia Snapshot del volumen de datos del host primario. En nuestro ejemplo, hana-3 es el host primario actual y se ejecuta un backup en este host.
 
-image::saphana-sr-scs-image17.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image17.png[saphana sr scs image17]
 
 El registro de trabajos de SnapCenter muestra la operación de identificación y la ejecución del backup en el host primario actual hana-3.
 
-image::saphana-sr-scs-image18.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image18.png[saphana sr scs image18]
 
 Ahora se ha creado un backup de Snapshot en el recurso HANA principal. El nombre de host incluido en el nombre de backup muestra hana-3.
 
-image::saphana-sr-scs-image19.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image19.png[saphana sr scs image19]
 
 El mismo backup Snapshot también se puede ver en el catálogo de backup de HANA.
 
-image::saphana-sr-scs-image20.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image20.png[saphana sr scs image20]
 
 Si se ejecuta una operación de toma de control, otros backups de SnapCenter ahora identifican el host secundario anterior (hana-4) como primario; la operación de backup se ejecuta en hana-4. De nuevo, solo se crea una copia de Snapshot del nuevo host primario (hana-4).
 
 
 NOTE: La lógica de identificación de SnapCenter solo cubre situaciones en las que los hosts HANA se encuentran en una relación primaria-secundaria o cuando uno de los hosts HANA está sin conexión.
 
-image::saphana-sr-scs-image21.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image21.png[saphana sr scs image21]
 
 El registro de trabajos de SnapCenter muestra la operación de identificación y la ejecución del backup en el host primario actual hana-4.
 
-image::saphana-sr-scs-image22.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image22.png[saphana sr scs image22]
 
 Ahora se ha creado un backup de Snapshot en el recurso HANA principal. El nombre de host incluido en el nombre de backup muestra hana-4.
 
-image::saphana-sr-scs-image23.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image23.png[saphana sr scs image23]
 
 El mismo backup Snapshot también se puede ver en el catálogo de backup de HANA.
 
-image::saphana-sr-scs-image24.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image24.png[saphana sr scs image24]
 
 
 
@@ -139,7 +139,7 @@ Como ONTAP gestiona la gestión de retención en el destino de SnapVault fuera d
 
 NOTE: No es posible limpiar todas las copias snapshot de SnapVault porque una copia snapshot está bloqueada como punto de sincronización. Si también es necesario eliminar la última copia de Snapshot, se debe eliminar la relación de replicación de SnapVault. En este caso, NetApp recomienda eliminar los backups en el catálogo de backup de HANA para desbloquear la gestión de la retención de backup de registros.
 
-image::saphana-sr-scs-image25.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image25.png[saphana sr scs image25]
 
 
 
@@ -155,7 +155,7 @@ Si la replicación de SnapVault forma parte de la estrategia de protección de d
 
 La siguiente figura muestra una situación en la que se han ejecutado varias adquisiciones y se han creado backups de Snapshot en ambos sitios. Con el estado actual, el host hana-3 es el host principal y el último backup es T4, que se ha creado en el host hana-3. Si necesita realizar una restauración y recuperación de datos, los backups T1 y T4 están disponibles para su restauración y recuperación en SnapCenter. Los backups, que se crearon en el host hana-4 (T2, T3), no se pueden restaurar mediante SnapCenter. Estos backups deben copiarse manualmente en el volumen de datos de hana-3 para la recuperación.
 
-image::saphana-sr-scs-image26.png[Error: Falta la imagen gráfica]
+image::saphana-sr-scs-image26.png[saphana sr scs image26]
 
 Las operaciones de restauración y recuperación de una configuración de grupos de recursos de SnapCenter 4.6 son idénticas a la configuración de replicación sin sistema que se haya detectado automáticamente. Todas las opciones de restauración y recuperación automatizada están disponibles. Si quiere más información, consulte el informe técnico https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
 

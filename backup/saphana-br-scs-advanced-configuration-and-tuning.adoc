@@ -119,7 +119,7 @@ Una segunda opción para configurar estas opciones es usar un comando de PowerSh
 . Con el comando `Set- SmConfigSettings -Plugin - HostName <pluginhostname> - PluginCode hana - configSettings @{"LOG_CLEANUP_DISABLE" = "Y"}`, Los cambios se configuran para el host del plug-in SAP HANA `<pluginhostname>` Especificado por la IP o el nombre de host (consulte la siguiente figura).
 
 
-image::saphana-br-scs-image154.jpeg[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image154.jpeg[saphana br scs image154]
 
 
 
@@ -127,7 +127,7 @@ image::saphana-br-scs-image154.jpeg[Error: Falta la imagen gráfica]
 
 SnapCenter detecta si el plugin de SAP HANA está instalado en un entorno virtualizado. Podría ser un entorno VMware o una instalación de SnapCenter en un proveedor de cloud público. En este caso, SnapCenter muestra una advertencia para configurar el hipervisor, como se muestra en la siguiente figura.
 
-image::saphana-br-scs-image34.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image34.png[saphana br scs image34]
 
 Es posible suprimir esta advertencia globalmente. En este caso, SnapCenter no conoce los entornos virtualizados y, por lo tanto, no muestra estas advertencias.
 
@@ -137,7 +137,7 @@ Para configurar SnapCenter para suprimir esta advertencia, se debe aplicar la si
 . Para la configuración del hipervisor, seleccione VMs have iSCSI Direct Attached Disks or NFS for All the hosts y actualice la configuración.
 
 
-image::saphana-br-scs-image155.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image155.png[saphana br scs image155]
 
 
 
@@ -162,7 +162,7 @@ En las siguientes secciones se describen dos formas de evitar esta discrepancia 
 
 En la vista de topología de un recurso, SnapCenter muestra los backups en el almacenamiento de backup externo al seleccionar los backups secundarios, como se muestra en la siguiente captura de pantalla. SnapCenter ejecuta una operación de limpieza con el icono Refresh para sincronizar los backups de este recurso.
 
-image::saphana-br-scs-image156.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image156.png[saphana br scs image156]
 
 
 
@@ -173,7 +173,7 @@ SnapCenter ejecuta el trabajo de limpieza `SnapCenter_RemoveSecondaryBackup` De 
 . Inicie una ventana de comandos de PowerShell en el servidor SnapCenter.
 . Abra la conexión con SnapCenter Server e introduzca las credenciales de administrador de SnapCenter en la ventana de inicio de sesión.
 +
-image::saphana-br-scs-image157.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image157.png[saphana br scs image157]
 
 . Para cambiar la programación de manera semanal a diaria, use el cmdlet `Set- SmSchedule`.
 +
@@ -213,6 +213,6 @@ PS C:\Users\scadmin> Check the configuration using the Windows Task Scheduler.
 ....
 . Puede comprobar las propiedades del trabajo en el programador de tareas de Windows.
 +
-image::saphana-br-scs-image158.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image158.png[saphana br scs image158]
 
 

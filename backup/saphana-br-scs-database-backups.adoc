@@ -24,7 +24,7 @@ El backup de bases de datos bajo demanda se puede realizar mediante la interfaz 
 
 La topología de recursos de SnapCenter muestra una lista de los backups creados mediante SnapCenter. En la siguiente figura, se muestran los backups disponibles en el almacenamiento principal y se resalta el backup más reciente.
 
-image::saphana-br-scs-image82.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image82.png[saphana br scs image82]
 
 Cuando se realiza un backup mediante copias de Snapshot de almacenamiento para un sistema SAP HANA MDC, se crea una copia de Snapshot del volumen de datos. Este volumen de datos contiene los datos de la base de datos del sistema, así como los de todas las bases de datos de tenant. Para reflejar esta arquitectura física, SAP HANA lleva a cabo internamente un backup combinado de la base de datos del sistema, así como de todas las bases de datos de tenant siempre que SnapCenter activa un backup de snapshot. Esto da como resultado varias entradas de backup independientes en el catálogo de backup de SAP HANA: Una para la base de datos del sistema y una para cada base de datos de tenant.
 
@@ -36,9 +36,9 @@ En el catálogo de backup de SAP HANA, el nombre del backup de SnapCenter se alm
 
 NOTE: El lanzamiento de HANA 2.0 SPS4 (revisiones 40 y 41) muestra siempre un tamaño de backup cero para backups basados en Snapshot. Esto se ha solucionado con la revisión 42. Para obtener más información, consulte la nota de SAP https://launchpad.support.sap.com/["https://launchpad.support.sap.com/#/notes/2795010"^].
 
-image::saphana-br-scs-image83.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image83.png[saphana br scs image83]
 
-image::saphana-br-scs-image84.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image84.png[saphana br scs image84]
 
 
 NOTE: SnapCenter solo conoce sus propios backups. Los backups adicionales creados, por ejemplo, con SAP HANA Studio, son visibles en el catálogo SAP HANA pero no en SnapCenter.
@@ -49,11 +49,11 @@ NOTE: SnapCenter solo conoce sus propios backups. Los backups adicionales creado
 
 Para ver los backups en la capa de almacenamiento, use OnCommand System Manager de NetApp y seleccione el volumen de la base de datos en la vista SVM—Volume. La ficha inferior copias Snapshot muestra las copias Snapshot del volumen. La siguiente captura de pantalla muestra las copias de seguridad disponibles para el volumen de base de datos `SS1_data_mnt00001` en el almacenamiento primario. El backup resaltado es el backup que se muestra en SnapCenter y SAP HANA Studio en las imágenes anteriores y tiene la misma convención de nomenclatura.
 
-image::saphana-br-scs-image85.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image85.png[saphana br scs image85]
 
 La siguiente captura de pantalla muestra las copias de seguridad disponibles para el volumen de destino de replicación `hana_SA1_data_mnt00001_dest` en el sistema de almacenamiento secundario.
 
-image::saphana-br-scs-image86.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image86.png[saphana br scs image86]
 
 
 
@@ -64,11 +64,11 @@ image::saphana-br-scs-image86.png[Error: Falta la imagen gráfica]
 La vista de topología de recursos ofrece información general de todos los backups disponibles que se crearon con SnapCenter. En la área superior de esta vista se muestra la topología de backup, que muestra los backups en el almacenamiento principal (copias locales) y, si están disponibles, en el almacenamiento de backup externo (copias vault).
 
 +
-image::saphana-br-scs-image86.5.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image86.5.png[saphana br scs image86,5]
 
 . En la fila superior, seleccione el icono Back up Now para iniciar un backup bajo demanda. En la lista desplegable, seleccione la política de backup `LocalSnap` Y, a continuación, haga clic en Backup para iniciar el backup bajo demanda.
 +
-image::saphana-br-scs-image87.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image87.png[saphana br scs image87]
 
 +
 Esto inicia el trabajo de copia de seguridad. Se muestra un registro de los cinco trabajos anteriores en el área actividad debajo de la vista de topología. Cuando termina el backup, se muestra una entrada nueva en la vista de topología. Los nombres de los backups siguen la misma convención de nomenclatura que el nombre de Snapshot definido en la sección link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration["“Configuración de protección de recursos”."]
@@ -78,11 +78,11 @@ Esto inicia el trabajo de copia de seguridad. Se muestra un registro de los cinc
 NOTE: Debe cerrar y volver a abrir la vista de topología para ver la lista de backups actualizada.
 
 +
-image::saphana-br-scs-image88.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image88.png[saphana br scs image88]
 
 . Los detalles del trabajo se muestran al hacer clic en la línea de actividad del trabajo en el área actividad. Es posible abrir un registro de trabajos detallado si se hace clic en View Logs.
 +
-image::saphana-br-scs-image89.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image89.png[saphana br scs image89]
 
 . En SAP HANA Studio, el nuevo backup se puede ver en el catálogo de backup. El mismo nombre de backup en SnapCenter también se utiliza en el campo comment y EBID del catálogo de backups.
 
@@ -94,11 +94,11 @@ image::saphana-br-scs-image89.png[Error: Falta la imagen gráfica]
 . En la vista de recursos, seleccione el recurso y haga doble clic en la línea para cambiar a la vista de topología.
 . En la fila superior, seleccione el icono Backup Now para iniciar un backup bajo demanda. En la lista desplegable, seleccione la política de backup `LocalSnapAndSnapVault`, A continuación, haga clic en copia de seguridad para iniciar la copia de seguridad bajo demanda.
 +
-image::saphana-br-scs-image90.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image90.png[saphana br scs image90]
 
 . Los detalles del trabajo se muestran al hacer clic en la línea de actividad del trabajo en el área actividad.
 +
-image::saphana-br-scs-image91.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image91.png[saphana br scs image91]
 
 . Cuando termina el backup, se muestra una entrada nueva en la vista de topología. Los nombres de los backups siguen la misma convención de nomenclatura que el nombre de Snapshot definido en la sección link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration["“Configuración de protección de recursos”."]
 +
@@ -106,11 +106,11 @@ image::saphana-br-scs-image91.png[Error: Falta la imagen gráfica]
 NOTE: Debe cerrar y volver a abrir la vista de topología para ver la lista de backups actualizada.
 
 +
-image::saphana-br-scs-image92.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image92.png[saphana br scs image92]
 
 . Al seleccionar copias de almacén, se muestran los backups en el almacenamiento secundario. El nombre del backup replicado es idéntico al nombre de la copia de seguridad en el almacenamiento principal.
 +
-image::saphana-br-scs-image93.png[Error: Falta la imagen gráfica]
+image::saphana-br-scs-image93.png[saphana br scs image93]
 
 . En SAP HANA Studio, el nuevo backup se puede ver en el catálogo de backup. El mismo nombre de backup en SnapCenter también se utiliza en el campo comment y EBID del catálogo de backups.
 

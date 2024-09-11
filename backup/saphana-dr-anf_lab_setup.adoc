@@ -27,7 +27,7 @@ Se ha configurado un pool de capacidad único con calidad de servicio manual en 
 
 La siguiente figura muestra la configuración de laboratorio.
 
-image::saphana-dr-anf_image7.png[Error: Falta la imagen gráfica]
+image::saphana-dr-anf_image7.png[saphana dr y image7]
 
 
 
@@ -39,8 +39,8 @@ Con la replicación del volumen de datos mediante la replicación entre regiones
 
 La siguiente figura muestra los backups Snapshot del volumen de datos HANA.
 
-image::saphana-dr-anf_image8.png[Error: Falta la imagen gráfica]
+image::saphana-dr-anf_image8.png[saphana dr y image8]
 
 La siguiente figura muestra el catálogo de backup de SAP HANA.
 
-image::saphana-dr-anf_image9.png[Error: Falta la imagen gráfica]
+image::saphana-dr-anf_image9.png[saphana dr y image9]
