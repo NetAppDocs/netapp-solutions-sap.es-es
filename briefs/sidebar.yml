@@ -5,9 +5,9 @@ entries:
 - title: Gestión del ciclo de vida de SAP HANA
   url: "/briefs/saphana-lm-sb_pdf_link.html"
 - title: Backup y recuperación de datos de SAP HANA
-  url: https://www.netapp.com/us/media/sb-3965.pdf
+  url: https://www.netapp.com/pdf.html?item=/media/6997-sb-3965pdf.pdf
 - title: Recuperación ante desastres de SAP HANA
-  url: https://www.netapp.com/us/media/sb-3968.pdf
+  url: https://www.netapp.com/pdf.html?item=/media/6998-sb-3968pdf.pdf
 - title: Automatización de SAP con Ansible y NetApp SnapCenter
   url: "/briefs/sap-lama-ansible.html"
 - title: Automatización de SAP con ALPACA y NetApp SnapCenter
