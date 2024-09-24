@@ -41,7 +41,7 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 | Septiembre de 2019 | Nuevas actualizaciones secundarias del sistema operativo 
 
 
-| Abril de 2020 | Los sistemas de almacenamiento de la nueva serie AFF ASA introdujeron múltiples funciones de partición de datos disponibles desde SAP HANA 2.0 SPS4 
+| Abril de 2020 | Se introdujeron múltiples funciones de partición de datos disponibles desde SAP HANA 2.0 SPS4 
 
 
 | Junio de 2020 | Información adicional sobre funcionalidades opcionales actualizaciones menores 
@@ -56,8 +56,5 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 | Septiembre de 2022 | Nuevos lanzamientos de SO 
 
 
-| Agosto de 2023 | Nuevos sistemas de almacenamiento (AFF C-Series) 
-
-
-| Mayo de 2024 | Nuevos sistemas de almacenamiento (AFF A-Series) 
+| Septiembre de 2024 | Nuevos sistemas de almacenamiento 
 |===

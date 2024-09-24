@@ -14,7 +14,7 @@ La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HA
 
 La certificación es válida para los siguientes modelos:
 
-* FAS2750, FAS2820, FAS8300, FAS8700, FAS9500
+* FAS2750, FAS2820, FAS8300, FAS8700, FAS70, FAS9500 y FAS90
 
 
 Si desea obtener una lista completa de las soluciones de almacenamiento certificadas por NetApp para SAP HANA, consulte https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["Directorio de hardware de SAP HANA certificado y compatible"^].

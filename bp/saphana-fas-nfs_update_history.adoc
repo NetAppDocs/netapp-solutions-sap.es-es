@@ -77,14 +77,11 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 | Septiembre de 2022 | Nuevos lanzamientos de SO 
 
 
-| Agosto de 2023 | Nuevos sistemas de almacenamiento (AFF C-Series) 
-
-
 | Diciembre de 2023 | Actualización de la configuración de hosts revisada de nconnect Se añadió información sobre las sesiones NFSv4,1 
 
 
-| Mayo de 2024 | Nuevos sistemas de almacenamiento (AFF A-Series) 
-
-
 | Septiembre de 2024 | Actualizaciones menores 
+
+
+| Septiembre de 2024 | Nuevos sistemas de almacenamiento 
 |===
