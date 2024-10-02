@@ -10,7 +10,7 @@ summary: Hay varios escenarios en los que los datos de un sistema de origen debe
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,11 +18,11 @@ Hay varios escenarios en los que los datos de un sistema de origen deben estar d
 
 Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
 
-image::lama-ansible-image2.png[Esta imagen muestra el flujo de trabajo medioambiental desde el entorno de desarrollo principal hasta las divisiones de proyecto temporales, los sistemas de reparación, los sistemas de formación y los sistemas sanbox. Muestra dónde se usan las funciones Actualizar sistema, copia de sistema y clonado de sistema para estos distintos fines.]
+image:lama-ansible-image2.png["Esta imagen muestra el flujo de trabajo medioambiental desde el entorno de desarrollo principal hasta las divisiones de proyecto temporales, los sistemas de reparación, los sistemas de formación y los sistemas sanbox. Muestra dónde se usan las funciones Actualizar sistema, copia de sistema y clonado de sistema para estos distintos fines."]
 
 Los flujos de trabajo de clonado de SAP Lama y NetApp se pueden utilizar para acelerar y automatizar las tareas necesarias en las capas de infraestructura y base de datos. En lugar de restaurar un backup desde el sistema de origen al sistema de destino, SAP Lama utiliza la copia de Snapshot de NetApp y la tecnología FlexClone de NetApp para que las tareas necesarias hasta una base de datos de HANA iniciada se puedan llevar a cabo en cuestión de minutos en lugar de horas, como se muestra en la siguiente figura. El tiempo necesario para el proceso de clonación es independiente del tamaño de la base de datos; por lo tanto, es posible crear sistemas de gran tamaño en un par de minutos. La reducción adicional del tiempo de ejecución se logra mediante la automatización de tareas en el sistema operativo y la capa de la base de datos, así como en el procesamiento posterior de SAP.
 
-image::lama-ansible-image3.png[Esta imagen muestra una comparación entre el proceso de clonación con y sin copias Snapshot de NetApp y la tecnología FlexClone de NetApp, que acelera el proceso de forma espectacular.]
+image:lama-ansible-image3.png["Esta imagen muestra una comparación entre el proceso de clonación con y sin copias Snapshot de NetApp y la tecnología FlexClone de NetApp, que acelera el proceso de forma espectacular."]
 
 
 
@@ -36,7 +36,7 @@ En lugar de restaurar el sistema SAP, el mejor método es intentar solucionar el
 
 Al configurar el sistema de reparación, la flexibilidad y la velocidad son cruciales. Con los backups de SnapVault basados en almacenamiento de NetApp, hay disponibles varias imágenes de bases de datos consistentes para crear un clon del sistema de producción con la tecnología FlexClone de NetApp. Los volúmenes FlexClone se pueden crear en cuestión de segundos en lugar de varias horas si se realiza una restauración redirigida a partir de un backup basado en archivos para configurar el sistema de reparación.
 
-image::lama-ansible-image4.png[Esta imagen muestra el proceso paso a paso para crear un sistema de reparación desde el sistema de clonación mediante la tecnología FlexClone.]
+image:lama-ansible-image4.png["Esta imagen muestra el proceso paso a paso para crear un sistema de reparación desde el sistema de clonación mediante la tecnología FlexClone."]
 
 
 
@@ -48,4 +48,4 @@ La replicación de almacenamiento con SnapMirror permite ejecutar pruebas de rec
 
 SAP Lama puede usar para organizar el procedimiento de prueba completo; también se encarga de la delimitación de red, el mantenimiento de host de destino, etc.
 
-image::lama-ansible-image5.png[En esta imagen, se muestra la relación entre los sistemas de almacenamiento NetApp en el centro de datos principal, el centro de datos de recuperación ante desastres local y el centro de datos de recuperación ante desastres remoto. Están conectados tanto por SnapMirror síncrono como por relaciones de SnapMirror asíncrono.]
+image:lama-ansible-image5.png["En esta imagen, se muestra la relación entre los sistemas de almacenamiento NetApp en el centro de datos principal, el centro de datos de recuperación ante desastres local y el centro de datos de recuperación ante desastres remoto. Están conectados tanto por SnapMirror síncrono como por relaciones de SnapMirror asíncrono."]

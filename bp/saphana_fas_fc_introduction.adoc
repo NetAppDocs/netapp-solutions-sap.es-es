@@ -8,9 +8,10 @@ summary: La familia de productos FAS de NetApp ha sido certificada para usarse c
 :allow-uri-read: 
 
 
-Marco Schoen: NetApp
-
+[role="lead"]
 La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos TDI. La plataforma de almacenamiento empresarial certificada se caracteriza por el sistema operativo ONTAP de NetApp.
+
+Marco Schoen: NetApp
 
 La certificación es válida para los siguientes modelos:
 
@@ -26,9 +27,9 @@ NOTE: La configuración descrita en este documento es necesaria para alcanzar lo
 
 Las guías de configuración para sistemas FAS que utilizan sistemas NFS y AFF de NetApp se pueden encontrar utilizando los siguientes enlaces:
 
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html["SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"^]
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana-fas-nfs_introduction.html["SAP HANA en sistemas FAS de NetApp con NFS"^]
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^]
+* link:saphana_aff_fc_introduction.html["SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"^]
+* link:saphana-fas-nfs_introduction.html["SAP HANA en sistemas FAS de NetApp con NFS"^]
+* link:saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^]
 
 
 En un entorno de varios hosts de SAP HANA, se utiliza el conector de almacenamiento SAP HANA estándar para proporcionar cercado en caso de una conmutación al nodo de respaldo del host de SAP HANA. Consulte las notas de SAP relevantes para ver las directrices de configuración del sistema operativo y las dependencias del kernel de Linux específicas de HANA. Para obtener más información, consulte https://launchpad.support.sap.com/["Nota 2235581 de SAP – sistemas operativos compatibles con SAP HANA"^].
@@ -39,7 +40,7 @@ En un entorno de varios hosts de SAP HANA, se utiliza el conector de almacenamie
 
 Las controladoras de almacenamiento FAS de NetApp cuentan con certificación para el programa de integración personalizada del centro de datos (TDI) de SAP HANA mediante los protocolos NFS (NAS) y Fibre Channel (SAN). Pueden ponerse en marcha en cualquier escenario de SAP HANA, como SAP Business Suite en HANA, S/4HANA, BW/4HANA o SAP Business Warehouse en HANA en configuraciones de un solo host o de varios hosts. Cualquier servidor certificado para su uso con SAP HANA se puede combinar con la solución de almacenamiento certificada. Consulte la siguiente figura para ver una descripción general de la arquitectura.
 
-image::saphana_fas_fc_image1.png[saphana FAS fc image1]
+image:saphana_fas_fc_image1.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Para obtener más información sobre los requisitos previos y las recomendaciones para los sistemas SAP HANA productivos, consulte el siguiente recurso:
 
@@ -50,7 +51,7 @@ Para obtener más información sobre los requisitos previos y las recomendacione
 
 == SAP HANA mediante VMware vSphere
 
-Existen varias opciones para conectar el almacenamiento a máquinas virtuales (VM). El preferido es conectar los volúmenes de almacenamiento con NFS directamente desde el sistema operativo invitado. Esta opción se describe en https://docs.netapp.com/us-en/netapp-solutions_main/ent-apps-db/saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^].
+Existen varias opciones para conectar el almacenamiento a máquinas virtuales (VM). El preferido es conectar los volúmenes de almacenamiento con NFS directamente desde el sistema operativo invitado. Esta opción se describe en link:saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^].
 
 También se admiten asignaciones de dispositivos sin formato (RDM), almacenes de datos FCP o almacenes de datos VVOL con FCP. Para ambas opciones de almacén de datos, solo se deben almacenar un volumen de registro o los datos SAP HANA en el almacén de datos para casos de uso productivos. Además, no puede implementarse el respaldo y la recuperación basados en Snapshot orquestados por SnapCenter y soluciones que se basan en esto, como la clonación de sistemas SAP.
 

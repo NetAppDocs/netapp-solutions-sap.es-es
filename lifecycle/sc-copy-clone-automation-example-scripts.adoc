@@ -10,9 +10,10 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 En este documento se utilizan dos scripts para automatizar aún más las operaciones de creación y clonado de SnapCenter.
 
 * El script `sc-system-refresh`.sh se utiliza para la actualización del sistema y el flujo de trabajo de clonado del sistema para ejecutar operaciones de recuperación y apagado de la base de datos SAP HANA.
@@ -36,7 +37,7 @@ El script escribe un archivo log `sc-system-refresh-SID.log``, en el mismo direc
 
 NOTE: La versión actual del script admite configuraciones de un solo inquilino MDC de sistemas de host individuales o configuraciones de varios inquilinos MDC. No admite sistemas con varios hosts SAP HANA.
 
-image::sc-copy-clone-image14.png[clon de copia sc image14]
+image:sc-copy-clone-image14.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -68,7 +69,7 @@ El script de ejemplo `sc-mount-volume.sh` se utiliza para ejecutar el montaje y 
 
 NOTE: El script admite los sistemas SAP HANA usando NFS como protocolo de almacenamiento.
 
-image::sc-copy-clone-image15.png[clon de copia sc image15]
+image:sc-copy-clone-image15.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

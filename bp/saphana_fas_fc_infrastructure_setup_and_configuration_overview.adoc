@@ -10,7 +10,7 @@ summary: Las siguientes secciones proporcionan directrices para la instalación 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

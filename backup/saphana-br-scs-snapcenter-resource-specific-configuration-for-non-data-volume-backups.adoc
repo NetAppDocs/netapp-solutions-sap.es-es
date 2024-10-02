@@ -10,7 +10,7 @@ summary: El backup de volúmenes que no forman parte de datos es una parte integ
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,15 +28,15 @@ En este ejemplo, queremos proteger los volúmenes que no son datos de la base de
 
 . En la pestaña Resource, seleccione Non-Data-Volume y haga clic en Add SAP HANA Database.
 +
-image::saphana-br-scs-image78.png[saphana br scs image78]
+image:saphana-br-scs-image78.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . En el paso uno del cuadro de diálogo Add SAP HANA Database, en la lista Resource Type, seleccione Non-data Volumes. Especifique un nombre para el recurso y el SID asociado y el host del plugin de SAP HANA que desea usar para el recurso y, a continuación, haga clic en Next.
 +
-image::saphana-br-scs-image79.png[saphana br scs image79]
+image:saphana-br-scs-image79.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Añada la SVM y el volumen de almacenamiento como espacio físico de almacenamiento y, a continuación, haga clic en Next.
 +
-image::saphana-br-scs-image80.png[saphana br scs image80]
+image:saphana-br-scs-image80.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . En el paso de resumen, haga clic en Finish para guardar la configuración.
 . Repita estos pasos para todos los volúmenes sin datos requeridos.
@@ -49,7 +49,7 @@ NOTE: La protección de datos para recursos de un volumen sin datos es idéntica
 En la siguiente figura, se muestra la lista de los recursos configurados de volúmenes sin datos.
 
 +
-image::saphana-br-scs-image81.png[saphana br scs image81]
+image:saphana-br-scs-image81.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

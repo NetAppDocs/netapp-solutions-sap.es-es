@@ -10,7 +10,7 @@ summary: Durante la puesta en marcha de ejemplo y la ejecución del flujo de tra
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

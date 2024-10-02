@@ -10,22 +10,22 @@ summary: Durante el flujo de trabajo de actualización, es necesario eliminar el
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
 En la siguiente figura, se destacan los principales pasos ejecutados con el flujo de trabajo de actualización del sistema.
 
-image::lama-ansible-image49.png[Esta imagen muestra una línea de tiempo de los pasos del flujo de trabajo de actualización del sistema. Contiene Configuración de exportación, detener sistema, despreparar sistema, eliminar clon de almacenamiento, clonar almacenamiento, preparar el sistema, activar el aislamiento, cambiar el nombre del sistema, iniciar el sistema, importar la configuración, automatización posterior a la copia y desactivación del aislamiento.]
+image:lama-ansible-image49.png["Esta imagen muestra una línea de tiempo de los pasos del flujo de trabajo de actualización del sistema. Contiene Configuración de exportación, detener sistema, despreparar sistema, eliminar clon de almacenamiento, clonar almacenamiento, preparar el sistema, activar el aislamiento, cambiar el nombre del sistema, iniciar el sistema, importar la configuración, automatización posterior a la copia y desactivación del aislamiento."]
 
 Durante el flujo de trabajo de actualización, es necesario eliminar el clon de almacenamiento. Puede usar el mismo libro de estrategia de Ansible que para el flujo de trabajo de destrucción del sistema. Sin embargo, el enlace personalizado se define con un paso diferente, por lo que el libro de estrategia se asigna en consecuencia. n´t paso del proceso del clon es diferente.
 
-image::lama-ansible-image50.png[Esta imagen muestra un diagrama arquitectónico que incluye los pasos incluidos en este flujo de trabajo.]
+image:lama-ansible-image50.png["Esta imagen muestra un diagrama arquitectónico que incluye los pasos incluidos en este flujo de trabajo."]
 
 El flujo de trabajo de actualización se puede activar mediante la pantalla de aprovisionamiento de un sistema copiado.
 
-image::lama-ansible-image51.png[Esta captura de pantalla muestra la vista del sistema de aprovisionamiento con el menú desplegable Actualizar sistema resaltado.]
+image:lama-ansible-image51.png["Esta captura de pantalla muestra la vista del sistema de aprovisionamiento con el menú desplegable Actualizar sistema resaltado."]
 
 De nuevo, nada difiere en las pantallas de entrada del estándar y la ejecución del flujo de trabajo se puede iniciar desde la pantalla de resumen.
 
-image::lama-ansible-image52.png[Esta captura de pantalla muestra la pantalla del sistema de actualización, incluidos los datos básicos del sistema que se van a actualizar y la selección del sistema de destino.]
+image:lama-ansible-image52.png["Esta captura de pantalla muestra la pantalla del sistema de actualización, incluidos los datos básicos del sistema que se van a actualizar y la selección del sistema de destino."]

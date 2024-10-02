@@ -10,7 +10,7 @@ summary: En esta sección se describe la configuración del sistema de almacenam
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -70,7 +70,7 @@ La siguiente información general resume los pasos necesarios para la configurac
 . Cree una máquina virtual de almacenamiento (SVM), tal como se describe en "<<Configuración de la máquina virtual de almacenamiento>>."
 . Cree interfaces lógicas (LIF), como se describe en "<<Configuración de interfaz lógica>>."
 . Cree un conjunto de puertos, como se describe en "<<Conjuntos de puertos FCP>>."
-. Crear grupos iniciadores, volúmenes y LUN dentro de los agregados, como se describe en Crear "<<LUNs and volumes and mapping LUNs to initiator groups>>."
+. Cree iGroups, volúmenes y LUN dentro de los agregados, como se describe en Crear «<<Creating LUNs,Volúmenes y asignación de LUN a iGroups>>.»
 
 
 
@@ -86,7 +86,7 @@ Se puede conectar un máximo de una bandeja de discos a una pila SAS para propor
 
 NOTE: Con la bandeja de discos DS224C, se puede utilizar el cableado SAS de ruta cuádruple, pero no es necesario.
 
-image::saphana_aff_fc_image10.png[saphana AFF fc image10]
+image:saphana_aff_fc_image10.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -94,7 +94,7 @@ image::saphana_aff_fc_image10.png[saphana AFF fc image10]
 
 Cada bandeja de escritorio NS224 NVMe está conectada con dos puertos de 100 GbE por controladora, como se muestra en la siguiente figura. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2 también se utiliza para la bandeja de discos NS224.
 
-image::saphana_aff_fc_image11.png[saphana AFF fc image11]
+image:saphana_aff_fc_image11.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -104,7 +104,7 @@ En general, debe configurar dos agregados por controladora, independientemente d
 
 La siguiente figura muestra una configuración de 12 hosts SAP HANA que se ejecutan en una bandeja SAS de 12 GB configurada con ADPv2. Seis hosts SAP HANA están conectados a cada controladora de almacenamiento. Se configuran cuatro agregados separados, dos en cada controladora de almacenamiento. Cada agregado está configurado con 11 discos con nueve particiones de datos y dos particiones de disco de paridad. Para cada controladora, hay dos particiones de repuesto disponibles.
 
-image::saphana_aff_fc_image12.jpg[saphana AFF fc image12]
+image:saphana_aff_fc_image12.jpg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -123,11 +123,11 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 Dentro de la configuración del clúster de almacenamiento, se debe crear una interfaz de red (LIF) y asignarla a un puerto FCP dedicado. Si, por ejemplo, se necesitan cuatro puertos FCP por motivos de rendimiento, deberá crear cuatro LIF. La figura siguiente muestra una captura de pantalla de las ocho LIF (denominadas `fc_*_*`) que se configuraron en la `hana` SVM.
 
-image::saphana_aff_fc_image13.jpeg[saphana AFF fc image13]
+image:saphana_aff_fc_image13.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Durante la creación de SVM con ONTAP 9.8 System Manager, puede seleccionar todos los puertos FCP físicos necesarios y un LIF por puerto físico se crea automáticamente.
 
-image::saphana_aff_fc_image14.jpeg[saphana AFF fc image14]
+image:saphana_aff_fc_image14.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -135,7 +135,7 @@ image::saphana_aff_fc_image14.jpeg[saphana AFF fc image14]
 
 Un conjunto de puertos FCP se utiliza para definir qué LIF se utilizarán en un iGroup específico. Normalmente, todos los LIF creados para los sistemas HANA se colocan en el mismo conjunto de puertos. En la figura siguiente se muestra la configuración de un conjunto de puertos llamado 32g, que incluye las cuatro LIF ya se han creado.
 
-image::saphana_aff_fc_image15.jpeg[saphana AFF fc image15]
+image:saphana_aff_fc_image15.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 NOTE: Con ONTAP 9.8, no es necesario un conjunto de puertos, pero se puede crear y utilizar a través de la línea de comandos.
@@ -149,7 +149,7 @@ En la siguiente figura, se muestra la configuración de volúmenes de cuatro sis
 
 NOTE: Si solo se usa una controladora de almacenamiento de una pareja de alta disponibilidad para los sistemas SAP HANA, los volúmenes de datos y los volúmenes de registro también pueden almacenarse en la misma controladora de almacenamiento.
 
-image::saphana_aff_fc_image16.jpg[saphana AFF fc image16]
+image:saphana_aff_fc_image16.jpg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Para cada host SAP HANA, un volumen de datos, un volumen de registro y un volumen de para `/hana/shared` están configurados. La siguiente tabla muestra un ejemplo de configuración con cuatro sistemas SAP HANA de un solo host.
 
@@ -231,7 +231,7 @@ NOTE: Si solo se usa una controladora de almacenamiento de un par de alta dispon
 
 NOTE: Los sistemas ASA AFF de NetApp no admiten NFS como protocolo. NetApp recomienda utilizar un sistema AFF o FAS adicional para `/hana/shared` sistema de archivos.
 
-image::saphana_aff_fc_image17.jpg[saphana AFF fc image17]
+image:saphana_aff_fc_image17.jpg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Para cada host SAP HANA, se crean un volumen de datos y un volumen de registro. La `/hana/shared` El volumen lo utilizan todos los hosts del sistema SAP HANA. En la siguiente tabla se muestra un ejemplo de configuración para un sistema SAP HANA de 4+1 host múltiple.
 
@@ -373,12 +373,12 @@ Los siguientes pasos muestran la configuración de un sistema HANA de dos+1 host
 
 . Inicie el asistente de aprovisionamiento de aplicaciones para SAP HANA en System Manager y proporcione la información necesaria. Deben añadirse todos los iniciadores (WWPN) de todos los hosts.
 +
-image::saphana_aff_fc_image18.jpeg[saphana AFF fc image18]
+image:saphana_aff_fc_image18.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Confirmar que el almacenamiento se ha aprovisionado correctamente.
 
 
-image::saphana_aff_fc_image19.jpeg[saphana AFF fc image19]
+image:saphana_aff_fc_image19.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

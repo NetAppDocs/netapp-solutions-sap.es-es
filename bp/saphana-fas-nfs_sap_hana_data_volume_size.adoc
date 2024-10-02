@@ -10,7 +10,7 @@ summary: Como valor predeterminado, SAP HANA solo usa un volumen de datos por se
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

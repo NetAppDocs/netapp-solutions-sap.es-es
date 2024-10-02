@@ -10,9 +10,10 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Este documento describe las situaciones de clonación y actualización del sistema SAP para sistemas SAP HANA que se ejecutan en sistemas NetApp en las instalaciones, en los sistemas Amazon FSx para NetApp ONTAP y en Azure NetApp Files. Sin embargo, no todas las funciones y escenarios están disponibles en todas las plataformas de almacenamiento. La siguiente tabla resume las configuraciones compatibles.
 
 Dentro del documento, utilizamos un entorno SAP HANA que se ejecuta en sistemas NetApp locales con NFS como protocolo de almacenamiento. La mayoría de los pasos del flujo de trabajo son idénticos en las diferentes plataformas y, si hay diferencias, se resaltan en este documento.

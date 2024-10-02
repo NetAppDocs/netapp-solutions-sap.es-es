@@ -10,20 +10,21 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 :firstname: ---
 :author: ---
 :authorinitials: -
 :authors: ---
 
 
-Nils Bauer: NetApp
+[role="lead"]
+En el dinámico entorno empresarial actual, las empresas deben ofrecer innovación continua y reaccionar rápidamente a los mercados en constante cambio. En estas circunstancias competitivas, las empresas que implementan una mayor flexibilidad en sus procesos de trabajo pueden adaptarse a las demandas del mercado de forma más eficaz.
+
+Autor: Nils Bauer, NetApp
 
 
 
 == Introducción
-
-En el dinámico entorno empresarial actual, las empresas deben ofrecer innovación continua y reaccionar rápidamente a los mercados en constante cambio. En estas circunstancias competitivas, las empresas que implementan una mayor flexibilidad en sus procesos de trabajo pueden adaptarse a las demandas del mercado de forma más eficaz.
 
 Los cambios en las demandas del mercado también afectan a los entornos SAP de una empresa, de manera que requieren integraciones, cambios y actualizaciones regulares. Los departamentos DE TECNOLOGÍA deben implementar estos cambios con menos recursos y con un periodo de tiempo más corto. Para minimizar el riesgo en la puesta en marcha de estos cambios, es necesario realizar pruebas y formación exhaustivas que requieran sistemas SAP adicionales con datos reales de producción.
 
@@ -31,7 +32,7 @@ Los enfoques tradicionales de la gestión del ciclo de vida de SAP para aprovisi
 
 Las soluciones NetApp para la optimización de la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y base de datos de SAP HANA, y combinan la protección de datos integrada en las aplicaciones eficiente con el aprovisionamiento flexible de sistemas de pruebas de SAP, como se muestra en la siguiente figura. Estas soluciones están disponibles para SAP HANA ejecutándose en las instalaciones o en el cloud en Azure NetApp Files (ANF) o Amazon FSx para NetApp ONTAP (FSx para ONTAP).
 
-image::sc-copy-clone-image1.png[clon de copia sc image1]
+image:sc-copy-clone-image1.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

@@ -10,7 +10,7 @@ summary: A continuación figuran los requisitos para la instalación del softwar
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

@@ -10,7 +10,7 @@ summary: En esta sección se describe cómo establecer la paridad de FSX para si
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

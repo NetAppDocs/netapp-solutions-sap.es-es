@@ -8,7 +8,10 @@ summary:
 :allow-uri-read: 
 
 
-= :hardbreaks: :nofoooter: :íconos: font :linkattrs: :imagesdir: ././media/
+= :hardbreaks: :nofooter: :icons: font :linkattrs: :imagesdir: ../media/
+
+[role="lead"]
+SAP HANA en NetApp AFF con el protocolo NFS.
 
 |===
 |  |  |  

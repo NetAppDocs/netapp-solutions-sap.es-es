@@ -10,8 +10,11 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y bases de datos de SAP HANA, combinando una protección eficiente de datos integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP.
 
 
 
@@ -19,11 +22,9 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 
 Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual. Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
 
-image::sc-copy-clone-image3.png[clon de copia sc image3]
+image:sc-copy-clone-image3.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"] Los flujos de trabajo de clonado de SnapCenter se pueden usar para acelerar y automatizar las tareas necesarias en las capas de la infraestructura y de bases de datos. En lugar de restaurar un backup del sistema de origen al sistema de destino, SnapCenter utiliza la copia Snapshot de NetApp y la tecnología FlexClone de NetApp, de modo que las tareas necesarias hasta una base de datos SAP HANA iniciada pueden llevarse a cabo en minutos en lugar de horas. El tiempo necesario para el proceso de clonación es independiente del tamaño de la base de datos, por lo que es posible crear sistemas de gran tamaño en un par de minutos. El tiempo de inicio solo depende del tamaño de la base de datos y de la conectividad entre el servidor de la base de datos y el sistema de almacenamiento.
 
-Los flujos de trabajo de clonación de SnapCenter se pueden usar para acelerar y automatizar las tareas necesarias en las capas de infraestructura y base de datos. En lugar de restaurar un backup del sistema de origen al sistema de destino, SnapCenter utiliza la copia Snapshot de NetApp y la tecnología FlexClone de NetApp, de modo que las tareas necesarias hasta una base de datos SAP HANA iniciada pueden llevarse a cabo en minutos en lugar de horas. El tiempo necesario para el proceso de clonación es independiente del tamaño de la base de datos, por lo que es posible crear sistemas de gran tamaño en un par de minutos. El tiempo de inicio solo depende del tamaño de la base de datos y de la conectividad entre el servidor de la base de datos y el sistema de almacenamiento.
-
-image::sc-copy-clone-image4.png[clon de copia sc image4]
+image:sc-copy-clone-image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El flujo de trabajo de las operaciones de actualización del sistema se describe en la sección link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["“Actualización del sistema SAP HANA con SnapCenter”."]
 
@@ -39,7 +40,7 @@ En lugar de restaurar el sistema SAP, el mejor método es intentar solucionar el
 
 Al configurar el sistema de reparación, la flexibilidad y la agilidad son cruciales. Cuando se utilizan backups de SnapVault basados en almacenamiento de NetApp, hay disponibles varias imágenes de base de datos consistentes para crear un clon del sistema de producción mediante la tecnología FlexClone de NetApp. Los volúmenes FlexClone se pueden crear en cuestión de segundos en lugar de varias horas si se realiza una restauración redirigida a partir de un backup basado en archivos para configurar el sistema de reparación.
 
-image::sc-copy-clone-image5.png[clon de copia sc image5]
+image:sc-copy-clone-image5.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El flujo de trabajo de creación del sistema de reparación se describe en la sección link:sc-copy-clone-sap-system-clone-with-snapcenter.html["“Clonado del sistema SAP con SnapCenter”."]
 
@@ -53,9 +54,7 @@ La replicación de almacenamiento con SnapMirror permite ejecutar pruebas de rec
 
 Las pruebas de recuperación ante desastres para SnapMirror asíncrono y síncrono utilizan backups de Snapshot y volúmenes FlexClone en el destino de recuperación ante desastres.
 
-image::sc-copy-clone-image6.png[clon de copia sc image6]
-
-Puede encontrar una descripción detallada paso a paso en los informes técnicos
+image:sc-copy-clone-image6.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"] Puede encontrar una descripción detallada paso a paso en los informes técnicos
 
 https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento (netapp.com)"]
 

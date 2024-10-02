@@ -10,7 +10,7 @@ summary: En esta sección se describe la preparación necesaria para instalar SA
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

@@ -10,7 +10,7 @@ summary: 'Este documento se centra en la integración de los sistemas de almacen
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -43,7 +43,7 @@ El término copia del sistema SAP se suele utilizar como sinónimo de tres proce
 
 En la siguiente imagen, se muestran los pasos del flujo de trabajo de clonado, copia y actualización de LaMa del sistema SAP relacionados con el almacenamiento de NetApp.
 
-image::sap-lama-image1.png[Imagen que muestra los pasos del flujo de trabajo LaMa de clonación, copia y actualización del sistema SAP relacionados con el almacenamiento de NetApp]
+image:sap-lama-image1.png["Imagen que muestra los pasos del flujo de trabajo LaMa de clonación, copia y actualización del sistema SAP relacionados con el almacenamiento de NetApp"]
 
 
 
@@ -68,7 +68,7 @@ La solución general consta de estos componentes principales:
 
 La siguiente imagen muestra cómo LaMa de SAP y los sistemas de almacenamiento de NetApp se integran a través de Playbooks de Ansible en un host de Ansible dedicado, desencadenado por scripts del shell ejecutados desde SAP Host Agent.
 
-image::sap-lama-image2.png[Imagen que muestra cómo LaMa de SAP y los sistemas de almacenamiento de NetApp se integran a través de Playbooks de Ansible en un host de Ansible dedicado, desencadenado por scripts de shell ejecutados desde SAP Host Agent]
+image:sap-lama-image2.png["Imagen que muestra cómo LaMa de SAP y los sistemas de almacenamiento de NetApp se integran a través de Playbooks de Ansible en un host de Ansible dedicado, desencadenado por scripts de shell ejecutados desde SAP Host Agent"]
 
 
 
@@ -80,7 +80,7 @@ Para acelerar y automatizar las tareas necesarias en las capas de infraestructur
 
 La siguiente imagen muestra las posibles mejoras de eficiencia operativa cuando utiliza la automatización.
 
-image::sap-lama-image3.png[Imagen que muestra las posibles mejoras de eficiencia operativa cuando se utiliza la automatización]
+image:sap-lama-image3.png["Imagen que muestra las posibles mejoras de eficiencia operativa cuando se utiliza la automatización"]
 
 
 

@@ -10,7 +10,7 @@ summary: En esta sección se describe cómo configurar una política para la rep
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,34 +18,34 @@ Debe configurar una política para la replicación de backups de la siguiente ma
 
 . Escriba un nombre para la política.
 +
-image::amazon-fsx-image79.png[amazon fsx image79]
+image:amazon-fsx-image79.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione Snapshot backup and a schedule frequency. Normalmente se utiliza diariamente para la replicación de backup.
 +
-image::amazon-fsx-image80.png[amazon fsx image80]
+image:amazon-fsx-image80.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione la retención para los backups de Snapshot.
 +
-image::amazon-fsx-image81.png[amazon fsx image81]
+image:amazon-fsx-image81.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 +
 Esta es la retención de los backups de Snapshot diarios que se realizan en el almacenamiento primario. La retención de backups secundarios en el destino de SnapVault ya se ha configurado previamente mediante el comando add rule en el nivel ONTAP. Consulte “Configurar relaciones de replicación en FSX para sistemas de archivos ONTAP” (xref).
 
 +
-image::amazon-fsx-image82.png[amazon fsx image82]
+image:amazon-fsx-image82.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione el campo Update SnapVault y proporcione una etiqueta personalizada.
 +
 Esta etiqueta debe coincidir con la etiqueta de SnapMirror que se proporciona en la `add rule` Comando a nivel de ONTAP.
 
 +
-image::amazon-fsx-image83.png[amazon fsx image83]
+image:amazon-fsx-image83.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 +
-image::amazon-fsx-image84.png[amazon fsx image84]
+image:amazon-fsx-image84.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
 Se ha configurado la nueva política de SnapCenter.
 
-image::amazon-fsx-image85.png[amazon fsx image85]
+image:amazon-fsx-image85.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

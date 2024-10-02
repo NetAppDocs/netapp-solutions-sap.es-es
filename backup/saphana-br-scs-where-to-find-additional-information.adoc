@@ -10,7 +10,7 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,7 +18,7 @@ Si quiere más información sobre el contenido de este documento, consulte los s
 
 * Página de recursos de SnapCenter
 +
-https://www.netapp.com/us/documentation/snapcenter-software.aspx["https://www.netapp.com/us/documentation/snapcenter-software.aspx"^]
+https://www.netapp.com/us/documentation/snapcenter-software.aspx["https://www.netapp.com/us/documentation/snapcenter-software.aspx"]
 
 * Documentación del software SnapCenter
 +

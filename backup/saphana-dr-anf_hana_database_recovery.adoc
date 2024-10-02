@@ -10,7 +10,7 @@ summary: A continuación se muestran los pasos para la recuperación de la base 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

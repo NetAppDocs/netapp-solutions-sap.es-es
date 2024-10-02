@@ -10,14 +10,14 @@ summary: En esta sección se describe cómo añadir una política a la protecci�
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
 Debe añadir la nueva política a la configuración de protección de recursos de HANA, como se muestra en la siguiente figura.
 
-image::amazon-fsx-image86.png[amazon fsx image86]
+image:amazon-fsx-image86.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En nuestra configuración se define un programa diario.
 
-image::amazon-fsx-image87.png[amazon fsx image87]
+image:amazon-fsx-image87.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

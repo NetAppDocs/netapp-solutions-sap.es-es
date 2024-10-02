@@ -10,7 +10,7 @@ summary: SAP recomienda combinar backups de SnapVault basados en almacenamiento 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -20,7 +20,7 @@ Al programar backups con esta política, SnapCenter crea un backup de archivos S
 
 SnapCenter no muestra la comprobación de integridad de bloques del mismo modo que los backups basados en copias de Snapshot. En su lugar, la tarjeta de resumen muestra la cantidad de backups basados en archivos y el estado del backup anterior.
 
-image::saphana-br-scs-image94.png[saphana br scs image94]
+image:saphana-br-scs-image94.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 No se puede eliminar un backup de comprobación de integridad del bloque con la interfaz de usuario de SnapCenter, pero se puede eliminar mediante comandos de PowerShell.
 
@@ -70,7 +70,7 @@ PS C:\Users\scadmin>
 ....
 El catálogo de backup de SAP HANA muestra entradas tanto para las bases de datos del sistema como para las de tenant. En la siguiente figura se muestra una comprobación de integridad de bloques de SnapCenter en el catálogo de backup de la base de datos del sistema.
 
-image::saphana-br-scs-image95.png[saphana br scs image95]
+image:saphana-br-scs-image95.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Una comprobación correcta de integridad de bloque crea archivos de backup de datos SAP HANA estándar. SnapCenter utiliza la ruta de backup que se ha configurado en la base de datos HANA para las operaciones de backup de datos basadas en archivos.
 

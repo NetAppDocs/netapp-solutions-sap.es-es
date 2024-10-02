@@ -10,12 +10,13 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 En la siguiente sección se proporciona una descripción paso a paso de las diferentes opciones de operación de actualización del sistema de una base de datos SAP HANA.
 
-image::sc-copy-clone-image7.png[clon de copia sc image7]
+image:sc-copy-clone-image7.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En función de la configuración de la base de datos SAP HANA, se ejecutan o deben prepararse pasos adicionales. La siguiente tabla muestra un resumen.
 
@@ -105,7 +106,7 @@ Se utilizaron las siguientes versiones de software:
 
 Todos los sistemas SAP HANA deben configurarse en función de la guía de configuración https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"]. SnapCenter y los recursos de SAP HANA se configuraron en función de la guía de mejores prácticas https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Backup y recuperación de datos de SAP HANA con SnapCenter"].
 
-image::sc-copy-clone-image16.png[clon de copia sc image16]
+image:sc-copy-clone-image16.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -145,7 +146,7 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 
 En esta sección se describe el flujo de trabajo de actualización del sistema SAP HANA en el que el nombre del inquilino en el sistema de origen y de destino es idéntico al SID. La clonación de almacenamiento se ejecuta en el almacenamiento primario y la recuperación se automatiza mediante el script `sc-system-refresh.sh`.
 
-image::sc-copy-clone-image17.png[clon de copia sc image17]
+image:sc-copy-clone-image17.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El flujo de trabajo consta de los siguientes pasos:
 
@@ -180,7 +181,7 @@ Las siguientes capturas de pantalla muestran los pasos necesarios.
 . Seleccione un backup de Snapshot del sistema de origen SS1 y haga clic en Clone.
 
 
-image::sc-copy-clone-image18.png[clon de copia sc image18]
+image:sc-copy-clone-image18.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione el host en el que está instalado el sistema de destino QS1. Introduzca QS1 como SID de destino. La dirección IP de exportación de NFS debe ser la interfaz de red de almacenamiento del host de destino.
 +
@@ -193,28 +194,28 @@ NOTE: Es fundamental que el recurso y el host del sistema de destino se hayan co
 
 
 
-image::sc-copy-clone-image19.png[clon de copia sc image19]
+image:sc-copy-clone-image19.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En una configuración de SAN Fibre Channel, no se requiere una dirección IP de exportación, pero debe proporcionar el protocolo utilizado en la siguiente pantalla.
 
 
 NOTE: Las capturas de pantalla muestran una configuración de laboratorio diferente mediante una conectividad FibreChannel.
 
-image::sc-copy-clone-image20.png[clon de copia sc image20]
+image:sc-copy-clone-image20.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
-image::sc-copy-clone-image21.png[clon de copia sc image21]
+image:sc-copy-clone-image21.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Con Azure NetApp Files y un pool de capacidad de calidad de servicio manual, debe proporcionar el rendimiento máximo del volumen nuevo. Asegúrese de que el pool de capacidad tenga suficiente espacio adicional; de lo contrario, se producirá un error en el flujo de trabajo de clonado.
 
 
 NOTE: Las capturas de pantalla muestran una configuración de laboratorio diferente que se ejecuta en Microsoft Azure con Azure NetApp Files.
 
-image::sc-copy-clone-image22.png[clon de copia sc image22]
+image:sc-copy-clone-image22.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Introduzca los scripts posteriores a la clonado opcionales con las opciones de línea de comandos requeridas. Con nuestro ejemplo utilizamos un script posterior a la clonado para ejecutar la recuperación de la base de datos SAP HANA.
 
 
-image::sc-copy-clone-image23.png[clon de copia sc image23]
+image:sc-copy-clone-image23.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 NOTE: Como se explicó anteriormente, el uso del script de recuperación es opcional. La recuperación también puede realizarse manualmente después de que finaliza el flujo de trabajo de clonación de SnapCenter.
@@ -225,7 +226,7 @@ NOTE: El script para la operación de recuperación recupera la base de datos SA
 . La pantalla Detalles del trabajo en SnapCenter muestra el progreso de la operación. Los detalles de la tarea también muestran que el tiempo de ejecución general, incluida la recuperación de la base de datos, fue inferior a 3 minutos.
 
 
-image::sc-copy-clone-image24.png[clon de copia sc image24]
+image:sc-copy-clone-image24.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . El archivo log del `sc-system-refresh` script muestra los diferentes pasos que se ejecutaron para la operación de recuperación. El script lee la lista de inquilinos de la base de datos del sistema y ejecuta una recuperación de todos los inquilinos existentes.
 
@@ -266,21 +267,21 @@ hana-7:/mnt/sapcc-share/SAP-System-Refresh
 . Cuando finalice el trabajo de SnapCenter, el clon se puede ver dentro de la vista de topología del sistema de origen.
 
 
-image::sc-copy-clone-image25.png[clon de copia sc image25]
+image:sc-copy-clone-image25.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . La base de datos SAP HANA se está ejecutando.
 . Si desea proteger el sistema SAP HANA de destino, debe ejecutar la detección automática haciendo clic en el recurso del sistema de destino.
 
 
-image::sc-copy-clone-image26.png[clon de copia sc image26]
+image:sc-copy-clone-image26.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Cuando finaliza el proceso de detección automática, el nuevo volumen clonado aparece en la sección huella de almacenamiento.
 
-image::sc-copy-clone-image27.png[clon de copia sc image27]
+image:sc-copy-clone-image27.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Al volver a hacer clic en el recurso, la protección de datos se puede configurar para el sistema QS1 actualizado.
 
-image::sc-copy-clone-image28.png[clon de copia sc image28]
+image:sc-copy-clone-image28.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -288,15 +289,13 @@ image::sc-copy-clone-image28.png[clon de copia sc image28]
 
 En esta sección se describe el flujo de trabajo de actualización del sistema SAP HANA para el que el nombre del inquilino en el sistema de origen y de destino es idéntico al SID. La clonación de almacenamiento se ejecuta en el almacenamiento de backup externo y se automatiza aún más mediante el script sc-system-refresh.sh.
 
-image::sc-copy-clone-image29.png[clon de copia sc image29]
+image:sc-copy-clone-image29.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"] La única diferencia en el flujo de trabajo de actualización del sistema SAP HANA entre el clonado del almacenamiento de backup primario y externo es la selección del backup Snapshot en SnapCenter. Para la clonado de almacenamiento de backup fuera de las instalaciones, se deben seleccionar primero los backups secundarios, seguidos por la selección del backup de Snapshot.
 
-La única diferencia en el flujo de trabajo de actualización del sistema SAP HANA entre el clonado del almacenamiento de backup primario y externo es la selección del backup Snapshot en SnapCenter. Para la clonado de almacenamiento de backup fuera de las instalaciones, se deben seleccionar primero los backups secundarios, seguidos por la selección del backup de Snapshot.
-
-image::sc-copy-clone-image30.png[clon de copia sc image30]
+image:sc-copy-clone-image30.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Si existen varias ubicaciones de almacenamiento secundario para el backup seleccionado, debe elegir el volumen de destino requerido.
 
-image::sc-copy-clone-image31.png[clon de copia sc image31]
+image:sc-copy-clone-image31.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Todos los pasos siguientes son idénticos al flujo de trabajo para clonar desde el almacenamiento primario.
 
@@ -306,7 +305,7 @@ Todos los pasos siguientes son idénticos al flujo de trabajo para clonar desde 
 
 En esta sección se describe el flujo de trabajo de actualización del sistema SAP HANA con varios inquilinos. La clonación de almacenamiento se ejecuta en el almacenamiento primario y se automatiza aún más mediante el script `sc-system-refresh.sh`.
 
-image::sc-copy-clone-image32.png[clon de copia sc image32]
+image:sc-copy-clone-image32.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Los pasos requeridos en SnapCenter son idénticos a los descritos en la sección «Clonación desde almacenamiento principal con un nombre de inquilino igual a SID». La única diferencia está en la operación de recuperación de arrendatarios dentro del script `sc-system-refresh.sh`, donde se recuperan todos los arrendatarios.
 
@@ -377,17 +376,17 @@ El flujo de trabajo de eliminación de clones ahora se ejecuta con los siguiente
 . Seleccione el clon dentro de la vista de topología del sistema de origen y haga clic en Eliminar.
 
 
-image::sc-copy-clone-image33.png[clon de copia sc image33]
+image:sc-copy-clone-image33.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Introduzca los scripts de clonado previo y desmontaje con las opciones de línea de comandos requeridas.
 
 
-image::sc-copy-clone-image34.png[clon de copia sc image34]
+image:sc-copy-clone-image34.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . La pantalla de detalles del trabajo en SnapCenter muestra el progreso de la operación.
 
 
-image::sc-copy-clone-image35.png[clon de copia sc image35]
+image:sc-copy-clone-image35.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . El archivo de registro `sc-system-refresh` del script muestra los pasos de las operaciones de apagado y desmontaje.
 
@@ -430,21 +429,21 @@ NOTE: Con Azure NetApp Files, la operación de división de clones no está disp
 
 El flujo de trabajo de división de clones en SnapCenter se inicia en la vista de topología del sistema de origen seleccionando el clon y haciendo clic en la división de clones.
 
-image::sc-copy-clone-image36.png[clon de copia sc image36]
+image:sc-copy-clone-image36.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En la siguiente pantalla se muestra una vista previa que proporciona información sobre la capacidad necesaria para el volumen dividido.
 
-image::sc-copy-clone-image37.png[clon de copia sc image37]
+image:sc-copy-clone-image37.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El registro de trabajos de SnapCenter muestra el progreso de la operación de división de clones.
 
-image::sc-copy-clone-image38.png[clon de copia sc image38]
+image:sc-copy-clone-image38.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En la vista de recursos de SnapCenter, el sistema de destino QS1 ahora ya no está marcado como un recurso clonado. Al volver a la vista de topología del sistema de origen, el clon ya no queda visible. El volumen dividido ahora es independiente del backup de snapshot del sistema de origen.
 
-image::sc-copy-clone-image39.png[clon de copia sc image39]
+image:sc-copy-clone-image39.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
-image::sc-copy-clone-image40.png[clon de copia sc image40]
+image:sc-copy-clone-image40.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El flujo de trabajo de actualización después de una operación de división de clones tiene un aspecto ligeramente diferente a la operación sin división de clones. Tras una operación de división de clones, no se requiere ninguna operación de eliminación de clones, ya que el volumen de datos de destino ya no es un volumen FlexClone.
 

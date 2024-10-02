@@ -10,7 +10,7 @@ summary: 'Los volúmenes ahora pueden montarse en el host de destino, según el 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

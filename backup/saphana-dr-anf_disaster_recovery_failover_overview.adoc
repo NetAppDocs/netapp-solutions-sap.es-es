@@ -10,7 +10,7 @@ summary: Dependiendo de si la replicación de backup de registros forma parte de
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -32,4 +32,4 @@ Para ejecutar la recuperación tras fallos, lleve a cabo los siguientes pasos:
 
 En las siguientes subsecciones se describen estos pasos con detalle, y la siguiente figura describe las pruebas de recuperación tras fallos en caso de desastre.
 
-image::saphana-dr-anf_image26.png[saphana dr y image26]
+image:saphana-dr-anf_image26.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

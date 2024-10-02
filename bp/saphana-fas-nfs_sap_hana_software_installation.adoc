@@ -10,7 +10,7 @@ summary: A continuación se enumeran los requisitos para la instalación de soft
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

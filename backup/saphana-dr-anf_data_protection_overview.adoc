@@ -10,6 +10,8 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
+En esta sección se presenta una descripción general de la protección de datos para SAP HANA en Azure NetApp Files (ANF).

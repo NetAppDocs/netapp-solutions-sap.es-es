@@ -10,9 +10,10 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Esta sección proporciona una descripción paso a paso de la operación de clonado del sistema SAP, que puede utilizarse para configurar un sistema de reparación para solucionar daños lógicos.
 
 En la siguiente figura se resumen los pasos necesarios para realizar una operación de clonación del sistema SAP mediante SnapCenter.
@@ -34,7 +35,7 @@ Si el sistema ya no es necesario, el proceso de limpieza se lleva a cabo con los
 . Flujo de trabajo de eliminación de clones de SnapCenter para el volumen compartido de SAP HANA.
 
 
-image::sc-copy-clone-image9.png[clon de copia sc image9]
+image:sc-copy-clone-image9.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -64,7 +65,7 @@ Se utilizaron las siguientes versiones de software:
 
 Todos los sistemas SAP HANA deben configurarse en función de la guía de configuración https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"]. SnapCenter y los recursos de SAP HANA se configuraron en función de la guía de mejores prácticas https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Backup y recuperación de datos de SAP HANA con SnapCenter"].
 
-image::sc-copy-clone-image41.png[clon de copia sc image41]
+image:sc-copy-clone-image41.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -172,26 +173,26 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 . Seleccione un backup Snapshot del volumen compartido del sistema de origen SS1 y haga clic en Clonar.
 
 
-image::sc-copy-clone-image42.png[clon de copia sc image42]
+image:sc-copy-clone-image42.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione el host donde se ha preparado el sistema de reparación de destino. La dirección IP de exportación de NFS debe ser la interfaz de red de almacenamiento del host de destino. El SID de destino mantiene el mismo SID que el sistema de origen. En nuestro ejemplo SS1.
 
 
-image::sc-copy-clone-image43.png[clon de copia sc image43]
+image:sc-copy-clone-image43.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Escriba el script de montaje con las opciones de línea de comandos requeridas.
 +
 
-NOTE: El sistema SAP HANA utiliza un único volumen para `/hana/shared` , así como para `/usr/sap/SS1`, separados en subdirectorios como se recomienda en la guía de configuración https://www.netapp.com/media/17238-tr4435.pdf["SAP HANA en sistemas AFF de NetApp con NFS"]. El script `sc-mount-volume.sh` admite esta configuración mediante una opción de línea de comandos especial para la ruta de montaje. Si la opción de línea de comandos mount path es igual a usr-sap-and-shared, el script monta los subdirectorios compartidos y usr-sap en el volumen de forma acorde.
+NOTE: El sistema SAP HANA utiliza un único volumen para `/hana/shared`, así como para `/usr/sap/SS1`, separados en subdirectorios como se recomienda en la guía de configuración link:../bp/saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"]. El script `sc-mount-volume.sh` admite esta configuración mediante una opción de línea de comandos especial para la ruta de montaje. Si la opción de línea de comandos mount path es igual a usr-sap-and-shared, el script monta los subdirectorios compartidos y usr-sap en el volumen de forma acorde.
 
 
 
-image::sc-copy-clone-image44.png[clon de copia sc image44]
+image:sc-copy-clone-image44.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . La pantalla Detalles del trabajo en SnapCenter muestra el progreso de la operación.
 
 
-image::sc-copy-clone-image45.png[clon de copia sc image45]
+image:sc-copy-clone-image45.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . El archivo log del script sc-mount-volume.sh muestra los diferentes pasos ejecutados para la operación de montaje.
 
@@ -220,7 +221,7 @@ Filesystem 1K-blocks Used Available Use% Mounted on
 . En SnapCenter, se puede ver un nuevo recurso para el volumen clonado.
 
 
-image::sc-copy-clone-image46.png[clon de copia sc image46]
+image:sc-copy-clone-image46.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Ahora que el volumen compartido /hana/está disponible, los servicios SAP HANA pueden iniciarse.
 
@@ -259,12 +260,12 @@ Debe agregar las entradas de servicios requeridas a /usr/sap/sapservices, y los 
 . Seleccione un backup de SAP HANA Snapshot del sistema de origen SS1.
 
 
-image::sc-copy-clone-image47.png[clon de copia sc image47]
+image:sc-copy-clone-image47.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Seleccione el host donde se ha preparado el sistema de reparación de destino. La dirección IP de exportación de NFS debe ser la interfaz de red de almacenamiento del host de destino. El SID de destino mantiene el mismo SID que el sistema de origen. En nuestro ejemplo SS1
 
 
-image::sc-copy-clone-image48.png[clon de copia sc image48]
+image:sc-copy-clone-image48.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 . Introduzca los scripts posteriores a la clonado con las opciones de línea de comandos requeridas.
 +
@@ -273,11 +274,11 @@ NOTE: El script de la operación de recuperación recupera la base de datos SAP 
 
 
 
-image::sc-copy-clone-image23.png[clon de copia sc image23]
+image:sc-copy-clone-image23.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 La pantalla de detalles del trabajo en SnapCenter muestra el progreso de la operación.
 
-image::sc-copy-clone-image49.png[clon de copia sc image49]
+image:sc-copy-clone-image49.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 El archivo log del `sc-system-refresh` script muestra los diferentes pasos que se ejecutan para el montaje y la operación de recuperación.
 

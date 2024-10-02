@@ -10,7 +10,7 @@ summary: Cada servidor SAP HANA debe disponer de una conexión SAN FCP redundant
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,6 +18,6 @@ Cada servidor SAP HANA debe disponer de una conexión SAN FCP redundante con un 
 
 En la siguiente figura, se muestra un ejemplo con cuatro hosts SAP HANA conectados a dos controladoras de almacenamiento. Cada host SAP HANA tiene dos puertos FCP conectados a la estructura redundante. En la capa de almacenamiento, cuatro puertos FCP están configurados para proporcionar el rendimiento necesario para cada host SAP HANA.
 
-image::saphana_fas_fc_image9.png[saphana FAS fc image9]
+image:saphana_fas_fc_image9.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Además de la división en zonas en la capa del switch, debe asignar cada LUN del sistema de almacenamiento a los hosts que se conectan a esta LUN. Mantener la división en zonas en el switch simple; es decir, definir un conjunto de zonas en el que todos los HBA del host puedan ver todos los HBA de la controladora.

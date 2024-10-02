@@ -10,7 +10,7 @@ summary: Los siguientes son pasos para la recuperación de la base de datos de H
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

@@ -10,7 +10,7 @@ summary: Sólo se necesita un conector de almacenamiento en entornos de varios h
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

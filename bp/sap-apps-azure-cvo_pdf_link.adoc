@@ -13,13 +13,14 @@ summary: El informe técnico TR-4757 proporciona prácticas recomendadas para us
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Bernd Herth, Tobias Brandl, Nils Bauer, NetApp
-
-Bratton, Geert van Teylingen, Microsoft
-
+[role="lead"]
 El informe técnico TR-4757 proporciona prácticas recomendadas para usar Azure NetApp Files para aplicaciones SAP e implementaciones de SAP HANA. También detalla los diferentes casos de uso de los sistemas de archivos compartidos SAP este documento ofrece prácticas recomendadas para aprovechar las aplicaciones SAP Cloud Volumes ONTAP de NetApp y las implementaciones de SAP HANA. Incluye diferentes casos de uso de sistemas de archivos compartidos de SAP y consideraciones específicas de rendimiento con SAP HANA en Cloud Volumes ONTAP.
+
+Autores:
+
+Bernd Herth, Tobias Brandl, Nils Bauer, NetApp Will Bratton, Geert van Teylingen, Microsoft
 
 link:https://www.netapp.com/pdf.html?item=/media/17126-tr4757pdf.pdf["https://www.netapp.com/pdf.html?item=/media/17126-tr4757pdf.pdf"]

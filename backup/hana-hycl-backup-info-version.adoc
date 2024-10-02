@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: backup/hana-hycl-backup-info-version.html 
 keywords: BlueXP, SAP HANA, restore 
-summary: Esta sección enumera dónde encontrar información adicional y muestra el historial de versiones. 
+summary: Esta sección muestra dónde encontrar información adicional y el historial de versiones. 
 ---
 = Información Adicional e Historial de Versiones
 :hardbreaks:
@@ -10,8 +10,11 @@ summary: Esta sección enumera dónde encontrar información adicional y muestra
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+Esta sección muestra dónde encontrar información adicional y el historial de versiones.
 
 
 

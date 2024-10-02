@@ -10,7 +10,7 @@ summary: En caso de conmutación al nodo de respaldo ante desastres, es necesari
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -21,15 +21,15 @@ NOTE: Para el volumen de datos de HANA, debe restaurar el volumen al backup de s
 
 Las siguientes dos capturas de pantalla muestran la operación de pausa y eliminación de paridad para el volumen de datos de HANA. Deben realizarse las mismas operaciones para el backup de registros y el volumen compartido de HANA.
 
-image::saphana-dr-anf_image27.png[saphana dr y image27]
+image:saphana-dr-anf_image27.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
-image::saphana-dr-anf_image28.png[saphana dr y image28]
+image:saphana-dr-anf_image28.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Como se eliminó el paridad de replicación, es posible revertir el volumen al último backup de snapshot de HANA. Si no se elimina la relación de paridad, la selección de revertir volumen se atenúa y no se puede seleccionar. Las dos siguientes capturas de pantalla muestran la operación de reversión de volumen.
 
-image::saphana-dr-anf_image29.png[saphana dr y image29]
+image:saphana-dr-anf_image29.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
-image::saphana-dr-anf_image30.png[saphana dr y image30]
+image:saphana-dr-anf_image30.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Después de la operación de reversión de volumen, el volumen de datos se basa en el backup de snapshot consistente de HANA y ahora puede utilizarse para ejecutar operaciones de recuperación de reenvío.
 

@@ -8,8 +8,9 @@ summary: Este documento proporciona a los clientes y socios las prácticas recom
 :allow-uri-read: 
 
 
-Marco Schoen: NetApp
-
+[role="lead"]
 Este documento proporciona a los clientes y socios las prácticas recomendadas para implementar ONTAP de NetApp para respaldar las soluciones de SAP Business Suite que se ejecutan en un entorno de Microsoft SQL Server en Windows.
+
+Marco Schoen: NetApp
 
 link:https://www.netapp.com/media/16865-tr-4467.pdf["https://www.netapp.com/media/16865-tr-4467.pdf"]

@@ -10,7 +10,7 @@ summary: La integración de un marco de automatización moderno como Ansible en 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

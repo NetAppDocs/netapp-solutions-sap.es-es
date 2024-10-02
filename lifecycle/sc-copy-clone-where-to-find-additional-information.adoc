@@ -10,9 +10,10 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:
 
 * https://docs.netapp.com/us-en/netapp-solutions-sap/["Aplicaciones empresariales SAP y soluciones de bases de datos SAP HANA (netapp.com)"]

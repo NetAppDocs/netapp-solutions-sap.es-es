@@ -10,8 +10,11 @@ summary: Este informe técnico ofrece las mejores prácticas para la protección
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+Este informe técnico ofrece las mejores prácticas para la protección de datos de SAP HANA mediante el backup nad Recovery de NetApp BlueXP para aplicación. Este documento abarca conceptos, recomendaciones de configuración y flujos de trabajo de operaciones, incluidas la configuración, las operaciones de backup. y la restauración.
 
 
 
@@ -36,7 +39,7 @@ Es necesario poner en marcha un conector BlueXP en la red virtual del cliente. S
 La transferencia de datos entre el almacenamiento en las instalaciones y el bucket de cloud está protegida integral con cifrado AES de 256 bits en reposo, cifrado TLS/HTTPS en tránsito y compatibilidad con claves gestionadas por el cliente (CMK). +
 Los datos de los que se ha realizado un BACKUP pueden almacenarse en un estado WORM inalterable e indeleble. La única forma de acceder a los datos desde el almacenamiento de objetos consiste en restaurarlos en un almacenamiento basado en NetApp ONTAP, incluido NetApp CVO.
 
-image::hana-hycl-back-image1.png[Ein Bild,624,450]
+image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Descripción generierte,width=624,height=450"]
 
 
 

@@ -10,7 +10,7 @@ summary: Una completa solución de recuperación ante desastres debe permitir a 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,7 +22,7 @@ Además, los datos también se replican de forma asíncrona en una región secun
 
 En este documento se tratan las distintas opciones de implantación de una solución de recuperación ante desastres en dos regiones.
 
-image::saphana-dr-anf_image3.png[saphana dr y image3]
+image:saphana-dr-anf_image3.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -52,7 +52,7 @@ La siguiente figura muestra la configuración de una solución de recuperación 
 
 La figura siguiente muestra la replicación del sistema SAP HANA.
 
-image::saphana-dr-anf_image4.png[saphana dr y image4]
+image:saphana-dr-anf_image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -80,13 +80,13 @@ En la siguiente figura se muestra un ejemplo de solución de recuperación ante 
 
 El objetivo de tiempo de recuperación depende principalmente del tiempo necesario para iniciar la base de datos HANA en el sitio de recuperación ante desastres y cargar los datos en la memoria. Suponiendo que se leen los datos con una velocidad de transferencia de 1000 MB/s, la carga de 1 TB de datos llevaría aproximadamente 18 minutos. Dependiendo de la configuración de la replicación, es necesaria también la recuperación futura y se añadirá al valor de RTO total.
 
-En el capítulo encontrará más información sobre las distintas opciones de configuración link:ent-apps-db/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Opciones de configuración para la replicación entre regiones con SAP HANA"].
+Más detalles sobre las diferentes opciones de configuración se proporcionan en el capítulo link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Opciones de configuración para la replicación entre regiones con SAP HANA"].
 
 Los servidores en los sitios de recuperación de desastres pueden usarse como sistemas de prueba/desarrollo durante el funcionamiento normal. En caso de desastre, los sistemas de desarrollo y pruebas deben cerrarse y iniciarse como servidores de producción de recuperación ante desastres.
 
 ANF Cross-Region Replication le permite probar el flujo de trabajo de recuperación ante desastres sin que ello afecte al RPO ni al RTO. Esto se logra mediante la creación de clones de volúmenes y la conexión de estos al servidor de pruebas de recuperación ante desastres.
 
-image::saphana-dr-anf_image5.png[saphana dr y image5]
+image:saphana-dr-anf_image5.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

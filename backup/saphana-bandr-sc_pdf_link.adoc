@@ -13,11 +13,12 @@ summary: 'El documento describe la instalación y la configuración de la soluci
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer: NetApp
-
+[role="lead"]
 El TR-4313 describe la instalación y la configuración de la solución de backup y recuperación de NetApp para SAP HANA. La solución se basa en el marco Snap Creator de NetApp y en el complemento Snap Creator para SAP HANA. Esta solución es compatible con el dispositivo de multinodo de Cisco SAP HANA certificado en combinación con el almacenamiento de NetApp. Esta solución también es compatible con sistemas SAP HANA de un único nodo y varios nodos en proyectos de integración personalizada de centro de datos (TDI).
+
+Autor: Nils Bauer, NetApp
 
 link:https://www.netapp.com/pdf.html?item=/media/19779-tr-4313.pdf["https://www.netapp.com/pdf.html?item=/media/19779-tr-4313.pdf"]

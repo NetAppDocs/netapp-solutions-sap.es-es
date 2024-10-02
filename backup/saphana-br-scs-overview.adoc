@@ -10,12 +10,13 @@ summary: Las empresas requieren hoy en día una disponibilidad continua e ininte
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer: NetApp
-
+[role="lead"]
 Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción.
+
+Autor: Nils Bauer, NetApp
 
 Los períodos definidos para los procesos de backup se reducen, mientras que la cantidad de datos objeto de backup es cada vez mayor. Por consiguiente, resulta difícil encontrar un momento en el que los backups puedan realizarse con un efecto mínimo en los procesos empresariales. El tiempo necesario para restaurar y recuperar los sistemas SAP es una preocupación, ya que deben minimizarse el tiempo de inactividad para la producción SAP y los sistemas que no son de producción para reducir el coste y la pérdida de datos para la empresa.
 
@@ -44,7 +45,7 @@ SnapVault ofrece ventajas significativas en comparación con los backups tradici
 
 La solución también se puede ampliar sin problemas a un modelo de operación de cloud híbrido. La replicación de datos para recuperación ante desastres o los fines de backup externo pueden realizarse desde sistemas ONTAP de NetApp en las instalaciones a instancias Cloud Volumes ONTAP que se ejecuten en el cloud. Puede utilizar SnapCenter como herramienta central para gestionar la protección de datos y la replicación de datos, independientemente de si el sistema SAP HANA se ejecuta en las instalaciones o en el cloud. La siguiente figura muestra información general sobre la solución de backup.
 
-image::saphana-br-scs-image1.png[saphana br scs image1]
+image:saphana-br-scs-image1.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -55,7 +56,7 @@ La siguiente captura de pantalla muestra HANA Studio de un cliente que ejecuta S
 
 NOTE: La parte más grande del tiempo de ejecución del flujo de trabajo de backup general es el tiempo necesario para ejecutar la operación del punto de guardado del backup de HANA, y este paso depende de la carga de la base de datos de HANA. El propio backup de los snapshots de almacenamiento siempre finaliza en un par de segundos.
 
-image::saphana-br-scs-image2.png[saphana br scs image2]
+image:saphana-br-scs-image2.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -89,17 +90,17 @@ Los backups de datos de copias de Snapshot de almacenamiento suelen programarse 
 
 La siguiente figura muestra un ejemplo de objetivo de tiempo de recuperación para una base de datos de 1 TB cuando se utilizan backups de datos basados en archivos. En este ejemplo, se realiza un backup una vez al día. El objetivo de tiempo de recuperación varía según el momento en que se realizó la restauración y la recuperación. Si las restauraciones y las recuperaciones se llevaron a cabo inmediatamente después de realizar un backup, el RTO se basa principalmente en el tiempo de restauración, que es de 1 hora y 10 minutos en el ejemplo. El tiempo de recuperación se aumentó a 2 horas y 50 minutos cuando se realizaron la restauración y la recuperación inmediatamente antes de que se pudiera realizar el siguiente backup, y el RTO máximo se mostró a 4 horas y 30 minutos.
 
-image::saphana-br-scs-image3.png[saphana br scs image3]
+image:saphana-br-scs-image3.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 La siguiente figura muestra un ejemplo de objetivo de tiempo de recuperación para una base de datos de 1 TB cuando se utilizan backups Snapshot. En cuanto a los backups de Snapshot basados en almacenamiento, el objetivo de tiempo de recuperación solo depende del tiempo de inicio de la base de datos y del tiempo de recuperación de alcance, ya que la restauración se realiza en unos pocos segundos, independientemente del tamaño de la base de datos. El tiempo de recuperación futura también aumenta en función de cuándo se realicen las restauraciones y las recuperaciones, pero, debido a la mayor frecuencia de backups (cada seis horas en este ejemplo), el tiempo de recuperación futura es, como máximo, de 43 minutos. En este ejemplo, el objetivo de tiempo de recuperación máximo es de 1 hora y 13 minutos.
 
-image::saphana-br-scs-image4.png[saphana br scs image4]
+image:saphana-br-scs-image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 La siguiente figura muestra una comparación de objetivos de tiempo de recuperación de backups Snapshot basados en archivos y basados en almacenamiento para diferentes tamaños de base de datos y diferentes frecuencias de los backups de Snapshot. La barra verde muestra el backup basado en archivos. Las otras barras muestran los backups de copias de Snapshot con diferentes frecuencias de backup.
 
 Con un único backup de datos de copia Snapshot al día, el objetivo de tiempo de recuperación ya se ha reducido en un 40 % en comparación con un backup de datos basado en archivos. La reducción aumenta hasta el 70% cuando se realizan cuatro backups Snapshot al día. La figura también muestra que la curva se mantendrá si aumenta la frecuencia de backup de Snapshot a más de cuatro o seis backups de Snapshot al día. Por lo tanto, nuestros clientes suelen configurar de cuatro a seis backups Snapshot al día.
 
-image::saphana-br-scs-image5.png[saphana br scs image5]
+image:saphana-br-scs-image5.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 NOTE: El gráfico muestra el tamaño de la RAM del servidor HANA. El tamaño de la base de datos en la memoria se calcula para ser la mitad del tamaño de la RAM del servidor.

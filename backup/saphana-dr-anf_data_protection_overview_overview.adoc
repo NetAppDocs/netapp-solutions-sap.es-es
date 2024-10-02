@@ -8,15 +8,18 @@ summary: Estudios han demostrado que el tiempo de inactividad de las aplicacione
 :allow-uri-read: 
 
 
-Nils Bauer, NetApp Ralf Klahr, Microsoft
+[role="lead"]
+Estudios han demostrado que el tiempo de inactividad de las aplicaciones empresariales tiene un impacto negativo significativo en el negocio de las empresas.
 
-Estudios han demostrado que el tiempo de inactividad de las aplicaciones empresariales tiene un impacto negativo significativo en el negocio de las empresas. Además del impacto financiero, el tiempo de inactividad también puede dañar la reputación de la empresa, la moral del personal y la lealtad del cliente. Sorprendentemente, no todas las empresas cuentan con una normativa completa de recuperación ante desastres.
+Autores: Nils Bauer, NetApp Ralf Klahr, Microsoft
+
+Además del impacto financiero, el tiempo de inactividad también puede dañar la reputación de la empresa, la moral del personal y la lealtad del cliente. Sorprendentemente, no todas las empresas cuentan con una normativa completa de recuperación ante desastres.
 
 Al ejecutar SAP HANA en Azure NetApp Files (ANF), los clientes acceden a funciones adicionales que amplían y mejoran las funcionalidades integradas de protección de datos y recuperación ante desastres de SAP HANA. En esta sección de descripción general se explican estas opciones para ayudar a los clientes a seleccionar opciones que respalden sus necesidades empresariales.
 
 Para desarrollar una normativa completa de recuperación ante desastres, los clientes deben comprender los requisitos de las aplicaciones empresariales y las capacidades técnicas que necesitan para la protección de datos y la recuperación ante desastres. En la figura siguiente se ofrece información general sobre la protección de datos.
 
-image::saphana-dr-anf_image2.png[saphana dr y image2]
+image:saphana-dr-anf_image2.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

@@ -10,8 +10,10 @@ summary: La información de la aplicación independiente sobre la replicación e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
-La información de la aplicación independiente sobre la replicación entre regiones se puede encontrar en https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Documentación de Azure NetApp Files | Microsoft Docs"^] en las secciones conceptos y procedimientos.
+La información independiente de la aplicación sobre la replicación entre regiones se puede encontrar en la siguiente ubicación.
+
+link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Documentación de Azure NetApp Files | Microsoft Docs"^] en las secciones conceptos y guía.

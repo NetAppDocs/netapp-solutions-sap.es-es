@@ -10,7 +10,7 @@ summary: Las tres siguientes capturas de pantalla muestran el estado de replicac
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,15 +22,15 @@ La duración de la transferencia y el tamaño de la transferencia proporcionan i
 
 La siguiente captura de pantalla muestra el estado de replicación del volumen de datos HANA.
 
-image::saphana-dr-anf_image14.png[saphana dr y image14]
+image:saphana-dr-anf_image14.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 La siguiente captura de pantalla muestra el estado de replicación del volumen de backup de registros de HANA.
 
-image::saphana-dr-anf_image15.png[saphana dr y image15]
+image:saphana-dr-anf_image15.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 La siguiente captura de pantalla muestra el estado de replicación del volumen compartido de HANA.
 
-image::saphana-dr-anf_image16.png[saphana dr y image16]
+image:saphana-dr-anf_image16.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -41,4 +41,4 @@ Con cada actualización de replicación del volumen de origen al de destino, tod
 
 NOTE: En el volumen de origen y destino, también se crean copias Snapshot de SnapMirror, que se utilizan para realizar operaciones de actualización de sincronización y replicación. Estas copias Snapshot no son coherentes con las aplicaciones desde el punto de vista de la base de datos de HANA; solo se pueden utilizar las copias snapshot coherentes con las aplicaciones creadas a través de AzaCSnap para las operaciones de recuperación de HANA.
 
-image::saphana-dr-anf_image17.png[saphana dr y image17]
+image:saphana-dr-anf_image17.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

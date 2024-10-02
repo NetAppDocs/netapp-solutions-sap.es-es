@@ -10,7 +10,7 @@ summary: A partir de SAP HANA 2.0 SPS4, se pueden configurar particiones de vol√
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -217,4 +217,4 @@ Ejecute la siguiente sentencia SQL en la base de datos de tenant para agregar un
 ....
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
-image::saphana_aff_nfs_image18.jpg[image18 de saphana AFF]
+image:saphana_aff_nfs_image18.jpg["Figura que muestra el cuadro de di√°logo de entrada/salida o que representa el contenido escrito"]

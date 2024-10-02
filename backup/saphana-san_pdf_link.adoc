@@ -8,10 +8,11 @@ summary: 'Esta arquitectura verificada de NetApp cubre la modernización de los 
 :allow-uri-read: 
 
 
-Nils Bauer, Roland Wartenberg, Darryl Clinkscales, Daniel Hohman, Marco Schöen, Steve Botkin, Michael Peppers, Vidula Aiyer, Steve Collins, Pavan Jhamnani, Lee Dorrier, NetApp
-
-Jim Zucchero, Naem Saafein, Ph.D., Broadcom Brocade
-
+[role="lead"]
 Esta arquitectura verificada de NetApp cubre la modernización de los sistemas y operaciones SAP para SAP HANA en sistemas de almacenamiento de cabinas All SAN (ASA) de NetApp con Brocade FC SAN Fabric. Incluye backup y recuperación, recuperación ante desastres y protección de datos. La solución utiliza SnapCenter de NetApp para automatizar la creación de backup, restauración y recuperación de datos de SAP HANA, así como los flujos de trabajo de clonado. La configuración de recuperación ante desastres, las pruebas y los escenarios de conmutación por error se describen mediante el software de replicación de datos SnapMirror de NetApp síncrona. Además, se describe la protección de datos SAP con CommVault.
+
+Autores:
+
+Nils Bauer, Roland Wartenberg, Darryl Clinkscales, Daniel Hohman, Marco Schöen, Steve Botkin, Michael Peppers, Vidula Aiyer, Steve Collins, Pavan Jhamnani, Lee Dorrier, NetApp Jim Zucchero, Naem Saafein, Ph.D., Broadcom Brocade
 
 link:https://www.netapp.com/pdf.html?item=/media/10235-nva-1147-design.pdf["https://www.netapp.com/pdf.html?item=/media/10235-nva-1147-design.pdf"]

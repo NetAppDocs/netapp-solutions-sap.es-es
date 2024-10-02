@@ -10,7 +10,7 @@ summary: Debe sincronizar la hora entre las controladoras de almacenamiento y lo
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

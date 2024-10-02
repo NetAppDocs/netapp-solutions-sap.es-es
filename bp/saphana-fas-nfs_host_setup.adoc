@@ -10,7 +10,7 @@ summary: Todos los pasos descritos en esta sección son válidos tanto para los 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

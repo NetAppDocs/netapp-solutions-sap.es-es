@@ -10,7 +10,7 @@ summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

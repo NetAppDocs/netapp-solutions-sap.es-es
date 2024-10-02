@@ -10,7 +10,7 @@ summary: Todos los pasos para configurar el host descritos en esta sección son 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

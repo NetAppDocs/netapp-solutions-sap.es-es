@@ -10,7 +10,7 @@ summary: Las operaciones de backup siempre se realizan en el host SAP HANA princ
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,10 +22,10 @@ La capacidad de utilizar cualquier backup para restaurar y reenviar recuperacion
 
 Cada host SAP HANA tiene su propio volumen de almacenamiento. Cuando se utiliza una copia Snapshot basada en el almacenamiento para realizar un backup, se crea una copia Snapshot coherente con la base de datos en el volumen de almacenamiento del host SAP HANA principal.
 
-image::saphana-sr-scs-image3.png[saphana sr scs image3]
+image:saphana-sr-scs-image3.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Cuando se realiza una conmutación por error al host 2, el host 2 se convierte en el host primario, los backups se ejecutan en el host 2 y los backups de Snapshot se crean en el volumen de almacenamiento del host 2.
 
 El backup creado en el host 2 se puede restaurar directamente en la capa de almacenamiento. Si se debe usar un backup creado en el host 1, se debe copiar el backup del volumen de almacenamiento del host 1 al volumen de almacenamiento del host 2. La recuperación futura utiliza los backups de registros de ambos hosts.
 
-image::saphana-sr-scs-image4.png[saphana sr scs image4]
+image:saphana-sr-scs-image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

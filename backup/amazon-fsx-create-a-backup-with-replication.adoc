@@ -10,7 +10,7 @@ summary: En esta sección se describe cómo crear un backup con replicación.
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,11 +18,11 @@ Se crea un backup del mismo modo que con una copia Snapshot local.
 
 Para crear un backup con replicación, seleccione la política que incluye la replicación de backup y haga clic en Backup.
 
-image::amazon-fsx-image88.png[amazon fsx image88]
+image:amazon-fsx-image88.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Dentro del registro de trabajos de SnapCenter, puede ver el paso actualización secundaria, que inicia una operación de actualización de SnapVault. Los bloques modificados de replicación del volumen de origen al volumen objetivo.
 
-image::amazon-fsx-image89.png[amazon fsx image89]
+image:amazon-fsx-image89.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En el FSX para el sistema de archivos ONTAP, se crea una copia Snapshot del volumen de origen con la etiqueta SnapMirror, `snapcenter`, Según se configuró en la directiva SnapCenter.
 
@@ -52,8 +52,8 @@ FsxId05f7f00af49dc7a3e::>
 ....
 El nuevo backup de Snapshot también se incluye en el catálogo de backup de HANA.
 
-image::amazon-fsx-image90.png[amazon fsx image90]
+image:amazon-fsx-image90.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En SnapCenter, puede ver una lista de los backups replicados haciendo clic en Vault copies en la vista de topología.
 
-image::amazon-fsx-image91.png[amazon fsx image91]
+image:amazon-fsx-image91.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

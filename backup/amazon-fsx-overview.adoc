@@ -10,12 +10,13 @@ summary: Este informe técnico proporciona las mejores prácticas para la protec
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer: NetApp
-
+[role="lead"]
 Este informe técnico proporciona las mejores prácticas para la protección de datos de SAP HANA en Amazon FSX para ONTAP de NetApp y SnapCenter de NetApp. Este documento abarca conceptos de SnapCenter, recomendaciones de configuración y flujos de trabajo de operaciones, incluidos la configuración, las operaciones de backup y operaciones de restauración y recuperación.
+
+Autor: Nils Bauer, NetApp
 
 Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias, como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción.
 

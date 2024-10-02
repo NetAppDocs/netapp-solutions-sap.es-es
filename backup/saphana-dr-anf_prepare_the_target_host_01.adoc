@@ -10,7 +10,7 @@ summary: En esta sección se describen los pasos de preparación necesarios en e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

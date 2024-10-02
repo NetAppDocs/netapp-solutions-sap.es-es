@@ -10,7 +10,7 @@ summary: En nuestra configuración de laboratorio, utilizamos un segundo FSX par
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,7 +18,7 @@ En nuestra configuración de laboratorio, utilizamos un segundo FSX para el sist
 
 Como se explica en el capítulo link:amazon-fsx-snapcenter-architecture.html#data-protection-strategy["“Estrategia de protección de datos”"], El destino de replicación debe ser un segundo FSX para que el sistema de archivos ONTAP de otra zona de disponibilidad esté protegido de un fallo del FSX primario para el sistema de archivos ONTAP. Además, el volumen compartido de HANA se debe replicar en el FSX secundario para el sistema de archivos ONTAP.
 
-image::amazon-fsx-image8.png[amazon fsx image8]
+image:amazon-fsx-image8.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 

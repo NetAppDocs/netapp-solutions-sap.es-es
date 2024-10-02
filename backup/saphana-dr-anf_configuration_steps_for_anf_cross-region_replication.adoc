@@ -10,7 +10,7 @@ summary: Para poder configurar la replicación de volúmenes, es necesario reali
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -66,27 +66,27 @@ NOTE: La cuota del volumen se puede establecer en función de los requisitos de 
 
 NOTE: Si el pool de capacidad se configuró con calidad de servicio manual, se puede configurar el rendimiento además de los requisitos de capacidad. Igual que lo anterior, puede configurar el rendimiento con un valor bajo durante el funcionamiento normal y aumentarlo en caso de recuperación ante desastres en caso de fallo.
 
-image::saphana-dr-anf_image10.png[saphana dr y image10]
+image:saphana-dr-anf_image10.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En la pestaña Protocol, debe proporcionar el protocolo de red, la ruta de red y la política de exportación.
 
 
 NOTE: El protocolo debe ser el mismo que el protocolo utilizado para el volumen de origen.
 
-image::saphana-dr-anf_image11.png[saphana dr y image11]
+image:saphana-dr-anf_image11.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 En la pestaña Replication, debe configurar el ID del volumen de origen y la programación de replicación. Para la replicación del volumen de datos, configuramos un programa de replicación diario para nuestra configuración de laboratorio.
 
 
 NOTE: El ID del volumen de origen se puede copiar desde la pantalla Propiedades del volumen de origen.
 
-image::saphana-dr-anf_image12.png[saphana dr y image12]
+image:saphana-dr-anf_image12.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Como paso final, se debe autorizar la replicación en el volumen de origen mediante el ID del volumen de destino.
 
 
 NOTE: El ID del volumen de destino se puede copiar desde la pantalla Propiedades del volumen de destino.
 
-image::saphana-dr-anf_image13.png[saphana dr y image13]
+image:saphana-dr-anf_image13.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Se deben realizar los mismos pasos para el volumen de backup compartido de HANA y de registros.
