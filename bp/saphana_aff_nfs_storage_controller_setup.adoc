@@ -299,11 +299,11 @@ Las opciones de NFS enumeradas en la siguiente tabla deben ser verificadas y est
 | Habilite NFSv3 | nfs modify -vserver <vserver-name> v3.0 habilitado 
 
 
-| ONTAP 9: Establece el tamaño máximo de transferencia de TCP de NFS en 1 MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
-
-
-| ONTAP 8: Establecer un tamaño de lectura y escritura para NFS en 64 KB | set advanced nfs modify -vserver <vserver-name> -v3-tcp-max-read-size 65536 nfs modify -vserver <vserver-name> -v3-tcp-max-write-size 65536 set admin 
+| Establezca el tamaño máximo de transferencia de TCP de NFS en 1MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
 |===
+
+NOTE: En entornos compartidos con cargas de trabajo diferentes se establece el tamaño máximo de transferencia TCP de NFS en 262144
+
 
 
 == Configuración de NFS para NFSv4
@@ -319,10 +319,7 @@ Para algunos de los comandos de esta tabla, es necesario cambiar al modo de priv
 | Habilite NFSv4 | nfs modify -vserver <vserver-name> -v4.1 habilitado 
 
 
-| ONTAP 9: Establece el tamaño máximo de transferencia de TCP de NFS en 1 MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
-
-
-| ONTAP 8: Establecer un tamaño de lectura y escritura para NFS en 64 KB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 65536 set admin 
+| Establezca el tamaño máximo de transferencia de TCP de NFS en 1MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
 
 
 | Deshabilitar las listas de control de acceso (ACL) de NFSv4 | nfs modify -vserver <vserver_name> -v4.1-acl deshabilitado 
@@ -346,13 +343,16 @@ nfs modify -vserver hana -v4.x-session-num-slots <value>
 configurar admin 
 |===
 
+NOTE: En entornos compartidos con cargas de trabajo diferentes se establece el tamaño máximo de transferencia TCP de NFS en 262144
+
+
 NOTE: Tenga en cuenta que la desactivación de id numéricos requiere la gestión de usuarios, como se describe en la sección link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["“Preparación de la instalación de SAP HANA para NFSv4”."]
 
 
 NOTE: El ID de dominio de NFSv4 debe configurarse con el mismo valor en todos los servidores Linux (`/etc/idmapd.conf`) Y SVMs, como se describe en la sección link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["“Preparación de la instalación de SAP HANA para NFSv4”."]
 
 
-NOTE: Si utiliza NFSV4.1, pNFS puede activarse y utilizarse.
+NOTE: PNFs puede activarse y utilizarse.
 
 Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de respaldo automática de host, los parámetros de conmutación por error deben ajustarse dentro `nameserver.ini` tal como se muestra en la siguiente tabla.
 Mantenga el intervalo de reintento predeterminado de 10 segundos en estas secciones.
