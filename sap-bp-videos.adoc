@@ -19,7 +19,3 @@ Descripción general de los vídeos y demostraciones en los que se destacan las 
 
 
 == Vídeos y demostraciones de prácticas recomendadas para la configuración de SAP
-
-* link:https://media.netapp.com/video-detail/71853836-ac06-50bf-a579-01ff36851580/sap-hana-runs-best-on-netapp-infrastructure-brk-1114-2["SAP HANA funciona mejor en la infraestructura de NetApp"^]
-* link:https://media.netapp.com/video-detail/60bf8c7c-d14d-5463-b839-4e1c8daca1a3/sap-on-azure-netapp-files-overview-and-updates-brk-1453-2["SAP en Azure NetApp Files: Descripción general y actualizaciones"^]
-

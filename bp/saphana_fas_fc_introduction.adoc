@@ -53,7 +53,7 @@ Para obtener más información sobre los requisitos previos y las recomendacione
 
 Existen varias opciones para conectar el almacenamiento a máquinas virtuales (VM). El preferido es conectar los volúmenes de almacenamiento con NFS directamente desde el sistema operativo invitado. Esta opción se describe en link:saphana_aff_nfs_introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^].
 
-También se admiten asignaciones de dispositivos sin formato (RDM), almacenes de datos FCP o almacenes de datos VVOL con FCP. Para ambas opciones de almacén de datos, solo se deben almacenar un volumen de registro o los datos SAP HANA en el almacén de datos para casos de uso productivos. Además, no puede implementarse el respaldo y la recuperación basados en Snapshot orquestados por SnapCenter y soluciones que se basan en esto, como la clonación de sistemas SAP.
+También se admiten asignaciones de dispositivos sin formato (RDM), almacenes de datos FCP o almacenes de datos VVOL con FCP. Para ambas opciones de almacén de datos, solo se deben almacenar un volumen de registro o los datos SAP HANA en el almacén de datos para casos de uso productivos.
 
 Para obtener más información sobre el uso de vSphere con SAP HANA, consulte los siguientes enlaces:
 
