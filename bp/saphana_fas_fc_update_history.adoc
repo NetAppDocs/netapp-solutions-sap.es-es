@@ -58,4 +58,7 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 
 
 | Septiembre de 2024 | Nuevos sistemas de almacenamiento 
+
+
+| Febrero de 2025 | Nuevo sistema de almacenamiento 
 |===

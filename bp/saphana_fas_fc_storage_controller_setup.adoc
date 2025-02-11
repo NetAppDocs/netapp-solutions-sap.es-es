@@ -134,17 +134,6 @@ image:saphana_fas_fc_image15.jpeg["Figura que muestra el cuadro de diálogo de e
 
 
 
-== Conjuntos de puertos FCP
-
-Un conjunto de puertos FCP se utiliza para definir qué LIF va a usar un igroup específico. Normalmente, todos los LIF creados para los sistemas HANA se colocan en el mismo conjunto de puertos. En la siguiente figura, se muestra la configuración de un conjunto de puertos denominado 32g, que incluye las cuatro LIF que ya se han creado.
-
-image:saphana_fas_fc_image16.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
-
-
-NOTE: Con ONTAP 9.8, no es necesario un conjunto de puertos, pero se puede crear y utilizar a través de la línea de comandos.
-
-
-
 == Grupos de iniciadores
 
 Se puede configurar un igroup para cada servidor o para un grupo de servidores que requieran acceso a una LUN. La configuración del igroup requiere los nombres de puerto WWPN de los servidores.

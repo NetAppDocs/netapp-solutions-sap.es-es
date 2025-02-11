@@ -15,7 +15,7 @@ Marco Schön, NetApp
 
 Actualmente, esta certificación solo es válida para los siguientes modelos:
 
-* FAS2750, FAS2820, FAS8300, FAS8700, FAS70, FAS9500 y FAS90 encontrará una lista completa de las soluciones de almacenamiento con certificación de NetApp para SAP HANA en https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["El directorio de hardware de SAP HANA está certificado y compatible"^] el .
+* FAS2750, FAS2820, FAS8300 NetApp, FAS50, FAS8700, FAS70, FAS9500 y FAS90 En https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["El directorio de hardware de SAP HANA está certificado y compatible"^] el .
 
 
 En este documento se describen los requisitos de configuración de ONTAP para el protocolo NFS versión 3 (NFSv3) o la versión 4 (NFSv4.1).

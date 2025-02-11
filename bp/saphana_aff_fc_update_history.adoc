@@ -61,4 +61,10 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 
 
 | Septiembre de 2024 | Nuevos sistemas de almacenamiento (ASA A-Series) 
+
+
+| Noviembre de 2024 | Nuevos sistemas de almacenamiento 
+
+
+| Febrero de 2025 | Nuevos sistemas de almacenamiento 
 |===

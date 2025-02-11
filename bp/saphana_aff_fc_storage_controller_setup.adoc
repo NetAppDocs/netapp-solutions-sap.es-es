@@ -69,7 +69,7 @@ La siguiente información general resume los pasos necesarios para la configurac
 . Crear y configurar los agregados necesarios, tal y como se describe en "<<Configuración de agregados>>."
 . Cree una máquina virtual de almacenamiento (SVM), tal como se describe en "<<Configuración de la máquina virtual de almacenamiento>>."
 . Cree interfaces lógicas (LIF), como se describe en "<<Configuración de interfaz lógica>>."
-. Cree un conjunto de puertos, como se describe en "<<Conjuntos de puertos FCP>>."
+. Cree un conjunto de puertos, como se describe en "<<FCP port sets>>."
 . Cree iGroups, volúmenes y LUN dentro de los agregados, como se describe en Crear «<<Creating LUNs,Volúmenes y asignación de LUN a iGroups>>.»
 
 
@@ -128,17 +128,6 @@ image:saphana_aff_fc_image13.jpeg["Figura que muestra el cuadro de diálogo de e
 Durante la creación de SVM con ONTAP 9.8 System Manager, puede seleccionar todos los puertos FCP físicos necesarios y un LIF por puerto físico se crea automáticamente.
 
 image:saphana_aff_fc_image14.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
-
-
-
-== Conjuntos de puertos FCP
-
-Un conjunto de puertos FCP se utiliza para definir qué LIF se utilizarán en un iGroup específico. Normalmente, todos los LIF creados para los sistemas HANA se colocan en el mismo conjunto de puertos. En la figura siguiente se muestra la configuración de un conjunto de puertos llamado 32g, que incluye las cuatro LIF ya se han creado.
-
-image:saphana_aff_fc_image15.jpeg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
-
-
-NOTE: Con ONTAP 9.8, no es necesario un conjunto de puertos, pero se puede crear y utilizar a través de la línea de comandos.
 
 
 
