@@ -27,15 +27,13 @@ Use las siguientes directrices al configurar la red:
 * Para evitar interferencias entre sí, utilice rutas de red/E independientes para el área de datos y registro.
 
 
-La siguiente figura muestra un ejemplo con cuatro hosts SAP HANA conectados a un par de alta disponibilidad de una controladora de almacenamiento mediante una red de 10 GbE. Cada host SAP HANA tiene una conexión activa-pasiva a la estructura redundante.
+La siguiente figura muestra un ejemplo con cuatro hosts SAP HANA conectados a un par de alta disponibilidad de una controladora de almacenamiento mediante una red de 10 GbE. Cada host SAP HANA tiene una conexión activa-activa a la estructura redundante.
 
-En la capa de almacenamiento, se configuran cuatro conexiones activas para proporcionar un rendimiento de 10 GB para cada host de SAP HANA. Además, se configura una interfaz de reserva en cada controladora de almacenamiento.
+En la capa de almacenamiento, se configuran cuatro conexiones activas para proporcionar un rendimiento de 10 GB para cada host de SAP HANA. En la capa de almacenamiento, se configura un dominio de retransmisión con un tamaño de MTU de 9000 y se añaden todas las interfaces físicas necesarias a este dominio de retransmisión. Este método asigna automáticamente estas interfaces físicas al mismo grupo de recuperación tras fallos. Todas las interfaces lógicas (LIF) asignadas a estas interfaces físicas se añaden a este grupo de conmutación por error.
 
-En la capa de almacenamiento, se configura un dominio de retransmisión con un tamaño de MTU de 9000 y se añaden todas las interfaces físicas necesarias a este dominio de retransmisión. Este método asigna automáticamente estas interfaces físicas al mismo grupo de recuperación tras fallos. Todas las interfaces lógicas (LIF) asignadas a estas interfaces físicas se añaden a este grupo de conmutación por error.
+image:saphana_aff_nfs_image10a.png["Descripción general de la red"]
 
-image:saphana_aff_nfs_image10.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
-
-En general, también es posible utilizar grupos de interfaces de alta disponibilidad en los servidores (enlaces) y los sistemas de almacenamiento (por ejemplo, el protocolo de control de agregación de enlaces [LACP] e igroups). Con los grupos de interfaces de alta disponibilidad, compruebe que la carga está distribuida por igual entre todas las interfaces del grupo. La distribución de la carga depende de la funcionalidad de la infraestructura del conmutador de red.
+En general, se recomienda utilizar grupos de interfaz de alta disponibilidad en los servidores (vínculos) y los sistemas de almacenamiento (por ejemplo, Protocolo de control de agregación de enlaces [LACP] e ifgroups). Con los grupos de interfaces de alta disponibilidad, compruebe que la carga está distribuida por igual entre todas las interfaces del grupo. La distribución de la carga depende de la funcionalidad de la infraestructura del conmutador de red.
 
 
 NOTE: Según el número de hosts SAP HANA y la velocidad de conexión utilizada, se necesitan diferentes números de puertos físicos activos. Para obtener más información, consulte la sección link:saphana_aff_nfs_storage_controller_setup.html#lif-configuration["Configuración de LIF"].

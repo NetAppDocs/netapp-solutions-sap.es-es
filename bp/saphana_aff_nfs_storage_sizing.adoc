@@ -64,11 +64,10 @@ NOTE: Este cálculo es independiente de la controladora de almacenamiento utiliz
 
 === Bandeja NS224 NVMe
 
-Un SSD de NVMe (datos) admite hasta 5 hosts SAP HANA. Los SSD y los hosts SAP HANA deben distribuirse de igual manera entre las dos controladoras de almacenamiento.
-Lo mismo se aplica a los discos NVMe internos de los sistemas AFF A800, AFF A70 y AFF A90.
+Un SSD (datos) de NVMe admite hasta 2/5 hosts SAP HANA en función de los discos NVMe utilizados. Los SSD y los hosts SAP HANA deben distribuirse de igual manera entre las dos controladoras de almacenamiento. Lo mismo se aplica a los discos NVMe internos de sistemas AFF.
 
 
-NOTE: Añadir más bandejas de discos no aumenta la cantidad máxima de hosts SAP HANA que puede admitir una controladora de almacenamiento.
+NOTE: Al añadir más bandejas de discos no aumenta la cantidad máxima de hosts SAP HANA que admite una controladora de almacenamiento.
 
 
 
@@ -214,4 +213,4 @@ El tamaño de la RAM, el tamaño de los datos netos del disco de cada host SAP H
 
 La siguiente figura resume el proceso de dimensionamiento.
 
-image:saphana_aff_nfs_image9.jpg["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_aff_nfs_image9a.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

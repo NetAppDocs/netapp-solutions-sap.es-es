@@ -138,7 +138,7 @@ En la siguiente tabla se muestra el número máximo de montajes de volumen de re
 | Velocidad de puerto Ethernet | 10 GbE | 25 GbE | 40 GbE | 100 GEE 
 
 
-| Número máximo de montajes de volumen de datos o registro por puerto físico | 2 | 6 | 12 | 24 
+| Número máximo de montajes de volumen de datos o registro por puerto físico | 3 | 8 | 12 | 30 
 |===
 
 NOTE: Un LIF compartido entre distintos hosts SAP HANA puede requerir el montaje de volúmenes de datos o registros en una LIF diferente. Este cambio evita las consecuencias en el rendimiento si se mueve un volumen a una controladora de almacenamiento diferente.
