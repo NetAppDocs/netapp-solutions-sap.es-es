@@ -65,11 +65,13 @@ FabricPool es una buena opción para mover los backups de registros a otro nivel
 
 La siguiente información general resume los pasos necesarios para la configuración del almacenamiento. Cada paso se trata con más detalle en las secciones siguientes. En esta sección, asumimos que el hardware de almacenamiento está configurado y que el software ONTAP ya está instalado. Además, debe haberse conectado los puertos FCP del almacenamiento a la estructura SAN.
 
-. Comprobar la configuración correcta de la bandeja de discos, como se describe en "<<Conexión de la bandeja de discos>>."
-. Crear y configurar los agregados necesarios, tal y como se describe en "<<Configuración de agregados>>."
-. Cree una máquina virtual de almacenamiento (SVM), tal como se describe en "<<Configuración de la máquina virtual de almacenamiento>>."
-. Cree interfaces lógicas (LIF), como se describe en "<<Configuración de interfaz lógica>>."
-. Cree iGroups, volúmenes y LUN dentro de los agregados, como se describe en Crear «<<Creating LUNs,Volúmenes y asignación de LUN a iGroups>>.»
+. Compruebe la configuración de bandeja de discos correcta, según se describe en <<Conexión de la bandeja de discos>>.
+. Cree y configure los agregados necesarios, como se describe en <<Configuración de agregados>>.
+. Cree una máquina virtual de almacenamiento (SVM), como se describe en <<Configuración de la máquina virtual de almacenamiento>>.
+. Cree interfaces lógicas (LIF), como se describe en <<Configuración de interfaz lógica>>.
+. Cree iGroups con nombres a nivel mundial (WWN) de servidores HANA tal como se describe en la sección link:saphana_FAS_fc_storage_controller_setup.html#initiator-groups <<Grupos de iniciadores>>.
+. Cree volúmenes y LUN dentro de los agregados tal como se describe en la <<Configuración de volúmenes y LUN para sistemas SAP HANA de un solo host>>sección y. <<Configuración de volúmenes y LUN para sistemas SAP HANA con varios hosts>>
+. Cree iGroups, volúmenes y LUN dentro de los agregados, como se describe en <<#lun_create,Crear LUN, volúmenes y asignar LUN a iGroups>>.
 
 
 
@@ -123,9 +125,9 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 == Configuración de interfaz lógica
 
-Dentro de la configuración del clúster de almacenamiento, se debe crear una interfaz de red (LIF) y asignarla a un puerto FCP dedicado. Si, por ejemplo, se necesitan cuatro puertos FCP por motivos de rendimiento, deberá crear cuatro LIF. La figura siguiente muestra una captura de pantalla de las ocho LIF (denominadas `fc_*_*`) que se configuraron en la `hana` SVM.
+Dentro de la configuración del clúster de almacenamiento, se debe crear una interfaz de red (LIF) y asignarla a un puerto FCP dedicado. Si, por ejemplo, se necesitan cuatro puertos FCP por motivos de rendimiento, deberá crear cuatro LIF. En la siguiente figura se muestra una captura de pantalla de los ocho LIF que se configuraron en la SVM.
 
-image:saphana_aff_fc_image13a.png["Superposición de interfaces lógicas"]
+image:saphana_aff_fc_image13a.png["Descripción general de las interfaces lógicas"]
 
 Durante la creación de la SVM con ONTAP System Manager, puede seleccionar todos los puertos FCP físicos necesarios y se crea automáticamente una LIF por puerto físico.
 
@@ -134,6 +136,30 @@ image:saphana_aff_fc_image14a.png["Creación de la SVM"]
 
 NOTE: Los sistemas ASA lanzados después de agosto de 2024 no requieren este paso, ya que se hace automáticamente
 
+
+
+== Grupos de iniciadores
+
+Se puede configurar un igroup para cada servidor o para un grupo de servidores que requieran acceso a una LUN. La configuración del igroup requiere los nombres de puerto WWPN de los servidores.
+
+Con el `sanlun` Ejecute el siguiente comando para obtener los WWPN de cada host SAP HANA:
+
+....
+stlrx300s8-6:~ # sanlun fcp show adapter
+/sbin/udevadm
+/sbin/udevadm
+
+host0 ...... WWPN:2100000e1e163700
+host1 ...... WWPN:2100000e1e163701
+....
+
+NOTE:  `sanlun`La herramienta es parte de las utilidades del host NetApp y debe instalarse en cada host SAP HANA. Más detalles se pueden encontrar en la sección link:saphana_aff_fc_host_setup.html["Configuración del host."]
+
+Los iGroups se pueden crear mediante la CLI del clúster de ONTAP.
+
+....
+lun igroup create -igroup <igroup name> -protocol fcp -ostype linux -initiator <list of initiators> -vserver <SVM name>
+....
 
 
 == Configuración de volúmenes y LUN para sistemas SAP HANA de un solo host
@@ -330,7 +356,7 @@ NOTE: Con la configuración descrita, el `/usr/sap/SID` el directorio en el que 
 
 
 
-== Opciones de volumen
+=== Opciones de volumen
 
 Las opciones de volumen enumeradas en la siguiente tabla deben verificarse y definirse en todas las SVM.
 
@@ -345,27 +371,16 @@ Las opciones de volumen enumeradas en la siguiente tabla deben verificarse y def
 |===
 
 
-=== Crear LUN, volúmenes y asignar LUN a iGroups
+== Crear LUN, volúmenes y asignar LUN a iGroups
 
-Puede usar ONTAP System Manager de NetApp para crear volúmenes de almacenamiento y LUN, y asignarlas a los servidores.
+Puede usar NetApp ONTAP System Manager para crear volúmenes de almacenamiento y LUN, y asignarlos a los iGroups de los servidores y la CLI de ONTAP. Esta guía describe el uso de la CLI.
 
-NetApp ofrece un asistente de aplicación automatizado para SAP HANA en ONTAP System Manager 9.7 y versiones anteriores, lo que simplifica de forma significativa el proceso de aprovisionamiento de volúmenes y LUN. Crea y configura los volúmenes y las LUN automáticamente de acuerdo con las prácticas recomendadas de NetApp para SAP HANA.
-
-Con el `sanlun` Ejecute el siguiente comando para obtener los nombres de puerto WWPN de cada host SAP HANA:
-
-....
-stlrx300s8-6:~ # sanlun fcp show adapter
-/sbin/udevadm
-/sbin/udevadm
-host0 ...... WWPN:2100000e1e163700
-host1 ...... WWPN:2100000e1e163701
-....
 
 NOTE: La `sanlun` La herramienta forma parte de las utilidades de host de NetApp y debe instalarse en cada host SAP HANA. Para obtener más información, consulte la sección "host_setup".
 
 
 
-== Crear LUN, volúmenes y asignar LUN a iGroups mediante la CLI
+=== Crear LUN, volúmenes y asignar LUN a iGroups mediante la CLI
 
 En esta sección se muestra un ejemplo de configuración mediante la línea de comandos con ONTAP 9.8 para un sistema host múltiple de SAP HANA 2+1 con SID FC5 mediante LVM y dos LUN por grupo de volúmenes LVM:
 

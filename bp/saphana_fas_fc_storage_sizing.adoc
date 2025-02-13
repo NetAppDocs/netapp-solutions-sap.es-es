@@ -73,6 +73,12 @@ NOTE: Este cálculo es independiente de la controladora de almacenamiento utiliz
 
 
 
+=== Bandeja NS224 NVMe
+
+Un SSD de NVMe (datos) admite hasta 2 hosts SAP HANA. Los SSD y los hosts SAP HANA deben distribuirse de igual manera entre las dos controladoras de almacenamiento.
+
+
+
 == Cargas de trabajo mixtas
 
 Se admiten cargas de trabajo de SAP HANA y otras aplicaciones que se ejecutan en la misma controladora de almacenamiento o en el mismo agregado de almacenamiento. Sin embargo, una mejor práctica de NetApp es separar las cargas de trabajo de SAP HANA de las demás cargas de trabajo de aplicaciones.

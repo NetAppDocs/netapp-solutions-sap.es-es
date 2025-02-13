@@ -94,7 +94,7 @@ image:saphana_aff_nfs_image13.png["Conexiones de bandeja SAS"]
 
 === Bandejas de discos NVMe (100 GbE)
 
-Cada bandeja de discos NS224 NVMe se conecta utilizando dos puertos de 100 GbE por controladora. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2, como se describe en el capítulo sobre configuración de agregados, también se utiliza para la bandeja de discos NS224. La siguiente figura muestra la conexión de la bandeja de discos con una unidad NVMe.
+Cada bandeja de discos NVMe NS224 está conectada con dos puertos 100GbE GbE por controladora, como se muestra en la figura siguiente. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2, como se describe en el capítulo sobre configuración de agregados, también se utiliza para la bandeja de discos NS224.
 
 image:saphana_aff_nfs_image14a.png["Conexiones de bandeja de discos MV"]
 
