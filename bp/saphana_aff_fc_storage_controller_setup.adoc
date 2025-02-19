@@ -382,7 +382,7 @@ NOTE: La `sanlun` La herramienta forma parte de las utilidades de host de NetApp
 
 === Crear LUN, volúmenes y asignar LUN a iGroups mediante la CLI
 
-En esta sección se muestra un ejemplo de configuración mediante la línea de comandos con ONTAP 9.8 para un sistema host múltiple de SAP HANA 2+1 con SID FC5 mediante LVM y dos LUN por grupo de volúmenes LVM:
+En esta sección se muestra un ejemplo de configuración mediante la línea de comandos con ONTAP 9 para un sistema host múltiple de SAP HANA 2+1 con SID FC5 mediante LVM y dos LUN por grupo de volúmenes LVM:
 
 . Cree todos los volúmenes necesarios.
 +

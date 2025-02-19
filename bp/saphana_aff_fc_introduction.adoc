@@ -75,7 +75,7 @@ También se admiten asignaciones de dispositivos sin formato (RDM), almacenes de
 
 Para obtener más información sobre el uso de vSphere con SAP HANA, consulte los siguientes enlaces:
 
-* https://wiki.scn.sap.com/wiki/display/VIRTUALIZATION/SAP+HANA+on+VMware+vSphere["SAP HANA en VMware vSphere - virtualización - Wiki de la comunidad"^]
-* https://core.vmware.com/resource/sap-hana-vmware-vsphere-best-practices-and-reference-architecture-guide#introduction["Prácticas recomendadas de SAP HANA en VMware vSphere y guía de arquitectura de referencia"^]
+* https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["SAP HANA en VMware vSphere - virtualización - Wiki de la comunidad"^]
+* https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["Guía de prácticas recomendadas de SAP HANA en VMware vSphere"^]
 * https://launchpad.support.sap.com/["2161991 - Directrices de configuración de VMware vSphere - SAP ONE Support Launchpad (se requiere inicio de sesión)"^]
 
