@@ -1,0 +1,121 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-smas-config.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Configuración de sincronización activa de SnapMirror
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+
+
+== Requisitos previos
+
+Los clústeres de almacenamiento y las SVM relevantes deben tener una relación entre iguales.
+
+El mediador de ONTAP debe estar disponible y configurado en los dos clústeres de almacenamiento.
+
+image:sc-saphana-vmware-smas-image10.png[""]
+
+image:sc-saphana-vmware-smas-image11.png[""]
+
+
+
+== Configuración de la distribución de almacenamiento y del grupo de consistencia
+
+En la documentación de ONTAP https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#key-concepts["Información general sobre la sincronización activa de SnapMirror en ONTAP"], se describe a continuación el concepto de grupos de consistencia con SnapMirror sincronización activa:
+
+Un grupo de coherencia es una colección de volúmenes FlexVol que proporcionan una garantía de coherencia para la carga de trabajo de la aplicación que se debe proteger para la continuidad del negocio.
+
+El propósito de un grupo de coherencia es realizar imágenes Snapshot simultáneas de varios volúmenes, lo que garantiza copias consistentes con los fallos de una recogida de volúmenes en un momento específico. Un grupo de consistencia garantiza que todos los volúmenes de un conjunto de datos se pongan en modo inactivo y luego se capturen precisamente en el mismo momento específico. Esto proporciona un punto de restauración coherente con los datos en los volúmenes donde se admite el conjunto de datos. De este modo, un grupo de consistencia mantiene la consistencia dependiente en orden de escritura. Si decide proteger las aplicaciones para la continuidad del negocio, debe añadirse el grupo de volúmenes correspondientes a esta aplicación a un grupo de consistencia para que se establezca una relación de protección de datos entre un grupo de consistencia de origen y un de destino. La coherencia de origen y destino debe contener la misma cantidad y el mismo tipo de volúmenes.
+
+Para la replicación de sistemas HANA, el grupo de consistencia debe incluir todos los volúmenes utilizados por cada sistema HANA (datos, registro y compartidos). Los volúmenes que deben formar parte de un grupo de coherencia deben almacenarse en la misma SVM. Las imágenes de sistema operativo pueden almacenarse en un volumen aparte con su propio grupo de coherencia. En la siguiente figura se muestra un ejemplo de configuración con dos sistemas HANA.
+
+image:sc-saphana-vmware-smas-image12.png[""]
+
+
+
+== Configuración del iGroup
+
+En nuestra configuración de laboratorio, creamos un iGroup que incluye las dos SVM de almacenamiento que se usan para la replicación síncrona activa de SnapMirror. En la configuración de sincronización activa de SnapMirror descrita más adelante, definiremos que el iGroup formará parte de la replicación.
+
+Mediante la configuración de proximidad, hemos definido qué host ESX está cerca de qué clúster de almacenamiento. En nuestro caso, A700 se aproxima a ESX-1 y A800 se aproxima a ESX-2.
+
+image:sc-saphana-vmware-smas-image13.png[""]
+
+image:sc-saphana-vmware-smas-image14.png[""]
+
+
+NOTE: En una configuración de acceso no uniforme, el iGroup del clúster de almacenamiento primario (A700) solo debe incluir los iniciadores del host ESX-1, ya que no hay conexión SAN al ESX-2. Además, debe configurar otro iGroup en el segundo clúster de almacenamiento (A800) que solo incluyan los iniciadores del host ESX-2. No se requiere configuración de proximidad ni replicación del iGroup.
+
+
+
+== Configure la protección con el administrador del sistema de ONTAP
+
+image:sc-saphana-vmware-smas-image15.png[""]
+
+
+
+=== Replicación del grupo de consistencia e iGroup
+
+Debe crearse un nuevo grupo de consistencia, y las tres LUN del sistema HANA deben agregarse al grupo de consistencia.
+
+Se ha habilitado el «Replicar iGroup». El grupo de imitadores se mantendrá sincronizado independientemente de dónde se realicen los cambios.
+
+
+NOTE: En una configuración de acceso no uniforme, el iGroup no se debe replicar, ya que debe configurarse un iGroup independiente en el segundo clúster de almacenamiento.
+
+image:sc-saphana-vmware-smas-image16.png[""]
+
+Al hacer clic en la configuración de proximidad, puede revisar la configuración realizada antes de la configuración del iGroup.
+
+image:sc-saphana-vmware-smas-image17.png[""]
+
+Debe configurarse el clúster de almacenamiento de destino y debe estar habilitado la «Initialize Relationship».
+
+
+
+=== Sincronización
+
+En el clúster de almacenamiento A700 (origen), la nueva relación ahora se muestra en la lista.
+
+image:sc-saphana-vmware-smas-image18.png[""]
+
+En el clúster de almacenamiento A800 (destino), se muestran la nueva relación y el estado de la replicación.
+
+image:sc-saphana-vmware-smas-image19.png[""]
+
+
+
+== Almacén de datos de infraestructura
+
+El almacén de datos, donde se almacenan las imágenes del sistema operativo del sistema HANA, SnapCenter y el complemento de vSphere, se replica de la misma manera que se describe para los almacenes de datos de la base de datos de HANA.
+
+
+
+== Sitio principal
+
+El comportamiento de la sincronización activa de SnapMirror es simétrico, con una excepción importante: La configuración del sitio principal.
+
+La sincronización activa de SnapMirror considerará que un sitio es el «origen» y el otro el «destino». Esto implica una relación de replicación unidireccional, pero esto no se aplica al comportamiento de E/S. La replicación es bidireccional y simétrica, y los tiempos de respuesta de I/O son los mismos en cualquier lado del espejo.
+
+Si se pierde el enlace de replicación, las rutas de LUN en la copia de origen seguirán sirviendo datos mientras que las rutas de LUN en la copia de destino dejarán de estar disponibles hasta que se restablezca la replicación y SnapMirror vuelva a entrar en un estado síncrono. A continuación, las rutas reanudarán el servicio de datos.
+
+El efecto de designar un clúster como origen simplemente controla qué clúster sobrevive como sistema de almacenamiento de lectura y escritura si se pierde el enlace de replicación.
+
+El sitio principal es detectado por SnapCenter y se utiliza para ejecutar operaciones de backup, restauración y clonado.
+
+
+NOTE: Tenga en cuenta que el origen y el destino no están vinculados a la SVM o al clúster de almacenamiento, pero que pueden ser diferentes para cada relación de replicación.
+
+image:sc-saphana-vmware-smas-image20.png[""]

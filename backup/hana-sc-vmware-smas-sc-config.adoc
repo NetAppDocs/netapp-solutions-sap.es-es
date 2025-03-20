@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-sc-config.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Configuración de SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+Tal y como se indicó al principio del documento, el propósito del documento es proporcionar prácticas recomendadas para un entorno HANA que utilice VMware con VMFS y SnapMirror sincronización activa. Solo trataremos los detalles y los pasos importantes relevantes para esta solución en concreto y no explicaremos los conceptos generales de SnapCenter. Estos conceptos y otra información adicional sobre SnapCenter se pueden encontrar en:
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html["TR-4719: Replicación de sistemas SAP HANA: Backup y recuperación de datos con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+
+
+
+== Requisitos previos
+
+En general, se debe configurar la sincronización activa de SnapMirror antes de que se agreguen los recursos protegidos a SnapCenter. Si los backups se han creado antes de la configuración de SnapMirror active sync, solo existirán en el almacenamiento primario original y no se replicarán después.
+
+
+
+=== Se debe detectar automáticamente el recurso de SnapCenter HANA
+
+SnapCenter debe detectar automáticamente los recursos configurados con VMware VMFS o los recursos protegidos con la sincronización activa de SnapMirror para permitir las operaciones específicas necesarias para estas configuraciones.
+
+Dado que los volúmenes que no son de datos de HANA siempre son recursos configurados manualmente en SnapCenter, no son compatibles con SnapCenter desde el primer momento. Más adelante en este documento, se tratarán las opciones y las soluciones alternativas para los volúmenes que no son de datos.
+
+SAP HANA Varios sistemas host deben configurarse usando un complemento central HANA y, por lo tanto, son recursos configurados manualmente de forma predeterminada. Estos sistemas HANA no son compatibles con SnapCenter si se usan VMware VMFS o SnapMirror con sincronización activa.
+
+
+
+=== Complemento de SnapCenter para VMware vSphere
+
+El complemento de SnapCenter para VMware vSphere debe ponerse en marcha en el entorno de VMware.
+
+
+
+=== La dirección IP de gestión en la SVM que aloja los volúmenes
+
+Aunque se añadirán clústeres a SnapCenter, las SVM que alojan los volúmenes de origen y destino deben tener configurada una dirección IP de gestión.
+
+
+
+=== API REST para la comunicación de almacenamiento
+
+La gestión y supervisión de la sincronización activa de SnapMirror requieren acceso a la API de REST. Por lo tanto, SnapCenter debe configurarse de modo que use API REST para las comunicaciones de almacenamiento. El parámetro «IsRestEnabledForStorageConnection» en el archivo de configuración + C:++\++Archivos de programa++\ NetApp+++\++SMCore++\++SMCoreServiceHost.dll.config debe establecerse en true.
+
+....
+<add key="IsRestEnabledForStorageConnection" value="true">
+....
+image:sc-saphana-vmware-smas-image21.png[""]
+
+Tras el cambio de parámetro, se debe reiniciar el servicio SnapCenter SMCore.
+
+image:sc-saphana-vmware-smas-image22.png[""]
+
+
+
+== Añadir sistemas de almacenamiento
+
+Es posible añadir sistemas de almacenamiento una vez que se ha habilitado la API de REST para SnapCenter. Es necesario añadir ambos clústeres de almacenamiento, no las SVM individuales.
+
+image:sc-saphana-vmware-smas-image23.png[""]
+
+image:sc-saphana-vmware-smas-image24.png[""]
+
+
+
+== Añadir host: Complemento de SnapCenter para VMware vSphere
+
+Si un recurso de SnapCenter se ejecuta en un entorno virtualizado de VMware, SnapCenter aprovecha el complemento de SnapCenter para VMware vSphere para ampliar los flujos de trabajo de backup, restauración y clonado de SnapCenter con los pasos requeridos en la capa de VMware.
+
+Antes de que se pueda añadir el host a SnapCenter, el complemento de SnapCenter para VMware vSphere debe implementarse en el entorno de VMware.
+
+
+NOTE: Las credenciales se deben definir durante el flujo de trabajo para agregar hosts, donde vSphere se puede seleccionar como un tipo de host.
+
+image:sc-saphana-vmware-smas-image25.png[""]
+
+image:sc-saphana-vmware-smas-image26.png[""]
+
+image:sc-saphana-vmware-smas-image27.png[""]
+
+
+NOTE: No se requiere ninguna configuración adicional en el propio complemento de SnapCenter para vSphere.
+
+
+
+== Añadir host: Sistema HANA
+
+
+NOTE: No hay requisitos específicos. La implementación del plugin y la detección automática se realiza de la manera habitual.
+
+Con el proceso de detección automática, SnapCenter detecta que el recurso de HANA se está ejecutando virtualizado mediante VMFS/VMDK. SnapCenter también detecta la configuración de sincronización activa de SnapMirror e identifica el sitio principal actual.
+
+Después de la detección automática de recursos, se muestra el sitio principal actual en la sección huella almacenamiento de la vista de recursos. La detección de qué sistema de almacenamiento está maestro se basa en el resultado del comando ONTAP, que utiliza SnapCenter.
+
+....
+volume show -vserver <vs> -volume <vol> -fields smbc-consensus,is-smbc-master
+....
+image:sc-saphana-vmware-smas-image28.png[""]
+
+
+
+== Configuración de directivas
+
+La política utilizada para el recurso protegido con sincronización activa de SnapMirror se debe configurar mediante la replicación de SnapMirror aunque SnapCenter no active ninguna operación de actualización de SnapMirror.
+
+image:sc-saphana-vmware-smas-image29.png[""]
+
+image:sc-saphana-vmware-smas-image30.png[""]
+
+
+
+== Configuración de la protección de recursos HANA
+
+No hay requisitos específicos. La configuración de la protección de recursos se realiza de la forma habitual.

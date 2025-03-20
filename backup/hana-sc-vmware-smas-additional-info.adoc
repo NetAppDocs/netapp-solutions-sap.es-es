@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-additional-info.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Información adicional e historial de versiones
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+SnapCenter.:
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html["TR-4719: Replicación de sistemas SAP HANA: Backup y recuperación de datos con SnapCenter"]
+
+https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+
+https://docs.netapp.com/us-en/snapcenter/index.html["Documentación sobre el software SnapCenter"]
+
+Sincronización activa de SnapMirror:
+
+https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Información general sobre la sincronización activa de SnapMirror en ONTAP"]
+
+https://knowledge.broadcom.com/external/article?legacyId=83370["NetApp ONTAP con sincronización activa de NetApp SnapMirror con VMware vSphere Metro Storage Cluster (VMSC)."]
+
+https://docs.netapp.com/us-en/netapp-solutions/vmware/vmware-vmsc-with-smas.html["VMware vSphere Metro Storage Cluster con sincronización activa SnapMirror"]
+
+https://www.vmware.com/docs/vmware-vsphere-metro-storage-cluster-vmsc["VMware vSphere Metro Storage Cluster (VMSC)"]
+
+Historial de versiones:
+
+[cols="33%,33%,33%"]
+|===
+| Versión | Fecha | Comentar 
+
+
+| Versión 1.0 | Marzo de 2025 | Versión inicial 
+|===

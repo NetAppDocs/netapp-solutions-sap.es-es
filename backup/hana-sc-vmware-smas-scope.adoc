@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-scope.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Protección de datos de SAP HANA y alta disponibilidad con SnapCenter, sincronización activa de SnapMirror y clúster de almacenamiento de VMware Metro
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+[role="lead"]
+Este documento describe las mejores prácticas para la protección de datos con SnapCenter en un entorno VMware combinado con la sincronización activa de SnapMirror como solución de alta disponibilidad para los recursos de almacenamiento de HANA.
+
+Autor: Nils Bauer, NetApp
+
+
+
+== Alcance de este documento
+
+El documento no pretende ser una descripción detallada de cómo configurar el entorno completo, pero tratará los conceptos y detalles relevantes relacionados con:
+
+* Configuración de sistemas SAP HANA con VMware VMFS
+* Configuración síncrona activa de SnapMirror para SAP HANA
+* Configuración de SnapCenter para HANA en VMware con VMFS
+* Configuración de SnapCenter para la sincronización activa de SnapMirror
+* Operaciones de SnapCenter con HANA en VMware y SnapMirror Active Sync
+
+
+Nos centraremos en una configuración de VMware Metro Storage Cluster (VMSC) usando una configuración de acceso uniforme de SnapMirror Active Sync, como se muestra en la siguiente figura, pero también tocaremos brevemente configuraciones de acceso bare metal y no uniformes.
+
+image:sc-saphana-vmware-smas-image1.png[""]
