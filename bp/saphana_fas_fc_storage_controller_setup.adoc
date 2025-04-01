@@ -40,13 +40,36 @@ El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de Ne
 
 == Calidad de servicio
 
-La calidad de servicio se puede utilizar para limitar el rendimiento del almacenamiento para sistemas SAP HANA específicos. Un caso de uso sería limitar el rendimiento de los sistemas de desarrollo y pruebas para que no puedan influir en los sistemas de producción en una configuración mixta.
+La calidad de servicio puede utilizarse para limitar el rendimiento del almacenamiento de sistemas SAP HANA específicos o aplicaciones no SAP en una controladora compartida.
 
-Durante el proceso de dimensionamiento, se deben determinar los requisitos de rendimiento de un sistema ajeno a la producción. Los sistemas de desarrollo y pruebas pueden tener un tamaño menor con valores de rendimiento, normalmente entre el 20% y el 50% de un sistema de producción.
 
-A partir de ONTAP 9, la calidad de servicio se configura en el nivel del volumen de almacenamiento, y utiliza los valores máximos para el rendimiento (MB/s) y el número de I/o (IOPS).
 
-Las grandes I/o de escritura tienen el mayor efecto en el rendimiento del sistema de almacenamiento. Por lo tanto, el límite de rendimiento de calidad de servicio debe definirse como un porcentaje de los valores de KPI de rendimiento de almacenamiento SAP HANA de escritura correspondientes en los volúmenes de datos y registros.
+=== Producción y desarrollo y pruebas
+
+Un caso de uso sería limitar el rendimiento de los sistemas de desarrollo y pruebas para que no puedan influir en los sistemas de producción en una configuración mixta. Durante el proceso de configuración, debe determinar los requisitos de rendimiento de un sistema que no sea de producción. Los sistemas de desarrollo y pruebas pueden ser dimensionados con valores de rendimiento más bajos, normalmente en el rango del 20% al 50% de un KPI de sistemas de producción, según lo define SAP. Las grandes I/o de escritura tienen el mayor efecto en el rendimiento del sistema de almacenamiento. Por lo tanto, el límite de rendimiento de calidad de servicio debe definirse como un porcentaje de los valores de KPI de rendimiento de almacenamiento SAP HANA de escritura correspondientes en los volúmenes de datos y registros.
+
+
+
+=== Entornos compartidos
+
+Otro caso de uso es limitar el rendimiento de cargas de trabajo de escritura pesadas, especialmente para evitar que estas cargas de trabajo tengan un impacto en otras cargas de trabajo de escritura sensibles a la latencia. En estos entornos, es mejor aplicar una política de grupo de calidad de servicio con techo de rendimiento no compartido a cada LUN dentro de cada SVM para restringir el rendimiento máximo de cada objeto de almacenamiento individual al valor dado. De este modo, se reduce la posibilidad de que una única carga de trabajo pueda influir de forma negativa en otras cargas de trabajo.
+
+Para ello, debe crearse una política de grupo mediante la CLI del clúster de ONTAP para cada SVM:
+
+....
+qos policy-group create -policy-group <policy-name> -vserver <vserver name> -max-throughput 1000MB/s -is-shared false
+....
+Y aplicado a cada LUN del SVM. A continuación se muestra un ejemplo para aplicar el grupo de políticas a todas las LUN existentes de una SVM:
+
+....
+lun modify -vserver <vserver name>  -path * -qos-policy-group  <policy-name>
+....
+Es necesario hacer esto para cada máquina virtual de almacenamiento. El nombre del grupo de policía de QoS de cada SVM debe ser diferente. En el caso de las nuevas LUN, la política se puede aplicar directamente:
+
+....
+lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
+....
+Se recomienda utilizar 1000MB GB/s como rendimiento máximo para una LUN determinada. Si una aplicación requiere un mayor rendimiento, se utilizarán varias LUN con segmentación de LUN para proporcionar el ancho de banda necesario. Esta guía proporciona un ejemplo para SAP HANA basado en Linux LVM en la sección https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_fas_fc_host_setup.html#create-lvm-volume-groups-and-logical-volumes["Configuración de host"].
 
 
 
