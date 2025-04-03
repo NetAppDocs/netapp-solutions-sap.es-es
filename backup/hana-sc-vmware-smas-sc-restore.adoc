@@ -6,9 +6,13 @@ summary:
 ---
 = Restauración y recuperación de SnapCenter
 :allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
 
 
-'''
+[role="lead"]
 Con recursos virtuales almacenados en VMFS/VMDK, siempre se realiza una operación de restauración de SnapCenter mediante una operación de clonado, montaje y copia.
 
 . SnapCenter crea un clon de volumen basado en la snapshot seleccionada
@@ -24,11 +28,11 @@ Por lo tanto, el tiempo de ejecución general de la operación de restauración 
 
 Además, cuando se configura un recurso con la sincronización activa de SnapMirror, la operación de restauración de SnapCenter solo puede seleccionarse en el sitio principal actual.
 
-image:sc-saphana-vmware-smas-image37.png[""]
+image:sc-saphana-vmware-smas-image37.png["Figura que muestra el contenido que se está discutiendo"]
 
 Mientras la operación de restauración y recuperación está en ejecución, es posible ver un nuevo volumen clonado, que se ha creado en el sitio principal.
 
-image:sc-saphana-vmware-smas-image38.png[""]
+image:sc-saphana-vmware-smas-image38.png["Figura que muestra el contenido que se está discutiendo"]
 
 En el host HANA Linux, se puede ver un nuevo disco que se montó en el host. Cuando la operación de restauración se realiza el disco, SnapCenter volverá a eliminar el almacén de datos y los volúmenes.
 

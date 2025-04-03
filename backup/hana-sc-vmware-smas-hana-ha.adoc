@@ -30,7 +30,7 @@ En caso de producirse algún fallo en el sitio principal, el almacenamiento, el 
 
 Para obtener una descripción completa de todas las opciones de configuración y escenarios de replicación, consulte https://help.sap.com/docs/SAP_HANA_PLATFORM/4e9b18c116aa42fc84c7dbfd02111aba/afac7100bc6d47729ae8eae32da5fdec.html["Portal de ayuda de SAP HANA System Replication ++|++ SAP"].
 
-image:sc-saphana-vmware-smas-image2.png[""]
+image:sc-saphana-vmware-smas-image2.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -52,7 +52,7 @@ En caso de producirse un fallo de almacenamiento, el sistema HANA accederá de f
 
 En caso de un fallo de host o de un sitio completo, se debe proporcionar un nuevo servidor del sitio secundario para acceder a los datos del host fallido. Normalmente se trata de un sistema de prueba o control de calidad del mismo tamaño que en producción, que se cerrará y se utilizará para ejecutar el sistema de producción. Después de que las LUN del sitio secundario se hayan conectado al nuevo host, se debe iniciar la base de datos de HANA. Por lo tanto, el objetivo de tiempo de recuperación total depende del tiempo necesario para aprovisionar el host y del tiempo de inicio de la base de datos de HANA.
 
-image:sc-saphana-vmware-smas-image3.png[""]
+image:sc-saphana-vmware-smas-image3.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -64,7 +64,7 @@ En caso de un fallo de almacenamiento, el host ESX accederá automáticamente a 
 
 En caso de un fallo de host o del sitio completo, se usa vSphere HA para iniciar la máquina virtual de HANA en el host ESX secundario. Cuando la máquina virtual de HANA se está ejecutando, se debe iniciar la base de datos HANA. Por lo tanto, el objetivo de tiempo de recuperación total depende principalmente del momento de inicio de la base de datos de HANA.
 
-image:sc-saphana-vmware-smas-image4.png[""]
+image:sc-saphana-vmware-smas-image4.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 

@@ -11,15 +11,12 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
 
+[role="lead"]
 Con cada operación de backup, SnapCenter ejecuta la detección en VMware, así como la detección del sitio principal. Si hay una conmutación por error de almacenamiento, SnapCenter detectará el nuevo sitio principal tan pronto como se ejecute un backup para el recurso.
 
-image:sc-saphana-vmware-smas-image31.png[""]
+image:sc-saphana-vmware-smas-image31.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -27,13 +24,13 @@ image:sc-saphana-vmware-smas-image31.png[""]
 
 En la vista de topología, SnapCenter muestra los backups de los clústeres de almacenamiento de origen y de destino.
 
-image:sc-saphana-vmware-smas-image32.png[""]
+image:sc-saphana-vmware-smas-image32.png["Figura que muestra el contenido que se está discutiendo"]
 
-image:sc-saphana-vmware-smas-image33.png[""]
+image:sc-saphana-vmware-smas-image33.png["Figura que muestra el contenido que se está discutiendo"]
 
 Al hacer clic en el número de recuento en el almacenamiento secundario, se muestran la relación actual y la dirección de replicación. El origen es siempre el sitio principal actual. Tras una conmutación por error de almacenamiento, el sitio principal cambiará y la pantalla se adaptará según corresponda. Todos los backups siempre tienen la misma relación que depende del sistema de almacenamiento que sea actualmente el sitio primario.
 
-image:sc-saphana-vmware-smas-image34.png[""]
+image:sc-saphana-vmware-smas-image34.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -43,8 +40,8 @@ Los backups de Snapshot que ha creado SnapCenter están disponibles en volúmene
 
 En la siguiente figura se muestran las copias Snapshot del volumen de datos HANA en el clúster A700.
 
-image:sc-saphana-vmware-smas-image35.png[""]
+image:sc-saphana-vmware-smas-image35.png["Figura que muestra el contenido que se está discutiendo"]
 
 En la siguiente figura se muestran las copias Snapshot del volumen de datos HANA en el clúster A800.
 
-image:sc-saphana-vmware-smas-image36.png[""]
+image:sc-saphana-vmware-smas-image36.png["Figura que muestra el contenido que se está discutiendo"]

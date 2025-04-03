@@ -11,11 +11,10 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
+
+[role="lead"]
+En este artículo se tratan los pasos de configuración necesarios para esta solución.
 
 
 
@@ -25,9 +24,9 @@ Los clústeres de almacenamiento y las SVM relevantes deben tener una relación 
 
 El mediador de ONTAP debe estar disponible y configurado en los dos clústeres de almacenamiento.
 
-image:sc-saphana-vmware-smas-image10.png[""]
+image:sc-saphana-vmware-smas-image10.png["Figura que muestra el contenido que se está discutiendo"]
 
-image:sc-saphana-vmware-smas-image11.png[""]
+image:sc-saphana-vmware-smas-image11.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -41,7 +40,7 @@ El propósito de un grupo de coherencia es realizar imágenes Snapshot simultán
 
 Para la replicación de sistemas HANA, el grupo de consistencia debe incluir todos los volúmenes utilizados por cada sistema HANA (datos, registro y compartidos). Los volúmenes que deben formar parte de un grupo de coherencia deben almacenarse en la misma SVM. Las imágenes de sistema operativo pueden almacenarse en un volumen aparte con su propio grupo de coherencia. En la siguiente figura se muestra un ejemplo de configuración con dos sistemas HANA.
 
-image:sc-saphana-vmware-smas-image12.png[""]
+image:sc-saphana-vmware-smas-image12.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -51,9 +50,9 @@ En nuestra configuración de laboratorio, creamos un iGroup que incluye las dos 
 
 Mediante la configuración de proximidad, hemos definido qué host ESX está cerca de qué clúster de almacenamiento. En nuestro caso, A700 se aproxima a ESX-1 y A800 se aproxima a ESX-2.
 
-image:sc-saphana-vmware-smas-image13.png[""]
+image:sc-saphana-vmware-smas-image13.png["Figura que muestra el contenido que se está discutiendo"]
 
-image:sc-saphana-vmware-smas-image14.png[""]
+image:sc-saphana-vmware-smas-image14.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 NOTE: En una configuración de acceso no uniforme, el iGroup del clúster de almacenamiento primario (A700) solo debe incluir los iniciadores del host ESX-1, ya que no hay conexión SAN al ESX-2. Además, debe configurar otro iGroup en el segundo clúster de almacenamiento (A800) que solo incluyan los iniciadores del host ESX-2. No se requiere configuración de proximidad ni replicación del iGroup.
@@ -62,7 +61,7 @@ NOTE: En una configuración de acceso no uniforme, el iGroup del clúster de alm
 
 == Configure la protección con el administrador del sistema de ONTAP
 
-image:sc-saphana-vmware-smas-image15.png[""]
+image:sc-saphana-vmware-smas-image15.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -75,11 +74,11 @@ Se ha habilitado el «Replicar iGroup». El grupo de imitadores se mantendrá si
 
 NOTE: En una configuración de acceso no uniforme, el iGroup no se debe replicar, ya que debe configurarse un iGroup independiente en el segundo clúster de almacenamiento.
 
-image:sc-saphana-vmware-smas-image16.png[""]
+image:sc-saphana-vmware-smas-image16.png["Figura que muestra el contenido que se está discutiendo"]
 
 Al hacer clic en la configuración de proximidad, puede revisar la configuración realizada antes de la configuración del iGroup.
 
-image:sc-saphana-vmware-smas-image17.png[""]
+image:sc-saphana-vmware-smas-image17.png["Figura que muestra el contenido que se está discutiendo"]
 
 Debe configurarse el clúster de almacenamiento de destino y debe estar habilitado la «Initialize Relationship».
 
@@ -89,11 +88,11 @@ Debe configurarse el clúster de almacenamiento de destino y debe estar habilita
 
 En el clúster de almacenamiento A700 (origen), la nueva relación ahora se muestra en la lista.
 
-image:sc-saphana-vmware-smas-image18.png[""]
+image:sc-saphana-vmware-smas-image18.png["Figura que muestra el contenido que se está discutiendo"]
 
 En el clúster de almacenamiento A800 (destino), se muestran la nueva relación y el estado de la replicación.
 
-image:sc-saphana-vmware-smas-image19.png[""]
+image:sc-saphana-vmware-smas-image19.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -118,4 +117,4 @@ El sitio principal es detectado por SnapCenter y se utiliza para ejecutar operac
 
 NOTE: Tenga en cuenta que el origen y el destino no están vinculados a la SVM o al clúster de almacenamiento, pero que pueden ser diferentes para cada relación de replicación.
 
-image:sc-saphana-vmware-smas-image20.png[""]
+image:sc-saphana-vmware-smas-image20.png["Figura que muestra el contenido que se está discutiendo"]

@@ -8,7 +8,7 @@ summary:
 :allow-uri-read: 
 
 
-'''
+[role="lead"]
 Cuando los recursos se configuran manualmente en SnapCenter y no se detectan automáticamente, SnapCenter no detecta la sincronización activa de VMware ni SnapMirror. Por lo tanto, no son compatibles de forma nativa con SnapCenter.
 
 En el caso de los volúmenes que no son de datos como los compartidos HANA, es posible realizar operaciones de backup y restauración con SnapCenter cuando se consideran pasos manuales adicionales.
@@ -19,7 +19,7 @@ En el caso de los volúmenes que no son de datos como los compartidos HANA, es p
 
 Si se produce un fallo en el sistema de almacenamiento configurado en SnapCenter, SnapCenter no cambiará automáticamente al otro sistema de almacenamiento. El recurso sin volumen de datos se debe adaptar manualmente para que la copia reflejada del volumen se utilice para operaciones de backup y restauración.
 
-image:sc-saphana-vmware-smas-image39.png[""]
+image:sc-saphana-vmware-smas-image39.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -27,9 +27,9 @@ image:sc-saphana-vmware-smas-image39.png[""]
 
 Aunque SnapCenter no reconoce la configuración de sincronización activa de SnapMirror para el volumen compartido de HANA, Snapshot se replica en ambos sitios.
 
-image:sc-saphana-vmware-smas-image40.png[""]
+image:sc-saphana-vmware-smas-image40.png["Figura que muestra el contenido que se está discutiendo"]
 
-image:sc-saphana-vmware-smas-image41.png[""]
+image:sc-saphana-vmware-smas-image41.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 

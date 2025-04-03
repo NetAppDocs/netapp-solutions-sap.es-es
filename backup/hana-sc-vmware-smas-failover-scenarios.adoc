@@ -10,11 +10,10 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
+
+[role="lead"]
+En este artículo se resaltan las situaciones de conmutación por error para esta solución.
 
 
 
@@ -28,7 +27,7 @@ En una configuración de acceso uniforme, la SAN de canal de fibra se extiende p
 
 Durante el funcionamiento normal, el sistema HANA lee y escribe desde/en la copia local en función de la ruta optimizada activa del host ESX ESX-1. Con cada operación de backup, SnapCenter detecta el sitio principal actual para la relación de replicación y ejecuta las operaciones de backup contra el sitio principal. Las Snapshots se replican en la copia duplicada y están disponibles en ambos sitios. Se ejecutará una operación de restauración de SnapCenter en el sitio principal.
 
-image:sc-saphana-vmware-smas-image42.png[""]
+image:sc-saphana-vmware-smas-image42.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -36,7 +35,7 @@ image:sc-saphana-vmware-smas-image42.png[""]
 
 Si falla el sistema de almacenamiento en el sitio 1, los sistemas HANA acceden a la copia reflejada en el sitio 2 y continúan con la operación. El sitio principal cambia al sitio secundario y SnapCenter ahora ejecuta operaciones de backup y restauración en el nuevo sitio principal.
 
-image:sc-saphana-vmware-smas-image43.png[""]
+image:sc-saphana-vmware-smas-image43.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -44,7 +43,7 @@ image:sc-saphana-vmware-smas-image43.png[""]
 
 En caso de un fallo del sitio, la máquina virtual de HANA, así como SnapCenter y el complemento de SnapCenter para VMware, realizarán la conmutación al nodo de respaldo en el host ESX del sitio secundario mediante vSphere HA. La base de datos de HANA debe comenzar y luego debe acceder a la copia duplicada en la segunda ubicación. El sitio principal cambia al sitio secundario y SnapCenter ahora ejecuta operaciones de backup y restauración en el nuevo sitio principal.
 
-image:sc-saphana-vmware-smas-image44.png[""]
+image:sc-saphana-vmware-smas-image44.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -58,7 +57,7 @@ En una configuración de acceso no uniforme, la SAN de canal de fibra no se exti
 
 Durante el funcionamiento normal, el sistema HANA lee y escribe en la copia local y en ella. Con cada operación de backup, SnapCenter detecta el sitio principal actual para la relación de replicación y ejecuta las operaciones de backup contra el sitio principal. Las Snapshots se replican en la copia duplicada y están disponibles en ambos sitios. Se ejecutará una operación de restauración de SnapCenter en el sitio principal.
 
-image:sc-saphana-vmware-smas-image45.png[""]
+image:sc-saphana-vmware-smas-image45.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -66,7 +65,7 @@ image:sc-saphana-vmware-smas-image45.png[""]
 
 En caso de un fallo de almacenamiento, la máquina virtual de HANA, así como SnapCenter y el complemento de SnapCenter para VMware, realizarán la conmutación al nodo de respaldo en el host ESX del sitio secundario mediante vSphere HA. La base de datos de HANA debe comenzar y luego debe acceder a la copia duplicada en la segunda ubicación. El sitio principal cambia al sitio secundario y SnapCenter ahora ejecuta operaciones de backup y restauración en el nuevo sitio principal.
 
-image:sc-saphana-vmware-smas-image46.png[""]
+image:sc-saphana-vmware-smas-image46.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -74,7 +73,7 @@ image:sc-saphana-vmware-smas-image46.png[""]
 
 Igual que un fallo de almacenamiento.
 
-image:sc-saphana-vmware-smas-image47.png[""]
+image:sc-saphana-vmware-smas-image47.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -84,4 +83,4 @@ Si la máquina virtual HANA se traslada al otro host ESX y el sitio principal de
 
 Como solución alternativa, hay que asegurarse de que la reubicación de las máquinas virtuales y el lado primario está hecha juntas, o que debe conmutar al sitio principal antes de la operación de restauración con SnapCenter.
 
-image:sc-saphana-vmware-smas-image48.png[""]
+image:sc-saphana-vmware-smas-image48.png["Figura que muestra el contenido que se está discutiendo"]

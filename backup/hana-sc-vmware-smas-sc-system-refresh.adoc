@@ -10,12 +10,9 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
 
+[role="lead"]
 Las operaciones de clonado pueden ejecutarse en el sitio principal o en el almacenamiento secundario.
 
 El volumen clonado no formará parte del grupo de consistencia de HANA y no se replicará con la sincronización activa de SnapMirror.

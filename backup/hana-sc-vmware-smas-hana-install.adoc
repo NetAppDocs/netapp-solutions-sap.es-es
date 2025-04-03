@@ -26,14 +26,14 @@ En este capítulo se describe la instalación y configuración del sistema SAP H
 
 La siguiente figura muestra la configuración de almacenamiento y almacén de datos para el sistema HANA. Debe configurar un volumen dedicado, LUN y un almacén de datos para cada sistema de archivos del sistema HANA. Los almacenes de datos no deben compartirse entre varios sistemas HANA u otras cargas de trabajo.
 
-image:sc-saphana-vmware-smas-image5.png[""]
+image:sc-saphana-vmware-smas-image5.png["Figura que muestra el contenido que se está discutiendo"]
 
 Las tres LUN del sistema HANA (hana++_++data++_++SMA, hana++_++log++_++SAM y hana++_++shared++_++SMA), así como el LUN para las imágenes del sistema operativo y los componentes de SnapCenter se han aprovisionado en el clúster de almacenamiento A700.
 
 
 NOTE: Todos los volúmenes del sistema HANA se deben aprovisionar en la misma SVM. En la configuración de sincronización activa de SnapMirror descrita más adelante, crearemos un grupo de coherencia en los tres volúmenes HANA, para lo cual se requiere que los volúmenes estén en la misma SVM. El volumen de infraestructura estará en un grupo de consistencia diferente y, por lo tanto, podría estar en una SVM diferente.
 
-image:sc-saphana-vmware-smas-image6.png[""]
+image:sc-saphana-vmware-smas-image6.png["Figura que muestra el contenido que se está discutiendo"]
 
 Se debe configurar un iGroup y las LUN anteriores deben asignarse al host ESX-1, que está muy cerca del sistema de almacenamiento A700 en nuestra configuración de laboratorio.
 
@@ -43,7 +43,7 @@ Se debe configurar un iGroup y las LUN anteriores deben asignarse al host ESX-1,
 
 Creamos tres almacenes de datos para el sistema HANA utilizando las tres LUN que habíamos aprovisionado antes. Además, creamos un almacén de datos de infraestructura con la LUN de infraestructura.
 
-image:sc-saphana-vmware-smas-image7.png[""]
+image:sc-saphana-vmware-smas-image7.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -57,7 +57,7 @@ En nuestra configuración de laboratorio, implementamos una nueva máquina virtu
 
 Se han añadido tres nuevos discos a la máquina virtual HANA, cada disco dentro de uno de los almacenes de datos que se han creado para el sistema HANA.
 
-image:sc-saphana-vmware-smas-image8.png[""]
+image:sc-saphana-vmware-smas-image8.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
@@ -67,7 +67,7 @@ El parámetro disk.EnableUUID se debe agregar y establecer en TRUE . SnapCenter 
 
 La VM se debe detener para poder agregar el parámetro.
 
-image:sc-saphana-vmware-smas-image9.png[""]
+image:sc-saphana-vmware-smas-image9.png["Figura que muestra el contenido que se está discutiendo"]
 
 La funcionalidad se puede comprobar con el siguiente comando.
 

@@ -37,4 +37,4 @@ El documento no pretende ser una descripción detallada de cómo configurar el e
 
 Nos centraremos en una configuración de VMware Metro Storage Cluster (VMSC) usando una configuración de acceso uniforme de SnapMirror Active Sync, como se muestra en la siguiente figura, pero también tocaremos brevemente configuraciones de acceso bare metal y no uniformes.
 
-image:sc-saphana-vmware-smas-image1.png[""]
+image:sc-saphana-vmware-smas-image1.png["Figura que muestra el contenido que se está discutiendo"]
