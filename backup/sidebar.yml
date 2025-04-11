@@ -182,3 +182,7 @@ entries:
 - title: 'SAP HANA en la cabina All SAN de NetApp: SAN moderno, protección de datos
     y recuperación ante desastres'
   url: "/backup/saphana-san_pdf_link.html"
+- title: Integración de SnapCenter para bases de datos SAP ASE
+  url: "/backup/snapcenter-sap-ase.html"
+- title: Integración de SnapCenter para bases de datos IBM DB2
+  url: "/backup/snapcenter-ibm-db2.html"
