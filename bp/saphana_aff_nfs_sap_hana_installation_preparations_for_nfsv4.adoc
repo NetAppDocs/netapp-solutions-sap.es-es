@@ -16,15 +16,17 @@ summary: 'La versión 4 y posteriores de NFS requieren la autenticación de usua
 [role="lead"]
 La versión 4 y posteriores de NFS requieren la autenticación de usuario. Esta autenticación se puede lograr mediante una herramienta de gestión de usuarios central, como un servidor de protocolo ligero de acceso a directorios (LDAP) o con cuentas de usuarios locales. En las siguientes secciones se describe cómo configurar las cuentas de usuario locales.
 
-El usuario de administración `<sidadm>` y la `sapsys` El grupo debe crearse manualmente en los hosts SAP HANA y las controladoras de almacenamiento antes de que comience la instalación del software SAP HANA.
+Los usuarios de administración `<sid>adm`,`<sid>crypt` y `sapsys` el grupo deben crearse manualmente en los hosts SAP HANA y en las controladoras de almacenamiento antes de que se inicie la instalación del software SAP HANA.
 
 
 
 == Hosts SAP HANA
 
-Si aún no existe, debe crear el `sapsys` En el host SAP HANA. Seleccione un ID de grupo único que no entra en conflicto con los ID de grupo existentes en las controladoras de almacenamiento.
+Si no existe, el `sapsys` El grupo debe crearse en el host SAP HANA. Debe seleccionarse un ID de grupo único que no entra en conflicto con los ID de grupo existentes en las controladoras de almacenamiento.
 
-El usuario `<sidadm>` Se crea en el host SAP HANA. Se debe elegir un ID único que no entre en conflicto con los ID de usuario existentes en las controladoras de almacenamiento.
+Los usuarios `<sid>adm` y `<sid>crypt` se crean en el host SAP HANA. Se deben seleccionar ID únicos que no entren en conflicto con los ID de usuario existentes en las controladoras de almacenamiento.
+
+Para un sistema SAP HANA de varios hosts, los ID de usuario y de grupo deben ser los mismos en todos los hosts SAP HANA. El grupo y el usuario se crean en los otros hosts SAP HANA copiando las líneas afectadas dentro `/etc/group` y `/etc/passwd` desde el sistema de origen en todos los demás hosts SAP HANA.
 
 Para un sistema SAP HANA con varios hosts, el ID de usuario y grupo debe ser el mismo en todos los hosts SAP HANA. El grupo y el usuario se crean en los otros hosts SAP HANA mediante la copia de las líneas afectadas en `/etc/group` y.. `/etc/passwd` Desde el sistema de origen a todos los demás hosts SAP HANA.
 
