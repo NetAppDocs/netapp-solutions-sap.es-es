@@ -1,0 +1,199 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-database-recovery.html 
+keywords: recovery, forward, log, backups, system, tenant, database, log, backups, check, consistency, hana, azure 
+summary: A continuación se muestran los pasos para la recuperación de la base de datos HANA 
+---
+= Recuperación de base de datos de HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+A continuación se muestran los pasos para la recuperación de la base de datos HANA
+
+Inicie los servicios SAP necesarios.
+
+....
+vm-pr1:~ # systemctl start sapinit
+....
+El siguiente resultado muestra los procesos necesarios.
+
+....
+vm-pr1:/ # ps -ef | grep sap
+root     23101     1  0 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/saphostexec pf=/usr/sap/hostctrl/exe/host_profile
+pr1adm   23191     1  3 11:29 ?        00:00:00 /usr/sap/PR1/HDB01/exe/sapstartsrv pf=/usr/sap/PR1/SYS/profile/PR1_HDB01_vm-pr1 -D -u pr1adm
+sapadm   23202     1  5 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/sapstartsrv pf=/usr/sap/hostctrl/exe/host_profile -D
+root     23292     1  0 11:29 ?        00:00:00 /usr/sap/hostctrl/exe/saposcol -l -w60 pf=/usr/sap/hostctrl/exe/host_profile
+root     23359  2597  0 11:29 pts/1    00:00:00 grep --color=auto sap
+....
+Los siguientes subapartados describen el proceso de recuperación con y sin recuperación futura mediante los backups de registros replicados. La recuperación se ejecuta mediante el script de recuperación de HANA para la base de datos del sistema y los comandos hdbsql para la base de datos del arrendatario.
+
+
+
+== Recuperación en el último punto de guardado de backup de volumen de datos de HANA
+
+La recuperación del último punto de guardado de la copia de seguridad se ejecuta con los siguientes comandos como usuario pr1adm:
+
+* Base de datos del sistema
+
+
+....
+recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG”
+....
+* Base de datos de tenant
+
+
+....
+Within hdbsql: RECOVER DATA FOR PR1 USING SNAPSHOT CLEAR LOG
+....
+También puede usar HANA Studio o Cockpit para ejecutar la recuperación del sistema y la base de datos de inquilinos.
+
+El siguiente resultado del comando muestra la ejecución de la recuperación.
+
+
+
+=== Recuperación de la base de datos del sistema
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> HDBSettings.sh recoverSys.py --command="RECOVER DATA USING SNAPSHOT CLEAR LOG"
+[139702869464896, 0.008] >> starting recoverSys (at Fri Feb 19 14:32:16 2021)
+[139702869464896, 0.008] args: ()
+[139702869464896, 0.009] keys: {'command': 'RECOVER DATA USING SNAPSHOT CLEAR LOG'}
+using logfile /usr/sap/PR1/HDB01/vm-pr1/trace/backup.log
+recoverSys started: ============2021-02-19 14:32:16 ============
+testing master: vm-pr1
+vm-pr1 is master
+shutdown database, timeout is 120
+stop system
+stop system on: vm-pr1
+stopping system: 2021-02-19 14:32:16
+stopped system: 2021-02-19 14:32:16
+creating file recoverInstance.sql
+restart database
+restart master nameserver: 2021-02-19 14:32:21
+start system: vm-pr1
+sapcontrol parameter: ['-function', 'Start']
+sapcontrol returned successfully:
+2021-02-19T14:32:56+00:00  P0027646      177bab4d610 INFO    RECOVERY RECOVER DATA finished successfully
+recoverSys finished successfully: 2021-02-19 14:32:58
+[139702869464896, 42.017] 0
+[139702869464896, 42.017] << ending recoverSys, rc = 0 (RC_TEST_OK), after 42.009 secs
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01>
+....
+
+
+=== Recuperación de bases de datos de tenant
+
+Si no se ha creado una clave de almacenamiento de usuario para el usuario pr1adm en el sistema de origen, debe crearse una clave en el sistema de destino. El usuario de la base de datos configurado en la clave debe tener privilegios para ejecutar operaciones de recuperación de inquilinos.
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbuserstore set PR1KEY vm-pr1:30113 <backup-user> <password>
+....
+La recuperación de arrendatarios se ejecuta ahora con hdbsql.
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbsql -U PR1KEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql SYSTEMDB=> RECOVER DATA FOR PR1 USING SNAPSHOT CLEAR LOG
+0 rows affected (overall time 66.973089 sec; server time 66.970736 sec)
+hdbsql SYSTEMDB=>
+....
+La base de datos HANA ahora está en funcionamiento y el flujo de trabajo de recuperación ante desastres de la base de datos de HANA se ha probado.
+
+
+
+== Recuperación con recuperación de reenvío mediante backups de registros/catálogos
+
+Los backups de registros y el catálogo de backup de HANA se están replicando desde el sistema de origen.
+
+La recuperación mediante todas las copias de seguridad de registro disponibles se ejecuta con los siguientes comandos como usuario pr1adm:
+
+* Base de datos del sistema
+
+
+....
+recoverSys.py --command "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT"
+....
+* Base de datos de tenant
+
+
+....
+Within hdbsql: RECOVER DATABASE FOR PR1 UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT
+....
+
+NOTE: Para recuperar utilizando todos los registros disponibles, puede utilizar en cualquier momento en el futuro como Marca de tiempo en la sentencia Recovery.
+
+También puede usar HANA Studio o Cockpit para ejecutar la recuperación del sistema y la base de datos de inquilinos.
+
+El siguiente resultado del comando muestra la ejecución de la recuperación.
+
+
+
+=== Recuperación de la base de datos del sistema
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> HDBSettings.sh recoverSys.py --command "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT"
+[140404915394368, 0.008] >> starting recoverSys (at Fri Feb 19 16:06:40 2021)
+[140404915394368, 0.008] args: ()
+[140404915394368, 0.008] keys: {'command': "RECOVER DATABASE UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT"}
+using logfile /usr/sap/PR1/HDB01/vm-pr1/trace/backup.log
+recoverSys started: ============2021-02-19 16:06:40 ============
+testing master: vm-pr1
+vm-pr1 is master
+shutdown database, timeout is 120
+stop system
+stop system on: vm-pr1
+stopping system: 2021-02-19 16:06:40
+stopped system: 2021-02-19 16:06:41
+creating file recoverInstance.sql
+restart database
+restart master nameserver: 2021-02-19 16:06:46
+start system: vm-pr1
+sapcontrol parameter: ['-function', 'Start']
+sapcontrol returned successfully:
+2021-02-19T16:07:19+00:00  P0009897      177bb0b4416 INFO    RECOVERY RECOVER DATA finished successfully, reached timestamp 2021-02-19T15:17:33+00:00, reached log position 38272960
+recoverSys finished successfully: 2021-02-19 16:07:20
+[140404915394368, 39.757] 0
+[140404915394368, 39.758] << ending recoverSys, rc = 0 (RC_TEST_OK), after 39.749 secs
+....
+
+
+=== Recuperación de bases de datos de tenant
+
+....
+pr1adm@vm-pr1:/usr/sap/PR1/HDB01> hdbsql -U PR1KEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+
+hdbsql SYSTEMDB=> RECOVER DATABASE FOR PR1 UNTIL TIMESTAMP '2021-02-20 00:00:00' CLEAR LOG USING SNAPSHOT
+0 rows affected (overall time 63.791121 sec; server time 63.788754 sec)
+
+hdbsql SYSTEMDB=>
+....
+La base de datos HANA ahora está en funcionamiento y el flujo de trabajo de recuperación ante desastres de la base de datos de HANA se ha probado.
+
+
+
+== Comprobar la coherencia de los backups de registros más recientes
+
+Debido a que la replicación del volumen de backup de registros se realiza de forma independiente del proceso de backup de registros ejecutado por la base de datos SAP HANA, puede haber archivos de backup de registros abiertos e incoherentes en el sitio de recuperación ante desastres. Sólo es posible que los archivos de backup de registro más recientes no sean consistentes y se deben comprobar dichos archivos antes de que se realice una recuperación Reenviar en el sitio de recuperación ante desastres mediante el `hdbbackupcheck` herramienta.
+
+Si la `hdbbackupcheck` la herramienta informa de un error acerca de los backups de registros más recientes, es necesario eliminar o eliminar el último conjunto de backups de registros.
+
+....
+pr1adm@hana-10: > hdbbackupcheck /hanabackup/PR1/log/SYSTEMDB/log_backup_0_0_0_0.1589289811148
+Loaded library 'libhdbcsaccessor'
+Loaded library 'libhdblivecache'
+Backup '/mnt/log-backup/SYSTEMDB/log_backup_0_0_0_0.1589289811148' successfully checked.
+....
+La comprobación debe ejecutarse para los archivos de backup de registro más recientes del sistema y la base de datos de tenant.
+
+Si la `hdbbackupcheck` la herramienta informa de un error acerca de los backups de registros más recientes, es necesario eliminar o eliminar el último conjunto de backups de registros.

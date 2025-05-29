@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-usecases-sys-refresh-copy-clone.html 
+keywords: data refresh, QA, text, sandbox, training, use case 
+summary: Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual. Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización. 
+---
+= Casos prácticos de actualización, copia y clonado del sistema
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual.
+
+Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
+
+image:lama-ansible-image2.png["Esta imagen muestra el flujo de trabajo medioambiental desde el entorno de desarrollo principal hasta las divisiones de proyecto temporales, los sistemas de reparación, los sistemas de formación y los sistemas sanbox. Muestra dónde se usan las funciones Actualizar sistema, copia de sistema y clonado de sistema para estos distintos fines."]
+
+Los flujos de trabajo de clonado de SAP Lama y NetApp se pueden utilizar para acelerar y automatizar las tareas necesarias en las capas de infraestructura y base de datos. En lugar de restaurar un backup desde el sistema de origen al sistema de destino, SAP Lama utiliza la copia de Snapshot de NetApp y la tecnología FlexClone de NetApp para que las tareas necesarias hasta una base de datos de HANA iniciada se puedan llevar a cabo en cuestión de minutos en lugar de horas, como se muestra en la siguiente figura. El tiempo necesario para el proceso de clonación es independiente del tamaño de la base de datos; por lo tanto, es posible crear sistemas de gran tamaño en un par de minutos. La reducción adicional del tiempo de ejecución se logra mediante la automatización de tareas en el sistema operativo y la capa de la base de datos, así como en el procesamiento posterior de SAP.
+
+image:lama-ansible-image3.png["Esta imagen muestra una comparación entre el proceso de clonación con y sin copias Snapshot de NetApp y la tecnología FlexClone de NetApp, que acelera el proceso de forma espectacular."]
+
+
+
+== Daños lógicos de dirección
+
+La corrupción lógica puede deberse a errores de software, errores humanos o sabotaje. Desgraciadamente, la corrupción lógica no se puede hacer frente a menudo con soluciones estándares de alta disponibilidad y de recuperación ante desastres. Como resultado, dependiendo de la capa, aplicación, sistema de archivos o almacenamiento donde se haya producido el daño lógico, a veces no se pueden satisfacer los requisitos de pérdida de datos y del tiempo de inactividad mínimo.
+
+En el peor de los casos, se puede ver un daño lógico en una aplicación SAP. Las aplicaciones SAP suelen funcionar en un entorno en el que diferentes aplicaciones se comunican entre sí y intercambian datos. Por lo tanto, el enfoque recomendado no es restaurar ni recuperar un sistema SAP en el que se ha producido un daño lógico. Cuando se restaura el sistema a un momento específico antes de que se dañara, se perderán los datos. Además, el entorno SAP ya no estaría sincronizado y necesitaría un postprocesamiento adicional.
+
+En lugar de restaurar el sistema SAP, el mejor método es intentar solucionar el error lógico dentro del sistema analizando el problema en un sistema de reparación independiente. El análisis de la causa raíz requiere la participación del proceso empresarial y el propietario de la aplicación. En esta situación, puede crear un sistema de reparación (un clon del sistema de producción) basado en los datos almacenados antes de que se produjera el daño lógico. Dentro del sistema de reparación, los datos necesarios se pueden exportar e importar al sistema de producción. Con este método, no es necesario detener el sistema de producción y, en el mejor de los casos, no se pierden datos ni solo una pequeña fracción de estos.
+
+Al configurar el sistema de reparación, la flexibilidad y la velocidad son cruciales. Con los backups de SnapVault basados en almacenamiento de NetApp, hay disponibles varias imágenes de bases de datos consistentes para crear un clon del sistema de producción con la tecnología FlexClone de NetApp. Los volúmenes FlexClone se pueden crear en cuestión de segundos en lugar de varias horas si se realiza una restauración redirigida a partir de un backup basado en archivos para configurar el sistema de reparación.
+
+image:lama-ansible-image4.png["Esta imagen muestra el proceso paso a paso para crear un sistema de reparación desde el sistema de clonación mediante la tecnología FlexClone."]
+
+
+
+== Pruebas de recuperación ante desastres
+
+Para que una estrategia de recuperación ante desastres sea eficaz, es necesario probar el flujo de trabajo necesario. Las pruebas demuestran si la estrategia funciona y si la documentación interna es suficiente. Además, permite a los administradores entrenar en los procedimientos requeridos.
+
+La replicación de almacenamiento con SnapMirror permite ejecutar pruebas de recuperación ante desastres sin poner en riesgo el objetivo de tiempo de recuperación ni el objetivo de punto de recuperación. Las pruebas de recuperación ante desastres pueden realizarse sin interrumpir la replicación de datos. Las pruebas de recuperación ante desastres para SnapMirror asíncrono y síncrono utilizan backups de Snapshot y volúmenes FlexClone en el destino de recuperación ante desastres.
+
+SAP Lama puede usar para organizar el procedimiento de prueba completo; también se encarga de la delimitación de red, el mantenimiento de host de destino, etc.
+
+image:lama-ansible-image5.png["En esta imagen, se muestra la relación entre los sistemas de almacenamiento NetApp en el centro de datos principal, el centro de datos de recuperación ante desastres local y el centro de datos de recuperación ante desastres remoto. Están conectados tanto por SnapMirror síncrono como por relaciones de SnapMirror asíncrono."]

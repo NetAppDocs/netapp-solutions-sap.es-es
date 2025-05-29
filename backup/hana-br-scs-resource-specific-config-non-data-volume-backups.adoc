@@ -1,0 +1,88 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-br-scs-resource-specific-config-non-data-volume-backups.html 
+keywords: resource-specific, configuration, non-data volume, resource group, sap landscape 
+summary: El backup de volúmenes que no forman parte de datos es una parte integrada del complemento SAP HANA. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento determinado, siempre y cuando los recursos de instalación de la base de datos y los registros requeridos sigan estando disponibles. 
+---
+= Configuración específica de recursos de SnapCenter para backups de volúmenes sin datos
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+El backup de volúmenes que no forman parte de datos es una parte integrada del complemento SAP HANA. Proteger el volumen de datos de la base de datos es suficiente para restaurar y recuperar la base de datos SAP HANA en un momento determinado, siempre y cuando los recursos de instalación de la base de datos y los registros requeridos sigan estando disponibles.
+
+Para la recuperación tras situaciones en las que se deben restaurar otros archivos distintos de datos, NetApp recomienda desarrollar una estrategia de backup adicional para los volúmenes que no sean de datos a fin de aumentar el backup de base de datos SAP HANA. En función de los requisitos específicos, el backup de volúmenes que no pertenecen a datos puede diferir en la configuración de frecuencia de programación y retención, por lo que debe tenerse en cuenta la frecuencia con la que se modifican los archivos que no son de datos. Por ejemplo, el volumen HANA `/hana/shared` Contiene ejecutables, pero también archivos de seguimiento SAP HANA. Aunque los ejecutables solo cambian cuando se actualiza la base de datos SAP HANA, es posible que los archivos de seguimiento de SAP HANA necesiten una frecuencia de backup mayor para permitir el análisis de situaciones problemáticas con SAP HANA.
+
+El backup de volúmenes que no son de datos de SnapCenter permite crear copias Snapshot de todos los volúmenes relevantes en solo unos segundos, con la misma eficiencia de espacio que los backups de bases de datos de SAP HANA. La diferencia es que no se requiere ninguna comunicación de SQL con la base de datos SAP HANA.
+
+
+
+== Configuración de los recursos que no son de volúmenes de datos
+
+En este ejemplo, queremos proteger los volúmenes que no son datos de la base de datos SAP HANA SS1.
+
+. En la pestaña Resource, seleccione Non-Data-Volume y haga clic en Add SAP HANA Database.
++
+image:saphana-br-scs-image78.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+. En el paso uno del cuadro de diálogo Add SAP HANA Database, en la lista Resource Type, seleccione Non-data Volumes. Especifique un nombre para el recurso y el SID asociado y el host del plugin de SAP HANA que desea usar para el recurso y, a continuación, haga clic en Next.
++
+image:saphana-br-scs-image79.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+. Añada la SVM y el volumen de almacenamiento como espacio físico de almacenamiento y, a continuación, haga clic en Next.
++
+image:saphana-br-scs-image80.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+. En el paso de resumen, haga clic en Finish para guardar la configuración.
+. Repita estos pasos para todos los volúmenes sin datos requeridos.
+. Continúe con la configuración de protección del nuevo recurso.
++
+
+NOTE: La protección de datos para recursos de un volumen sin datos es idéntica al flujo de trabajo de los recursos de base de datos SAP HANA y puede definirse en un nivel de recurso individual.
+
++
+En la siguiente figura, se muestra la lista de los recursos configurados de volúmenes sin datos.
+
++
+image:saphana-br-scs-image81.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+
+
+== Grupos de recursos
+
+Los grupos de recursos son una forma cómoda de definir la protección de varios recursos que requieren las mismas políticas de protección y programaciones. Los recursos individuales que forman parte de un grupo de recursos aún pueden protegerse en un nivel individual.
+
+Los grupos de recursos proporcionan las siguientes funciones:
+
+* Puede añadir uno o varios recursos a un grupo de recursos. Todos los recursos deben pertenecer al mismo plugin de SnapCenter.
+* La protección puede definirse en un nivel de grupo de recursos. Todos los recursos del grupo de recursos utilizan la misma política y programación cuando se protegen.
+* Todos los backups del repositorio de SnapCenter y las copias de Snapshot de almacenamiento tienen el mismo nombre definido en la protección de recursos.
+* Las operaciones de restauración se aplican en un solo nivel de recursos, no como parte de un grupo de recursos.
+* Cuando se usa SnapCenter para eliminar el backup de un recurso creado en el nivel de un grupo de recursos, este backup se elimina para todos los recursos del grupo de recursos. Eliminar el backup incluye eliminar el backup del repositorio de SnapCenter y eliminar las copias de Snapshot de almacenamiento.
+* El principal caso práctico para los grupos de recursos es cuando un cliente desea utilizar backups creados con SnapCenter para la clonación de sistemas con SAP Landscape Management. Esto se describe en la siguiente sección.
+
+
+
+
+== Uso de SnapCenter junto con la gestión de entornos SAP
+
+Con SAP Landscape Management (SAP Lama), los clientes pueden gestionar entornos de sistemas SAP complejos en centros de datos locales y en sistemas que se ejecutan en el cloud. SAP Lama, junto con Storage Services Connector (SSC) de NetApp, puede ejecutar operaciones de almacenamiento como el clonado y la replicación para casos de uso de clonado, copia y actualización del sistema SAP mediante la tecnología Snapshot y FlexClone. Esto le permite automatizar por completo una copia del sistema SAP basada en la tecnología de clonación de almacenamiento y, al mismo tiempo, incluir el postprocesamiento SAP necesario. Para obtener más información sobre las soluciones de NetApp para SAP LaMa, consulte https://www.netapp.com/pdf.html?item=/media/17195-tr4018pdf.pdf["TR-4018: Integración de los sistemas ONTAP de NetApp con SAP Landscape Management"^] .
+
+SSC de NetApp y SAP Lama pueden crear copias de Snapshot bajo demanda directamente con SSC de NetApp, pero también pueden usar las copias de Snapshot que se han creado mediante SnapCenter. Para utilizar los backups de SnapCenter como base de operaciones de clonado del sistema y copia con SAP Lama, debe cumplir los siguientes requisitos previos:
+
+* SAP Lama requiere que todos los volúmenes estén incluidos en el backup; esto incluye datos de SAP HANA, registros y volúmenes compartidos.
+* Todos los nombres de las copias Snapshot de almacenamiento deben ser idénticos.
+* Los nombres de las instantáneas de almacenamiento deben comenzar por VCM.
+
+
+
+NOTE: En las operaciones de backup normales, NetApp no recomienda incluir el volumen de registros. Si restaura el volumen de registro desde un backup, sobrescribe los últimos registros de recuperación activos y evita que la recuperación de la base de datos se recupere en el último estado reciente.
+
+Los grupos de recursos SnapCenter satisfacen todos estos requisitos. SnapCenter configura tres recursos: Un recurso cada uno para el volumen de datos, el volumen de registro y el volumen compartido. Los recursos se colocan en un grupo de recursos y se definen entonces la protección en el nivel del grupo de recursos. En la protección del grupo de recursos, el nombre de Snapshot personalizado debe definirse con VCM al principio.

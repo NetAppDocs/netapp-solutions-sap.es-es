@@ -1,0 +1,64 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-fc-update-history.html 
+keywords:  
+summary:  
+---
+= Actualizar historial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
+
+[cols="25,50"]
+|===
+| Fecha | Actualizar el resumen 
+
+
+| Febrero de 2015 | Versión inicial 
+
+
+| Octubre de 2015 | Parámetros de E/S incluidos para SAP HANA y HWVAL SPS 10 y posteriores 
+
+
+| Febrero de 2016 | Ajuste de tamaño de la capacidad actualizado 
+
+
+| Febrero de 2017 | Nuevos sistemas de almacenamiento y bandejas de discos de NetApp nuevas funciones de las versiones del nuevo SO de ONTAP 9 (SLES12 SP1 y Red Hat Enterprise Linux 7.2), nueva versión SAP HANA 
+
+
+| Julio de 2017 | Actualizaciones menores 
+
+
+| Septiembre de 2018 | Nuevos sistemas de almacenamiento de NetApp nuevas versiones de SO (SLES12 SP3 y Red Hat Enterprise Linux 7.4) actualizaciones secundarias adicionales de SAP HANA 2.0 SPS3 
+
+
+| Septiembre de 2019 | Nuevas actualizaciones secundarias del sistema operativo 
+
+
+| Abril de 2020 | Se introdujeron múltiples funciones de partición de datos disponibles desde SAP HANA 2.0 SPS4 
+
+
+| Junio de 2020 | Información adicional sobre funcionalidades opcionales actualizaciones menores 
+
+
+| Febrero de 2021 | LVM de Linux admite nuevos sistemas de almacenamiento NetApp nuevas versiones del SO (SLES15SP2, RHEL 8) 
+
+
+| Abril de 2021 | Se añadió información específica de VMware vSphere 
+
+
+| Septiembre de 2022 | Nuevos lanzamientos de SO 
+
+
+| Septiembre de 2024 | Nuevos sistemas de almacenamiento 
+
+
+| Febrero de 2025 | Nuevo sistema de almacenamiento 
+|===

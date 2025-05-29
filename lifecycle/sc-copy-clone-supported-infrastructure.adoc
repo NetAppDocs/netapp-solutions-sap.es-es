@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-supported-infrastructure.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP están integradas en las herramientas de gestión del ciclo de vida y bases de datos de SAP HANA, combinando una protección eficiente de datos integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP. 
+---
+= Infraestructura y escenarios compatibles
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este documento describe las situaciones de clonación y actualización del sistema SAP para sistemas SAP HANA que se ejecutan en sistemas NetApp en las instalaciones, en los sistemas Amazon FSx para NetApp ONTAP y en Azure NetApp Files. Sin embargo, no todas las funciones y escenarios están disponibles en todas las plataformas de almacenamiento. La siguiente tabla resume las configuraciones compatibles.
+
+Dentro del documento, utilizamos un entorno SAP HANA que se ejecuta en sistemas NetApp locales con NFS como protocolo de almacenamiento. La mayoría de los pasos del flujo de trabajo son idénticos en las diferentes plataformas y, si hay diferencias, se resaltan en este documento.
+
+[cols="25%,25%,25%,25%"]
+|===
+|  | *Sistemas NetApp locales* | *AWS FSx para ONTAP de NetApp* | *Azure NetApp Files* 
+
+
+| Protocolo de almacenamiento | NFS, Fibre Channel | NFS | NFS 
+
+
+| Clonado ligero (FlexClone) | Sí | Sí | No, con la versión actual de ANF, los volúmenes clonados siempre están divididos 
+
+
+| Operación de división de clones | Sí | Sí | NO DISPONIBLE 
+
+
+| Clonación desde el principal | Sí | Sí | Sí 
+
+
+| Clonado desde backup externo | Sí | Sí | No 
+
+
+| Clonado en el sitio de recuperación ante desastres | Sí | Sí | Sí, pero no está integrado en SnapCenter 
+|===

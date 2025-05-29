@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/libelle-sc-additional-info.html 
+keywords:  
+summary:  
+---
+= Dónde encontrar información adicional e historial de versiones
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si quiere más información sobre el contenido de este documento, consulte los siguientes documentos o sitios web:
+
+* Documentación de productos de NetApp
++
+https://docs.netapp.com["https://docs.netapp.com"^]
+
+
+
+
+
+== Historial de versiones
+
+|===
+| Versión | Fecha | Historial de versiones del documento 
+
+
+| Versión 1.0 | Abril de 2022 | Versión inicial. 
+|===

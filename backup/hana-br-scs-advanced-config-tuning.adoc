@@ -1,0 +1,218 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-br-scs-advanced-config-tuning.html 
+keywords: configuration, settings, secure communication, auto discovery, automated, log backup, housekeeping, cleanup 
+summary: Esta página describe las distintas operaciones necesarias para completar la configuración y el ajuste. 
+---
+= Configuración y ajuste avanzados
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se describen las opciones de configuración y ajuste que los clientes pueden usar para adaptar la configuración de SnapCenter a sus necesidades específicas. Es posible que no todas las configuraciones se apliquen a todos los escenarios de clientes.
+
+
+
+== Habilite la comunicación segura con la base de datos de HANA
+
+Si las bases de datos de HANA están configuradas con comunicación segura, el `hdbsql` El comando que ejecuta SnapCenter debe utilizar opciones adicionales de la línea de comandos. Esto se puede lograr usando un script contenedor que llama `hdbsql` con las opciones necesarias.
+
+
+NOTE: Existen varias opciones para configurar la comunicación SSL. En los siguientes ejemplos, la configuración de cliente más simple se describe utilizando la opción de línea de comandos, donde no se realiza ninguna validación de certificado de servidor. Si se requiere la validación de certificados en el servidor o en el cliente, se necesitan diferentes opciones de línea de comandos hdbsql y debe configurar el entorno PSE de acuerdo con lo descrito en la Guía de seguridad de SAP HANA.
+
+En lugar de configurar el `hdbsql` ejecutable en la `hana.properties` archivos, se agrega el script contenedor.
+
+Para un host de plugin de HANA central en el servidor de Windows de SnapCenter, debe añadir el siguiente contenido en `C:\Program Files\NetApp\SnapCenter\Snapcenter Plug-in Creator\etc\hana.properties`.
+
+....
+HANA_HDBSQL_CMD=C:\\Program Files\\sap\\hdbclient\\hdbsql-ssl.cmd
+....
+La secuencia de comandos contenedora `hdbsql-ssl.cmd` llamadas `hdbsql.exe` con las opciones de línea de comandos necesarias.
+
+....
+@echo off
+"C:\Program Files\sap\hdbclient\hdbsql.exe" -e -ssltrustcert %*
+....
+
+NOTE: La `-e - ssltrustcert` La opción de línea de comandos hdbsql también funciona con sistemas HANA en los que SSL no está habilitado. Por lo tanto, esta opción también se puede usar con un host del complemento HANA central, donde no todos los sistemas HANA tienen SSL habilitado o deshabilitado.
+
+Si el plugin de HANA se pone en marcha en hosts de base de datos HANA individuales, la configuración se debe realizar en cada host Linux de forma acorde.
+
+....
+HANA_HDBSQL_CMD = /usr/sap/SM1/HDB12/exe/hdbsqls
+....
+La secuencia de comandos contenedora `hdbsqls` llamadas `hdbsql` con las opciones de línea de comandos necesarias.
+
+....
+#/bin/bash
+/usr/sap/SM1/HDB12/exe/hdbsql -e -ssltrustcert $*
+....
+
+
+== Deshabilite la detección automática en el host del plugin de HANA
+
+Para deshabilitar la detección automática en el host del plugin de HANA, complete los siguientes pasos:
+
+. En el servidor de SnapCenter, abra PowerShell. Conéctese al servidor SnapCenter ejecutando el `Open- SmConnection` y especifique el nombre de usuario y la contraseña en la ventana de inicio de sesión de apertura.
+. Para deshabilitar la detección automática, ejecute el `Set- SmConfigSettings` comando.
++
+Para un host HANA `hana-2`, el mandato es el siguiente:
+
++
+....
+PS C:\Users\administrator.SAPCC> Set-SmConfigSettings -Agent -Hostname hana-2 -configSettings @{"DISABLE_AUTO_DISCOVERY"="true"}
+Name                           Value
+----                           -----
+DISABLE_AUTO_DISCOVERY         true
+PS C:\Users\administrator.SAPCC>
+....
+. Verifique la configuración ejecutando el `Get- SmConfigSettings` comando.
++
+....
+PS C:\Users\administrator.SAPCC> Get-SmConfigSettings -Agent -Hostname hana-2 -key all
+Key: CUSTOMPLUGINS_OPERATION_TIMEOUT_IN_MSEC            Value: 3600000      Details: Plug-in API operation Timeout
+Key: CUSTOMPLUGINS_HOSTAGENT_TO_SERVER_TIMEOUT_IN_SEC   Value: 1800         Details: Web Service API Timeout
+Key: CUSTOMPLUGINS_ALLOWED_CMDS                         Value: *;           Details: Allowed Host OS Commands
+Key: DISABLE_AUTO_DISCOVERY                             Value: true          Details:
+Key: PORT                                               Value: 8145          Details: Port for server communication
+PS C:\Users\administrator.SAPCC>
+....
++
+La configuración se escribe en el archivo de configuración del agente en el host y sigue disponible después de una actualización de plugin con SnapCenter.
+
++
+....
+hana-2:/opt/NetApp/snapcenter/scc/etc # cat /opt/NetApp/snapcenter/scc/etc/agent.properties | grep DISCOVERY
+DISABLE_AUTO_DISCOVERY = true
+hana-2:/opt/NetApp/snapcenter/scc/etc #
+....
+
+
+
+
+== Desactivar el mantenimiento automático de los backups de registros
+
+El mantenimiento del backup de registros está habilitado de forma predeterminada y se puede deshabilitar en el nivel de host del plugin de HANA. Hay dos opciones para cambiar esta configuración.
+
+
+
+=== Edite el archivo hana.property
+
+Incluido el parámetro `LOG_CLEANUP_DISABLE = Y` en la `hana.property` El archivo de configuración deshabilita el mantenimiento del backup de registros de todos los recursos mediante este host del plugin de SAP HANA como host de comunicación:
+
+* Para el host de comunicación Hdbsql en Windows, la `hana.property` el archivo está ubicado en `C:\Program Files\NetApp\SnapCenter\Snapcenter Plug-in Creator\etc`.
+* Para el host de comunicación Hdbsql en Linux, la `hana.property` el archivo está ubicado en `/opt/NetApp/snapcenter/scc/etc`.
+
+
+
+
+=== Utilice el comando PowerShell
+
+Una segunda opción para configurar estas opciones es usar un comando de PowerShell de SnapCenter.
+
+. En el servidor SnapCenter, abra un PowerShell. Conéctese al servidor SnapCenter mediante el comando `Open- SmConnection` y especifique el nombre de usuario y la contraseña en la ventana de inicio de sesión abierta.
+. Con el comando `Set- SmConfigSettings -Plugin - HostName <pluginhostname> - PluginCode hana - configSettings @{"LOG_CLEANUP_DISABLE" = "Y"}`, Los cambios se configuran para el host del plug-in SAP HANA `<pluginhostname>` Especificado por la IP o el nombre de host (consulte la siguiente figura).
+
+
+image:saphana-br-scs-image154.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+== Deshabilite la advertencia cuando ejecute el plugin de SAP HANA en un entorno virtual
+
+SnapCenter detecta si el plugin de SAP HANA está instalado en un entorno virtualizado. Podría ser un entorno VMware o una instalación de SnapCenter en un proveedor de cloud público. En este caso, SnapCenter muestra una advertencia para configurar el hipervisor, como se muestra en la siguiente figura.
+
+image:saphana-br-scs-image34.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Es posible suprimir esta advertencia globalmente. En este caso, SnapCenter no conoce los entornos virtualizados y, por lo tanto, no muestra estas advertencias.
+
+Para configurar SnapCenter para suprimir esta advertencia, se debe aplicar la siguiente configuración:
+
+. En la pestaña Configuración, seleccione Configuración global.
+. Para la configuración del hipervisor, seleccione VMs have iSCSI Direct Attached Disks or NFS for All the hosts y actualice la configuración.
+
+
+image:saphana-br-scs-image155.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+== Cambie la frecuencia de programación de la sincronización de los backups con el almacenamiento de backup externo
+
+Tal y como se describe en la secciónlink:hana-br-scs-concepts-best-practices.html#retention-management-of-backups-at-the-secondary-storage["“Gestión de retención de backups en el almacenamiento secundario”,"], la gestión de retención de backups de datos en un sistema de almacenamiento de backup externo se encarga de ONTAP. SnapCenter comprueba periódicamente si ONTAP ha eliminado los backups del almacenamiento de backup externo ejecutando un trabajo de limpieza con una programación predeterminada semanal.
+
+El trabajo de limpieza de SnapCenter elimina los backups del repositorio de SnapCenter, así como en el catálogo de backups de SAP HANA si se han identificado algunos backups eliminados en el almacenamiento de backup externo.
+
+La tarea de limpieza también ejecuta el mantenimiento de los backups de registros de SAP HANA.
+
+Hasta que esta limpieza programada haya finalizado, SAP HANA y SnapCenter pueden seguir mostrando backups que ya se han eliminado del almacenamiento de backup externo.
+
+
+NOTE: Esto puede generar backups de registros adicionales, incluso si ya se han eliminado los backups Snapshot basados en almacenamiento correspondientes en el almacenamiento de backup externo.
+
+En las siguientes secciones se describen dos formas de evitar esta discrepancia temporal.
+
+
+
+=== Actualización manual a nivel de recursos
+
+En la vista de topología de un recurso, SnapCenter muestra los backups en el almacenamiento de backup externo al seleccionar los backups secundarios, como se muestra en la siguiente captura de pantalla. SnapCenter ejecuta una operación de limpieza con el icono Refresh para sincronizar los backups de este recurso.
+
+image:saphana-br-scs-image156.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+=== Cambie la frecuencia del trabajo de limpieza de SnapCenter
+
+SnapCenter ejecuta el trabajo de limpieza `SnapCenter_RemoveSecondaryBackup` De forma predeterminada, para todos los recursos semanalmente mediante el mecanismo de programación de tareas de Windows. Esto se puede modificar con un cmdlet de PowerShell de SnapCenter.
+
+. Inicie una ventana de comandos de PowerShell en el servidor SnapCenter.
+. Abra la conexión con SnapCenter Server e introduzca las credenciales de administrador de SnapCenter en la ventana de inicio de sesión.
++
+image:saphana-br-scs-image157.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+. Para cambiar la programación de manera semanal a diaria, use el cmdlet `Set- SmSchedule`.
++
+....
+PS C:\Users\scadmin> Set-SmSchedule -ScheduleInformation @{"ScheduleType"="Daily";"StartTime"="03:45 AM";"DaysInterval"=
+"1"} -TaskName SnapCenter_RemoveSecondaryBackup
+TaskName              : SnapCenter_RemoveSecondaryBackup
+Hosts                 : {}
+StartTime             : 11/25/2019 3:45:00 AM
+DaysoftheMonth        :
+MonthsofTheYear       :
+DaysInterval          : 1
+DaysOfTheWeek         :
+AllowDefaults         : False
+ReplaceJobIfExist     : False
+UserName              :
+Password              :
+SchedulerType         : Daily
+RepeatTask_Every_Hour :
+IntervalDuration      :
+EndTime               :
+LocalScheduler        : False
+AppType               : False
+AuthMode              :
+SchedulerSQLInstance  : SMCoreContracts.SmObject
+MonthlyFrequency      :
+Hour                  : 0
+Minute                : 0
+NodeName              :
+ScheduleID            : 0
+RepeatTask_Every_Mins :
+CronExpression        :
+CronOffsetInMinutes   :
+StrStartTime          :
+StrEndTime            :
+PS C:\Users\scadmin> Check the configuration using the Windows Task Scheduler.
+....
+. Puede comprobar las propiedades del trabajo en el programador de tareas de Windows.
++
+image:saphana-br-scs-image158.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+

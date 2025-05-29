@@ -1,0 +1,419 @@
+---
+sidebar: sidebar 
+permalink: backup/snapcenter-sap-maxdb.html 
+keywords: SAP, snapcenter, SAP, maxdb, database, backup, restore 
+summary: Este documento describe las características específicas de la integración de SnapCenter para la base de datos SAP MaxDB utilizada en un entorno SAP. 
+---
+= Integración de SnapCenter para las bases de datos SAP MaxDB
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este documento describe las características específicas de la integración de SnapCenter para la base de datos SAP MaxDB utilizada en un entorno SAP.
+
+
+
+== Introducción
+
+El documento no pretende ser una descripción detallada de cómo configurar el entorno completo, pero tratará los conceptos y detalles relevantes relacionados con:
+
+* Descripción general de la configuración de ejemplo
+* Diseño de muestra
+* Proteja la instancia SAP MaxDB
+* Restaure y recupere una instancia SAP MaxDB
+
+
+
+
+== Descripción general de la configuración de ejemplo
+
+Ejemplo de implementación del complemento SnapCenter MaxDB para un sistema SAP que se ejecuta en nuestro Centro de demostración.
+
+
+NOTE: Esta implementación describe la configuración mínima de volumen necesaria. Las copias de seguridad de Data Dump y las copias de seguridad de Log Dump, la plantilla de copia de seguridad, etc. se configuran de acuerdo con SAP Note “1928060 - Copia de seguridad y recuperación de datos con copia de seguridad del sistema de archivos” y Notas referenciadas desde allí.
+
+También se puede utilizar la estructura de volumen descrita enlink:https://techcommunity.microsoft.com/blog/sapapplications/sap-netweaver-7-5-with-maxdb-7-9-on-azure-using-azure-netapp-files-anf/3905041["Blog de MS Techcommunity"].
+
+
+
+== Entorno de demostración
+
+image:sc-sap-maxdb-image01.png["Figura en la que se destaca el entorno de demostración utilizado"]
+
+
+
+== Versiones de software
+
+[cols="50%, 50%"]
+|===
+| *Software* | *Versión* 
+
+
+| Sistema operativo Linux | SLES PARA SAP 15 SP5 
+
+
+| SAP | NetWeaver 7,5 de SAP 
+
+
+| MaxDB de SAP | DBMServer 7.9.10 compilación 004-123-265-969 
+
+
+| SnapCenter | 6,1 
+|===
+
+
+== Diseño de volúmenes MaxDB
+
+Siguiente diseño de volumen mínimo debe utilizarse para habilitar los casos de uso de backup/recuperación y clonado para la base de datos SAP MaxDB. En la configuración de ejemplo, utilice <SID>: M02.
+
+[cols="20%, 20%, 20%, 40%"]
+|===
+| *Nombre del volumen* | *Directorio (qtree) en Volumen* | *Punto de montaje en el servidor* | *Comentario* 
+
+
+| <SID>_sapmaxdb | sapdb | /sapdb | Directorio principal para archivos relacionados con MaxDB 
+
+
+|  |  | /sapdb/<SID>/saplog | Redo Logs (puede colocarse en un volumen diferente) 
+
+
+|  |  | /sapdb/<SID>/backup | Volcar backups (Data + Log) (puede colocarse en otro volumen) 
+
+
+|  | adm. <sid> | /home/<sid>adm | Directorio inicial del usuario <sid>adm 
+
+
+|  | sdb | /home/sdb | Directorio inicial del usuario sdb 
+
+
+|  | <sid> | /home/<sid> | Directorio inicial del usuario <sid> 
+
+
+|  | usrsaptrans | /usr/sap/trans | Directorio de transporte 
+
+
+|  | Usrsap<SID> | /Usr/sap/<SID> | Usr sap 
+
+
+|  | Sapmnt<SID> | /Sapmnt/<SID> | Director SAP GlobalHost 
+
+
+| Datos_<SID> | sapdata | /sapdb/<SID>/sapdata | Archivos de Datos DE BASE DE DATOS (SID) 
+|===
+
+
+== Pasos para proteger la base de datos M02
+
+* Compruebe la distribución de archivos, según el diseño de ejemplo
+* Comprobar Requisitos para el Host (sap-lnx25)
+* Comprobar Requisitos para la Base de Datos (M02)
+* Implementar e instalar el agente de SnapCenter en el host (sap-lnx25)
+* Crear Configuración de Recurso de Instancia de SnapCenter
+
+
+
+
+== Requisitos previos en el host
+
+Más información actual podría estar disponible link:https://docs.netapp.com/us-en/snapcenter/protect-scu/reference_prerequisites_for_adding_hosts_and_installing_snapcenter_plug_ins_package_for_linux.html["aquí"].
+
+Antes de añadir un host e instalar el paquete de plugins para Linux, debe satisfacer todos los requisitos.
+
+* Si utiliza iSCSI, el servicio iSCSI debe estar en ejecución.
+* Puede usar la autenticación basada en contraseña para el usuario raíz o no raíz, o para la autenticación basada en la clave SSH.
+* El complemento de SnapCenter para sistemas de archivos Unix puede ser instalado por un usuario que no sea root. Sin embargo, debe configurar los privilegios sudo para el usuario no raíz para instalar e iniciar el proceso del plugin. Después de instalar el plugin, los procesos se ejecutan como un usuario efectivo que no es raíz.
+* Cree credenciales con modo de autenticación como Linux para el usuario de instalación.
+* Debe haber instalado Java 11 en el host Linux.
+* Asegúrese de haber instalado sólo la edición certificada de JAVA 11 en el host Linux
+* Para obtener información sobre cómo descargar JAVA, consulte: Descargas de Java para Todos los sistemas operativos
+* Debe tener bash como shell predeterminado para la instalación del plugin.
+
+
+
+
+== Requisitos previos para la base de datos: Crear plantillas de copia de seguridad, Activar copia de seguridad de registro
+
+* Crear directorios para backups de datos y registros (/sapdb/M02/backup/data, /sapdb/M02/backup/log – owner sdb:sdba – Permisos 755)
+* Conectarse a la base de datos M02 (como usuario del sistema operativo sqdm02)
++
+** Dbmcli -d M02 -u CONTROL,<password>
+
+
+* Crear plantilla de copia de seguridad de archivos de datos (M02_DATA) de acuerdo con SAP Note 1928060
++
+** Backup_template_create M02_DATA para ARCHIVAR LOS DATOS DE contenido /sapdb/M02/backup/data/M02_DATA
+
+
+* Crear plantilla de copia de seguridad de datos (M02_LOG) según SAP Note 1928060
++
+** Backup_template_create M02_LOG al REGISTRO DE contenido DEL ARCHIVO /sapdb/M02/backup/log/M02_LOG
+
+
+* Crear una plantilla de copia de seguridad de Data Snapshot (M02_SNAP) de acuerdo con SAP Note 1928060
++
+** Backup_TEMPLATE_CREATE M02_SNAP en LA INSTANTÁNEA EXTERNA
+
+
+* Cree Fake-Backup para activar la copia de seguridad de LOG
++
+** util_connect
+** Backup_start M02_SNAP
+** Backup_finish M02_SNAP ExternalBackupID first_full_fake_backup
+
+
+* Cambiar el modo de registro de base de datos
++
+** autotolog_off
+** autolog_ON INTERVALO M02_LOG 300
+** autolog_show
+
+
+
+
+
+
+== Implemente el agente SnapCenter en el host sap-lnx25
+
+Más información se puede encontrar en el link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["Documentación de SnapCenter"].
+
+Seleccione SAP MaxDB and Unix File Systems Plugins.
+
+image:sc-sap-maxdb-image02.png["Captura de pantalla de la interfaz de usuario Agregar host"]
+
+
+
+== Crear Configuración de Recursos de SnapCenter para Base de Datos M02
+
+Recursos -> SAP MaxDB -> Agregar recursos
+
+image:sc-sap-maxdb-image03.png["Captura de pantalla de la interfaz de usuario Add SAP MaxDB Resource"]
+
+
+NOTE: Si la contraseña contiene caracteres especiales, se deben enmascarar con una barra diagonal inversa (por ejemplo, Test!123! -> Test\!123\!).
+
+image:sc-sap-maxdb-image04.png["Captura de pantalla de la interfaz de usuario Add SAP MaxDB Resource Details"]
+
+image:sc-sap-maxdb-image05.png["Captura de pantalla de la interfaz de usuario Provide Storage Footprint Details"]
+
+Se deben crear los siguientes pares clave-valor personalizados de configuración de recursos (al menos).
+
+image:sc-sap-maxdb-image06.png["Captura de pantalla de la interfaz de usuario Configuración de recursos"]
+
+En la siguiente tabla se enumeran los parámetros del plug-in MaxDB, se proporcionan sus ajustes y se describen:
+
+[cols="25%, 25%, 50%"]
+|===
+| *Parámetro* | *Ajuste* | *Descripción* 
+
+
+| HANDLE_LOGWRITER | (Y / N) | Ejecuta las operaciones Suspender el logwriter (N) o reanudar el logwriter (y). 
+
+
+| DBMCLICMD | path_to_dbmcli_cmd | Especifica la ruta de acceso al comando MaxDB dbmcli.Si no se establece, se utilizará dbmcli en la ruta de búsqueda. 
+
+
+| SQLCLICMD | path_to_sqlcli_cmd | Especifica la ruta de acceso para el comando sqlcli de MaxDB.Si no se establece, se utiliza sqlcli en la ruta de búsqueda. 
+
+
+| MAXDB_UPDATE_HIST_LOG | (Y / N) | Indica al programa de copia de seguridad de MaxDB si desea actualizar o no el registro de historial de MaxDB. 
+
+
+| MAXDB_BACKUP_TEMPLATES | template_name (p. ej. `M02_SNAP`) | Especifica una plantilla de copia de seguridad para cada base de datos.la plantilla debe existir y ser un tipo externo de plantilla de copia de seguridad. Para habilitar la integración de copias Snapshot para MaxDB 7.8 y versiones posteriores, debe contar con la funcionalidad de servidor en segundo plano MaxDB y una plantilla de backup MaxDB ya configurada. 
+
+
+| MAXDB_BG_SERVER_PREFIX | bg_server_prefix (p. ej. `na_bg`) | Especifica el prefijo del nombre del servidor en segundo plano. Si se establece el parámetro MAXDB_BACKUP_TEMPLATES, también debe establecer el parámetro MAXDB_BG_SERVER_PREFIX. Si no define el prefijo, se utiliza el valor por defecto na_bg_DATABASE. 
+|===
+image:sc-sap-maxdb-image07.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+Ahora la configuración se puede terminar y la copia de seguridad se puede programar de acuerdo con el concepto de protección general.
+
+image:sc-sap-maxdb-image08.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+image:sc-sap-maxdb-image09.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+image:sc-sap-maxdb-image10.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+image:sc-sap-maxdb-image11.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+image:sc-sap-maxdb-image12.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+image:sc-sap-maxdb-image13.png["Captura de pantalla de la interfaz de usuario Add MaxDB Resource"]
+
+
+
+== Secuencia para recuperar el sistema M02
+
+. Detenga SAP System M02 (incluida la base de datos), detenga sapinit
+. Umount FileSystem /sapdb/M02/sapdata
+. Restauración de volúmenes M02_data (con SnapCenter)
+. Montar el sistema de archivos /sapdb/M02/sapdata
+. Iniciar la base de datos M02 y conectar (modo admin)
+. Recopilar información de copia de seguridad
+. recuperar backup de datos de base de datos
+. recuperar backups de registros de la base de datos
+. parar base de datos
+. Inicie sapinit, SAP System M02
+
+
+
+
+== Recuperar la instancia M02
+
+* Detenga SAP System + DB M02 en el host sap-lnx25
++
+** Usuario m02adm: Stopsap
+** Opcional: Si la base de datos no se ha detenido correctamente, Usuario: sqdm02
+** Dbmcli -d M02 -u CONTROL,<password>
++
+*** db_offline
+
+
+** Usuario root: /Etc/init.d/sapinit stop
+** Usuario root: Umount /sapdb/M02/sapdata
+
+
+* Restaurar backup
++
+** GUI de SnapCenter: Seleccione Required Bacukp para Restaurar
+
+
+
+
+image:sc-sap-maxdb-image14.png["Captura de pantalla de la interfaz de usuario Gestionar copias"]
+
+
+NOTE: Si selecciona Complete Resource, se activará una opción Snap Restore basada en volúmenes (VBSR). Dentro de Azure se llama link:https://learn.microsoft.com/en-us/azure/azure-netapp-files/snapshots-revert-volume["reversión del volumen"]. Para la implementación de ANF *Solo el recurso completo está disponible*.
+
+image:sc-sap-maxdb-image15.png["Captura de pantalla del mensaje mostrado durante el proceso anterior"]
+
+
+NOTE: Para otros tipos de puesta en marcha (por ejemplo, ANF en las instalaciones) podría orquestarse una operación de restauración de snap de archivo único (SFSR). Seleccione Nivel de archivo y el Volumen según y marque “Todo” – vea la siguiente captura de pantalla.
+
+image:sc-sap-maxdb-image16.png["Captura de pantalla de la interfaz de usuario Restaurar desde el recurso"]
+
+Se mostrará el resumen y con Finalizar se iniciará la restauración real.
+
+image:sc-sap-maxdb-image17.png["Captura de pantalla de la interfaz de usuario Restaurar desde el recurso"]
+
+* Sistemas de Archivos de Montaje (sap-lnx25)
++
+** Usuario root: Mount /sapdb/M02/sapdata
+
+
+* Inicie la base de datos M02 en modo admin y conéctese
++
+** Usuario: sqdm02: Dbmcli -d M02 -u CONTROL,<password>
++
+*** db_admin
+*** db_connect
+
+
+
+
+* Recopilar información de copia de seguridad
++
+** backup_history_open
+** backup_history_list -c etiqueta,acción,páginas,stop,media -r última
++
+image:sc-sap-maxdb-image21.png["Captura de pantalla del resultado del comando"]
+
+
+
+* Recuperar la base de datos
++
+** Recuperar copia de seguridad de datos
++
+*** Recover_start M02_SNAP data ExternalBackupID DAT_000000008
++
+image:sc-sap-maxdb-image18.png["Captura de pantalla del resultado del comando"]
+
+
+
+** Recupere la copia de seguridad del registro según sea necesario
++
+*** Por ejemplo, RECOVER_START M02_LOG LOG LOG 147
++
+image:sc-sap-maxdb-image19.png["Captura de pantalla del resultado del comando"]
+
+
+
+** Información opcional – recover automático a una marca de tiempo específica (sin necesidad de especificar datos dedicados / backp de registro
++
+*** por ejemplo, autorecover hasta 20250520 200000
++
+image:sc-sap-maxdb-image20.png["Captura de pantalla del resultado del comando"]
+
+
+
+
+
+* Finalice la recuperación y pare la base de datos
++
+** db_offline
++
+
+NOTE: Más información sobre la recuperación está disponible en el link:https://help.sap.com/docs/SUPPORT_CONTENT/maxdb/3362174129.html["Documentación de MaxDB"]
+
+
+
+* Inicie SAP System
++
+** Usuario root: /Etc/init.d/sapinit start
+** Usuario m02adm: Startsap
+
+
+
+
+
+
+== Información adicional e historial de versiones
+
+
+
+=== Demostraciones grabadas
+
+Las siguientes demostraciones recodificadas están disponibles para respaldar la documentación.
+
+.Instalación MaxDB Plugin, Configuration MaxDB Plugin, Backup de la base de datos MaxDB
+video::4b9ca452-d282-44c1-82ab-b2e501188b0f[panopto,width=360]
+.Restauración y recuperación de la base de datos MaxDB
+video::ecd66443-637f-4e67-90a0-b2e501188acf[panopto,width=360]
+
+
+=== Documentación externa
+
+Si quiere más información sobre el contenido de este documento, consulte los siguientes documentos o sitios web:
+
+* link:https://techcommunity.microsoft.com/blog/sapapplications/sap-netweaver-7-5-with-maxdb-7-9-on-azure-using-azure-netapp-files-anf/3905041["Instalación de SAP Azure en ANF"]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-scu/reference_prerequisites_for_adding_hosts_and_installing_snapcenter_plug_ins_package_for_linux.html["Requisitos previos de SnapCenter para plugins"]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["Plugins de instalación de SnapCenter"]
+* link:https://help.sap.com/docs/SUPPORT_CONTENT/maxdb/3362174129.html["Documentación de MaxDB Recovery"]
+* Notas de SAP (se requiere inicio de sesión)
++
+** link:https://me.sap.com/notes/1928060/E["1928060 - Copia de seguridad y recuperación de datos con copia de seguridad del sistema de archivos"]
+** link:https://me.sap.com/notes/2282954/E["2282054 - Servidor DBM en segundo plano"]
+** link:https://me.sap.com/notes/616814/E["616814 - Suspender escritor de registros para split mirror o snapshot"]
+
+
+* link:https://help.sap.com/docs/SUPPORT_CONTENT/maxdb/3362174112.html["HOWTO: SAP MaxDB Backup con CLI de Database Manager"]
+* link:https://help.sap.com/docs/SUPPORT_CONTENT/maxdb/3362174129.html["HOWTO - SAP MaxDB Recovery con Database Manager CLI"]
+* link:https://www.netapp.com/support-and-training/documentation/["Documentación de productos de NetApp"]
+* link:https://docs.netapp.com/us-en/netapp-solutions-sap["Soluciones SAP de NetApp: Información sobre casos de uso, mejores prácticas y ventajas"]
+
+
+
+
+=== Historial de versiones
+
+[cols="25%, 25%, 50%"]
+|===
+| *Versión* | *Fecha* | *Historial de versiones del documento* 
+
+
+| Versión 1.0 | Mayo de 2025 | Versión inicial: Copia de seguridad / recuperación de la base de datos MaxDB 
+|===

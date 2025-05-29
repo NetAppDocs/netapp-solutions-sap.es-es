@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-nfs-infra-setup-config.html 
+keywords:  
+summary:  
+---
+= Instalación y configuración de la infraestructura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En este documento se analiza la instalación y la configuración de la infraestructura para los sistemas NetApp AFF y NFS.

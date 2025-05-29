@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-prepare-target-host_01.html 
+keywords: prepare, target, host, sap, hana, azure, log, volume, users, ports, configure, file, system 
+summary: En esta sección se describen los pasos de preparación necesarios en el servidor que se usa para la conmutación al nodo de respaldo de recuperación ante desastres. 
+---
+= Prepare el host de destino
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se describen los pasos de preparación necesarios en el servidor que se usa para la conmutación al nodo de respaldo de recuperación ante desastres.
+
+Durante el funcionamiento normal, el host de destino se suele utilizar para otros fines, por ejemplo, como un sistema de garantía de calidad o prueba de HANA. Por lo tanto, la mayoría de los pasos descritos deben ejecutarse al ejecutar las pruebas de recuperación tras fallos de desastres. Por otro lado, los archivos de configuración pertinentes, como `/etc/fstab` y.. `/usr/sap/sapservices`, puede prepararse y luego ponerse en producción simplemente copiando el archivo de configuración. El procedimiento de conmutación por error de recuperación ante desastres garantiza que los archivos de configuración pertinentes preparados estén configurados correctamente.
+
+La preparación del host de destino también incluye apagar el sistema de prueba o control de calidad de HANA, así como detener todos los servicios que utilizan `systemctl stop sapinit`.
+
+
+
+== El nombre de host y la dirección IP del servidor de destino
+
+El nombre de host del servidor de destino debe ser idéntico al nombre de host del sistema de origen. La dirección IP puede ser diferente.
+
+
+NOTE: Se debe establecer una correcta delimitación del servidor de destino para que no pueda comunicarse con otros sistemas. Si no se cuenta con una delimitación adecuada, el sistema de producción clonado puede intercambiar datos con otros sistemas de producción, lo que puede dar lugar a datos dañados lógicamente.
+
+
+
+== Instale el software necesario
+
+El software del agente de host SAP debe instalarse en el servidor de destino. Para obtener toda la información, consulte https://help.sap.com/viewer/9f03f1852ce94582af41bb49e0a667a7/103/en-US["Agente host SAP"^] En el portal de ayuda de SAP.
+
+
+NOTE: Si el host se usa como sistema de control de calidad o prueba de HANA, el software del agente de host SAP ya está instalado.
+
+
+
+== Configurar usuarios, puertos y servicios SAP
+
+Los usuarios y los grupos requeridos para la base de datos SAP HANA deben estar disponibles en el servidor de destino. Normalmente, se utiliza la gestión central de usuarios; por lo tanto, no es necesario realizar ningún paso de configuración en el servidor de destino. Los puertos necesarios para la base de datos HANA deben configurarse en los hosts objetivo. La configuración se puede copiar desde el sistema de origen copiando el `/etc/services` archivo al servidor de destino.
+
+Las entradas de servicios SAP necesarias deben estar disponibles en el host de destino. La configuración se puede copiar desde el sistema de origen copiando el `/usr/sap/sapservices` archivo al servidor de destino. El siguiente resultado muestra las entradas necesarias para la base de datos SAP HANA que se utilizan en la configuración de laboratorio.
+
+....
+vm-pr1:~ # cat /usr/sap/sapservices
+#!/bin/sh
+LD_LIBRARY_PATH=/usr/sap/PR1/HDB01/exe:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH;/usr/sap/PR1/HDB01/exe/sapstartsrv pf=/usr/sap/PR1/SYS/profile/PR1_HDB01_vm-pr1 -D -u pr1adm
+limit.descriptors=1048576
+....
+
+
+== Prepare el volumen de registro de HANA
+
+Debido a que el volumen de registro de HANA no forma parte de la replicación, debe existir un volumen de registro vacío en el host de destino. El volumen de registro debe incluir los mismos subdirectorios que el sistema HANA de origen.
+
+....
+vm-pr1:~ # ls -al /hana/log/PR1/mnt00001/
+total 16
+drwxrwxrwx 5 root   root   4096 Feb 19 16:20 .
+drwxr-xr-x 3 root   root     22 Feb 18 13:38 ..
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00001
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00002.00003
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00003.00003
+vm-pr1:~ #
+....
+
+
+== Preparar el volumen de backup de registros
+
+Dado que el sistema de origen está configurado con un volumen separado para los backups de registros de HANA, debe haber un volumen de backup de registros también disponible en el host de destino. Es necesario configurar y montar un volumen para los backups de registros en el host objetivo.
+
+Si la replicación de volumen de backup de registros forma parte de la configuración de recuperación ante desastres, el volumen de backup de registros replicado se monta en el host de destino y no es necesario preparar un volumen de backup de registros adicional.
+
+
+
+== Preparar los montajes del sistema de archivos
+
+En la siguiente tabla se muestran las convenciones de nomenclatura utilizadas en la configuración del laboratorio. Los nombres de los volúmenes en el sitio de recuperación de desastres se incluyen en `/etc/fstab`.
+
+|===
+| Volúmenes PR1 HANA | Volumen y subdirectorios en el centro de recuperación ante desastres | Punto de montaje en el host de destino 
+
+
+| Volumen de datos | PR1-data-mnt00001-sm-dest | /hana/data/PR1/mnt00001 
+
+
+| Volumen compartido | PR1-shared-sm-dest/shared-sm-dest/usr-SAP-PR1 | /hana/shared /usr/SAP/PR1 
+
+
+| Volumen de backup de registros | el más extraño | /hanabackup 
+|===
+
+NOTE: Los puntos de montaje de esta tabla deben crearse en el host objetivo.
+
+Aquí están los requisitos `/etc/fstab` entradas.
+
+....
+vm-pr1:~ # cat /etc/fstab
+# HANA ANF DB Mounts
+10.0.2.4:/PR1-data-mnt0001-sm-dest /hana/data/PR1/mnt00001 nfs   rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+10.0.2.4:/PR1-log-mnt00001-dr /hana/log/PR1/mnt00001 nfs   rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+# HANA ANF Shared Mounts
+10.0.2.4:/PR1-shared-sm-dest/hana-shared /hana/shared nfs rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+10.0.2.4:/PR1-shared-sm-dest/usr-sap-PR1 /usr/sap/PR1 nfs rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+# HANA file and log backup destination
+10.0.2.4:/hanabackup-sm-dest    /hanabackup nfs   rw,vers=3,hard,timeo=600,rsize=262144,wsize=262144,nconnect=8,bg,noatime,nolock 0 0
+....

@@ -65,10 +65,10 @@ SnapCenter de NetApp con el complemento para SAP HANA se usa para aprovisionar l
 
 Se puede realizar un aprovisionamiento completo y completamente automatizado de los sistemas de prueba de SAP mediante herramientas de terceros e integración de funciones de NetApp. Más detalles están disponibles en:
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/lama-ansible-introduction.html["TR-4953: Integración de la gestión de entorno SAP de NetApp con Ansible"]
+link:lama-ansible-introduction.html["TR-4953: Integración de la gestión de entorno SAP de NetApp con Ansible"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["TR-4929: Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy (netapp.com)"]
+link:libelle-sc-overview.html["TR-4929: Automatización de las operaciones de copia del sistema SAP con Libelle SystemCopy (netapp.com)"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/briefs/sap-alpaca-automation.html#solution-overview["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y clonado de flujos de trabajo con ALPACA y NetApp SnapCenter"]
+link:../briefs/sap-alpaca-automation.html#solution-overview["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y clonado de flujos de trabajo con ALPACA y NetApp SnapCenter"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/briefs/sap-avantra-automation.html#solution-overview["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y flujos de trabajo de clonación con Avantra y NetApp SnapCenter"]
+link:../briefs/sap-avantra-automation.html#solution-overview["Automatización de la copia y verificación del sistema SAP;#44; Refresh, y flujos de trabajo de clonación con Avantra y NetApp SnapCenter"]

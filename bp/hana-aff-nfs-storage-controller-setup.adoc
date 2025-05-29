@@ -1,0 +1,376 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-nfs-storage-controller-setup.html 
+keywords: storage, controller, efficiency, volume encryption, quality of service, qos, fabricpool, DS224C, svm, configuration 
+summary: En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de ONTAP correspondientes. 
+---
+= Configuración de la controladora de almacenamiento
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de ONTAP correspondientes.
+
+
+
+== Eficiencia del almacenamiento
+
+SAP HANA es compatible con la deduplicación inline, la deduplicación inline, la compresión inline y la compactación inline, en una configuración de SSD.
+
+
+
+== Volúmenes de NetApp FlexGroup
+
+El uso de volúmenes de NetApp FlexGroup no es compatible con SAP HANA. Debido a la arquitectura de SAP HANA, el uso de FlexGroup Volumes no ofrece ningún beneficio y puede dar lugar a problemas de rendimiento.
+
+
+
+== Cifrado de volúmenes de NetApp y agregados
+
+El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de NetApp (NAE) son compatibles con SAP HANA.
+
+
+
+== Calidad de servicio
+
+La calidad de servicio se puede utilizar para limitar el rendimiento del almacenamiento para sistemas SAP HANA específicos u otras aplicaciones en una controladora de uso compartido. Un caso de uso sería limitar el rendimiento de los sistemas de desarrollo y pruebas para que no puedan influir en los sistemas de producción en una configuración mixta.
+
+Durante el proceso de configuración, debe determinar los requisitos de rendimiento de un sistema que no sea de producción. Los sistemas de desarrollo y pruebas se pueden ajustar con valores de rendimiento inferiores, normalmente entre el 20% y el 50% de un KPI de sistemas de producción, según lo define SAP.
+
+A partir de ONTAP 9, la calidad de servicio se configura en el nivel del volumen de almacenamiento y utiliza valores máximos para el rendimiento (MB/s) y la cantidad de I/o (IOPS).
+
+Las grandes I/o de escritura tienen el mayor efecto en el rendimiento del sistema de almacenamiento. Por lo tanto, el límite de rendimiento de calidad de servicio debe definirse como un porcentaje de los valores de KPI de rendimiento de almacenamiento SAP HANA de escritura correspondientes en los volúmenes de datos y registros.
+
+
+
+== FabricPool de NetApp
+
+La tecnología FabricPool de NetApp no debe utilizarse para sistemas de archivos primarios activos en sistemas SAP HANA. Esto incluye los sistemas de archivos para el área de datos y registro así como el `/hana/shared` sistema de archivos. Si lo hace, el rendimiento es impredecible, especialmente durante la inicio de un sistema SAP HANA.
+
+Utilizar la política de organización en niveles «solo de copias Snapshot», así como utilizar FabricPool en general en un destino de backup como un destino de SnapVault o SnapMirror de NetApp.
+
+
+NOTE: El uso de FabricPool para organizar las copias Snapshot en niveles en el almacenamiento principal o el uso de FabricPool en un destino de backup cambia el tiempo requerido para la restauración y recuperación de una base de datos u otras tareas, como la creación de clones del sistema o la reparación de sistemas. Tenga en cuenta esto para planificar su estrategia global de gestión del ciclo de vida y asegurarse de que se siguen cumpliendo los SLA mientras utiliza esta función.
+
+FabricPool es una buena opción para mover los backups de registros a otro nivel de almacenamiento. Mover backups afecta el tiempo necesario para recuperar una base de datos SAP HANA. Por lo tanto, la opción “organizar en niveles los días de enfriamiento mínimo” debe definirse en un valor que coloque las copias de seguridad de registros, que se necesitan habitualmente para la recuperación, en el nivel de almacenamiento rápido local.
+
+
+
+== Configuración del almacenamiento
+
+La siguiente información general resume los pasos necesarios para la configuración del almacenamiento. Cada paso se trata con detalle en las secciones siguientes. En esta sección, asumimos que el hardware de almacenamiento está configurado y que el software ONTAP ya está instalado. Además, las conexiones entre los puertos de almacenamiento (10 GbE o más rápido) y la red ya deben estar instaladas.
+
+. Comprobar la configuración correcta de la bandeja de discos, tal y como se describe en "<<Conexión de la bandeja de discos>>."
+. Crear y configurar los agregados necesarios tal y como se describe en "<<Configuración de agregados>>."
+. Cree una máquina virtual de almacenamiento (SVM) como se describe en "<<Configuración de SVM>>."
+. Cree LIF como se describe en "<<Configuración de LIF>>."
+. Cree volúmenes dentro de los agregados tal y como se describe en « «<<Configuración de volumen para sistemas SAP HANA de un solo host>>» y «<<Configuración de volumen para sistemas SAP HANA con varios hosts>>. ».
+. Establezca las opciones de volumen necesarias tal y como se describe en "<<Opciones de volumen>>."
+. Establezca las opciones necesarias para NFSv3 tal y como se describe en "<<Configuración de NFS para NFSv3>>" O para NFSv4, como se describe en "<<Configuración de NFS para NFSv4>>."
+. Montar los volúmenes en el espacio de nombres y establecer las políticas de exportación tal como se describe en "<<Montar los volúmenes en el espacio de nombres y establecer las políticas de exportación>>."
+
+
+
+
+== Conexión de la bandeja de discos
+
+
+
+=== Bandejas de discos SAS
+
+Se puede conectar un máximo de una bandeja de discos a una pila SAS para proporcionar el rendimiento necesario para los hosts SAP HANA, como se muestra en la siguiente figura. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2 se utiliza con ONTAP 9 y las bandejas de discos DS224C.
+
+
+NOTE: Con la bandeja de discos DS224C, se puede utilizar el cableado SAS de ruta cuádruple, pero no es necesario.
+
+image:saphana_aff_nfs_image13.png["Conexiones de bandeja SAS"]
+
+
+
+=== Bandejas de discos NVMe (100 GbE)
+
+Cada bandeja de discos NVMe NS224 está conectada con dos puertos 100GbE GbE por controladora, como se muestra en la figura siguiente. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2, como se describe en el capítulo sobre configuración de agregados, también se utiliza para la bandeja de discos NS224.
+
+image:saphana_aff_nfs_image14a.png["Conexiones de bandeja de discos MV"]
+
+
+
+== Configuración de agregados
+
+En general, debe configurar dos agregados por controladora, independientemente de la bandeja de discos o la tecnología de unidades (SSD SAS o SSD NVMe) que se utilice.
+
+La siguiente imagen muestra una configuración de 12 hosts SAP HANA que se ejecutan en una bandeja SAS de 12 GB configurada con ADPv2. Seis hosts SAP HANA están conectados a cada controladora de almacenamiento. Se configuran cuatro agregados separados, dos en cada controladora de almacenamiento. Cada agregado está configurado con 11 discos con nueve particiones de datos y dos particiones de disco de paridad. Para cada controladora, hay dos particiones de repuesto disponibles.
+
+image:saphana_aff_nfs_image15a.png["Configuración de agregado"]
+
+
+
+== Configuración de SVM
+
+Varios entornos SAP con bases de datos SAP HANA pueden utilizar un único SVM. También puede asignarse una SVM a cada entorno SAP, si es necesario, en caso de que esté gestionada por diferentes equipos dentro de una empresa.
+
+Si hay un perfil de calidad de servicio que se crea y se asigna automáticamente al crear una SVM nueva, quite este perfil creado automáticamente a partir de la SVM para habilitar el rendimiento requerido para SAP HANA:
+
+....
+vserver modify -vserver <svm-name> -qos-policy-group none
+....
+
+
+== Configuración de LIF
+
+Para los sistemas de producción SAP HANA, debe usar diferentes LIF para montar el volumen de datos y el volumen de registro desde el host SAP HANA. Por tanto, se necesitan al menos dos LIF.
+
+Los montajes de volúmenes de registros y datos de diferentes hosts SAP HANA pueden compartir un puerto de red de almacenamiento físico usando las mismas LIF o usando LIF individuales para cada montaje.
+
+En la siguiente tabla se muestra la cantidad máxima de montajes de volumen de registro y datos por interfaz física.
+
+|===
+| Velocidad de puerto Ethernet | 10 GbE | 25 GbE | 40 GbE | 100 GEE 
+
+
+| Número máximo de montajes de volumen de datos o registro por puerto físico | 3 | 8 | 12 | 30 
+|===
+
+NOTE: Un LIF compartido entre distintos hosts SAP HANA puede requerir el montaje de volúmenes de datos o registros en una LIF diferente. Este cambio evita las consecuencias en el rendimiento si se mueve un volumen a una controladora de almacenamiento diferente.
+
+Los sistemas de desarrollo y prueba pueden utilizar más montajes de volúmenes y datos o LIF en una interfaz de red física.
+
+Para los sistemas de producción, desarrollo y pruebas, el `/hana/shared` El sistema de archivos puede utilizar la misma LIF que el volumen de registro o de datos.
+
+
+
+== Configuración de volumen para sistemas SAP HANA de un solo host
+
+En la siguiente figura, se muestra la configuración de volúmenes de cuatro sistemas SAP HANA de un solo host. Los volúmenes de datos y de registro de cada sistema SAP HANA se distribuyen a diferentes controladoras de almacenamiento. Por ejemplo, volume `SID1_data_mnt00001` Se configura en la controladora A y en un volumen `SID1_log_mnt00001` Se configura en la controladora B.
+
+
+NOTE: Si solo se usa una controladora de almacenamiento de un par de alta disponibilidad para los sistemas SAP HANA, los volúmenes de registros y datos también se pueden almacenar en la misma controladora de almacenamiento.
+
+
+NOTE: Si los volúmenes de registros y datos se almacenan en la misma controladora, el acceso del servidor al almacenamiento debe realizarse con dos LIF diferentes: Una LIF para acceder al volumen de datos y la otra para acceder al volumen de registro.
+
+image:saphana_aff_nfs_image16a.png["Hosts únicos de SAP HANA de configuración de volúmenes"]
+
+Para cada host SAP HANA, un volumen de datos, un volumen de registro y un volumen de para `/hana/shared` están configurados. La siguiente tabla muestra un ejemplo de configuración para sistemas SAP HANA de un solo host.
+
+|===
+| Específico | Agregado 1 en la controladora a | Agregado 2 en la controladora a | Agregado 1 en la controladora B. | Agregado 2 en la controladora b 
+
+
+| Datos, registro y volúmenes compartidos para System SID1 | Volumen de datos: SID1_data_mnt00001 | Volumen compartido: SID1_shared | – | Volumen de registro: SID1_log_mnt00001 
+
+
+| Datos, registro y volúmenes compartidos para System SID2 | – | Volumen de registro: SID2_log_mnt00001 | Volumen de datos: SID2_data_mnt00001 | Volumen compartido: SID2_shared 
+
+
+| Datos, registro y volúmenes compartidos para System SID3 | Volumen compartido: SID3_shared | Volumen de datos: SID3_data_mnt00001 | Volumen de registro: SID3_log_mnt00001 | – 
+
+
+| Datos, registro y volúmenes compartidos para el sistema SID4 | Volumen de registro: SID4_log_mnt00001 | – | Volumen compartido: SID4_shared | Volumen de datos: SID4_data_mnt00001 
+|===
+En la siguiente tabla se muestra un ejemplo de la configuración de puntos de montaje para un sistema de un solo host. Para colocar el directorio principal de `sidadm` usuario del almacenamiento central, el `/usr/sap/SID` el sistema de archivos se debe montar desde el `SID_shared` volumen.
+
+|===
+| Ruta de unión | Directorio | Punto de montaje en el host HANA 
+
+
+| SID_data_mnt00001 |  | /hana/data/SID/mnt00001 
+
+
+| SID_log_mnt00001 |  | /hana/log/SID/mnt00001 
+
+
+| SID_shared | usr-sap compartido | /Usr/SAP/SID /hana/shared/ 
+|===
+
+
+== Configuración de volumen para sistemas SAP HANA con varios hosts
+
+La siguiente figura muestra la configuración de volúmenes de un sistema SAP HANA 4+1. Los volúmenes de datos y de registro de cada host SAP HANA se distribuyen a diferentes controladoras de almacenamiento. Por ejemplo, volume `SID1_data1_mnt00001` Se configura en la controladora A y en un volumen `SID1_log1_mnt00001` Se configura en la controladora B.
+
+
+NOTE: Si solo se usa una controladora de almacenamiento de una pareja de alta disponibilidad para el sistema SAP HANA, los volúmenes de registro y datos también pueden almacenarse en la misma controladora de almacenamiento.
+
+
+NOTE: Si los volúmenes de registros y datos se almacenan en la misma controladora, el acceso del servidor al almacenamiento debe realizarse con dos LIF diferentes: Una LIF para acceder al volumen de datos y otra para acceder al volumen de registro.
+
+image:saphana_aff_nfs_image17a.png["Configuración de volúmenes SAP HANA Varios hosts"]
+
+Para cada host SAP HANA, se crean un volumen de datos y un volumen de registro. La `/hana/shared` El volumen lo utilizan todos los hosts del sistema SAP HANA. En la siguiente tabla se muestra un ejemplo de configuración para un sistema SAP HANA de varios hosts con cuatro hosts activos.
+
+|===
+| Específico | Agregado 1 en la controladora a | Agregado 2 en la controladora A | Agregado 1 en la controladora B. | Agregado 2 en la controladora B. 
+
+
+| Volúmenes de datos y de registro para el nodo 1 | Volumen de datos: SID_data_mnt00001 | – | Volumen de registro: SID_log_mnt00001 | – 
+
+
+| Volúmenes de datos y de registro para el nodo 2 | Volumen de registro: SID_log_mnt00002 | – | Volumen de datos: SID_data_mnt00002 | – 
+
+
+| Volúmenes de datos y de registro para el nodo 3 | – | Volumen de datos: SID_data_mnt00003 | – | Volumen de registro: SID_log_mnt00003 
+
+
+| Volúmenes de datos y de registro para el nodo 4 | – | Volumen de registro: SID_log_mnt00004 | – | Volumen de datos: SID_data_mnt00004 
+
+
+| Volumen compartido para todos los hosts | Volumen compartido: SID_shared |  |  |  
+|===
+En la siguiente tabla se muestran la configuración y los puntos de montaje de un sistema de varios hosts con cuatro hosts SAP HANA activos. Para colocar los directorios de inicio de `sidadm` un usuario de cada host del almacenamiento central, el `/usr/sap/SID` los sistemas de archivos se montan desde el `SID_shared` volumen.
+
+|===
+| Ruta de unión | Directorio | Punto de montaje en el host SAP HANA | Nota 
+
+
+| SID_data_mnt00001 | – | /hana/data/SID/mnt00001 | Montado en todos los hosts 
+
+
+| SID_log_mnt00001 | – | /hana/log/SID/mnt00001 | Montado en todos los hosts 
+
+
+| SID_data_mnt00002 | – | /hana/data/SID/mnt00002 | Montado en todos los hosts 
+
+
+| SID_log_mnt00002 | – | /hana/log/SID/mnt00002 | Montado en todos los hosts 
+
+
+| SID_data_mnt00003 | – | /hana/data/SID/mnt00003 | Montado en todos los hosts 
+
+
+| SID_log_mnt00003 | – | /hana/log/SID/mnt00003 | Montado en todos los hosts 
+
+
+| SID_data_mnt00004 | – | /hana/data/SID/mnt00004 | Montado en todos los hosts 
+
+
+| SID_log_mnt00004 | – | /hana/log/SID/mnt00004 | Montado en todos los hosts 
+
+
+| SID_shared | compartido | /hana/shared/SID | Montado en todos los hosts 
+
+
+| SID_shared | usr-sap-host1 | /Usr/SAP/SID | Montado en el host 1 
+
+
+| SID_shared | usr-sap-host2 | /Usr/SAP/SID | Montado en el host 2 
+
+
+| SID_shared | usr-sap-host3 | /Usr/SAP/SID | Montado en el host 3 
+
+
+| SID_shared | usr-sap-host4 | /Usr/SAP/SID | Montado en el host 4 
+
+
+| SID_shared | usr-sap-host5 | /Usr/SAP/SID | Montado en el host 5 
+|===
+
+
+== Opciones de volumen
+
+Debe verificar y configurar las opciones de volumen que aparecen en la siguiente tabla en todas las SVM. Para algunos comandos, es necesario cambiar al modo de privilegio avanzado en ONTAP.
+
+|===
+| Acción | Comando 
+
+
+| Deshabilitar la visibilidad del directorio Snapshot | vol modify -vserver <vserver-name> -volume <volname> -snapdir-access false 
+
+
+| Deshabilite las copias Snapshot automáticas | vol modify –vserver <vserver-name> -volume <volname> -snapshot-policy none 
+
+
+| Deshabilite el tiempo de acceso de actualización, excepto el volumen SID_shared | set advanced vol modify -vserver <vserver-name> -volume <volname> -atime-update false set admin 
+|===
+
+
+== Configuración de NFS para NFSv3
+
+Las opciones de NFS enumeradas en la siguiente tabla deben ser verificadas y establecidas en todas las controladoras de almacenamiento. Para algunos de los comandos que se muestran en esta tabla, es necesario cambiar al modo de privilegio avanzado.
+
+|===
+| Acción | Comando 
+
+
+| Habilite NFSv3 | nfs modify -vserver <vserver-name> v3.0 habilitado 
+
+
+| Establezca el tamaño máximo de transferencia de TCP de NFS en 1MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
+|===
+
+NOTE: En entornos compartidos con cargas de trabajo diferentes se establece el tamaño máximo de transferencia TCP de NFS en 262144
+
+
+
+== Configuración de NFS para NFSv4
+
+Las opciones de NFS que aparecen en la siguiente tabla deben verificarse y definirse en todas las SVM.
+
+Para algunos de los comandos de esta tabla, es necesario cambiar al modo de privilegio avanzado.
+
+|===
+| Acción | Comando 
+
+
+| Habilite NFSv4 | nfs modify -vserver <vserver-name> -v4.1 habilitado 
+
+
+| Establezca el tamaño máximo de transferencia de TCP de NFS en 1MB | defina advanced nfs modify -vserver <vserver_name> -tcp-max-xfer-size 1048576 set admin 
+
+
+| Deshabilitar las listas de control de acceso (ACL) de NFSv4 | nfs modify -vserver <vserver_name> -v4.1-acl deshabilitado 
+
+
+| Establezca el ID de dominio de NFSv4 | nfs modify -vserver <vserver_name> -v4-id-domain <domain-name> 
+
+
+| Deshabilite la delegación de lectura de NFSv4 | nfs modify -vserver <vserver_name> -v4.1-read-delegación deshabilitado 
+
+
+| Deshabilite la delegación de escritura de NFSv4 | nfs modify -vserver <vserver_name> -v4.1-write-delegación deshabilitada 
+
+
+| Deshabilite los id numéricos de NFSv4 | nfs modify -vserver <vserver_name> -v4-numeric-ids deshabilitado 
+
+
+| Cambie la cantidad de ranuras de sesión NFSv4.x
+  opcional | establecer avanzado
+nfs modify -vserver hana -v4.x-session-num-slots <value>
+configurar admin 
+|===
+
+NOTE: En entornos compartidos con cargas de trabajo diferentes se establece el tamaño máximo de transferencia TCP de NFS en 262144
+
+
+NOTE: Tenga en cuenta que la desactivación de id numéricos requiere la gestión de usuarios, como se describe en la sección link:hana-aff-nfs-install-prep-nfsv4.html["“Preparación de la instalación de SAP HANA para NFSv4”."]
+
+
+NOTE: El ID de dominio NFSv4 debe establecerse con el mismo valor en todos los servidores Linux (`/etc/idmapd.conf`) y SVM, como se describe en la sección link:hana-aff-nfs-install-prep-nfsv4.html["“Preparación de la instalación de SAP HANA para NFSv4”."]
+
+
+NOTE: PNFs puede activarse y utilizarse.
+
+Si se utilizan sistemas de varios hosts SAP HANA con conmutación al nodo de respaldo automática de host, los parámetros de conmutación por error deben ajustarse dentro `nameserver.ini` tal como se muestra en la siguiente tabla.
+Mantenga el intervalo de reintento predeterminado de 10 segundos en estas secciones.
+
+|===
+| Sección en nameserver.ini | Parámetro | Valor 
+
+
+| conmutación al respaldo | normal_retries | 9 
+
+
+| distributed_watchdog | desactivation_retries | 11 
+
+
+| distributed_watchdog | takeover_retries | 9 
+|===
+
+
+== Montar los volúmenes en el espacio de nombres y establecer las políticas de exportación
+
+Cuando se crea un volumen, este se debe montar en el espacio de nombres. En este documento, asumimos que el nombre de la ruta de unión es el mismo que el nombre del volumen. De manera predeterminada, el volumen se exporta con la política predeterminada. La política de exportación puede adaptarse si es necesario.

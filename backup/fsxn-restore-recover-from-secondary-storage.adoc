@@ -1,0 +1,27 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-restore-recover-from-secondary-storage.html 
+keywords: restore, recover, secondary, storage, 
+summary: En esta sección se describe cómo restaurar y recuperar datos desde el almacenamiento secundario. 
+---
+= Restauración y recuperación desde el almacenamiento secundario
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para restaurar y recuperar el sistema desde el almacenamiento secundario, siga estos pasos:
+
+Para recuperar la lista de todos los backups del almacenamiento secundario, en la vista SnapCenter Topology, haga clic en Vault copies, seleccione un backup y haga clic en Restore.
+
+image:amazon-fsx-image92.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+El cuadro de diálogo de restauración muestra las ubicaciones secundarias.
+
+image:amazon-fsx-image93.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Otros pasos para la restauración y recuperación son idénticos a los que se encontraban previamente para un backup con Snapshot en el almacenamiento primario.

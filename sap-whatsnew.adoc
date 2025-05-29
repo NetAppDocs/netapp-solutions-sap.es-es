@@ -16,10 +16,10 @@ keywords: 'netapp, solutions, SAP, what"s new'
 [role="lead"]
 Descripción general de las últimas soluciones y materiales suplementarios de soluciones SAP.
 
-* link:backup/saphana-backup-anf-overview.html["TR-4905: Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter"]
-* link:backup/saphana-dr-anf_data_protection_overview_overview.html["TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files"]
-* link:bp/saphana_aff_nfs_introduction.html["TR-4435: SAP HANA en sistemas AFF de NetApp con NFS: Guía de configuración"]
-* link:bp/saphana-fas-nfs_introduction.html["TR-4290: Guía de configuración de SAP HANA en sistemas FAS de NetApp con NFS"]
-* link:bp/saphana_fas_fc_introduction.html["TR-4384: Guía de configuración del protocolo Fibre Channel para SAP HANA en sistemas FAS de NetApp"]
-* link:bp/saphana_aff_fc_introduction.html["TR-4436: SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"]
+* link:backup/hana-backup-anf-overview.html["TR-4905: Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter"]
+* link:backup/hana-dr-anf-data-protection-overview.html["TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files"]
+* link:bp/hana-aff-nfs-introduction.html["TR-4435: SAP HANA en sistemas AFF de NetApp con NFS: Guía de configuración"]
+* link:bp/hana-fas-nfs-introduction.html["TR-4290: Guía de configuración de SAP HANA en sistemas FAS de NetApp con NFS"]
+* link:bp/hana-fas-fc-introduction.html["TR-4384: Guía de configuración del protocolo Fibre Channel para SAP HANA en sistemas FAS de NetApp"]
+* link:bp/hana-aff-fc-introduction.html["TR-4436: SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"]
 

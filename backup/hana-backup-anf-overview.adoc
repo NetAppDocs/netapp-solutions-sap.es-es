@@ -1,0 +1,32 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-backup-anf-overview.html 
+keywords: overview, introduction, tr-4905, 4905, tr4905, snapcenter service, anf, azure netapp files 
+summary: Este informe técnico describe las mejores prácticas para la protección de datos de SAP HANA con SnapCenter Service y Azure NetApp Files de NetApp. Trata los conceptos de servicio de SnapCenter, las recomendaciones de configuración y los flujos de trabajo operativos, incluidas las operaciones de backup, restauración y recuperación de datos. 
+---
+= TR-4905: Backup y recuperación de datos de SAP HANA en Azure NetApp Files con el servicio SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Este informe técnico describe las mejores prácticas para la protección de datos de SAP HANA con SnapCenter Service y Azure NetApp Files de NetApp. Trata los conceptos de servicio de SnapCenter, las recomendaciones de configuración y los flujos de trabajo operativos, incluidas las operaciones de backup, restauración y recuperación de datos.
+
+Autor: Nils Bauer, NetApp
+
+Las empresas requieren hoy en día una disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento constantes frente al creciente volumen de datos, así como la necesidad de realizar tareas de mantenimiento rutinarias como los backups del sistema. La realización de backups de bases de datos SAP es una tarea crucial y puede tener un efecto significativo en el rendimiento del sistema SAP de producción.
+
+Los períodos definidos para los procesos de backup se reducen, mientras que la cantidad de datos objeto de backup es cada vez mayor. Por consiguiente, resulta difícil encontrar un momento en el que los backups puedan realizarse con un efecto mínimo en los procesos empresariales. El tiempo necesario para restaurar y recuperar los sistemas SAP es una preocupación, ya que deben minimizarse el tiempo de inactividad para la producción SAP y los sistemas que no son de producción para reducir el coste y la pérdida de datos para la empresa.
+
+Los puntos siguientes resumen los desafíos a los que se enfrentan los procesos de respaldo y recuperación de SAP:
+
+* *Efectos sobre el rendimiento en los sistemas SAP de producción.* normalmente, las copias de seguridad tradicionales basadas en copias generan un significativo drenaje del rendimiento en los sistemas SAP de producción debido a las pesadas cargas que se encuentran en el servidor de bases de datos, el sistema de almacenamiento y la red de almacenamiento.
+* *Reducción de ventanas de copia de seguridad.* las copias de seguridad convencionales sólo se pueden realizar cuando pocas actividades de diálogo o por lotes están en proceso en el sistema SAP. La programación de backups se complica cuando los sistemas SAP se utilizan de forma ininterrumpida.
+* *Rápido crecimiento de datos.* el rápido crecimiento de datos y la reducción de los plazos de respaldo requieren una inversión continua en infraestructura de respaldo. En otras palabras, debe adquirir espacio adicional en disco de backup y redes de backup más rápidas. También debe cubrir el gasto continuo en almacenamiento y gestión de estos activos de backup. Los backups incrementales o diferenciales pueden resolver estos problemas, pero esta disposición da como resultado un proceso de restauración muy lento, engorroso y complejo que es más difícil de verificar. Dichos sistemas suelen aumentar los tiempos de objetivo de tiempo de recuperación (RTO) y objetivo de punto de recuperación (RPO) de formas que no son aceptables para la empresa.
+* *Aumento del costo del tiempo de inactividad.* el tiempo de inactividad no planificado de un sistema SAP afecta típicamente a las finanzas del negocio. El requisito de restaurar y recuperar el sistema SAP consume una parte significativa de cualquier tiempo de inactividad no planificado. Por tanto, el objetivo de tiempo de recuperación deseado determina el diseño de la arquitectura de backup y recuperación.
+* *Tiempo de copia de seguridad y recuperación para proyectos de actualización SAP.* el plan de proyecto para una actualización SAP incluye al menos tres copias de seguridad de la base de datos SAP. Estos backups reducen significativamente el tiempo disponible para el proceso de actualización. La decisión de proceder suele basarse en el tiempo necesario para restaurar y recuperar la base de datos desde el backup creado previamente. En lugar de simplemente restaurar un sistema a su estado anterior, una restauración rápida ofrece más tiempo para resolver los problemas que pueden ocurrir durante una actualización.
+

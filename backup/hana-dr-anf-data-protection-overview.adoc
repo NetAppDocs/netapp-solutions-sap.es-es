@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-data-protection-overview.html 
+keywords:  
+summary:  
+---
+= TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files
+:allow-uri-read: 
+
+
+[role="lead"]
+Estudios han demostrado que el tiempo de inactividad de las aplicaciones empresariales tiene un impacto negativo significativo en el negocio de las empresas.
+
+Autores: Nils Bauer, NetApp Ralf Klahr, Microsoft
+
+Además del impacto financiero, el tiempo de inactividad también puede dañar la reputación de la empresa, la moral del personal y la lealtad del cliente. Sorprendentemente, no todas las empresas cuentan con una normativa completa de recuperación ante desastres.
+
+Al ejecutar SAP HANA en Azure NetApp Files (ANF), los clientes acceden a funciones adicionales que amplían y mejoran las funcionalidades integradas de protección de datos y recuperación ante desastres de SAP HANA. En esta sección de descripción general se explican estas opciones para ayudar a los clientes a seleccionar opciones que respalden sus necesidades empresariales.
+
+Para desarrollar una normativa completa de recuperación ante desastres, los clientes deben comprender los requisitos de las aplicaciones empresariales y las capacidades técnicas que necesitan para la protección de datos y la recuperación ante desastres. En la figura siguiente se ofrece información general sobre la protección de datos.
+
+image:saphana-dr-anf_image2.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+== Requisitos de las aplicaciones empresariales
+
+Existen dos indicadores clave para las aplicaciones de negocio:
+
+* El objetivo de punto de recuperación (RPO) o la pérdida máxima de datos tolerable
+* El objetivo de tiempo de recuperación o el tiempo de inactividad máximo tolerable de las aplicaciones empresariales
+
+
+Estos requisitos se definen por el tipo de aplicación utilizada y la naturaleza de los datos de su negocio. El objetivo de punto de recuperación y el objetivo de tiempo de recuperación pueden diferir si se protege contra fallos en una única región de Azure. También pueden diferir si se están preparando para desastres catastróficos como la pérdida de una región completa de Azure. Es importante evaluar los requisitos comerciales que definen los objetivos de tiempo y de puntos de recuperación, ya que estos requisitos tienen un impacto significativo en las opciones técnicas disponibles.
+
+
+
+== Alta disponibilidad
+
+La infraestructura para SAP HANA, como máquinas virtuales, redes y almacenamiento, debe tener componentes redundantes para garantizar de que no exista un único punto de error. MS Azure ofrece redundancia para los diferentes componentes de la infraestructura.
+
+Para proporcionar una alta disponibilidad en el lado de los recursos informáticos y las aplicaciones, los hosts SAP HANA en espera se pueden configurar para alta disponibilidad incorporada con un sistema host múltiple SAP HANA. Si se produce un error en un servidor o un servicio SAP HANA, el servicio SAP HANA conmuta al host de espera, lo que provoca un tiempo de inactividad de la aplicación.
+
+Si no se aceptan tiempos de inactividad de las aplicaciones en caso de un fallo del servidor o de la aplicación, también puede utilizar la replicación del sistema SAP HANA como una solución de alta disponibilidad que permita la conmutación por error en un plazo muy breve. Los clientes de SAP utilizan la replicación de sistemas HANA no solo para gestionar la alta disponibilidad ante fallos no planificados, sino también para minimizar el tiempo de inactividad para operaciones planificadas, como actualizaciones de software HANA.
+
+
+
+== Daño lógico
+
+La corrupción lógica puede deberse a errores de software, errores humanos o sabotaje. Desgraciadamente, la corrupción lógica no se puede hacer frente a menudo con soluciones estándares de alta disponibilidad y de recuperación ante desastres. Como resultado, dependiendo de la capa, la aplicación, el sistema de archivos o el almacenamiento donde se produjo el daño lógico, a veces no se pueden satisfacer los requisitos de objetivo de tiempo de recuperación y objetivo de punto de recuperación.
+
+El peor de los casos es un daño lógico en una aplicación SAP. Las aplicaciones SAP suelen funcionar en un entorno en el que diferentes aplicaciones se comunican entre sí y intercambian datos. Por lo tanto, el enfoque recomendado no es restaurar ni recuperar un sistema SAP en el que se ha producido un daño lógico. Cuando se restaura el sistema a un momento específico antes de que se dañara, se perderán los datos, de modo que el objetivo de punto de recuperación será mayor que cero. Además, el entorno SAP ya no estaría sincronizado y necesitaría un postprocesamiento adicional.
+
+En lugar de restaurar el sistema SAP, el mejor método consiste en intentar solucionar el error lógico dentro del sistema mediante el análisis del problema en un sistema de reparación independiente. El análisis de la causa raíz requiere la participación del proceso empresarial y el propietario de la aplicación. En esta situación, puede crear un sistema de reparación (un clon del sistema de producción) basado en los datos almacenados antes de que se produjera el daño lógico. Dentro del sistema de reparación, los datos necesarios se pueden exportar e importar al sistema de producción. Con este enfoque, no es necesario detener el sistema productivo y, en el mejor de los casos, no se pierden datos ni sólo una pequeña fracción de los datos.
+
+
+NOTE: Los pasos necesarios para configurar un sistema de reparación son idénticos a los escenarios de prueba de recuperación ante desastres descritos en este documento. Por lo tanto, la solución de recuperación ante desastres descrita también puede ampliarse con facilidad para abordar el daño lógico.
+
+
+
+== Completos
+
+Los backups se crean para habilitar la restauración y recuperación de diferentes conjuntos de datos de un momento específico. Normalmente, estos backups se guardan durante un par de días a unas semanas.
+
+En función del tipo de daños, la restauración y la recuperación se pueden realizar con o sin pérdida de datos. Si el objetivo de punto de recuperación debe ser cero, incluso cuando se pierde el almacenamiento primario y de backup, el backup debe combinarse con la replicación de datos síncrona.
+
+El objetivo de tiempo de recuperación para la restauración y la recuperación se define por el tiempo de restauración necesario, el tiempo de recuperación (incluido el inicio de la base de datos) y la carga de datos en la memoria. En el caso de bases de datos de gran tamaño y enfoques de backup tradicionales, el objetivo de tiempo de recuperación puede ser fácilmente de varias horas, lo cual puede que no sea aceptable. Para lograr un objetivo de tiempo de recuperación muy bajo, se debe combinar una copia de seguridad con una solución en espera en activo, que incluye la precarga de datos en la memoria.
+
+Por el contrario, una solución de backup debe hacer frente a un daño lógico, ya que las soluciones de replicación de datos no pueden cubrir todo tipo de daños lógicos.
+
+
+
+== Replicación de datos síncrona o asíncrona
+
+El RPO determina principalmente el método de replicación de datos que se debe usar. Si el RPO debe ser cero, incluso cuando se pierde el almacenamiento primario y backup, los datos se deben replicar de forma síncrona. Sin embargo, existen limitaciones técnicas para la replicación síncrona como la distancia entre dos regiones de Azure. En la mayoría de los casos, la replicación síncrona no es adecuada para distancias superiores a 100 km debido a la latencia, por lo que esto no es una opción para la replicación de datos entre regiones de Azure.
+
+Si se admite un objetivo de punto de recuperación de mayor tamaño, es posible usar la replicación asíncrona a grandes distancias. En este caso, el RPO se define mediante la frecuencia de replicación.
+
+
+
+== Replicación del sistema HANA con o sin precarga de datos
+
+El tiempo de inicio de una base de datos SAP HANA es mucho más largo que el de las bases de datos tradicionales, ya que debe cargarse una gran cantidad de datos en la memoria antes de que la base de datos pueda proporcionar el rendimiento esperado. Por lo tanto, una parte significativa del objetivo de tiempo de recuperación es el tiempo necesario para iniciar la base de datos. Con cualquier replicación basada en almacenamiento y con la replicación del sistema HANA sin carga previa de los datos, se debe iniciar la base de datos de SAP HANA en caso de conmutación al nodo de respaldo en el sitio de recuperación ante desastres.
+
+La replicación del sistema SAP HANA ofrece un modo de operación en el que los datos se cargan de manera previa y se actualizan de manera continua en el host secundario. Este modo habilita unos valores de objetivo de tiempo de recuperación muy bajos, pero también requiere un servidor dedicado que solo se utilice para recibir los datos de replicación del sistema de origen.

@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sr-scs-restore-recovery-other-host-backup.html 
+keywords: restore, backup, recovery 
+summary: Una operación de restauración a partir de un backup que se creó en el otro host SAP HANA es un escenario válido para ambas opciones de configuración de SnapCenter. 
+---
+= Restauración y recuperación a partir de un backup creado en el otro host
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Una operación de restauración a partir de un backup que se creó en el otro host SAP HANA es un escenario válido para ambas opciones de configuración de SnapCenter.
+
+La siguiente figura muestra información general sobre el escenario de restauración y recuperación descrito en esta sección.
+
+Se ha creado un backup en T1 en el host 1. Se ha realizado una conmutación por error al host 2. En el momento actual, el host 2 es el host primario.
+
+. Se ha producido un fallo y debe restaurar al backup creado en T1 en el host 1.
+. El host primario (host 1) se apaga.
+. Los datos de backup T1 del host 1 se restauran en el host 2.
+. La recuperación futura se realiza con registros del host 1 y del host 2.
+. Se inicia el host 1 y se inicia automáticamente una resincronización de replicación del sistema del host 1.
+
+
+image:saphana-sr-scs-image48.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+En la siguiente figura, se muestra el catálogo de backup de SAP HANA y se destaca el backup, creado en el host 1, que se utilizó para la operación de restauración y recuperación.
+
+image:saphana-sr-scs-image49.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+La operación de restauración conlleva los siguientes pasos:
+
+. Crear un clon desde el backup creado en el host 1.
+. Monte el volumen clonado en el host 2.
+. Copie los datos del volumen clonado en la ubicación original.
+
+
+En SnapCenter, se selecciona el backup y se inicia la operación de clonado.
+
+image:saphana-sr-scs-image50.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Debe proporcionar el servidor de clonado y la dirección IP de exportación de NFS.
+
+
+NOTE: En una configuración de recurso único de SnapCenter, el plugin de SAP HANA no está instalado en el host de base de datos. Para ejecutar el flujo de trabajo de clonado de SnapCenter, cualquier host con un plugin de HANA instalado se puede usar como servidor de clones.
+
++ en una configuración de SnapCenter con recursos independientes, el host de la base de datos HANA se selecciona como servidor de clones y se utiliza un script de montaje para montar el clon en el host de destino.
+
+image:saphana-sr-scs-image51.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Para determinar la ruta de unión necesaria para montar el volumen clonado, compruebe el registro de trabajos del trabajo de clonado, como se muestra en la siguiente figura.
+
+image:saphana-sr-scs-image52.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Ahora el volumen clonado puede montarse.
+
+....
+stlrx300s8-5:/mnt/tmp # mount 192.168.173.101:/Scc373da37-00ff-4694-b1e1-8153dbd46caf /mnt/tmp
+....
+El volumen clonado contiene los datos de la base de datos HANA.
+
+....
+stlrx300s8-5:/mnt/tmp/# ls –al
+drwxr-x--x 2 ssradm sapsys 4096 Jun 27 11:12 hdb00001
+drwx------ 2 ssradm sapsys 4096 Jun 21 09:38 hdb00002.00003
+drwx------ 2 ssradm sapsys 4096 Jun 27 11:12 hdb00003.00003
+-rw-r--r-- 1 ssradm sapsys   22 Jun 27 11:12 nameserver.lck
+....
+Los datos se copian en la ubicación original.
+
+....
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00001 /hana/data/SSR/mnt00001/
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00002.00003/ /hana/data/SSR/mnt00001/
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00003.00003/ /hana/data/SSR/mnt00001/
+....
+La recuperación con SAP HANA Studio se realiza como se describe en la sección link:hana-sr-scs-config-single-resource.html#snapcenter-restore-of-the-valid-backup-only["Restauración SnapCenter únicamente del backup válido"].

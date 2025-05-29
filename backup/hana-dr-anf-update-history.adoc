@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-update-history.html 
+keywords:  
+summary:  
+---
+= Actualizar historial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
+
+[cols="25,25,50"]
+|===
+| Versión | Fecha | Actualizar el resumen 
+
+
+| Versión 1.0 | Abril de 2021 | Versión inicial 
+|===

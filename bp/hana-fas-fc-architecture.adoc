@@ -1,0 +1,97 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-fc-architecture.html 
+keywords: architecture, sap, hana, backup, storage, replication, snapmirror, metrocluster 
+summary: Los hosts SAP HANA están conectados a las controladoras de almacenamiento mediante una infraestructura FCP y software multivía redundantes. 
+---
+= Arquitectura
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Los hosts SAP HANA están conectados a las controladoras de almacenamiento mediante una infraestructura FCP y software multivía redundantes. Se necesita una infraestructura de switch FCP redundante para proporcionar conectividad de host a almacenamiento de SAP HANA con tolerancia a fallos en caso de fallo del switch o del adaptador de bus de host (HBA). Debe configurarse la división en zonas adecuada en el switch para permitir que todos los hosts HANA lleguen a las LUN requeridas en las controladoras de almacenamiento.
+
+En la capa de almacenamiento se pueden utilizar diferentes modelos de la familia de productos FAS. El número máximo de hosts SAP HANA conectados al almacenamiento está definido por los requisitos de rendimiento de SAP HANA. El número de bandejas de discos necesario viene determinado por los requisitos de capacidad y rendimiento de los sistemas SAP HANA.
+
+En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad de almacenamiento.
+
+image:saphana_fas_fc_image2.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Esta arquitectura se puede escalar en dos dimensiones:
+
+* Agregando hosts SAP HANA adicionales y capacidad de disco al almacenamiento, suponiendo que las controladoras de almacenamiento puedan proporcionar el suficiente rendimiento con la nueva carga para cumplir los indicadores clave de rendimiento (KPI).
+* Añadiendo más sistemas de almacenamiento y capacidad de disco para los hosts adicionales SAP HANA
+
+
+La siguiente figura muestra un ejemplo de configuración en el que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de los 16 hosts SAP HANA. Según los requisitos de rendimiento totales, debe añadir conexiones FC adicionales a las controladoras de almacenamiento.
+
+image:saphana_fas_fc_image3.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Independientemente del modelo de almacenamiento del sistema FAS puesto en marcha, el panorama SAP HANA también se puede escalar agregando controladoras de almacenamiento, como se muestra en la siguiente figura.
+
+image:saphana_fas_fc_image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+
+
+== Backup de SAP HANA
+
+El software ONTAP de NetApp proporciona un mecanismo integrado para realizar backups de las bases de datos SAP HANA. El backup de Snapshot basado en el almacenamiento es una solución de backup integrada y con compatibilidad total disponible para los sistemas de contenedor único de SAP HANA y para los sistemas de un solo inquilino de SAP HANA MDC.
+
+Los backups de Snapshot basados en el almacenamiento se implementan usando el complemento SnapCenter de NetApp para SAP HANA, el cual permite realizar backups de Snapshot basados en el almacenamiento consistentes mediante las interfaces proporcionadas por la base de datos SAP HANA. SnapCenter registra los backups de Snapshot en el catálogo de backup SAP HANA para que los backups estén visibles en el estudio SAP HANA y se puedan seleccionar para operaciones de restauración y recuperación.
+
+Mediante el software SnapVault de NetApp, las copias Snapshot que se crearon en el almacenamiento primario pueden replicarse en el almacenamiento secundario de respaldo controlado por SnapCenter. Pueden definirse diferentes políticas de retención de respaldos para los backups en el almacenamiento primario y los backups en el almacenamiento secundario. El plugin de SnapCenter para bases de datos SAP HANA gestiona la retención de backups de datos basados en copias de Snapshot y backups de registros, incluido el mantenimiento del catálogo de backup. El plugin de SnapCenter para bases de datos de SAP HANA también permite ejecutar una comprobación de la integridad de bloques de la base de datos de SAP HANA mediante la ejecución de un backup basado en archivos.
+
+Puede realizarse un backup de los registros de la base de datos directamente en el almacenamiento secundario mediante un montaje NFS, como se muestra en la siguiente figura.
+
+image:saphana_fas_fc_image5.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Los backups de SnapVault basados en almacenamiento proporcionan importantes ventajas en comparación con los backups basados en archivos. Estas ventajas incluyen las siguientes:
+
+* Backups más rápidos (pocos minutos)
+* Restauración más rápida en la capa de almacenamiento (unos minutos)
+* No afectan al rendimiento del host, la red o el almacenamiento de la base de datos SAP HANA durante el backup
+* Replicación con gestión eficiente del espacio y del ancho de banda en el almacenamiento secundario en función de los cambios de bloque
+
+
+Para obtener información detallada acerca de la solución de backup y recuperación de SAP HANA con SnapCenter, consulte link:../backup/hana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
+
+
+
+== Recuperación ante desastres de SAP HANA
+
+La recuperación ante desastres de SAP HANA se puede llevar a cabo en la capa de bases de datos mediante la replicación de sistemas SAP o en la capa de almacenamiento mediante tecnologías de replicación del almacenamiento. La siguiente sección ofrece información general sobre las soluciones de recuperación ante desastres basadas en la replicación de almacenamiento.
+
+Para obtener información detallada sobre la solución de recuperación ante desastres SAP HANA con SnapCenter, consulte link:../backup/hana-dr-sr-pdf-link.html["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"^].
+
+
+
+=== Replicación de almacenamiento basada en SnapMirror
+
+La siguiente figura muestra una solución de recuperación ante desastres en tres sitios, utilizando la replicación SnapMirror síncrona en el centro de datos de recuperación ante desastres local y SnapMirror asíncrono para replicar datos en el centro de datos de recuperación ante desastres remoto.
+
+La replicación de datos mediante SnapMirror síncrono proporciona un objetivo de punto de recuperación de cero. La distancia entre el centro de datos primario y el local de recuperación ante desastres se limita a unos 100 km.
+
+La protección contra fallos del sitio de recuperación ante desastres local y primario se realiza replicando los datos en un tercer centro de datos de recuperación ante desastres remoto mediante SnapMirror asíncrono. El RPO depende de la frecuencia de las actualizaciones de replicación y de la rapidez con la que se pueden transferir. En teoría, la distancia es ilimitada, pero el límite depende de la cantidad de datos que se debe transferir y de la conexión disponible entre los centros de datos. Los valores típicos del RPO están dentro del intervalo de 30 minutos a varias horas.
+
+El objetivo de tiempo de recuperación para ambos métodos de replicación depende principalmente del tiempo necesario para iniciar la base de datos HANA en el sitio de recuperación ante desastres y cargar los datos en la memoria. Suponiendo que se leen los datos con un rendimiento de 1000 Mbps, la carga de 1 TB de datos requeriría aproximadamente 18 minutos.
+
+Los servidores en los sitios de DR pueden usarse como sistemas de desarrollo y pruebas durante el funcionamiento normal. En caso de desastre, los sistemas de desarrollo y pruebas deberían cerrarse y iniciarse como servidores de producción de recuperación ante desastres.
+
+Ambos métodos de replicación permiten ejecutar pruebas del flujo de trabajo de recuperación ante desastres sin que ello afecte al objetivo de punto de recuperación ni al objetivo de tiempo de recuperación. Los volúmenes FlexClone se crean en el almacenamiento y se conectan a los servidores de pruebas de recuperación ante desastres.
+
+image:saphana_fas_fc_image6.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacenamiento secundario no se completa por ningún motivo, las operaciones de I/o de la aplicación fallan, lo cual garantiza que los sistemas de almacenamiento primario y secundario sean idénticos. Las operaciones de I/o de la aplicación en el principal se reanudan solo después de que la relación de SnapMirror vuelva al estado InSync. Si falla el almacenamiento primario, se pueden reanudar las operaciones de I/o de la aplicación en el almacenamiento secundario después de una conmutación por error sin pérdida de datos. En el modo StrictSync, el objetivo de punto de recuperación siempre es cero.
+
+
+
+=== Replicación de almacenamiento basada en MetroCluster de NetApp
+
+En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El clúster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para cargas de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
+
+image:saphana_fas_fc_image7.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]

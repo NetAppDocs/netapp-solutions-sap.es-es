@@ -1,0 +1,88 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-nfs-update-history.html 
+keywords:  
+summary:  
+---
+= Actualizar historial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
+
+[cols="25,50"]
+|===
+| Fecha | Actualizar el resumen 
+
+
+| Abril de 2014 | Versión inicial 
+
+
+| Agosto de 2014 | Se ha actualizado la selección del tamaño del disco y se ha añadido la configuración de SSD. La configuración de Red Hat Enterprise Linux OS ha añadido información sobre el conector de almacenamiento SAP HANA adicional acerca de la configuración de VMware 
+
+
+| Noviembre de 2014 | Sección de tamaño del almacenamiento actualizada 
+
+
+| Enero de 2015 | La sección API del conector de almacenamiento actualizada actualizó la configuración de volúmenes y agregados 
+
+
+| Marzo de 2015 | Se ha agregado la nueva implementación de STONITH para SAP HANA SPS9, que ha añadido la sección de instalación de nodos de computación y HANA 
+
+
+| Octubre de 2015 | Se ha añadido la compatibilidad con NFSv4 para CDOT actualizado el parámetro sysctl I/o incluye el parámetro I/o para SAP HANA y HWVAL > SPS10 
+
+
+| Marzo de 2016 | Ajuste de tamaño de la capacidad actualizado Opciones de montaje actualizadas para el parámetro /hana/shared sysctl actualizada 
+
+
+| Febrero de 2017 | Nuevos sistemas de almacenamiento y bandejas de discos de NetApp nuevas funciones de la compatibilidad con ONTAP 9 para versiones de 40 GbE nuevos sistemas operativos (SUSE Linux Enterprise Server12 SP1 y Red Hat Enterprise Linux 7.2) Nueva versión SAP HANA 
+
+
+| Julio de 2017 | Actualizaciones menores 
+
+
+| Septiembre de 2018 | Nuevos sistemas de almacenamiento de NetApp nuevas versiones de SO (SUSE Linux Enterprise Server 12 SP3 y Red Hat Enterprise Linux 7.4) cambios menores adicionales SAP HANA 2.0 SPS3 
+
+
+| Septiembre de 2019 | Nuevas versiones del sistema operativo (SUSE Linux Enterprise Server 12 SP4, SUSE Linux Enterprise Server 15 y Red Hat Enterprise Linux 7.6) cambios menores de tamaño de volumen de MAX Data 
+
+
+| Diciembre de 2019 | Nuevos sistemas de almacenamiento NetApp nuevo SO SUSE Linux Enterprise Server 15 SP1 
+
+
+| Marzo de 2020 | Soporte de nconnect para NFSv3 Nueva versión del SO Red Hat Enterprise Linux 8 
+
+
+| Mayo de 2020 | Se introdujeron múltiples funciones de partición de datos disponibles desde SAP HANA 2.0 SPS4 
+
+
+| Junio de 2020 | Información adicional sobre funcionalidades opcionales actualizaciones menores 
+
+
+| Diciembre de 2020 | La compatibilidad con nconnect para NFSv4.1 a partir de ONTAP 9.8, versiones del nuevo sistema operativo de SAP HANA 
+
+
+| Febrero de 2021 | Cambios en la configuración de la red de host y otros cambios menores 
+
+
+| Abril de 2021 | Se añadió información específica de VMware vSphere 
+
+
+| Septiembre de 2022 | Nuevos lanzamientos de SO 
+
+
+| Diciembre de 2023 | Actualización de la configuración de hosts revisada de nconnect Se añadió información sobre las sesiones NFSv4,1 
+
+
+| Septiembre de 2024 | Nuevos sistemas de almacenamiento y actualizaciones menores 
+
+
+| Febrero de 2025 | Nuevo sistema de almacenamiento 
+|===

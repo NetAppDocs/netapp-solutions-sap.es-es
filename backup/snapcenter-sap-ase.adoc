@@ -440,7 +440,7 @@ Si quiere más información sobre el contenido de este documento, consulte los s
 ** 1585981 - SYB: Cómo garantizar la capacidad de recuperación de SAP ASE: https://me.sap.com/notes/1585981/E[]
 ** 1588316 - SYB: Configure las copias de seguridad automáticas de la base de datos y del registro: https://me.sap.com/notes/1588316/E[]
 ** Documentación de productos de NetApp: https://www.netapp.com/support-and-training/documentation/[]
-** Soluciones SAP de NetApp: Información sobre casos de uso, mejores prácticas y ventajas: https://docs.netapp.com/us-en/netapp-solutions-sap[]
+** link:../index.html["Soluciones SAP de NetApp: Información sobre casos de uso, mejores prácticas y ventajas"]
 
 
 

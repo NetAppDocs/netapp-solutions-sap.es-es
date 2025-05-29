@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-fc-additional-info.html 
+keywords: additional, information, sap, hana, fc 
+summary: Para obtener más información acerca de la información descrita en este documento, consulte los siguientes documentos o sitios web. 
+---
+= Dónde encontrar información adicional
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:
+
+* link:../index.html["Soluciones de software SAP HANA"]
+* link:../backup/hana-dr-sr-pdf-link.html["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"]
+* link:../backup/hana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+* link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de copias del sistema SAP mediante el complemento SAP HANA de SnapCenter"]
+* Centros de documentación de NetApp
++
+https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]
+
+* Hardware de almacenamiento empresarial certificado de SAP para SAP HANA
++
+http://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/enterprise-storage.html["http://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/enterprise-storage.html"^]
+
+* Requisitos de almacenamiento SAP HANA
++
+https://www.sap.com/documents/2024/03/146274d3-ae7e-0010-bca6-c68f7e60039b.html["https://www.sap.com/documents/2024/03/146274d3-ae7e-0010-bca6-c68f7e60039b.html"^]
+
+* Preguntas frecuentes sobre la integración personalizada del centro de datos de SAP HANA
++
+https://www.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html["https://www.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html"^]
+
+* SAP HANA en VMware vSphere Wiki
++
+https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html"^]
+
+* Guía de prácticas recomendadas de SAP HANA en VMware vSphere
++
+https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper"^]
+
+

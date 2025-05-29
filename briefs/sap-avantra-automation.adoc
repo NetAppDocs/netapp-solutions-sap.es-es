@@ -114,7 +114,7 @@ Debido a que las actualizaciones del sistema, las copias, los clones y las prueb
 Si quiere obtener más información sobre el contenido de este documento, consulte los siguientes documentos y sitios web:
 
 * link:https://www.avantra.com/["Avantra"]
-* link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+* link:../lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
 * link:https://docs.netapp.com/us-en/snapcenter/sc-automation/reference_supported_rest_apis.html["API DE REST compatibles con SnapCenter Server y los plugins"]
 
 
