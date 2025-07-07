@@ -22,7 +22,7 @@ Los diferentes modelos de la familia de productos AFF pueden combinarse y empare
 
 En la siguiente figura, se muestra un ejemplo de configuración con ocho hosts SAP HANA conectados a un par de alta disponibilidad (ha) de almacenamiento.
 
-image:saphana_aff_nfs_image2a.png["Ocho hosts SAP HANA conectados a un par de alta disponibilidad del almacenamiento"]
+image:saphana_aff_nfs_image2b.png["Ocho hosts SAP HANA conectados a un par de alta disponibilidad del almacenamiento"]
 
 La arquitectura se puede escalar en dos dimensiones:
 
@@ -32,11 +32,11 @@ La arquitectura se puede escalar en dos dimensiones:
 
 La siguiente figura muestra una configuración de ejemplo en la que hay más hosts SAP HANA conectados a las controladoras de almacenamiento. En este ejemplo, se necesitan más bandejas de discos para cumplir los requisitos de capacidad y rendimiento de los 16 hosts SAP HANA. En función de los requisitos de rendimiento totales, debe añadir conexiones 10 GbE o más rápidas a las controladoras de almacenamiento.
 
-image:saphana_aff_nfs_image3a.png["Hosts SAP HANA adicionales a un par de alta disponibilidad de controladoras de almacenamiento existente"]
+image:saphana_aff_nfs_image3b.png["Hosts SAP HANA adicionales a un par de alta disponibilidad de controladoras de almacenamiento existente"]
 
 Independientemente del sistema AFF puesto en marcha, el entorno SAP HANA también puede escalarse al añadir cualquiera de las controladoras de almacenamiento certificadas para cumplir con la densidad de nodos deseada, como se muestra en la siguiente figura.
 
-image:saphana_aff_nfs_image4a.png["Se añadió el par de alta disponibilidad adicional"]
+image:saphana_aff_nfs_image4b.png["Se añadió el par de alta disponibilidad adicional"]
 
 
 
@@ -50,7 +50,7 @@ La tecnología SnapMirror de NetApp permite replicar copias de Snapshot creadas 
 
 Puede realizarse un backup de los registros de la base de datos directamente en el almacenamiento secundario mediante un montaje NFS, como se muestra en la siguiente figura.
 
-image:saphana_aff_nfs_image6.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_asa_fc_image5a.png["Descripción general de SnapCenter"]
 
 Los backups basados en almacenamiento Snapshot proporcionan importantes ventajas en comparación con los backups basados en archivos convencionales. Estas ventajas incluyen, entre otras:
 

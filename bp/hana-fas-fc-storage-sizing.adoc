@@ -221,4 +221,4 @@ El tamaño de la RAM, el tamaño de los datos netos del disco de cada host SAP H
 
 La siguiente figura resume el proceso de dimensionamiento.
 
-image:saphana_fas_fc_image8.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_fas_fc_image8a.png["Proceso de dimensionamiento de SAP HANA"]

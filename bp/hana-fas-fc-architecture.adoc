@@ -34,7 +34,7 @@ image:saphana_fas_fc_image3.png["Figura que muestra el cuadro de diálogo de ent
 
 Independientemente del modelo de almacenamiento del sistema FAS puesto en marcha, el panorama SAP HANA también se puede escalar agregando controladoras de almacenamiento, como se muestra en la siguiente figura.
 
-image:saphana_fas_fc_image4.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_fas_fc_image4a.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 
 
@@ -48,7 +48,7 @@ Mediante el software SnapVault de NetApp, las copias Snapshot que se crearon en 
 
 Puede realizarse un backup de los registros de la base de datos directamente en el almacenamiento secundario mediante un montaje NFS, como se muestra en la siguiente figura.
 
-image:saphana_fas_fc_image5.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_asa_fc_image5a.png["Descripción general de SnapCenter"]
 
 Los backups de SnapVault basados en almacenamiento proporcionan importantes ventajas en comparación con los backups basados en archivos. Estas ventajas incluyen las siguientes:
 

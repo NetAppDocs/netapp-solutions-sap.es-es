@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-fas-nfs-additional-info.html 
-keywords: additional, information, fas, nfs, sap, hana 
-summary: Para obtener más información acerca de la información descrita en este documento, consulte los siguientes documentos o sitios web. 
+permalink: bp/hana-asa-fc-additional-info.html 
+keywords:  
+summary:  
 ---
 = Dónde encontrar información adicional
 :hardbreaks:
@@ -18,8 +18,9 @@ Para obtener más información sobre la información descrita en este documento,
 
 * link:../index.html["Soluciones de software SAP HANA"]
 * link:../backup/hana-dr-sr-pdf-link.html["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento"]
+* link:../backup/hana-sc-vmware-smas-scope.html["Protección de datos de SAP HANA y alta disponibilidad con SnapCenter, sincronización activa de SnapMirror y clúster de almacenamiento de VMware Metro"^]
 * link:../backup/hana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
-* link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de copias del sistema SAP mediante el complemento SAP HANA de SnapCenter"]
+* link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
 * Centros de documentación de NetApp
 +
 https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]

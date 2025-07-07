@@ -2,16 +2,16 @@
 sidebar: sidebar 
 permalink: bp/hana-fas-nfs-introduction.html 
 keywords: sap, hana, fas, systems, nfs, configuration, guide 
-summary: 'La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). El sistema de almacenamiento empresarial certificado se caracteriza por el software ONTAP de NetApp.' 
+summary: 'La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). Esta guía proporciona las mejores prácticas para SAP HANA en esta plataforma.' 
 ---
 = Guía de configuración de SAP HANA en sistemas NetApp FAS con NFS
 :allow-uri-read: 
 
 
 [role="lead"]
-La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). El sistema de almacenamiento empresarial certificado se caracteriza por el software ONTAP de NetApp.
+La familia de productos FAS de NetApp ha sido certificada para usarse con SAP HANA en proyectos de integración personalizada de centro de datos (TDI). Esta guía proporciona las mejores prácticas para SAP HANA en esta plataforma con NFS.
 
-Marco Schön, NetApp
+Marco Schoen: NetApp
 
 Actualmente, esta certificación solo es válida para los siguientes modelos:
 
@@ -28,9 +28,10 @@ NOTE: La configuración descrita en este documento es necesaria para alcanzar lo
 
 Las guías de configuración de los sistemas FAS de NetApp que utilizan FCP y para sistemas AFF que utilizan NFS o FC pueden encontrarse en los enlaces siguientes:
 
-* link:hana-fas-fc-introduction.html["SAP HANA en sistemas FAS de NetApp con el protocolo Fibre Channel"^]
+* link:hana-fas-fc-introduction.html["SAP HANA en sistemas FAS de NetApp con FCP"^]
 * link:hana-aff-nfs-introduction.html["SAP HANA en sistemas AFF de NetApp con NFS"^]
-* link:hana-aff-fc-introduction.html["SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"^]
+* link:hana-aff-fc-introduction.html["SAP HANA en sistemas AFF de NetApp con FCP"^]
+* link:hana-asa-fc-introduction.html["SAP HANA en sistemas ASA de NetApp con FCP"^]
 
 
 La siguiente tabla muestra las combinaciones compatibles para las versiones NFS, el bloqueo NFS y las implementaciones de aislamiento requeridas, dependiendo de la configuración de la base de datos SAP HANA.
