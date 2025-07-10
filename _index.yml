@@ -25,6 +25,9 @@ indexpage:
         sincronización activa de SnapMirror y clúster de almacenamiento de VMware
         Metro
       url: backup/hana-sc-vmware-smas-scope.html
+    - title: Protección de datos de SAP HANA con SnapCenter con sistemas VMware VMFS
+        y NetApp ASA
+      url: backup/hana-sc-vmfs-asar2-scope.html
     - title: 'Backup y recuperación de BlueXP para SAP HANA: Almacenamiento de objetos
         en nube como destino de backup'
       url: backup/hana-hycl-backup-overview.html

@@ -94,6 +94,27 @@ entries:
     url: "/backup/hana-sc-vmware-smas-failover-scenarios.html"
   - title: Información adicional e historial de versiones
     url: "/backup/hana-sc-vmware-smas-additional-info.html"
+- title: Protección de datos de SAP HANA con SnapCenter con sistemas VMware VMFS y
+    NetApp ASA
+  entries:
+  - title: Alcance de este documento
+    url: "/backup/hana-sc-vmfs-asar2-scope.html"
+  - title: Configuración de laboratorio utilizada para este documento
+    url: "/backup/hana-sc-vmfs-asar2-lab-setup.html"
+  - title: Aprovisionamiento e instalación de sistemas HANA
+    url: "/backup/hana-sc-vmfs-asar2-hana-prov.html"
+  - title: Configuración de HANA
+    url: "/backup/hana-sc-vmfs-asar2-hana-config.html"
+  - title: Configuración de SnapCenter
+    url: "/backup/hana-sc-vmfs-asar2-sc-config.html"
+  - title: Operaciones de backup de SnapCenter
+    url: "/backup/hana-sc-vmfs-asar2-sc-backup.html"
+  - title: Operaciones de restauración y recuperación de SnapCenter
+    url: "/backup/hana-sc-vmfs-asar2-sc-restore.html"
+  - title: Actualización del sistema SAP
+    url: "/backup/hana-sc-vmfs-asar2sap-refresh.html"
+  - title: Información adicional e historial de versiones
+    url: "/backup/hana-sc-vmfs-asar2-add-info.html"
 - title: 'Backup y recuperación de BlueXP para SAP HANA: Almacenamiento de objetos
     en nube como destino de backup'
   entries:
