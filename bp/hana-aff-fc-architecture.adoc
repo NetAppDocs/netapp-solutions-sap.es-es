@@ -72,21 +72,17 @@ Para obtener información detallada acerca de las soluciones de recuperación an
 
 === Replicación de almacenamiento basada en SnapMirror
 
-La siguiente figura muestra una solución de recuperación ante desastres en tres sitios mediante la replicación SnapMirror síncrona en el centro de datos de recuperación ante desastres local y SnapMirror asíncrono para replicar los datos en el centro de datos de recuperación ante desastres remoto.
+La siguiente figura muestra una solución de recuperación ante desastres de tres sitios que utiliza la sincronización activa síncrona de SnapMirror con el centro de datos de recuperación ante desastres local y la sincronización asíncrona de SnapMirror para replicar los datos al centro de datos de recuperación ante desastres remoto. La sincronización activa de SnapMirror permite que los servicios empresariales sigan funcionando incluso tras un fallo total del sitio, lo que permite la conmutación por error transparente de las aplicaciones mediante una copia secundaria (RPO=0 y RTO=0). No se requiere intervención manual ni secuencias de comandos personalizadas para activar una conmutación por error con SnapMirror Active Sync. A partir de ONTAP 9.15.1, SnapMirror active sync admite una funcionalidad activo-activo simétrica. Activo-activo simétrico permite operaciones de I/O de lectura y escritura desde ambas copias de una LUN protegida con replicación síncrona bidireccional. De este modo, ambas copias LUN pueden servir operaciones de I/O localmente.
 
-La replicación de datos mediante SnapMirror síncrono proporciona un objetivo de punto de recuperación de cero. La distancia entre el centro de datos primario y el local de recuperación ante desastres se limita a unos 100 km.
+Puede encontrar más detalles en  https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Información general sobre la sincronización activa de SnapMirror en ONTAP"] ..
 
-La protección contra fallos del sitio de recuperación ante desastres local y primario se realiza replicando los datos en un tercer centro de datos de recuperación ante desastres remoto mediante SnapMirror asíncrono. El RPO depende de la frecuencia de las actualizaciones de replicación y de la rapidez con la que se pueden transferir. En teoría, la distancia es ilimitada, pero el límite depende de la cantidad de datos que se debe transferir y de la conexión disponible entre los centros de datos. Los valores típicos del RPO están dentro del intervalo de 30 minutos a varias horas.
-
-El objetivo de tiempo de recuperación para ambos métodos de replicación depende principalmente del tiempo necesario para iniciar la base de datos HANA en el sitio de recuperación ante desastres y cargar los datos en la memoria. Suponiendo que se leen los datos con un rendimiento de 1000 Mbps, la carga de 1 TB de datos requeriría aproximadamente 18 minutos.
+El RTO para la replicación asincrónica de SnapMirror depende principalmente del tiempo necesario para iniciar la base de datos HANA en el sitio de DR y cargar los datos en la memoria. Suponiendo que se leen los datos con un rendimiento de 1000 Mbps, la carga de 1 TB de datos requeriría aproximadamente 18 minutos.
 
 Los servidores en los sitios de DR pueden usarse como sistemas de desarrollo y pruebas durante el funcionamiento normal. En caso de desastre, los sistemas de desarrollo y pruebas deberían cerrarse y iniciarse como servidores de producción de recuperación ante desastres.
 
 Ambos métodos de replicación permiten ejecutar pruebas del flujo de trabajo de recuperación ante desastres sin que ello afecte al objetivo de punto de recuperación ni al objetivo de tiempo de recuperación. Los volúmenes FlexClone se crean en el almacenamiento y se conectan a los servidores de pruebas de recuperación ante desastres.
 
-image:saphana_aff_fc_image6.png["Solución SnapMirror"]
-
-La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacenamiento secundario no se completa por ningún motivo, las operaciones de I/o de la aplicación fallan, lo cual garantiza que los sistemas de almacenamiento primario y secundario sean idénticos. Las operaciones de I/o de la aplicación en el principal se reanudan solo después de que la relación de SnapMirror vuelva al estado InSync. Si falla el almacenamiento primario, se pueden reanudar las operaciones de I/o de la aplicación en el almacenamiento secundario después de una conmutación por error sin pérdida de datos. En el modo StrictSync, el objetivo de punto de recuperación siempre es cero.
+image:saphana_aff_fc_image6a.png["Solución SnapMirror"]
 
 
 
@@ -94,4 +90,4 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
 
-image:saphana_aff_fc_image7.png["NetApp MetroCluster"]
+image:saphana_aff_image7a.png["NetApp MetroCluster"]

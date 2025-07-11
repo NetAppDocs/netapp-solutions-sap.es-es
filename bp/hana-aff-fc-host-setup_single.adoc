@@ -1,0 +1,111 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-host-setup_single.html 
+keywords: multipathing, fcp, hba, configure 
+summary: Antes de configurar el host, las utilidades de host SAN de NetApp deben descargarse en el sitio de soporte de NetApp y estar instaladas en los servidores HANA. La documentación de la utilidad de host incluye información sobre software adicional que debe instalarse según el HBA de FCP utilizado. 
+---
+= Configuración de un solo host
+:allow-uri-read: 
+
+
+
+
+== Configuración de un solo host
+
+[role="lead"]
+Este capítulo describe la configuración de un único host SAP HANA.
+
+
+
+=== Cree grupos de volúmenes LVM y volúmenes lógicos
+
+. Inicialice todas las LUN como volumen físico.
++
+....
+pvcreate /dev/mapper/hana-FC5_data_mnt00001
+pvcreate /dev/mapper/hana-FC5_data2_mnt00001
+pvcreate /dev/mapper/hana-FC5_log_mnt00001
+pvcreate /dev/mapper/hana-FC5_log2_mnt00001
+....
+. Cree los grupos de volúmenes para cada partición de registro y datos.
++
+....
+vgcreate FC5_data_mnt00001 /dev/mapper/hana-FC5_data_mnt00001 /dev/mapper/hana-FC5_data2_mnt00001
+vgcreate FC5_log_mnt00001 /dev/mapper/hana-FC5_log_mnt00001 /dev/mapper/hana-FC5_log2_mnt00001
+....
+. Cree un volumen lógico para cada partición de datos y registro. Utilice un tamaño de franja igual al número de LUN utilizadas por grupo de volúmenes (en este ejemplo, son dos) y un tamaño de franja de 256 k para datos y 64 000 para registro. SAP solo admite un volumen lógico por grupo de volúmenes.
++
+....
+lvcreate --extents 100%FREE -i 2 -I 256k --name vol FC5_data_mnt00001
+lvcreate --extents 100%FREE -i 2 -I 64k --name vol FC5_log_mnt00001
+....
+. Analice los volúmenes físicos, los grupos de volúmenes y los grupos de volúmenes en el resto de hosts.
+
+
+....
+modprobe dm_mod
+pvscan
+vgscan
+lvscan
+....
+
+NOTE: Si estos comandos no encuentran los volúmenes, es necesario reiniciar.
+
+Para montar los volúmenes lógicos, deben activarse los volúmenes lógicos. Para activar los volúmenes, ejecute el siguiente comando:
+
+....
+vgchange -a y
+....
+
+
+=== Crear sistemas de archivos
+
+Cree el sistema de archivos XFS en todos los volúmenes lógicos de datos y registros y el LUN compartido de hana.
+
+....
+mkfs.xfs FC5_data_mnt00001-vol
+mkfs.xfs FC5_log_mnt00001-vol
+mkfs.xfs /dev/mapper/svm1-FC5_shared
+....
+
+NOTE: Los varios comandos de ejemplo de host muestran un sistema HANA de dos+1 host múltiple.
+
+
+
+=== Cree puntos de montaje
+
+Para crear los directorios de puntos de montaje necesarios, realice una de las siguientes acciones:
+
+* Para un sistema de host único, establezca permisos y cree puntos de montaje en el host de la base de datos.
+
+
+....
+sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/log/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/shared
+sapcc-hana-tst:/ # chmod –R 777 /hana/log/FC5
+sapcc-hana-tst:/ # chmod –R 777 /hana/data/FC5
+sapcc-hana-tst:/ # chmod 777 /hana/shared
+....
+
+
+=== Montaje de sistemas de archivos
+
+Para montar sistemas de archivos durante el arranque del sistema mediante el `/etc/fstab` archivo de configuración, lleve a cabo los siguientes pasos:
+
+* Para un sistema de un solo host, añada los sistemas de archivos necesarios al `/etc/fstab` archivo de configuración.
++
+....
+# cat /etc/fstab
+/dev/mapper/hana-FC5_shared /hana/shared xfs defaults 0 0
+/dev/mapper/FC5_log_mnt00001-vol /hana/log/FC5/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/FC5_data_mnt00001-vol /hana/data/FC5/mnt00001 xfs relatime,inode64 0 0
+....
++
+
+NOTE: Los sistemas de archivos XFS para las LUN de datos y de registro deben montarse con el `relatime` y.. `inode64` las opciones de montaje.
+
++
+Para montar los sistemas de archivos, ejecute el  `mount –a` comando en el host.
+
+

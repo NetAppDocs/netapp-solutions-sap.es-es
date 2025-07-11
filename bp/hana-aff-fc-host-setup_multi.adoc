@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-host-setup_multi.html 
+keywords: multipathing, fcp, hba, configure 
+summary: Antes de configurar el host, las utilidades de host SAN de NetApp deben descargarse en el sitio de soporte de NetApp y estar instaladas en los servidores HANA. La documentación de la utilidad de host incluye información sobre software adicional que debe instalarse según el HBA de FCP utilizado. 
+---
+= Configuración de varios hosts
+:allow-uri-read: 
+
+
+
+
+== Configuración de varios hosts
+
+[role="lead"]
+Este capítulo describe la configuración de un sistema host múltiple SAP HANA 2+1 como ejemplo.
+
+
+
+=== Cree grupos de volúmenes LVM y volúmenes lógicos
+
+. Inicialice todas las LUN como volumen físico.
++
+....
+pvcreate /dev/mapper/hana-FC5_data_mnt00001
+pvcreate /dev/mapper/hana-FC5_data2_mnt00001
+pvcreate /dev/mapper/hana-FC5_data_mnt00002
+pvcreate /dev/mapper/hana-FC5_data2_mnt00002
+pvcreate /dev/mapper/hana-FC5_log_mnt00001
+pvcreate /dev/mapper/hana-FC5_log2_mnt00001
+pvcreate /dev/mapper/hana-FC5_log_mnt00002
+pvcreate /dev/mapper/hana-FC5_log2_mnt00002
+....
+. Cree los grupos de volúmenes para cada partición de registro y datos.
++
+....
+vgcreate FC5_data_mnt00001 /dev/mapper/hana-FC5_data_mnt00001 /dev/mapper/hana-FC5_data2_mnt00001
+vgcreate FC5_data_mnt00002 /dev/mapper/hana-FC5_data_mnt00002 /dev/mapper/hana-FC5_data2_mnt00002
+vgcreate FC5_log_mnt00001 /dev/mapper/hana-FC5_log_mnt00001 /dev/mapper/hana-FC5_log2_mnt00001
+vgcreate FC5_log_mnt00002 /dev/mapper/hana-FC5_log_mnt00002 /dev/mapper/hana-FC5_log2_mnt00002
+....
+. Cree un volumen lógico para cada partición de datos y registro. Utilice un tamaño de franja igual al número de LUN utilizadas por grupo de volúmenes (en este ejemplo, son dos) y un tamaño de franja de 256 k para datos y 64 000 para registro. SAP solo admite un volumen lógico por grupo de volúmenes.
++
+....
+lvcreate --extents 100%FREE -i 2 -I 256k --name vol FC5_data_mnt00001
+lvcreate --extents 100%FREE -i 2 -I 256k --name vol FC5_data_mnt00002
+lvcreate --extents 100%FREE -i 2 -I 64k --name vol FC5_log_mnt00002
+lvcreate --extents 100%FREE -i 2 -I 64k --name vol FC5_log_mnt00001
+....
+. Analice los volúmenes físicos, los grupos de volúmenes y los grupos de volúmenes en el resto de hosts.
+
+
+....
+modprobe dm_mod
+pvscan
+vgscan
+lvscan
+....
+
+NOTE: Si estos comandos no encuentran los volúmenes, es necesario reiniciar.
+
+Para montar los volúmenes lógicos, deben activarse los volúmenes lógicos. Para activar los volúmenes, ejecute el siguiente comando:
+
+....
+vgchange -a y
+....
+
+
+=== Crear sistemas de archivos
+
+Cree el sistema de archivos XFS en todos los volúmenes lógicos de datos y registros.
+
+....
+mkfs.xfs FC5_data_mnt00001-vol
+mkfs.xfs FC5_data_mnt00002-vol
+mkfs.xfs FC5_log_mnt00001-vol
+mkfs.xfs FC5_log_mnt00002-vol
+....
+
+
+=== Cree puntos de montaje
+
+Para crear los directorios de puntos de montaje necesarios, configure permisos y cree puntos de montaje en todos los hosts de trabajo y en espera.
+
+....
+sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/log/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00002
+sapcc-hana-tst:/ # mkdir -p /hana/log/FC5/mnt00002
+sapcc-hana-tst:/ # mkdir -p /hana/shared
+sapcc-hana-tst:/ # chmod –R 777 /hana/log/FC5
+sapcc-hana-tst:/ # chmod –R 777 /hana/data/FC5
+sapcc-hana-tst:/ # chmod 777 /hana/shared
+....
+
+
+=== Montaje de sistemas de archivos
+
+Para montar el  `/hana/shared` sistemas de archivos durante el arranque del sistema utilizando el  `/etc/fstab` archivo de configuración, agregue el  `/hana/shared` sistema de archivos al  `/etc/fstab` archivo de configuración de cada host.
+
+....
+sapcc-hana-tst:/ # cat /etc/fstab
+<storage-ip>:/hana_shared /hana/shared nfs rw,vers=3,hard,timeo=600, intr,noatime,nolock 0 0
+....
+
+NOTE: Todos los sistemas de archivos de datos y de registro se montan a través del conector de almacenamiento SAP HANA.
+
+Para montar los sistemas de archivos, ejecute el `mount –a` en cada host.

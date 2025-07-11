@@ -46,7 +46,7 @@ Debido a que todos los datos para las instancias de SAP HANA, incluidos los dato
 
 En la siguiente figura se proporciona información general sobre la red.
 
-image:saphana-fas-nfs_image11a.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana-fas-nfs_image11b.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Cada nodo SAP HANA utiliza un grupo de puertos dedicado en el switch distribuido de VMware. Este grupo de puertos permite una calidad de servicio mejorada y la asignación dedicada de tarjetas de interfaz de red física (NIC) en los hosts ESX. Para utilizar NIC físicas dedicadas a la vez que se conservan las capacidades de alta disponibilidad si se produce un error en el NIC, el NIC físico dedicado se configura como un enlace ascendente activo. Las NIC adicionales se configuran como enlaces ascendentes en espera en la configuración de equipos y recuperación tras fallos del grupo de puertos SAP HANA. Además, deben habilitarse las tramas gigantes (MTU 9,000) para terminar en switches físicos y virtuales. Además, desactive el control de flujo en todos los puertos ethernet que se utilizan para el tráfico de almacenamiento en servidores, switches y sistemas de almacenamiento. En la siguiente figura se muestra un ejemplo de dicha configuración.
 

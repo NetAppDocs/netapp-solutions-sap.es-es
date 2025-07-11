@@ -94,4 +94,4 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El clúster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para cargas de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
 
-image:saphana_fas_fc_image7.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_fas_image8.png["IP de NetApp MetroCluster"]

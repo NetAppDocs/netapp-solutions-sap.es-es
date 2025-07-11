@@ -87,7 +87,7 @@ Los servidores en los sitios de DR pueden usarse como sistemas de desarrollo y p
 
 Ambos métodos de replicación permiten ejecutar pruebas del flujo de trabajo de recuperación ante desastres sin que ello afecte al objetivo de punto de recuperación ni al objetivo de tiempo de recuperación. Los volúmenes FlexClone se crean en el almacenamiento y se conectan a los servidores de pruebas de recuperación ante desastres.
 
-image:saphana_aff_nfs_image7.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_aff_nfs_image7b.png["SnapMirror de NetApp"]
 
 La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacenamiento secundario no se completa por ningún motivo, las operaciones de I/o de la aplicación fallan, lo cual garantiza que los sistemas de almacenamiento primario y secundario sean idénticos. Las operaciones de I/o de la aplicación en el principal se reanudan solo después de que la relación de SnapMirror vuelva al estado InSync. Si falla el almacenamiento primario, se pueden reanudar las operaciones de I/o de la aplicación en el almacenamiento secundario después de una conmutación por error sin pérdida de datos. En el modo StrictSync, el objetivo de punto de recuperación siempre es cero.
 
@@ -97,4 +97,4 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.
 
-image:saphana_aff_nfs_image8.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_aff_image7a.png["IP de NetApp MetroCluster"]
