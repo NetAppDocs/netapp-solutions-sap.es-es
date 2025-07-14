@@ -80,7 +80,7 @@ Para configurar un host, complete los siguientes pasos:
 . Cree el sistema de archivos XFS en cada LUN adicional que pertenezca al sistema HANA.
 +
 ....
-stlrx300s8-6:/ # mkfs.xfs /dev/mapper/hana-SS3_data2_mnt00001
+stlrx300s8-6:/ # mkfs.xfs /dev/mapper/hana-FC5_data2_mnt00001
 ....
 . Agregue los sistemas de archivos adicionales al `/etc/fstab` archivo de configuración.
 +
@@ -90,16 +90,16 @@ NOTE: Los sistemas de archivos XFS para la LUN de datos se deben montar con el `
 +
 ....
 stlrx300s8-6:/ # cat /etc/fstab
-/dev/mapper/hana-SS3_shared /hana/shared xfs defaults 0 0
-/dev/mapper/hana-SS3_log_mnt00001 /hana/log/SS3/mnt00001 xfs relatime,inode64 0 0
-/dev/mapper/hana-SS3_data_mnt00001 /hana/data/SS3/mnt00001 xfs relatime,inode64 0 0
-/dev/mapper/hana-SS3_data2_mnt00001 /hana/data2/SS3/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_shared /hana/shared xfs defaults 0 0
+/dev/mapper/hana-FC5_log_mnt00001 /hana/log/FC5/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_data_mnt00001 /hana/data/FC5/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_data2_mnt00001 /hana/data2/FC5/mnt00001 xfs relatime,inode64 0 0
 ....
 . Cree los puntos de montaje y establezca los permisos en el host de la base de datos.
 +
 ....
-stlrx300s8-6:/ # mkdir -p /hana/data2/SS3/mnt00001
-stlrx300s8-6:/ # chmod –R 777 /hana/data2/SS3
+stlrx300s8-6:/ # mkdir -p /hana/data2/FC5/mnt00001
+stlrx300s8-6:/ # chmod –R 777 /hana/data2/FC5
 ....
 . Para montar los sistemas de archivos, ejecute el `mount –a` comando.
 

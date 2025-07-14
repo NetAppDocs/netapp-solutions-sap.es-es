@@ -4,13 +4,13 @@ permalink: bp/hana-asa-fc-storage-controller-setup_single_host.html
 keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
 summary: En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de Data ONTAP correspondientes. 
 ---
-= Configuración del controlador de almacenamiento: host único
+= Host único
 :allow-uri-read: 
 
 
 
 
-== Configuración del controlador de almacenamiento: host único
+== Host único
 
 [role="lead"]
 Esta sección describe la configuración del sistema de almacenamiento NetApp específico para sistemas de host único SAP HANA

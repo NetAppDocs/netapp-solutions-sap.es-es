@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-aff-fc-storage-controller-setup_single_host.html 
-keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
-summary: En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de Data ONTAP correspondientes. 
+permalink: bp/hana-fas-fc-storage-controller-setup_single_host.html 
+keywords: storage, controller, setup, storage, efficiency volume, encryption, quality, configure, disk, connection, aggregate 
+summary: En esta sección se describe la configuración del sistema de almacenamiento de NetApp. Debe completar la instalación y configuración principal según las guías de instalación y configuración de ONTAP correspondientes. 
 ---
 = Host único
 :allow-uri-read: 
@@ -19,12 +19,12 @@ Esta sección describe la configuración del sistema de almacenamiento NetApp es
 
 == Configuración de volúmenes y LUN para sistemas SAP HANA de un solo host
 
-En la siguiente figura, se muestra la configuración de volúmenes de cuatro sistemas SAP HANA de un solo host. Los volúmenes de datos y de registro de cada sistema SAP HANA se distribuyen a diferentes controladoras de almacenamiento. Por ejemplo, volume `SID1_data_mnt00001` Se configura en la controladora A y en un volumen `SID1_log_mnt00001` Se configura en la controladora B. Dentro de cada volumen, se configura una única LUN.
+En la siguiente figura, se muestra la configuración de volúmenes de cuatro sistemas SAP HANA de un solo host. Los volúmenes de datos y de registro de cada sistema SAP HANA se distribuyen a diferentes controladoras de almacenamiento. Por ejemplo, el volumen `SID1_data_mnt00001` se configura en la controladora A y el volumen `SID1_log_mnt00001` se configura en la controladora B. En cada volumen, se configura un solo LUN.
 
 
-NOTE: Si solo se usa una controladora de almacenamiento de una pareja de alta disponibilidad para los sistemas SAP HANA, los volúmenes de datos y los volúmenes de registro también pueden almacenarse en la misma controladora de almacenamiento.
+NOTE: Si solo se usa una controladora de almacenamiento de un par de alta disponibilidad (ha) para los sistemas SAP HANA, los volúmenes de datos y los volúmenes de registros también pueden almacenarse en la misma controladora de almacenamiento.
 
-image:saphana_aff_fc_image16a.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:saphana_fas_fc_image18.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
 
 Para cada host SAP HANA, un volumen de datos, un volumen de registro y un volumen de para `/hana/shared` están configurados. La siguiente tabla muestra un ejemplo de configuración con cuatro sistemas SAP HANA de un solo host.
 
@@ -46,7 +46,7 @@ Para cada host SAP HANA, un volumen de datos, un volumen de registro y un volume
 En la siguiente tabla se muestra un ejemplo de la configuración de puntos de montaje para un sistema de un solo host.
 
 |===
-| LUN | Punto de montaje en el host SAP HANA | Nota 
+| LUN | Punto de montaje en el host HANA | Nota 
 
 
 | SID1_data_mnt00001 | /hana/data/SID1/mnt00001 | Montado usando la entrada /etc/fstab 
@@ -75,7 +75,7 @@ NOTE: No es necesario utilizar LVM con varias LUN para cumplir los KPI de SAP HA
 
 | Volúmenes compartidos, de registro y de datos para el sistema basado en LVM | Volumen de datos: SID1_data_mnt00001 | Volumen compartido: SID1_Shared Log2 volume: SID1_log2_mnt00001 | Data2 volume: SID1_data2_mnt00001 | Volumen de registro: SID1_log_mnt00001 
 |===
-En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos, como se indica en la siguiente tabla.
+En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos. En la siguiente tabla, se enumeran los puntos de montaje para los sistemas de un solo host que utilizan LVM.
 
 |===
 | Volumen lógico/LUN | Punto de montaje en el host SAP HANA | Nota 
@@ -109,7 +109,13 @@ Las opciones de volumen enumeradas en la siguiente tabla deben verificarse y con
 |===
 
 
-=== Creación de LUN y asignación de LUN a grupos de iniciadores mediante la CLI
+=== Crear LUN, volúmenes y asignar LUN a iGroups
+
+Puede usar NetApp ONTAP System Manager para crear volúmenes de almacenamiento y LUN, y asignarlos a los iGroups de los servidores y la CLI de ONTAP. Esta guía describe el uso de la CLI.
+
+
+
+=== Crear LUN, volúmenes y asignar LUN a iGroups mediante la CLI
 
 Esta sección muestra un ejemplo de configuración utilizando la línea de comandos con ONTAP 9 para un sistema de host único SAP HANA con SID FC5 usando LVM y dos LUN por grupo de volúmenes LVM:
 

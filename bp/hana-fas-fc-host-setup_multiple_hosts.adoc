@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-aff-fc-host-setup_multi.html 
-keywords: multipathing, fcp, hba, configure 
-summary: Antes de configurar el host, las utilidades de host SAN de NetApp deben descargarse en el sitio de soporte de NetApp y estar instaladas en los servidores HANA. La documentación de la utilidad de host incluye información sobre software adicional que debe instalarse según el HBA de FCP utilizado. 
+permalink: bp/hana-fas-fc-host-setup_multiple_hosts.html 
+keywords: configure, multipathing, create, lvm, volume, groups, logical, mount, points, file, systems 
+summary: La documentación también contiene información sobre las configuraciones de multivía específicas de la versión de Linux utilizada. 
 ---
 = Configuración de varios hosts
 :allow-uri-read: 

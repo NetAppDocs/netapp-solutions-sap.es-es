@@ -96,12 +96,12 @@ La siguiente información general resume los pasos necesarios para la configurac
 . Cree una máquina virtual de almacenamiento (SVM), como se describe en <<Configuración de la máquina virtual de almacenamiento>>.
 . Cree interfaces lógicas (LIF), como se describe en <<Configuración de interfaz lógica>>.
 . Cree grupos de iniciadores (igroups) con nombres mundiales (WWN) de servidores HANA como se describe en la sección <<Grupos de iniciadores>> .
-. Cree y configure volúmenes y LUN dentro de los agregados como se describe en la sección link:hana-aff-fc-host-setup_single_host.html["Configuración de host único"] para hosts individuales o en sección link:hana-aff-fc-host-setup_multiple_hosts.html["Configuración de varios hosts"]
+. Cree y configure volúmenes y LUN dentro de los agregados como se describe en la sección link:hana-aff-fc-storage-controller-setup_single_host.html["Configuración de host único"] para hosts individuales o en sección link:hana-aff-fc-storage-controller-setup_multiple_hosts.html["Configuración de varios hosts"]
 
 
 
 
-== Conexión de la bandeja de discos
+== Conexiones del estante del disco
 
 
 
@@ -116,7 +116,7 @@ image:saphana_aff_fc_image10.png["Conexión a la bandeja de discos de DS224C"]
 
 
 
-=== Bandejas de discos basadas en NVMe (100 GbE)
+=== Estantes de discos basados en NVMe
 
 Cada bandeja de discos NVMe NS224 está conectada con dos puertos 100GbE GbE por controladora, como se muestra en la figura siguiente. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad. ADPv2 también se utiliza para la bandeja de discos NS224.
 

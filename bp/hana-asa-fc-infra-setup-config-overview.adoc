@@ -5,12 +5,13 @@ keywords:
 summary:  
 ---
 = Instalación y configuración de la infraestructura
+:hardbreaks:
 :allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
 
-
-
-
-== Instalación y configuración de la infraestructura
 
 [role="lead"]
 Las siguientes secciones proporcionan directrices para instalar y configurar la infraestructura SAP HANA y describen todos los pasos necesarios para configurar un sistema SAP HANA. Dentro de estas secciones, se utilizan las siguientes configuraciones de ejemplo:

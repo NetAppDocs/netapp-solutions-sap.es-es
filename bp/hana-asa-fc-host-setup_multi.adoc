@@ -80,7 +80,7 @@ mkfs.xfs FC5_log_mnt00002-vol
 
 === Cree puntos de montaje
 
-Para crear los directorios de puntos de montaje necesarios, configure permisos y cree puntos de montaje en todos los hosts de trabajo y en espera.
+Cree los directorios de puntos de montaje necesarios y configure los permisos en todos los hosts de trabajo y en espera:
 
 ....
 sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001

@@ -4,13 +4,13 @@ permalink: bp/hana-asa-fc-storage-controller-setup_multiple_hosts.html
 keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
 summary: Esta sección describe cómo crear LUN para un sistema host múltiple 
 ---
-= Configuración del controlador de almacenamiento: varios hosts
+= Múltiples hosts
 :allow-uri-read: 
 
 
 
 
-== Configuración del controlador de almacenamiento: varios hosts
+== Múltiples hosts
 
 [role="lead"]
 Esta sección describe la configuración del sistema de almacenamiento NetApp específico para sistemas de múltiples hosts SAP HANA
