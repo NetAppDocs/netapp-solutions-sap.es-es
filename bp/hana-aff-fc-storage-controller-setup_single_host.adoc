@@ -67,7 +67,7 @@ NOTE: Con la configuración descrita, el `/usr/sap/SID1` el directorio en el que
 Se puede utilizar LVM de Linux para aumentar el rendimiento y solucionar las limitaciones de tamaño de LUN. Los diferentes LUN de un grupo de volúmenes de LVM deben almacenarse en un agregado diferente y en una controladora diferente. En la siguiente tabla se muestra un ejemplo para dos LUN por grupo de volúmenes.
 
 
-NOTE: No es necesario utilizar LVM con varias LUN para cumplir los KPI de SAP HANA. Una única configuración de LUN cumple los KPI necesarios.
+NOTE: No es necesario utilizar LVM con múltiples LUN para cumplir con los KPI de SAP HANA, pero se recomienda.
 
 |===
 | Específico | Agregado 1 en la controladora a | Agregado 2 en la controladora a | Agregado 1 en la controladora B. | Agregado 2 en la controladora B. 
@@ -75,23 +75,6 @@ NOTE: No es necesario utilizar LVM con varias LUN para cumplir los KPI de SAP HA
 
 | Volúmenes compartidos, de registro y de datos para el sistema basado en LVM | Volumen de datos: SID1_data_mnt00001 | Volumen compartido: SID1_Shared Log2 volume: SID1_log2_mnt00001 | Data2 volume: SID1_data2_mnt00001 | Volumen de registro: SID1_log_mnt00001 
 |===
-En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos, como se indica en la siguiente tabla.
-
-|===
-| Volumen lógico/LUN | Punto de montaje en el host SAP HANA | Nota 
-
-
-| LV: SID1_data_mnt0000-vol | /hana/data/SID1/mnt00001 | Montado usando la entrada /etc/fstab 
-
-
-| LV: SID1_log_mnt00001-vol | /hana/log/SID1/mnt00001 | Montado usando la entrada /etc/fstab 
-
-
-| LUN: SID1_shared | /hana/shared/SID1 | Montado usando la entrada /etc/fstab 
-|===
-
-NOTE: Con la configuración descrita, el `/usr/sap/SID1` el directorio en el que se almacena el directorio inicial predeterminado del usuario SID1adm se encuentra en el disco local. En una configuración de recuperación ante desastres con replicación basada en disco, NetApp recomienda crear un LUN adicional dentro de la `SID1_shared` volumen para `/usr/sap/SID1` directory de modo que todos los sistemas de ficheros estén en el almacenamiento central.
-
 
 
 == Opciones de volumen

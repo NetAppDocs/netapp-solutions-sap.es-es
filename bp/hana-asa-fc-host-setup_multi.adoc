@@ -17,27 +17,59 @@ Este capítulo describe la configuración de un sistema host múltiple SAP HANA 
 
 
 
+== Configuración de LUN para sistemas SAP HANA con múltiples hosts
+
+Se utiliza Linux LVM para aumentar el rendimiento y abordar las limitaciones de tamaño de LUN.
+
+En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos, como se indica en la siguiente tabla.
+
+|===
+| Volumen lógico (LV) | Punto de montaje en el host SAP HANA | Nota 
+
+
+| LV: FC5_data_mnt00001-vol | /hana/data/FC5/mnt00001 | Montado con el conector de almacenamiento 
+
+
+| LV: FC5_log_mnt00001-vol | /hana/log/FC5/mnt00001 | Montado con el conector de almacenamiento 
+
+
+| LV: FC5_data_mnt00002-vol | /hana/data/FC5/mnt00002 | Montado con el conector de almacenamiento 
+
+
+| LV: FC5_log_mnt00002-vol | /hana/log/FC5/mnt00002 | Montado con el conector de almacenamiento 
+
+
+| Recurso compartido NFS externo: FC5_shared | /hana/shared | Montado en todos los hosts usando entrada NFS y /etc/fstab 
+|===
+
+NOTE: Los sistemas de múltiples hosts de SAP HANA requieren  `/hana/shared` Sistema de archivos conectado a todos los hosts de un sistema. Generalmente, se trata de un recurso compartido NFS proporcionado por un servidor NFS. Se recomienda usar un servidor NFS de alta disponibilidad, como un sistema NetApp FAS o AFF. Otra opción es usar el servidor NFS integrado de un host Linux.
+
+
+NOTE: Con la configuración descrita, el  `/usr/sap/FC5` El directorio donde se almacena el directorio de inicio predeterminado del usuario FC5adm se encuentra en el disco local de cada host HANA. En una configuración de recuperación ante desastres con replicación basada en disco, NetApp recomienda usar cuatro LUN adicionales para  `/usr/sap/FC5` sistema de archivos de cada host para que cada host de base de datos tenga todos sus sistemas de archivos en el almacenamiento central.
+
+
+
 === Cree grupos de volúmenes LVM y volúmenes lógicos
 
 . Inicialice todas las LUN como volumen físico.
 +
 ....
-pvcreate /dev/mapper/hana-FC5_data_mnt00001
-pvcreate /dev/mapper/hana-FC5_data2_mnt00001
-pvcreate /dev/mapper/hana-FC5_data_mnt00002
-pvcreate /dev/mapper/hana-FC5_data2_mnt00002
-pvcreate /dev/mapper/hana-FC5_log_mnt00001
-pvcreate /dev/mapper/hana-FC5_log2_mnt00001
-pvcreate /dev/mapper/hana-FC5_log_mnt00002
-pvcreate /dev/mapper/hana-FC5_log2_mnt00002
+pvcreate /dev/mapper/svm1-FC5_data_mnt00001_1
+pvcreate /dev/mapper/svm1-FC5_data_mnt00001_2
+pvcreate /dev/mapper/svm1-FC5_data_mnt00002_1
+pvcreate /dev/mapper/svm1-FC5_data_mnt00002_2
+pvcreate /dev/mapper/svm1-FC5_log_mnt00001_1
+pvcreate /dev/mapper/svm1-FC5_log_mnt00001_2
+pvcreate /dev/mapper/svm1-FC5_log_mnt00002_1
+pvcreate /dev/mapper/svm1-FC5_log_mnt00002_2
 ....
 . Cree los grupos de volúmenes para cada partición de registro y datos.
 +
 ....
-vgcreate FC5_data_mnt00001 /dev/mapper/hana-FC5_data_mnt00001 /dev/mapper/hana-FC5_data2_mnt00001
-vgcreate FC5_data_mnt00002 /dev/mapper/hana-FC5_data_mnt00002 /dev/mapper/hana-FC5_data2_mnt00002
-vgcreate FC5_log_mnt00001 /dev/mapper/hana-FC5_log_mnt00001 /dev/mapper/hana-FC5_log2_mnt00001
-vgcreate FC5_log_mnt00002 /dev/mapper/hana-FC5_log_mnt00002 /dev/mapper/hana-FC5_log2_mnt00002
+vgcreate FC5_data_mnt00001 /dev/mapper/svm1-FC5_data_mnt00001_1 /dev/mapper/svm1-FC5_data_mnt00001_2
+vgcreate FC5_data_mnt00002 /dev/mapper/svm1-FC5_data_mnt00002_1 /dev/mapper/svm1-FC5_data_mnt00002_2
+vgcreate FC5_log_mnt00001 /dev/mapper/svm1-FC5_log_mnt00001_1 /dev/mapper/svm1-FC5_log_mnt00001_2
+vgcreate FC5_log_mnt00002 /dev/mapper/svm1-FC5_log_mnt00002_1 /dev/mapper/svm1-FC5_log_mnt00002_2
 ....
 . Cree un volumen lógico para cada partición de datos y registro. Utilice un tamaño de franja igual al número de LUN utilizadas por grupo de volúmenes (en este ejemplo, son dos) y un tamaño de franja de 256 k para datos y 64 000 para registro. SAP solo admite un volumen lógico por grupo de volúmenes.
 +

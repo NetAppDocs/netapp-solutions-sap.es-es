@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: briefs/saphana-dr_pdf_link.html 
+keywords: sb-3968, sap, SAP HANA, Disaster Recovery 
+summary: Este documento se centra en la recuperación ante desastres para SAP HANA. 
+---
+= SB-3968: Recuperación ante desastres para SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+== El desafío
+
+La continuidad del negocio es esencial en las organizaciones de TI.  Deben poder proporcionar servicios de alta disponibilidad para las aplicaciones de misión crítica que sus clientes requieren para operar sus negocios.  De lo contrario, sus clientes enfrentarán una disminución de la productividad y las organizaciones de comercio electrónico podrían enfrentar un impacto directo en sus ingresos.
+
+
+
+== La solución
+
+NetApp ha desarrollado una cartera completa de tecnologías y herramientas para ayudar a las organizaciones de TI a construir o adaptar sus planes de recuperación ante desastres para responder a todas las demandas del negocio:
+
+link:https://www.netapp.com/pdf.html?item=/media/6998-sb-3968pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6998-sb-3968pdf.pdf"]
