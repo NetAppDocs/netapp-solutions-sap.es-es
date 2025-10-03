@@ -115,17 +115,6 @@ entries:
     url: "/backup/hana-sc-vmfs-asar2sap-refresh.html"
   - title: Información adicional e historial de versiones
     url: "/backup/hana-sc-vmfs-asar2-add-info.html"
-- title: 'Backup y recuperación de BlueXP para SAP HANA: Almacenamiento de objetos
-    en nube como destino de backup'
-  entries:
-  - title: 'Backup y recuperación de datos de BlueXP para SAP HANA: Información general'
-    url: "/backup/hana-hycl-backup-overview.html"
-  - title: Configurar el backup y recuperación de datos de BlueXP para SAP HANA
-    url: "/backup/hana-hycl-backup-conf.html"
-  - title: Restaurar backups de SAP HANA BlueXP
-    url: "/backup/hana-hycl-backup-restore.html"
-  - title: Información Adicional e Historial de Versiones
-    url: "/backup/hana-hycl-backup-info-version.html"
 - title: Backup y recuperación de datos de replicación de sistemas SAP HANA con SnapCenter
   entries:
   - title: Información general de la replicación de sistemas SAP HANA

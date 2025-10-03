@@ -55,7 +55,7 @@ Es necesario hacer esto para cada máquina virtual de almacenamiento. El nombre 
 ....
 lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
 ....
-Se recomienda utilizar 1000MB GB/s como rendimiento máximo para una LUN determinada. Si una aplicación requiere un mayor rendimiento, se utilizarán varias LUN con segmentación de LUN para proporcionar el ancho de banda necesario. Esta guía proporciona un ejemplo para SAP HANA basado en Linux LVM en la sección link:hana-asa-fc-host-setup.html#create-lvm-volume-groups-and-logical-volumes["Configuración de host"].
+Se recomienda utilizar 1000 MB/s como rendimiento máximo para un LUN determinado.  Si una aplicación requiere un mayor rendimiento, se deben utilizar múltiples LUN con segmentación de LUN para proporcionar el ancho de banda necesario.  Esta guía proporciona un ejemplo para SAP HANA basado en Linux LVM en la secciónlink:hana-asa-fc-host-setup.html["Configuración de host"] .
 
 
 NOTE: El límite se aplica también a las lecturas. Por ello, utilice suficientes LUN para cumplir con los acuerdos de nivel de servicio requeridos para el tiempo de inicio de la base de datos de SAP HANA y para los backups.

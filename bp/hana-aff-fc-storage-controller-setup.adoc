@@ -91,7 +91,7 @@ FabricPool es una buena opción para mover los backups de registros a otro nivel
 
 La siguiente información general resume los pasos necesarios para la configuración del almacenamiento. Cada paso se trata con más detalle en las secciones siguientes. En esta sección, asumimos que el hardware de almacenamiento está configurado y que el software ONTAP ya está instalado. Además, debe haberse conectado los puertos FCP del almacenamiento a la estructura SAN.
 
-. Compruebe la configuración de bandeja de discos correcta, según se describe en <<Conexión de la bandeja de discos>>.
+. Verifique la configuración correcta del estante del disco, como se describe en<<Conexiones del estante del disco>> .
 . Cree y configure los agregados necesarios, como se describe en <<Configuración de agregados>>.
 . Cree una máquina virtual de almacenamiento (SVM), como se describe en <<Configuración de la máquina virtual de almacenamiento>>.
 . Cree interfaces lógicas (LIF), como se describe en <<Configuración de interfaz lógica>>.

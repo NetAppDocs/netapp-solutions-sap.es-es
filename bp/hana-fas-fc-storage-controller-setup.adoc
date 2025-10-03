@@ -69,7 +69,7 @@ Es necesario hacer esto para cada máquina virtual de almacenamiento. El nombre 
 ....
 lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
 ....
-Se recomienda utilizar 1000MB GB/s como rendimiento máximo para una LUN determinada. Si una aplicación requiere un mayor rendimiento, se utilizarán varias LUN con segmentación de LUN para proporcionar el ancho de banda necesario. Esta guía proporciona un ejemplo para SAP HANA basado en Linux LVM en la sección link:hana-fas-fc-host-setup.html#create-lvm-volume-groups-and-logical-volumes["Configuración de host"].
+Se recomienda utilizar 1000 MB/s como rendimiento máximo para un LUN determinado.  Si una aplicación requiere un mayor rendimiento, se deben utilizar múltiples LUN con segmentación de LUN para proporcionar el ancho de banda necesario.  Esta guía proporciona un ejemplo para SAP HANA basado en Linux LVM en la secciónlink:hana-fas-fc-host-setup.html["Configuración de host"] .
 
 
 NOTE: El límite se aplica también a las lecturas. Por ello, utilice suficientes LUN para cumplir con los acuerdos de nivel de servicio requeridos para el tiempo de inicio de la base de datos de SAP HANA y para los backups.
@@ -93,13 +93,17 @@ FabricPool es una buena opción para mover los backups de registros a otro nivel
 
 La siguiente información general resume los pasos necesarios para la configuración del almacenamiento. Cada paso se trata con más detalle en las secciones siguientes. Antes de iniciar estos pasos, complete la configuración de hardware de almacenamiento, la instalación del software ONTAP y la conexión de los puertos FCP de almacenamiento a la estructura DE SAN.
 
-. Compruebe la configuración de bandeja de discos correcta, según se describe en <<Conexión de la bandeja de discos>>.
+. Verifique la configuración correcta del estante del disco, como se describe en<<Conexiones del estante del disco>> .
 . Cree y configure los agregados necesarios, como se describe en <<Configuración de agregados>>.
 . Cree una máquina virtual de almacenamiento (SVM), como se describe en <<Configuración de la máquina virtual de almacenamiento>>.
 . Cree interfaces lógicas (LIF), como se describe en <<Configuración de interfaz lógica>>.
 . Cree iGroups con los nombres a nivel mundial (WWN) de servidores HANA tal como se describe en la sección link:hana-fas-fc-storage-controller-setup.html#iGroups <<Grupos de iniciadores>>.
 . Cree y configure volúmenes y LUN dentro de los agregados como se describe en la sección link:hana-fas-fc-storage-controller-setup_single_host.html["Configuración de host único"] para hosts individuales o en sección link:hana-fas-fc-storage-controller-setup_multiple_hosts.html["Configuración de varios hosts"] para múltiples hosts
 
+
+
+
+== Conexiones del estante del disco
 
 Con las HDD, se pueden conectar un máximo de dos bandejas de discos DS2246 o cuatro bandejas de discos DS224C a una pila SAS para proporcionar el rendimiento requerido para los hosts SAP HANA, como se muestra en la siguiente figura. Los discos dentro de cada bandeja deben distribuirse de forma equitativa a ambas controladoras de la pareja de alta disponibilidad.
 
