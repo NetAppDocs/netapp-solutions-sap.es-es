@@ -1,0 +1,25 @@
+---
+sidebar: sidebar 
+permalink: bp/kvm-hana-update-history.html 
+keywords:  
+summary:  
+---
+= Actualizar historial
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Desde su publicación original se han realizado los siguientes cambios técnicos en esta solución.
+
+[cols="25,50"]
+|===
+| Fecha | Actualizar el resumen 
+
+
+| octubre de 2025 | Versión inicial 
+|===
