@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: bp/kvm-hana-fcn.html 
-keywords: fibre channel,KVM, SAP HANA, tailored data center integration, FCP 
-summary: Esta guía proporciona información sobre cómo configurar SUSE KVM para SAP HANA utilizando el almacenamiento NetApp . 
+keywords: fibre channel,KVM, SAP HANA, FCP, HBA, PCI passthrough, storage 
+summary: Configure la red Fibre Channel para SAP HANA en SUSE KVM asignando puertos HBA físicos a las máquinas virtuales como dispositivos PCI.  Configure conexiones FCP redundantes utilizando dos puertos físicos conectados a diferentes conmutadores de estructura. 
 ---
-= Configuración de la red Fibre Channel
+= Configurar la red Fibre Channel para SAP HANA en SUSE KVM
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,25 +14,49 @@ summary: Esta guía proporciona información sobre cómo configurar SUSE KVM par
 
 
 [role="lead"]
-Esta sección proporciona información sobre cómo configurar FCP en SUSE KVM para SAP HANA utilizando almacenamiento NetApp .
+Configure la red Fibre Channel para SAP HANA en SUSE KVM asignando puertos HBA físicos a las máquinas virtuales como dispositivos PCI.  Configure conexiones FCP redundantes utilizando dos puertos físicos conectados a diferentes conmutadores de estructura.
 
 
+NOTE: Los siguientes pasos solo son necesarios si se utiliza FCP como protocolo de almacenamiento.  Si se utiliza NFS, estos pasos no son necesarios.
 
-== Asignación de puertos FCP a la máquina virtual
-
-Como no existe una función similar a SR-IOV para FCP, es necesario asignar los puertos HBA físicos a la máquina virtual.  Es necesario utilizar dos puertos físicos conectados a diferentes tejidos.
+.Acerca de esta tarea
+Como no existe ninguna función equivalente a SR-IOV para FCP, asigne los puertos HBA físicos directamente a la máquina virtual.  Utilice dos puertos físicos conectados a diferentes tejidos para redundancia.
 
 
 NOTE: Un puerto físico solo puede asignarse a una máquina virtual.
 
-Para ello, complete los siguientes pasos:
+.Pasos
+. Inicie virt-manager:
++
+image:kvm-hana-image2.png["ancho=601, alto=385"]
 
-. Inicie _virt-manager._ +image:kvm-hana-image2.png["ancho=601, alto=385"]
-. Abra la máquina virtual deseada. + image:kvm-hana-image3.png["ancho=601, alto=385"]
-. Pulse “Añadir hardware”. + image:kvm-hana-image4.png["Virtmanager Agregar hardware, ancho=601, alto=443"]
-. Seleccione el puerto HBA deseado de la lista de dispositivos host PCI y pulse Finalizar.  + En este ejemplo 0000.A2:00:0. + image:kvm-hana-image9.png["ancho=601, alto=441"]
-. Seleccione el puerto HBA deseado de la lista de dispositivos host PCI pertenecientes al segundo tejido y pulse Finalizar.  En este ejemplo 0000.A2:00:1. + image:kvm-hana-image10.png["ancho=601, alto=441"]
-. Posteriormente, los puertos HBA físicos se asignan a la máquina virtual y esta puede iniciarse. + image:kvm-hana-image11.png["ancho=601, alto=441"]
+. Abra la máquina virtual deseada.image:kvm-hana-image3.png["ancho=601, alto=385"]
+. Seleccione *Agregar hardware*.
++
+image:kvm-hana-image4.png["Virtmanager Agregar hardware, ancho=601, alto=443"]
+
+. Seleccione el puerto HBA deseado de la lista de dispositivos host PCI y pulse Finalizar.
++
+En este ejemplo 0000.A2:00:0.
+
++
+image:kvm-hana-image9.png["ancho=601, alto=441"]
+
+. Seleccione el puerto HBA deseado de la lista de dispositivos host PCI pertenecientes al segundo tejido y pulse Finalizar. En este ejemplo 0000.A2:00:1.
++
+image:kvm-hana-image10.png["ancho=601, alto=441"]
+
+. Posteriormente, los puertos HBA físicos se asignan a la máquina virtual y esta puede iniciarse.
++
+image:kvm-hana-image11.png["ancho=601, alto=441"]
+
++
+Los puertos físicos se transfieren a la máquina virtual, por lo que no se requiere ninguna preparación adicional dentro de la misma.
 
 
-Como los puertos físicos ya se han asignado a la máquina virtual, no es necesario realizar ninguna preparación adicional.
+
+
+
+== ¿Que sigue?
+
+Una vez que hayas configurado la red Fibre Channel,link:kvm-hana-storage.html["Configurar el almacenamiento NetApp para SAP HANA"] .

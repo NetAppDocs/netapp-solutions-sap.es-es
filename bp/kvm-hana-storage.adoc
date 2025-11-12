@@ -1,10 +1,10 @@
 ---
 sidebar: sidebar 
 permalink: bp/kvm-hana-storage.html 
-keywords: NetApp storage, KVM, SAP HANA, tailored data center integration, NFS, FCP 
-summary: Esta guía proporciona información sobre cómo configurar SUSE KVM para SAP HANA utilizando el almacenamiento NetApp . 
+keywords: NetApp storage, KVM, SAP HANA, NFS, FCP, ONTAP, storage configuration 
+summary: Configure el almacenamiento NetApp para SAP HANA en SUSE KVM utilizando los protocolos NFS o FCP.  Configure las conexiones de almacenamiento entre la máquina virtual y los sistemas NetApp ONTAP para un rendimiento óptimo de la base de datos. 
 ---
-= Conexión de almacenamiento a la máquina virtual KVM para SAP HANA
+= Configurar el almacenamiento NetApp para SAP HANA en SUSE KVM
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,4 +14,41 @@ summary: Esta guía proporciona información sobre cómo configurar SUSE KVM par
 
 
 [role="lead"]
-Una vez configurada correctamente la máquina virtual, se puede conectar el almacenamiento desde dentro de la misma.  + Para NFS, siga las instrucciones. https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-aff-nfs-introduction.html["SAP HANA en sistemas NetApp AFF con NFS: Guía de configuración de"] y para FCP siga cualquiera de las siguientes opciones: https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-aff-fc-introduction.html["SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"] guía o la https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA en sistemas ASA de NetApp con el protocolo Fibre Channel"] La guía varía según el producto de almacenamiento utilizado.
+Configure el almacenamiento NetApp para SAP HANA en SUSE KVM utilizando los protocolos NFS o FCP.  Configure las conexiones de almacenamiento entre la máquina virtual y los sistemas NetApp ONTAP para un rendimiento óptimo de la base de datos.
+
+Después de configurar la máquina virtual con interfaces de red SR-IOV o puertos HBA FCP, configure el acceso al almacenamiento desde dentro de la máquina virtual.  Utilice la guía de configuración de NetApp SAP HANA adecuada según el protocolo de almacenamiento elegido.
+
+
+
+== Configurar el almacenamiento NFS para SAP HANA
+
+Utilice las interfaces de red SR-IOV creadas previamente si se va a utilizar el protocolo NFS para el almacenamiento de SAP HANA.
+
+Siga los pasos de configuración detallados en el https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-aff-nfs-introduction.html["SAP HANA en sistemas NetApp AFF con NFS: Guía de configuración de"] .
+
+Consideraciones clave de configuración para entornos KVM:
+
+* Utilice las funciones virtuales (VF) SR-IOV configuradas anteriormente para el tráfico de red.
+* Configure la agregación de enlaces de red dentro de la máquina virtual para redundancia.
+* Asegúrese de que la conmutación de red entre la máquina virtual y los SVM de almacenamiento NetApp sea la correcta.
+* Configure los controladores de almacenamiento y la máquina virtual de acuerdo con la Guía de configuración de SAP HANA.
+
+
+
+
+== Configurar el almacenamiento FCP para SAP HANA
+
+Utilice los puertos HBA físicos asignados a la máquina virtual como dispositivos PCI si se va a utilizar el protocolo FCP para el almacenamiento de SAP HANA.
+
+Elija la guía de configuración adecuada según su sistema de almacenamiento NetApp :
+
+* Para sistemas NetApp AFF : https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-aff-fc-introduction.html["SAP HANA en sistemas AFF de NetApp con el protocolo Fibre Channel"]
+* Para sistemas NetApp ASA : https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA en sistemas ASA de NetApp con el protocolo Fibre Channel"]
+
+
+Consideraciones clave de configuración para entornos KVM:
+
+* Utilice los puertos HBA físicos que se asignaron a la máquina virtual mediante PCI passthrough.
+* Configure el enrutamiento de múltiples rutas dentro de la máquina virtual para lograr redundancia entre los conmutadores de la estructura.
+* Configure los controladores de almacenamiento y las máquinas virtuales de acuerdo con la Guía de configuración de SAP HANA.
+

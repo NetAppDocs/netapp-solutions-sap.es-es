@@ -22,4 +22,7 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 
 
 | octubre de 2025 | Versión inicial 
+
+
+| noviembre de 2025 | Actualización de diseño. 
 |===
