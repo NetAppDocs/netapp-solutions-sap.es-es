@@ -1,0 +1,343 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-supported-configs.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Obtenga información sobre las configuraciones compatibles con SnapCenter para SAP HANA
+:allow-uri-read: 
+
+
+[role="lead"]
+SnapCenter admite una amplia gama de arquitecturas de sistemas SAP HANA y escenarios de implementación en plataformas de almacenamiento locales y en la nube. Obtenga información sobre las configuraciones de SAP HANA compatibles, las combinaciones de plataformas, los protocolos de almacenamiento y las operaciones de respaldo y restauración disponibles para cada entorno.
+
+
+
+== Configuraciones de SAP HANA compatibles
+
+SnapCenter admite las siguientes configuraciones y funciones de HANA:
+
+* Sistemas de host único SAP HANA
+* Sistemas host múltiples de SAP HANA
++
+** Requiere una implementación de complemento central como se describe en link:hana-sc-generic-concepts.html#deployment-options-for-snapcenter-plug-in-for-sap-hana["Opciones de implementación del complemento SnapCenter para SAP HANA"].
+
+
+* Sistemas SAP HANA MDC
++
+** con uno o varios inquilinos
+
+
+* Sistemas SAP HANA con múltiples particiones
+* Replicación de sistemas SAP HANA
+* Cifrado de SAP HANA (datos, registro, copia de seguridad)
+
+
+
+
+== Configuraciones de plataforma e infraestructura compatibles
+
+SnapCenter admite las siguientes combinaciones de plataformas de host, sistemas de archivos y plataformas de almacenamiento.
+
+[cols="24%,47%,29%"]
+|===
+| Plataforma de alojamiento | Conexión de almacenamiento y sistema de archivos de SAP HANA | Plataforma de almacenamiento 
+
+
+| VMware | Montajes NFS en el invitado | ONTAP AFF 
+
+
+| VMware | Almacén de datos FC con VMFS + VM con XFS con o sin Linux LVM | ONTAP AFF o ASA 
+
+
+| KVM | Montajes NFS en el invitado | ONTAP AFF 
+
+
+| Servidor físico | Montajes NFS | ONTAP AFF 
+
+
+| Servidor físico | FC SAN + y XFS con o sin Linux LVM | ONTAP AFF o ASA (*) 
+
+
+| Máquina virtual de Azure | Montajes NFS | Azure NetApp Files 
+
+
+| AWS EC2 | Montajes NFS | FSx para ONTAP 
+|===
+(*): Soporte ASA disponible a partir de la versión 6.2 de SnapCenter
+
+
+NOTE: Los complementos de HANA y Linux solo están disponibles para la plataforma de CPU Intel. Para Linux en IBM Power, se debe configurar una implementación de complemento HANA central como se describe en link:hana-sc-generic-concepts.html#deployment-options-for-snapcenter-plug-in-for-sap-hana["Opciones de implementación del complemento SnapCenter para SAP HANA"].
+
+
+
+== Funciones y operaciones compatibles
+
+
+
+=== Explicación de la abreviatura
+
+* VBSR: SnapRestore basado en volumen + Un SnapRestore basado en volumen revierte el volumen al estado de la instantánea.
+* SFSR: SnapRestore de un solo archivo + Se puede usar un SnapRestore de un solo archivo para restaurar archivos o LUN específicos dentro de un volumen.
+
+
+Véase también https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_types_of_restore_performed_for_auto_discovered_sap_hana_databases.html["Tipos de operaciones de restauración para bases de datos SAP HANA detectadas automáticamente"]
+
+
+
+=== ONTAP AFF y FSx para ONTAP
+
+
+NOTE: Solo la columna 1 (montajes NFS) de la tabla a continuación es relevante para FSx para ONTAP.
+
+[cols="40%,20%,20%,20%"]
+|===
+| Operación | Montajes NFS en Bare Metal o en invitado con VMware o KVM | FC SAN + Metal desnudo | Almacén de datos FC VMware VMFS 
+
+
+| *Operaciones de copia de seguridad y restauración de instantáneas para la base de datos HANA* |  |  |  
+
+
+| Copia de seguridad de instantáneas | Sí | Sí | Sí 
+
+
+| Instantánea a prueba de manipulaciones | Sí | Sí | Sí 
+
+
+| Restauración completa | VBSR o SFSR (seleccionable) | SFSR de LUN completo | Clonar, montar, copiar 
+
+
+| Restauración de un solo inquilino | SFSR | Clonar, montar, copiar | Clonar, montar, copiar 
+
+
+| * Operaciones de copia de seguridad y restauración de SnapVault para bases de datos HANA * |  |  |  
+
+
+| Replicación SnapVault | Sí | Sí | Sí 
+
+
+| Instantánea a prueba de manipulaciones | Sí | Sí | Sí 
+
+
+| Restauración completa | Sí | Sí | Clonar, montar, copiar 
+
+
+| Restauración de un solo inquilino | Sí | Clonar, montar, copiar | Clonar, montar, copiar 
+
+
+| *Operación de recuperación de HANA desde el destino Snapshot o SnapVault principal* |  |  |  
+
+
+| Recuperación automatizada de un solo inquilino de MDC | Sí | Sí | Sí 
+
+
+| Recuperación automatizada de MDC para múltiples inquilinos | No | No | No 
+
+
+| *Realizar copias de seguridad y restaurar volúmenes que no sean de datos* |  |  |  
+
+
+| Copia de seguridad de instantáneas | Sí | Sí | Sí (*) 
+
+
+| Restaurar desde una instantánea | VBSR o SFSR (seleccionable) | SFSR de LUN completo | VBSR (*) 
+
+
+| Replicación SnapVault | Sí | Sí | Sí (*) 
+
+
+| Restaurar desde el destino SnapVault | Sí | Sí | Sí (*) 
+
+
+| *Actualización del sistema SAP* |  |  |  
+
+
+| Desde la instantánea principal | Sí | Sí (**) | Sí (**) 
+
+
+| Desde el destino SnapVault | Sí | Sí (**) | Sí (**) 
+
+
+| *HA y DR* |  |  |  
+
+
+| HSR admite instantáneas y SnapVault | Sí | Sí | Sí 
+
+
+| Actualizaciones de replicación de SnapMirror con SC | Sí | Sí | Sí 
+
+
+| Sincronización activa de SnapMirror | NA | Sí | Sí 
+|===
+(*): Sin integración con VMware: instantánea de imagen de falla y restauración de volumen completo
+
+(**): Se requieren soluciones alternativas para versiones de SnapCenter anteriores a la 6.2
+
+
+
+=== ONTAP ASA
+
+[cols="40%,30%,30%"]
+|===
+| Operación | FC SAN + Metal desnudo (*) | Almacén de datos FC VMware VMFS 
+
+
+| *Operaciones de copia de seguridad y restauración de instantáneas para la base de datos HANA* |  |  
+
+
+| Copia de seguridad de instantáneas | Sí | Sí 
+
+
+| Instantánea a prueba de manipulaciones | No | No 
+
+
+| Restauración completa | SFSR de LUN completo | Clonar, montar, copiar 
+
+
+| Restauración de un solo inquilino | Clonar, montar, copiar | Clonar, montar, copiar 
+
+
+| * Operaciones de copia de seguridad y restauración de SnapVault para bases de datos HANA * |  |  
+
+
+| Replicación SnapVault | Sí | Sí 
+
+
+| Instantánea a prueba de manipulaciones | No | No 
+
+
+| Restauración completa | Sí | Clonar, montar, copiar 
+
+
+| Restauración de un solo inquilino | Clonar, montar, copiar | Clonar, montar, copiar 
+
+
+| *Operación de recuperación de HANA desde el destino Snapshot o SnapVault principal* |  |  
+
+
+| Recuperación automatizada de un solo inquilino de MDC | Sí | Sí 
+
+
+| Recuperación automatizada de MDC para múltiples inquilinos | No | No 
+
+
+| *Realizar copias de seguridad y restaurar volúmenes que no sean de datos* |  |  
+
+
+| Copia de seguridad de instantáneas | Sí (*) | Sí (*) 
+
+
+| Restaurar desde una instantánea | SFSR de LUN completo (*) | SFSR de LUN completo (*) 
+
+
+| Replicación SnapVault | Sí (*) | Sí (*) 
+
+
+| Restaurar desde el destino SnapVault | Sí (*) | Sí (*) 
+
+
+| *Actualización del sistema SAP* |  |  
+
+
+| Desde la instantánea principal | Sí (**) | Sí (**) 
+
+
+| Desde el destino SnapVault | Sí (**) | Sí (**) 
+
+
+| *HA y DR* |  |  
+
+
+| HSR admite instantáneas y SnapVault | Sí | Sí 
+
+
+| Actualizaciones de replicación de SnapMirror activadas por SnapCenter | Sí | Sí 
+
+
+| Sincronización activa de SnapMirror | Sí | Sí 
+|===
+(*): Soporte a partir de la versión 6.2 de SnapCenter
+
+(**): Se requieren soluciones alternativas para versiones de SnapCenter anteriores a la 6.2
+
+
+
+=== Azure NetApp Files
+
+[cols="60%,40%"]
+|===
+| Operación | Montajes NFS 
+
+
+| *Operaciones de copia de seguridad y restauración de instantáneas para la base de datos HANA* |  
+
+
+| Copia de seguridad de instantáneas | Sí 
+
+
+| Instantánea a prueba de manipulaciones | No 
+
+
+| Restauración completa en el lugar | Reversión de volumen o SFSR (seleccionable) 
+
+
+| Restauración de un solo inquilino | SFSR 
+
+
+| *Operaciones de copia de seguridad y restauración de ANF para la base de datos HANA* |  
+
+
+| Replicación de copia de seguridad de ANF | Sí 
+
+
+| Instantánea a prueba de manipulaciones | No 
+
+
+| Restauración completa en el lugar | Sí 
+
+
+| Restauración de un solo inquilino | Sí 
+
+
+| *Operación de recuperación de HANA desde una instantánea principal o una copia de seguridad de ANF* |  
+
+
+| Recuperación automatizada de un solo inquilino de MDC | Sí 
+
+
+| Recuperación automatizada de MDC para múltiples inquilinos | No 
+
+
+| *Realizar copias de seguridad y restaurar volúmenes que no sean de datos* |  
+
+
+| Copia de seguridad de instantáneas | Sí 
+
+
+| Restaurar desde una instantánea | Reversión de volumen 
+
+
+| Replicación de copia de seguridad de ANF | Sí 
+
+
+| Restauración completa en el lugar desde una copia de seguridad ANF | No (*) 
+
+
+| *Actualización del sistema SAP* |  
+
+
+| Desde la instantánea principal | Sí 
+
+
+| Desde la copia de seguridad de ANF | Sí 
+
+
+| *HA y DR* |  
+
+
+| Soporte HSR Instantáneas y copia de seguridad ANF | Sí 
+
+
+| Actualización de replicación entre regiones activada por SnapCenter | No 
+|===
+(*): Con la versión actual, se debe realizar una operación de restauración mediante el portal de Azure o CLI

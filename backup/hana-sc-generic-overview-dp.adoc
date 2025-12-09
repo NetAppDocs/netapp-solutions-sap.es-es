@@ -1,0 +1,106 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-overview-dp.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Obtenga más información sobre la protección de datos de SAP HANA con la tecnología Snapshot de NetApp
+:allow-uri-read: 
+
+
+[role="lead"]
+Descubra cómo la tecnología Snapshot de NetApp protege las bases de datos de SAP HANA con copias de seguridad que se completan en minutos, independientemente del tamaño de la base de datos. Obtenga información sobre las estrategias de respaldo y recuperación mediante copias instantáneas, SnapRestore para una recuperación rápida y replicación con SnapVault o respaldo de Azure NetApp Files para protección secundaria.
+
+Las empresas hoy en día requieren disponibilidad continua e ininterrumpida para sus aplicaciones SAP. Esperan niveles de rendimiento consistentes y necesitan operaciones diarias automatizadas frente a volúmenes de datos cada vez mayores y la necesidad de tareas de mantenimiento de rutina, como copias de seguridad del sistema. Realizar copias de seguridad de las bases de datos de SAP es una tarea crítica y puede tener un impacto significativo en el rendimiento del sistema SAP de producción.
+
+Las ventanas de respaldo se están reduciendo mientras que la cantidad de datos a respaldar está aumentando. Por lo tanto, es difícil encontrar un momento en el que sea posible realizar copias de seguridad con un efecto mínimo en los procesos de negocio. El tiempo necesario para restaurar y recuperar los sistemas SAP es una preocupación porque el tiempo de inactividad de los sistemas de producción y no producción de SAP debe minimizarse para reducir los costos para la empresa.
+
+
+
+== Copia de seguridad y recuperación mediante copias de seguridad instantáneas
+
+Puede utilizar la tecnología NetApp Snapshot para crear copias de seguridad de bases de datos en minutos. El tiempo necesario para crear una copia instantánea es independiente del tamaño de la base de datos porque una copia instantánea no mueve ningún bloque de datos físicos en la plataforma de almacenamiento. Además, el uso de la tecnología Snapshot no tiene ningún efecto sobre el rendimiento del sistema SAP en vivo, ya que todas las operaciones se ejecutan en el sistema de almacenamiento. Por lo tanto, puede programar la creación de copias de instantáneas sin tener en cuenta los períodos pico de diálogo o actividad por lotes. Los clientes de SAP en NetApp generalmente programan varias copias de seguridad instantáneas en línea durante el día; por ejemplo, lo habitual es que se realicen cada seis horas. Estas copias de seguridad instantáneas normalmente se conservan durante tres a cinco días en el sistema de almacenamiento principal antes de eliminarlas o almacenarlas en un almacenamiento más económico para su retención a largo plazo.
+
+Las copias instantáneas también brindan ventajas clave para las operaciones de restauración y recuperación. Una operación de restauración recupera los datos del sistema de archivos según el estado de una copia de seguridad. Se utiliza una operación de recuperación para hacer retroceder el estado de la base de datos a un punto en el tiempo mediante copias de seguridad del registro de la base de datos.
+
+La tecnología NetApp SnapRestore permite la restauración de una base de datos completa o, alternativamente, solo una parte de una base de datos, basándose en las copias de seguridad Snapshot disponibles actualmente. El proceso de restauración finaliza en unos segundos, independientemente del tamaño de la base de datos. Dado que se pueden crear varias copias de seguridad instantáneas en línea durante el día, el tiempo necesario para el proceso de recuperación se reduce significativamente en comparación con el enfoque tradicional de copia de seguridad una vez al día. Debido a que puede realizar una restauración con una copia instantánea que tenga como máximo solo unas pocas horas de antigüedad (en lugar de hasta 24 horas), se deben aplicar menos registros de transacciones durante la recuperación hacia adelante. El tiempo necesario para la restauración y recuperación se reduce significativamente en comparación con las copias de seguridad de transmisión tradicionales.
+
+Debido a que las copias de seguridad instantáneas se almacenan en el mismo sistema de disco que los datos en línea activos, NetApp recomienda utilizar copias de seguridad instantáneas como complemento en lugar de reemplazo de las copias de seguridad en una ubicación secundaria. La mayoría de las acciones de restauración y recuperación se administran mediante SnapRestore en el sistema de almacenamiento principal. Las restauraciones desde una ubicación secundaria solo son necesarias si el sistema de almacenamiento principal que contiene las copias instantáneas no está disponible. También puede utilizar la copia de seguridad secundaria si es necesario restaurar una copia de seguridad que ya no está disponible en el almacenamiento principal.
+
+Una copia de seguridad en una ubicación secundaria se basa en copias instantáneas creadas en el almacenamiento principal. De esta forma, los datos se leen directamente desde el sistema de almacenamiento primario sin generar carga en el servidor de base de datos SAP ni en su red. El almacenamiento principal se comunica directamente con el almacenamiento secundario y replica los datos de respaldo en el destino mediante la funcionalidad de respaldo SnapVault o ANF.
+
+Las copias de seguridad de SnapVault y ANF ofrecen ventajas significativas en comparación con las copias de seguridad tradicionales. Después de una transferencia de datos inicial, donde todos los datos se transfieren desde el origen al destino, todas las copias de seguridad posteriores solo replican los bloques modificados en el almacenamiento secundario. Por lo tanto, la carga en el sistema de almacenamiento primario y el tiempo necesario para realizar una copia de seguridad completa se reducen significativamente. Dado que en el destino solo se almacenan los bloques modificados, cualquier copia de seguridad completa adicional de la base de datos consume significativamente menos espacio en disco.
+
+
+
+== Tiempo de ejecución de las operaciones de backup y restauración de Snapshot
+
+La siguiente figura muestra el HANA Studio de un cliente utilizando operaciones de respaldo de instantáneas. La imagen muestra que la base de datos HANA (de aproximadamente 4 TB de tamaño) se respalda en 1 minuto y 20 segundos utilizando la tecnología de respaldo Snapshot y más de 4 horas con una operación de respaldo basada en archivos.
+
+La mayor parte del tiempo de ejecución general del flujo de trabajo de respaldo es el tiempo necesario para ejecutar la operación de instantánea de la base de datos HANA. La copia de seguridad instantánea de almacenamiento se finaliza en un par de segundos, independientemente del tamaño de la base de datos de HANA.
+
+image:hana-sc-generic-image-001.png["ancho=624, alto=267"]
+
+
+
+== Comparación de objetivos de tiempo de recuperación
+
+Esta sección proporciona una comparación del objetivo de tiempo de recuperación (RTO) de las copias de seguridad instantáneas basadas en archivos y basadas en almacenamiento. El RTO se define por la suma del tiempo necesario para restaurar, recuperar y luego iniciar la base de datos.
+
+
+
+=== Tiempo necesario para restaurar las bases de datos
+
+Con un backup basado en archivos, el tiempo de restauración depende del tamaño de la infraestructura de backup y base de datos, que define la velocidad de restauración en megabytes por segundo. Por ejemplo, si la infraestructura admite una operación de restauración a una velocidad de 250 Mbps, se tarda aproximadamente 4.5 horas en restaurar una base de datos de 4 TB de tamaño en la persistencia.
+
+Con las copias de seguridad Snapshot de NetApp , el tiempo de restauración es independiente del tamaño de la base de datos y siempre está en el rango de un par de segundos.
+
+
+
+=== Tiempo necesario para recuperar las bases de datos
+
+El tiempo de recuperación depende de la cantidad de registros que se deben aplicar después de la restauración. Este número viene determinado por la frecuencia con la que se realizan backups de datos.
+
+Con los backups de datos basados en archivos, la programación de backup suele ser una vez al día. Por lo general, no es posible aumentar la frecuencia de backup, ya que el backup reduce el rendimiento de producción. Por lo tanto, en el peor de los casos, todos los registros que se escribieron durante el día deben aplicarse durante la recuperación de avance.
+
+Las copias de seguridad instantáneas generalmente se programan con una frecuencia mayor porque no tienen ningún impacto en el rendimiento de la base de datos de SAP HANA. Por ejemplo, si las copias de seguridad de instantáneas se programan cada seis horas, sería necesario aplicar registros en el peor de los casos de las últimas seis horas, si la falla ocurre directamente antes de que se haya creado la siguiente instantánea. Para una copia de seguridad diaria basada en archivos, se deberían aplicar los registros de las últimas 24 horas en el peor de los casos.
+
+
+
+=== Tiempo necesario para iniciar la base de datos
+
+El tiempo de inicio de la base de datos depende del tamaño de la base de datos y del tiempo necesario para cargar los datos en la memoria. En los siguientes ejemplos, se supone que los datos se pueden cargar con 1000 Mbps. Cargar 4 TB en la memoria tarda aproximadamente 1 hora y 10 minutos. La hora de inicio es la misma para las operaciones de recuperación y restauración basadas en archivos y de Snapshot.
+
+
+
+=== Cálculo de muestra de restauración y recuperación
+
+La siguiente figura muestra una comparación entre las operaciones de restauración y recuperación con una copia de seguridad diaria basada en archivos y copias de seguridad instantáneas con diferentes programaciones.
+
+Las dos primeras barras muestran que, incluso con un único backup de Snapshot al día, la restauración y la recuperación se reducen al 43% debido a la velocidad de la operación de restauración desde un backup de Snapshot. Si se crean varios backups Snapshot diarios, es posible reducir más el tiempo de ejecución, ya que es necesario aplicar menos registros durante la recuperación futura.
+
+La siguiente figura también muestra que tiene más sentido realizar entre cuatro y seis backups Snapshot al día, ya que una mayor frecuencia ya no tiene una gran influencia en el tiempo de ejecución general.
+
+image:hana-sc-generic-image-002.png["ancho=624, alto=326"]
+
+
+
+== Casos de uso y valores de operaciones de backup y clonado aceleradas
+
+La ejecución de backups es una parte fundamental de cualquier estrategia de protección de datos. Las copias de seguridad se programan regularmente para garantizar que puede recuperarse de fallos del sistema. Este es el caso de uso más obvio, pero también hay otras tareas de gestión del ciclo de vida de SAP, en las que acelerar las operaciones de backup y recuperación es decisivo.
+
+La actualización del sistema SAP HANA es un ejemplo en el que una copia de seguridad a pedido antes de la actualización y una posible operación de restauración si la actualización falla tienen un impacto significativo en el tiempo de inactividad general planificado. Con el ejemplo de una base de datos de 4 TB, puede reducir el tiempo de inactividad planificado en 8 horas, o disponer de 8 horas más para analizar y corregir errores mediante operaciones de copia de seguridad y restauración basadas en instantáneas.
+
+Otro caso de uso sería un ciclo de prueba típico, donde las pruebas deben realizarse en múltiples iteraciones con diferentes conjuntos de datos o parámetros. Al aprovechar las operaciones rápidas de copia de seguridad y restauración, puede crear fácilmente puntos de guardado dentro de su ciclo de prueba y restablecer el sistema a cualquiera de estos puntos de guardado anteriores si una prueba falla o necesita repetirse. Esto permite que las pruebas finalicen antes o que se realicen más pruebas al mismo tiempo y mejora los resultados de las pruebas.
+
+image:hana-sc-generic-image-003.png["ancho=618, alto=279"]
+
+Una vez implementadas las copias de seguridad instantáneas, se pueden utilizar para abordar muchos otros casos de uso que requieren copias de una base de datos HANA. Puede crear un nuevo volumen basado en el contenido de cualquier copia de seguridad instantánea disponible. El tiempo de ejecución de esta operación es de unos pocos segundos, independientemente del tamaño del volumen.
+
+El caso de uso más popular es la actualización del sistema SAP, donde es necesario copiar datos del sistema de producción al sistema de prueba o control de calidad. Al aprovechar la función de clonación de ONTAP o ANF, puede aprovisionar el volumen para el sistema de prueba desde cualquier copia instantánea del sistema de producción en cuestión de segundos. Luego se debe conectar el nuevo volumen al sistema de prueba y se debe recuperar la base de datos HANA.
+
+El segundo caso de uso es la creación de un sistema de reparación, que se utiliza para abordar la corrupción lógica en el sistema de producción. En este caso, se utiliza una copia de seguridad instantánea anterior del sistema de producción para iniciar un sistema de reparación, que es un clon idéntico del sistema de producción con los datos antes de que ocurriera la corrupción. Luego, el sistema de reparación se utiliza para analizar el problema y exportar los datos necesarios antes de que se corrompan.
+
+El último caso de uso es la capacidad de ejecutar una prueba de conmutación por error de recuperación ante desastres sin detener la replicación y, por lo tanto, sin influir en el RTO y el objetivo del punto de recuperación (RPO) de la configuración de recuperación ante desastres. Cuando se utiliza la replicación ONTAP SnapMirror o la replicación entre regiones ANF para replicar los datos en el sitio de recuperación ante desastres, las copias de seguridad de instantáneas de producción también están disponibles en el sitio de recuperación ante desastres y luego se pueden usar para crear un nuevo volumen para pruebas de recuperación ante desastres.
+
+image:hana-sc-generic-image-004.png["ancho=627, alto=328"]

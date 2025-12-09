@@ -1,0 +1,327 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-initial-config.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Configurar los ajustes iniciales de SnapCenter para SAP HANA
+:allow-uri-read: 
+
+
+[role="lead"]
+Configure los ajustes iniciales de SnapCenter para entornos SAP HANA configurando credenciales para entidades de servicio de Azure, agregando sistemas de almacenamiento y creando políticas para copias de seguridad de instantáneas, comprobaciones de integridad de bloques y replicación secundaria.
+
+La configuración inicial de SnapCenter incluye los siguientes pasos:
+
+. Configuración de credenciales
++
+.. Para los sistemas HANA configurados con Azure NetApp Files (ANF), se debe preparar una entidad de servicio y luego configurarla en SnapCenter.
+.. Se deben proporcionar las credenciales del host para permitir la instalación automatizada del complemento de HANA en los hosts de la base de datos de HANA.
+
+
+. Configuración del sistema de almacenamiento
++
+.. Para los sistemas HANA configurados con ANF, se pueden seleccionar las cuentas NetApp necesarias y agregarlas a la configuración de SnapCenter .
+.. Para los sistemas de almacenamiento ONTAP o FSx para ONTAP , se pueden agregar SVM o el clúster de almacenamiento completo a SnapCenter.
+
+
+. Configuración de políticas
++
+.. Se pueden configurar políticas para copias de seguridad basadas en instantáneas, así como operaciones de verificación de integridad de bloques, para ANF, así como para ONTAP y FSx para sistemas de almacenamiento ONTAP .
+.. Las políticas para instantáneas a prueba de manipulaciones y copias de seguridad secundarias con SnapVault o SnapMirror solo se pueden configurar para sistemas de almacenamiento ONTAP y FSx para ONTAP .
+.. Para los sistemas HANA configurados con ANF, una política puede incluir https://learn.microsoft.com/en-us/azure/azure-netapp-files/backup-introduction["Copia de seguridad de ANF"].
+
+
+
+
+
+NOTE: Las mismas políticas de respaldo de instantáneas se pueden utilizar para bases de datos de HANA, así como para volúmenes que no son de datos, por ejemplo, el volumen compartido de HANA.
+
+La siguiente figura resume las secciones de configuración.
+
+image:hana-sc-generic-image-017.png["ancho=601, alto=158"]
+
+Los siguientes capítulos describen los pasos de configuración inicial.
+
+
+
+== Configuración de credenciales
+
+
+
+=== Credenciales para la implementación del complemento HANA
+
+Las credenciales se configuran en la sección Configuración y seleccionando la pestaña Credencial. Se pueden agregar credenciales haciendo clic en el ícono +.
+
+image:hana-sc-generic-image-018.png["ancho=601, alto=118"]
+
+NetApp recomienda configurar un usuario en todos los hosts de base de datos de HANA (por ejemplo, scuser) y configurar privilegios de sudo como se describe en https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_prerequisites_to_adding_hosts_and_installing_snapcenter_plug_in_for_sap_hana_database.html#windows-hosts["Requisitos previos para agregar hosts e instalar el complemento de SnapCenter para la base de datos SAP HANA"].
+
+image:hana-sc-generic-image-019.png["ancho=287, alto=247"]
+
+
+
+=== Credenciales para Azure NetApp Files
+
+Se debe preparar una entidad de servicio de Azure que permita a SnapCenter ejecutar las operaciones necesarias para los volúmenes ANF. El siguiente ejemplo muestra los permisos mínimos necesarios, que deben incluirse.
+
+....
+
+    "assignableScopes": [
+        "/subscriptions/xxx"
+    ],
+    "createdBy": "xxx",
+    "createdOn": "2025-05-07T07:12:14.451483+00:00",
+    "description": "Restricted Access for SnapCenter ",
+    "id": "/subscriptions/xxx/providers/Microsoft.Authorization/roleDefinitions/xxx",
+    "name": "xxx",
+    "permissions": [
+        {
+            "actions": [
+            "Microsoft.NetApp/register/action",
+            "Microsoft.NetApp/unregister/action",
+            "Microsoft.NetApp/netAppAccounts/read",
+            "Microsoft.NetApp/netAppAccounts/getKeyVaultStatus/action",
+            "Microsoft.NetApp/netAppAccounts/migrateEncryption/action",
+            "Microsoft.NetApp/netAppAccounts/transitionToCmk/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/write",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/delete",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/revert/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/poolChange/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/finalizeRelocation/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/revertRelocation/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/breakFileLocks/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/getGroupIdListForLdapUser/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups/write",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups/restoreFiles/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/write",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/delete",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/restoreFiles/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/write",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/getMetadata/action",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/volumeQuotaRules/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/latestRestoreStatus/current/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/mountTargets/read",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/restoreStatus/read",
+            "Microsoft.NetApp/netAppAccounts/snapshotPolicies/read",
+            "Microsoft.NetApp/netAppAccounts/snapshotPolicies/write",
+            "Microsoft.NetApp/netAppAccounts/snapshotPolicies/listVolumes/read",
+            "Microsoft.NetApp/netAppAccounts/snapshotPolicies/volumes/read",
+            "Microsoft.NetApp/netAppAccounts/volumeGroups/read",
+            "Microsoft.NetApp/netAppAccounts/volumeGroups/write",
+            "Microsoft.NetApp/locations/checknameavailability/action",
+            "Microsoft.NetApp/locations/checkfilepathavailability/action",
+            "Microsoft.NetApp/locations/operationresults/read",
+            "Microsoft.NetApp/Operations/read",
+            "Microsoft.Resources/resources/read",
+            "Microsoft.Resources/subscriptions/resourceGroups/read",
+            "Microsoft.Resources/subscriptions/resourcegroups/resources/read",
+            "Microsoft.Network/virtualNetworks/read",
+            "Microsoft.Network/virtualNetworks/subnets/read",
+            "Microsoft.Network/virtualNetworks/write",
+            "Microsoft.Network/virtualNetworks/subnets/write"
+            ],
+            "condition": null,
+            "conditionVersion": null,
+            "dataActions": [],
+            "notActions": [],
+            "notDataActions": []
+        }
+    ],
+    "roleName": "SnapCenter-Restricted-Access",
+    "roleType": "CustomRole",
+    "type": "Microsoft.Authorization/roleDefinitions",
+    "updatedBy": "xxx",
+    "updatedOn": "2025-05-07T07:12:14.451483+00:00"
+}
+....
+Las credenciales se configuran en la sección Configuración y seleccionando la pestaña Credencial. Las credenciales se configuran haciendo clic en el ícono +.
+
+image:hana-sc-generic-image-020.png["ancho=601, alto=116"]
+
+En la siguiente pantalla, se debe proporcionar un nombre de credencial y se debe seleccionar el modo de autenticación Credenciales de Azure. Luego se deben configurar el ID del inquilino, el ID del cliente y la clave secreta del cliente.
+
+image:hana-sc-generic-image-021.png["ancho=252, alto=246"]
+
+
+
+== Configuración del sistema de almacenamiento
+
+
+
+=== Sistemas ONTAP y FSx para ONTAP
+
+El sistema ONTAP o FSx para ONTAP se puede agregar a SnapCenter proporcionando credenciales de clúster o credenciales para cada SVM requerida. Cuando se proporcionan las credenciales del clúster, todas las SVM del clúster se agregan a SnapCenter.
+
+En nuestra configuración de laboratorio, agregamos los clústeres de almacenamiento a SnapCenter. Los clústeres ONTAP se configuran en la sección Sistemas de almacenamiento seleccionando la pestaña Almacenamiento ONTAP y el tipo de clúster ONTAP . Se agrega un nuevo clúster haciendo clic en el ícono +.
+
+image:hana-sc-generic-image-022.png["ancho=601, alto=117"]
+
+En la siguiente pantalla deberá proporcionar las credenciales para un usuario del clúster.
+
+
+NOTE: No se debe utilizar el usuario del clúster admin. En su lugar, se debe crear un nuevo usuario con los privilegios necesarios como se describe en https://docs.netapp.com/us-en/snapcenter/install/task_create_an_ontap_cluster_role_with_minimum_privileges.html["Crear roles de clúster de ONTAP con privilegios mínimos"]Los privilegios necesarios para el sistema ASA se pueden encontrar en https://docs.netapp.com/us-en/snapcenter/install/create-cluster-roles-asa-r2-resources.html["Crear roles de clúster ONTAP para sistemas ASA r2"].
+
+image:hana-sc-generic-image-023.png["ancho=299, alto=176"]
+
+Las SVM se configuran en la sección Sistemas de almacenamiento seleccionando la pestaña Almacenamiento ONTAP y el tipo SVMS ONTAP . Se agrega un nuevo SVM haciendo clic en el ícono +.
+
+En la siguiente pantalla deberá proporcionar las credenciales para un usuario del clúster.
+
+
+NOTE: No se debe utilizar el usuario SVM vsadmin. En su lugar, se debe crear un nuevo usuario con los privilegios necesarios como se describe en https://docs.netapp.com/us-en/snapcenter/install/create-svm-roles-minimum-privileges.html["Crear roles SVM con privilegios mínimos"]Los privilegios necesarios para el sistema ASA se pueden encontrar en https://docs.netapp.com/us-en/snapcenter/install/create-svm-roles-asa-r2-resources.html["Crear roles SVM para sistemas ASA r2"].
+
+
+NOTE: El nombre DNS para la SVM debe coincidir con el nombre SVM configurado en el sistema ONTAP .
+
+image:hana-sc-generic-image-024.png["ancho=331, alto=199"]
+
+
+
+=== Azure NetApp Files
+
+Una vez configuradas las credenciales de ANF, se pueden agregar cuentas de NetApp de ANF a SnapCenter. Las cuentas de NetApp se configuran en la sección Sistemas de almacenamiento y seleccionando la pestaña Azure NetApp Files . Se agrega una nueva cuenta de NetApp haciendo clic en el ícono +.
+
+image:hana-sc-generic-image-025.png["ancho=601, alto=117"]
+
+Después de seleccionar la credencial ANF y la suscripción, se puede agregar una cuenta de NetApp a SnapCenter.
+
+image:hana-sc-generic-image-026.png["ancho=401, alto=176"]
+
+
+
+=== Configuración de almacenamiento al utilizar la sincronización activa de SnapMirror
+
+Los pasos específicos de configuración del almacenamiento se describen en https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#add-storage-systems["Configuración de almacenamiento con sincronización activa de SnapMirror"].
+
+
+
+== Configuración de políticas
+
+Como se analiza en la sección Las políticas de estrategia de protección de datos generalmente se configuran independientemente del recurso y se pueden usar para múltiples sistemas SAP HANA.
+
+Una configuración mínima típica consiste en las siguientes políticas:
+
+* Política de copias de seguridad por hora sin replicación
+* Política para copias de seguridad diarias con SnapVault o replicación de copias de seguridad ANF
+* Política para la operación de verificación semanal de integridad de bloques
++
+** utilizando una copia de seguridad basada en archivos
+** usando la herramienta HANA hdbpersdiag
+
+
+
+
+En las siguientes secciones se describe la configuración de estas tres directivas.
+
+Las políticas se configuran en la sección Configuración y seleccionando la pestaña Políticas. Se configura una nueva política haciendo clic en el ícono +. Las dos capturas de pantalla a continuación muestran la lista de políticas para los sistemas HANA que se ejecutan con Azure NetApp Files y una segunda para los sistemas HANA que se ejecutan con sistemas de almacenamiento ONTAP o FSx para ONTAP.
+
+image:hana-sc-generic-image-027.png["ancho=601, alto=133"]
+
+image:hana-sc-generic-image-028.png["ancho=601, alto=138"]
+
+
+
+=== Copias de seguridad instantáneas con sistemas ONTAP y FSx para ONTAP
+
+Las políticas de respaldo de instantáneas para el sistema ONTAP o FSx para ONTAP pueden combinar una instantánea local con operaciones de replicación o bloqueo de instantáneas (instantánea a prueba de manipulaciones). Este ejemplo muestra una política con replicación a un almacenamiento secundario mediante SnapVault.
+
+Proporcione un nombre de política y una descripción opcional.
+
+image:hana-sc-generic-image-029.png["ancho=376, alto=103"]
+
+Seleccione el tipo de almacenamiento ONTAP y el alcance de la política de instantáneas.
+
+image:hana-sc-generic-image-030.png["ancho=385, alto=97"]
+
+Para esta política se ha configurado un tipo de programación diaria. Se creará una instantánea diaria y los deltas de la instantánea se replicarán en el almacenamiento secundario mediante SnapVault.
+
+
+NOTE: La programación en sí está configurada con la configuración de protección de recursos de HANA individual.
+
+La retención que se configura en la política solo es válida para las instantáneas principales. La retención en el destino SnapVault se configura con la relación de replicación de ONTAP para los volúmenes individuales de la base de datos de HANA como se describe en el capítulo link:hana-sc-generic-backup-operations.html["Operaciones de respaldo de instantáneas de SAP HANA"]. La etiqueta de instantánea que se configura en la política debe coincidir con la etiqueta configurada con la relación de replicación de ONTAP .
+
+El bloqueo de instantáneas (instantáneas a prueba de manipulaciones) se puede habilitar haciendo clic en las casillas de verificación y definiendo el período de bloqueo. Esta función requiere una licencia SnapLock en el sistema de almacenamiento y el reloj de cumplimiento configurado.
+
+Se configuraría una política solo para instantáneas locales con una programación por hora y deshabilitando la casilla de verificación Actualizar SnapVault .
+
+image:hana-sc-generic-image-031.png["ancho=378, alto=352"]
+
+La pantalla de resumen muestra los parámetros configurados.
+
+image:hana-sc-generic-image-032.png["ancho=385, alto=119"]
+
+
+
+=== Copias de seguridad de instantáneas con Azure NetApp Files
+
+Las políticas de copia de seguridad de instantáneas para Azure NetApp Files pueden combinar una instantánea local con una copia de seguridad de ANF, que replica los datos de la instantánea en un blob de Azure. Este ejemplo muestra una política utilizada para la replicación con copia de seguridad ANF.
+
+Proporcione un nombre de política y una descripción opcional.
+
+image:hana-sc-generic-image-033.png["ancho=356, alto=95"]
+
+Seleccione el tipo de almacenamiento de Azure NetApp Files y el alcance de la directiva de instantáneas.
+
+image:hana-sc-generic-image-034.png["ancho=360, alto=102"]
+
+Para esta política se ha configurado un tipo de programación diaria. Se creará una instantánea diaria y los deltas de la instantánea se replicarán en la bóveda de respaldo mediante el respaldo ANF.
+
+
+NOTE: La programación en sí está configurada con la configuración de protección de recursos de HANA individual.
+
+La retención de instantáneas que está configurada en la política es válida para las instantáneas principales en el volumen ANF. La retención de la copia de seguridad de ANF se configura con la configuración de retención de copia de seguridad.
+
+Se configuraría una política solo para instantáneas locales con una programación por hora y deshabilitando la casilla de verificación Habilitar copia de seguridad.
+
+image:hana-sc-generic-image-035.png["ancho=373, alto=361"]
+
+La pantalla de resumen muestra los parámetros configurados.
+
+image:hana-sc-generic-image-036.png["ancho=376, alto=138"]
+
+
+
+=== Operaciones de verificación de integridad de bloques para todas las plataformas
+
+
+
+==== Herramienta HANA hdbpersdiag
+
+Los detalles se describen en el capítulo link:hana-sc-generic-block-check.html["Comprobaciones de consistencia de bloques con SnapCenter"].
+
+
+
+==== Copia de seguridad basada en archivos
+
+Proporcione un nombre de política y una descripción opcional.
+
+image:hana-sc-generic-image-037.png["ancho=346, alto=95"]
+
+Seleccione el tipo de almacenamiento ONTAP o Azure NetApp Files , según su configuración, y seleccione el ámbito de política basado en archivos.
+
+image:hana-sc-generic-image-038.png["ancho=357, alto=98"]
+
+Como se discutió, se recomienda ejecutar la verificación de integridad del bloque una vez por semana. Por lo tanto, se selecciona un horario semanal.
+
+
+NOTE: La programación en sí está configurada con la configuración de protección de recursos de HANA individual.
+
+
+NOTE: El sistema de archivos donde se escribe la copia de seguridad basada en archivos debe proporcionar suficiente capacidad para una copia de seguridad más de la definida en la configuración de retención, porque SnapCenter elimina la copia de seguridad anterior después de que se haya creado la nueva. En este ejemplo se requiere espacio para dos copias de seguridad con una retención de una. La retención mínima configurable es cero.
+
+image:hana-sc-generic-image-039.png["ancho=351, alto=173"]
+
+La pantalla de resumen muestra los parámetros configurados.
+
+image:hana-sc-generic-image-040.png["ancho=366, alto=101"]
+
+
+
+=== Configuración de políticas al utilizar la sincronización activa de SnapMirror
+
+Los pasos específicos de configuración de políticas se describen en el documento https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#policy-configuration["Configuración de la política de sincronización activa de SnapMirror"].

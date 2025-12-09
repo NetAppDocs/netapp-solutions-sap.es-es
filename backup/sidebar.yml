@@ -2,6 +2,40 @@
 section: backup
 title: Backup, restauración y recuperación ante desastres
 entries:
+- title: Backup y recuperación de datos de SAP HANA con SnapCenter
+  entries:
+  - title: Descripción general de la solución
+    url: "/backup/hana-sc-generic-scope.html"
+  - title: Protección de datos de SAP HANA
+    url: "/backup/hana-sc-generic-overview-dp.html"
+  - title: Arquitectura SnapCenter
+    url: "/backup/hana-sc-generic-sc-architecture.html"
+  - title: Solución de respaldo SnapCenter para SAP HANA
+    url: "/backup/hana-sc-generic-sc-backup-solution.html"
+  - title: Configuraciones compatibles con SnapCenter
+    url: "/backup/hana-sc-generic-sc-supported-configs.html"
+  - title: Conceptos y mejores prácticas
+    url: "/backup/hana-sc-generic-concepts.html"
+  - title: Descripción general de la configuración de SnapCenter
+    url: "/backup/hana-sc-generic-sc-config-overview.html"
+  - title: Configuración inicial de SnapCenter
+    url: "/backup/hana-sc-generic-sc-initial-config.html"
+  - title: Configuración específica de recursos de SnapCenter para backups de base
+      de datos SAP HANA
+    url: "/backup/hana-sc-generic-sc-resource-config.html"
+  - title: Configuración específica de recursos de SnapCenter para backups de volúmenes
+      sin datos
+    url: "/backup/hana-sc-generic-sc-config-non-data-vols.html"
+  - title: Configuración del host del complemento central
+    url: "/backup/hana-sc-generic-central-plugin.html"
+  - title: Operaciones de respaldo de instantáneas de SAP HANA
+    url: "/backup/hana-sc-generic-backup-operations.html"
+  - title: Comprobaciones de consistencia de bloques con SnapCenter
+    url: "/backup/hana-sc-generic-block-check.html"
+  - title: Restauración y recuperación con SnapCenter
+    url: "/backup/hana-sc-generic-restore.html"
+  - title: Configuración y ajuste avanzados
+    url: "/backup/hana-sc-generic-advanced-config.html"
 - title: 'SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación con SnapCenter'
   entries:
   - title: Descripción general
@@ -35,38 +69,6 @@ entries:
       url: "/backup/fsxn-restore-recover-from-secondary-storage.html"
   - title: Dónde encontrar información adicional
     url: "/backup/fsxn-additional-info.html"
-- title: Backup y recuperación de datos de SAP HANA con SnapCenter
-  entries:
-  - title: Descripción general
-    url: "/backup/hana-br-scs-overview.html"
-  - title: Arquitectura SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-architecture.html"
-  - title: Solución de backup SAP HANA de SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-backup.html"
-  - title: Conceptos y prácticas recomendadas de SnapCenter
-    url: "/backup/hana-br-scs-concepts-best-practices.html"
-  - title: Configuración de laboratorio utilizada para este informe
-    url: "/backup/hana-br-scs-lab-setup.html"
-  - title: Configuración de SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-config.html"
-  - title: Configuración inicial de SnapCenter
-    url: "/backup/hana-br-scs-snapcenter-initial-config.html"
-  - title: Configuración específica de recursos de SnapCenter para backups de base
-      de datos SAP HANA
-    url: "/backup/hana-br-scs-resource-config-hana-database-backups.html"
-  - title: Configuración específica de recursos de SnapCenter para backups de volúmenes
-      sin datos
-    url: "/backup/hana-br-scs-resource-specific-config-non-data-volume-backups.html"
-  - title: Backups de bases de datos
-    url: "/backup/hana-br-scs-database-backups.html"
-  - title: Comprobación de integridad de bloques
-    url: "/backup/hana-br-scs-block-integrity-check.html"
-  - title: Restauración y recuperación
-    url: "/backup/hana-br-scs-restore-recovery.html"
-  - title: Configuración y ajuste avanzados
-    url: "/backup/hana-br-scs-advanced-config-tuning.html"
-  - title: Dónde encontrar información adicional e historial de versiones
-    url: "/backup/hana-br-scs-additional-info.html"
 - title: Protección de datos de SAP HANA y alta disponibilidad con SnapCenter, sincronización
     activa de SnapMirror y clúster de almacenamiento de VMware Metro
   entries:

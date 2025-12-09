@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-scope.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Proteja los sistemas SAP HANA con SnapCenter en ONTAP, Azure NetApp Files y FSx para ONTAP
+:allow-uri-read: 
+
+
+[role="lead"]
+Proteja los sistemas SAP HANA con NetApp SnapCenter utilizando copias de seguridad basadas en instantáneas y replicación de datos. Esta solución cubre la configuración de SnapCenter y las mejores prácticas operativas para sistemas SAP HANA en sistemas ONTAP AFF y ASA , Azure NetApp Files y Amazon FSx para ONTAP, incluidas estrategias de respaldo, controles de coherencia y flujos de trabajo de recuperación.
+
+Autor: Nils Bauer, NetApp
+
+Se pueden encontrar detalles adicionales específicos de casos de uso sobre las operaciones de actualización del sistema SAP y la replicación del sistema SAP HANA en:
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sr-scs-system-replication-overview.html["Replicación de sistemas SAP HANA: Backup y recuperación de datos con SnapCenter"]
+
+
+Las mejores prácticas para combinar la protección de datos de SnapCenter y la sincronización activa de NetApp SnapMirror se describen en
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-scope.html["Protección de datos y alta disponibilidad de SAP HANA con SnapCenter™ SnapMirror active sync y VMware Metro Storage Cluster"]
+
+
+La documentación adicional sobre las mejores prácticas específicas de la plataforma está disponible en
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmfs-asar2-scope.html["Protección de datos de SAP HANA con SnapCenter con sistemas VMware VMFS y NetApp ASA"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/fsxn-overview.html["SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación con SnapCenter"]
+* https://techcommunity.microsoft.com/blog/sapapplications/sap-hana-data-protection-on-azure-netapp-files-with-snapcenter/3510031["Protección de datos SAP HANA en Azure NetApp Files con SnapCenter (blog y vídeo)"]
+* https://techcommunity.microsoft.com/blog/sapapplications/sap-system-refresh-and-cloning-operations-on-azure-netapp-files-with-snapcenter/4356389["Operaciones de clonado y actualización del sistema SAP en Azure NetApp Files con SnapCenter (blog y vídeo)"]
+
