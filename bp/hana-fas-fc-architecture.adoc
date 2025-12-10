@@ -58,7 +58,7 @@ Los backups de SnapVault basados en almacenamiento proporcionan importantes vent
 * Replicación con gestión eficiente del espacio y del ancho de banda en el almacenamiento secundario en función de los cambios de bloque
 
 
-Para obtener información detallada acerca de la solución de backup y recuperación de SAP HANA con SnapCenter, consulte link:../backup/hana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"^].
+Para obtener información detallada sobre la solución de copia de seguridad y recuperación de SAP HANA mediante SnapCenter, consulte link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"^].
 
 
 

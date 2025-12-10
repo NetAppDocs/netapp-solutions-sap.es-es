@@ -17,7 +17,7 @@ summary: Las soluciones de NetApp para optimizar la gestión del ciclo de vida d
 Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:
 
 * link:../index.html["Aplicaciones empresariales SAP y soluciones de bases de datos SAP HANA (netapp.com)"]
-* link:../backup/hana-br-scs-overview.html["TR-4614: Backup y recuperación de datos de SAP HANA con SnapCenter"]
+* link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"]
 * link:../bp/hana-aff-fc-introduction.html["TR-4436: SAP HANA en sistemas All Flash FAS de NetApp con el protocolo Fibre Channel"]
 * link:../bp/hana-aff-nfs-introduction.html["TR-4435: SAP HANA en sistemas All Flash FAS de NetApp con NFS"]
 * link:../backup/fsxn-overview.html["TR-4926: SAP HANA en Amazon FSX para ONTAP de NetApp: Backup y recuperación de datos con SnapCenter"]

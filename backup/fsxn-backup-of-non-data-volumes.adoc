@@ -123,7 +123,7 @@ image:amazon-fsx-image69.png["Figura que muestra el cuadro de diálogo de entrad
 
 . Seleccione el ámbito y el tipo de restauración.
 +
-El escenario estándar para los sistemas de un solo inquilino MDC de HANA es utilizar un recurso completo con reversión de volumen. Para un sistema MDC de HANA con varios inquilinos, puede que desee restaurar solo un tenant. Para obtener más información sobre la restauración de inquilino único, consulte link:hana-br-scs-restore-recovery.html["Restauración y recuperación (netapp.com)"^].
+El escenario estándar para los sistemas de inquilino único de HANA MDC es utilizar recursos completos con reversión de volumen. Para un sistema HANA MDC con múltiples inquilinos, es posible que desee restaurar solo un inquilino. Para obtener más información sobre la restauración de un solo inquilino, consulte link:hana-sc-generic-restore.html["Restauración y recuperación (netapp.com)"^].
 
 +
 image:amazon-fsx-image70.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
