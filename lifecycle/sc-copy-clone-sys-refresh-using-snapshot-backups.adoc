@@ -29,15 +29,25 @@ Una excepción de esta regla es un sistema SAP HANA con un único inquilino, don
 
 NOTE: Tan pronto como se ejecuta una operación de creación, cambio de nombre o borrado de inquilino en el sistema de origen, la base de datos SAP HANA elimina este indicador de configuración. Por lo tanto, aunque la configuración se haya vuelto a inquilino = SID, el indicador ya no estará disponible y la excepción relativa a la recuperación de inquilinos con el flujo de trabajo 3 ya no es posible. En este caso, la opción 2 es el flujo de trabajo necesario.
 
-image:sc-copy-clone-image10.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:sc-copy-clone-image10.png[""]
 
-image:sc-copy-clone-image11.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:sc-copy-clone-image11.png[""]
 
 
 
 == Flujo de trabajo de actualización del sistema con cifrado SAP HANA habilitado
 
-Cuando se activa el cifrado de persistencia de SAP HANA, se necesitan pasos adicionales para poder recuperar la base de datos SAP HANA en el sistema de destino.
+Cuando el cifrado de persistencia de SAP HANA está activado y, dependiendo del almacén seguro utilizado para las claves raíz de cifrado, instancia SFSS o local secure store LSS, se requieren pasos adicionales antes de que puedas recuperar la base de datos SAP HANA en el sistema de destino.
+
+Con SFSS las claves raíz se almacenan dentro del sistema de archivos y deben respaldarse por separado además de la base de datos de HANA. Luego, las copias de seguridad de las claves raíz deben importarse en el sistema de destino para permitir la recuperación de la base de datos de HANA. Esto solo hay que hacerlo una vez si las claves raíz no se cambian.
+
+Con LSS, las claves raíz se respaldan y se restauran junto con la base de datos HANA en una sola operación. Para poder recuperar la base de datos HANA, necesitas tener la contraseña que se usó para el respaldo de las claves raíz.
+
+Las operaciones necesarias se describen con más detalle en los siguientes capítulos.
+
+
+
+=== Almacén seguro SFSS
 
 En el sistema de origen, es necesario crear una copia de seguridad de las claves raíz de cifrado para la base de datos del sistema, así como para todas las bases de datos de arrendatarios. Los archivos de copia de seguridad deben copiarse en el sistema de destino y las claves raíz deben importarse del backup antes de que se ejecute la operación de recuperación.
 
@@ -45,7 +55,7 @@ Consulte también https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83
 
 
 
-=== Copia de seguridad de claves raíz
+==== Copia de seguridad de claves raíz
 
 Siempre se requiere una copia de seguridad de las claves raíz, si se han realizado cambios en las claves raíz. El comando BACKUP requiere dbid como parámetro CLI. Los dbid se pueden identificar utilizando la siguiente sentencia SQL.
 
@@ -96,7 +106,7 @@ done.
 ....
 
 
-=== Importación de claves raíz en el sistema de destino
+==== Importación de claves raíz en el sistema de destino
 
 La importación de las claves raíz es necesaria inicialmente para la primera operación de refrescamiento del sistema. Si las claves raíz no se cambian en el sistema de origen, no se requiere ninguna importación adicional. El comando import requiere dbid como parámetro CLI. Los dbid se pueden identificar de la misma manera que se describe para la copia de seguridad de la clave raíz.
 
@@ -125,10 +135,40 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 ....
 
 
-=== Importación de clave raíz, si dbid no existe en el destino
+==== Importación de clave raíz, si dbid no existe en el destino
 
 Como se describe en el capítulo anterior, el dbid es necesario para importar la clave raíz para el sistema y todas las bases de datos de arrendatario. Mientras que la base de datos del sistema siempre tiene dbid=0, las bases de datos del inquilino pueden tener diferentes dbid.
 
-image:sc-copy-clone-image13.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+image:sc-copy-clone-image13.png[""]
 
 La salida anterior muestra dos inquilinos con dbid=3 y dbid=4. Si el sistema de destino aún no ha alojado un arrendatario con dbid=4, la importación de la clave raíz fallará. En ese caso, debe recuperar primero la base de datos del sistema y luego importar la clave para el inquilino con dbid=4.
+
+
+
+=== Almacén seguro LSS
+
+
+NOTE: Necesitas usar al menos la versión 2.00.088 de HANA, de lo contrario el procedimiento descrito no funcionará, mira también la nota SAP 3613110.
+
+Para recuperar un sistema HANA que utiliza encriptación y LSS, necesitas la contraseña que se usó para hacer la copia de seguridad de las claves raíz.
+
+La sentencia SQL
+
+....
+alter system set encryption root keys backup password <backup-pw-of-source-system>;
+....
+puede usarse para establecer la contraseña del sistema de origen en la configuración LSS del sistema de destino. Se debe usar la misma declaración para la base de datos del sistema y del inquilino.
+
+Si la contraseña no se ha establecido previamente, puedes proporcionarla durante la operación de recuperación.
+
+Base de datos del sistema:
+
+....
+./exe/Python/bin/python /usr/sap/QM1/HDB22/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>'"
+....
+Base de datos del inquilino:
+
+....
+hdbsql SYSTEMDB=> RECOVER DATA for QM1 USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>';
+
+....

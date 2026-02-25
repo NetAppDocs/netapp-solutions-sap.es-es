@@ -224,25 +224,25 @@ NOTE: Solo la columna 1 (montajes NFS) de la tabla a continuación es relevante 
 | *Realizar copias de seguridad y restaurar volúmenes que no sean de datos* |  |  
 
 
-| Copia de seguridad de instantáneas | Sí (*) | Sí (*) 
+| Copia de seguridad de instantáneas | Sí | Sí (*) 
 
 
-| Restaurar desde una instantánea | SFSR de LUN completo (*) | SFSR de LUN completo (*) 
+| Restaurar desde una instantánea | SFSR de LUN completo | SFSR de LUN completo (*) 
 
 
-| Replicación SnapVault | Sí (*) | Sí (*) 
+| Replicación SnapVault | Sí | Sí (*) 
 
 
-| Restaurar desde el destino SnapVault | Sí (*) | Sí (*) 
+| Restaurar desde el destino SnapVault | Sí | Sí (*) 
 
 
 | *Actualización del sistema SAP* |  |  
 
 
-| Desde la instantánea principal | Sí (**) | Sí (**) 
+| Desde la instantánea principal | Sí | Sí (**) 
 
 
-| Desde el destino SnapVault | Sí (**) | Sí (**) 
+| Desde el destino SnapVault | Sí | Sí (**) 
 
 
 | *HA y DR* |  |  

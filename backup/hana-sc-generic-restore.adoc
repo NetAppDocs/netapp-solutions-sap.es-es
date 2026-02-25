@@ -35,7 +35,10 @@ SnapCenter admite las siguientes operaciones de restauración y recuperación.
 NOTE: La recuperación automatizada solo es compatible cuando el complemento HANA está implementado en el host de la base de datos HANA y SnapCenter detecta automáticamente el sistema HANA. Con una configuración de host de complemento central, la recuperación debe realizarse manualmente después de la operación de restauración con SnapCenter.
 
 
-NOTE: Se admite la restauración desde el volumen ANF principal. Aún no se admite la restauración de una copia de seguridad ANF. Una restauración local o una restauración a un nuevo volumen desde una copia de seguridad ANF debe realizarse manualmente mediante el portal de Azure o la CLI.
+NOTE: Con Azure NetApp Files, se admiten operaciones de restaurar para volúmenes ANF primarios o ANF backups. Para volúmenes ANF primarios, se ejecutará una reversión de volumen; para ANF backups, se realizará un restaurar sin movimiento con restauración de archivo único. En ambos casos, se mantendrán las configuraciones de grupo de volúmenes de la aplicación.
+
+
+NOTE: Si el cifrado de volúmenes está activado y se utiliza SAP local secure store (LSS), se admite una recuperación con SnapCenter siempre que la contraseña de la copia de seguridad de la clave raíz en el LSS no se haya cambiado desde que se hizo la copia de seguridad. Si la contraseña cambió y se realiza una restauración y recuperación usando una Snapshot anterior con una contraseña diferente, la recuperación debe hacerse manualmente y se debe proporcionar la contraseña anterior con la instrucción de recuperación: "RECOVER DATA USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD 'old-password'"
 
 
 

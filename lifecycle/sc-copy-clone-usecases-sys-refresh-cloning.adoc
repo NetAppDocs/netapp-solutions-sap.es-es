@@ -32,7 +32,7 @@ El flujo de trabajo de las operaciones de actualización del sistema se describe
 
 == Daños lógicos de dirección
 
-La corrupción lógica puede deberse a errores de software, errores humanos o sabotaje. Desgraciadamente, la corrupción lógica no se puede hacer frente a menudo con soluciones estándares de alta disponibilidad y de recuperación ante desastres. Como resultado, dependiendo de la capa, la aplicación, el sistema de archivos o el almacenamiento donde se produjo el daño lógico, a veces no se pueden satisfacer los requisitos mínimos de tiempo de inactividad y pérdida máxima de datos.
+La corrupción lógica puede estar causada por errores de software, errores humanos o sabotaje. Desafortunadamente, la corrupción lógica a menudo no puede abordarse con soluciones estándar de alta disponibilidad y recuperación ante desastres. Como resultado, dependiendo de la capa, la aplicación, el sistema de archivos o el almacenamiento donde se produjo la corrupción lógica, a veces no se pueden cumplir los requisitos de tiempo de inactividad máximo y pérdida de datos.
 
 En el peor de los casos, se puede ver un daño lógico en una aplicación SAP. Las aplicaciones SAP suelen funcionar en un entorno en el que diferentes aplicaciones se comunican entre sí y intercambian datos. Por lo tanto, el enfoque recomendado no es restaurar ni recuperar un sistema SAP en el que se ha producido un daño lógico. Cuando se restaura el sistema a un momento específico antes de que se dañara, se perderán los datos. Además, el entorno SAP ya no estaría sincronizado y necesitaría un postprocesamiento adicional.
 
@@ -56,6 +56,6 @@ Las pruebas de recuperación ante desastres para SnapMirror asíncrono y síncro
 
 image:sc-copy-clone-image6.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"] Puede encontrar una descripción detallada paso a paso en los informes técnicos
 
-https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: Recuperación ante desastres de SAP HANA con replicación de almacenamiento (netapp.com)"]
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["Recuperación ante desastres de SAP HANA con replicación de almacenamiento"]
 
-link:../backup/hana-dr-anf-data-protection-overview.html["TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files"]
+link:../backup/hana-dr-anf-data-protection-overview.html["Recuperación ante desastres de SAP HANA con Azure NetApp Files"]

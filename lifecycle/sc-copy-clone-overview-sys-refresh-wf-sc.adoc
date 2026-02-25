@@ -54,7 +54,7 @@ En la mayoría de los casos, los sistemas de prueba/control de calidad objetivo 
 NOTE: Al dividir el volumen FlexClone, SnapCenter elimina todos los backups que se crearon en el sistema de destino.
 
 
-NOTE: Con SnapCenter y Azure NetApp Files, la operación de división de clones no está disponible, ya que Azure NetApp Files siempre divide el clon una vez creado.
+NOTE: Con SnapCenter y Azure NetApp Files, la operación de división de clones no está disponible, el clon siempre se divide después de la creación.
 
 La operación de actualización, incluida la división de clones, consta de los siguientes pasos.
 

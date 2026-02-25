@@ -4,7 +4,7 @@ permalink: backup/hana-dr-anf-data-protection-overview.html
 keywords:  
 summary:  
 ---
-= TR-4891: Recuperación ante desastres de SAP HANA con Azure NetApp Files
+= Recuperación ante desastres de SAP HANA con Azure NetApp Files
 :allow-uri-read: 
 
 

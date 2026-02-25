@@ -8,7 +8,7 @@ summary:
 :allow-uri-read: 
 
 
-Puede encontrar información detallada sobre las operaciones de actualización del sistema SAP mediante SnapCenter en  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"] .
+Puedes encontrar información detallada sobre las operaciones de actualización del sistema SAP usando SnapCenter en https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"].
 
 El segundo sistema HANA QFS se ha aprovisionado de la misma manera que se describe en el capítulo link:hana-sc-vmfs-asar2-hana-prov.html["Aprovisionamiento e instalación del sistema HANA"] .
 
@@ -16,7 +16,7 @@ El segundo sistema HANA QFS se ha aprovisionado de la misma manera que se descri
 
 === Requisitos previos
 
-La versión actual de SnapCenter (6.1P1) tiene algunas limitaciones que se planea solucionar con las próximas versiones.
+Para las versiones de SnapCenter < 6.2 hay limitaciones que tienes que considerar.
 
 . Es necesario reiniciar el proceso spl después de cada flujo de trabajo de “creación de clonación” y “eliminación de clonación” utilizando el comando “systemctl restart spl” en el host HANA de destino.
 . Las máquinas virtuales HANA utilizadas como origen y destino de la operación de actualización del sistema SAP deben ejecutarse en el mismo host ESX.
@@ -174,4 +174,4 @@ La siguiente captura de pantalla muestra los pasos del trabajo ejecutados por Sn
 
 image:sc-hana-asrr2-vmfs-image39.png["Figura que muestra el contenido que se está discutiendo"]
 
-Como se menciona en la sección “Requisitos previos”, el servicio spl de SnapCenter en el host HANA debe reiniciarse usando el comando “systemctl restart spl” para iniciar una limpieza adecuada.
+Como se menciona en la sección “Pre-requisitos”, para las versiones de SnapCenter < 6.2 el servicio spl de SnapCenter en el host HANA debe reiniciarse usando el comando “systemctl restart spl” para iniciar la limpieza adecuada.

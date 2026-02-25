@@ -23,20 +23,21 @@ Dentro del documento, utilizamos un entorno SAP HANA que se ejecuta en sistemas 
 |  | *Sistemas NetApp locales* | *AWS FSx para ONTAP de NetApp* | *Azure NetApp Files* 
 
 
-| Protocolo de almacenamiento | NFS, Fibre Channel | NFS | NFS 
+| Protocolo de almacenamiento y sistema de archivos | Bare metal: NFS, FC con XFS VMware: montajes NFS in-guest, FC con VMDKs y XFS | NFS | NFS 
 
 
-| Clonado ligero (FlexClone) | Sí | Sí | No, con la versión actual de ANF, los volúmenes clonados siempre están divididos 
+| Clonado ligero (FlexClone) | Sí | Sí | Sí, pero no está integrado en SnapCenter 
 
 
-| Operación de división de clones | Sí | Sí | NO DISPONIBLE 
+| Operación de división de clones | Sí | Sí | Sí, pero no está integrado en SnapCenter 
 
 
 | Clonación desde el principal | Sí | Sí | Sí 
 
 
-| Clonado desde backup externo | Sí | Sí | No 
+| Clonado desde backup externo | Sí | Sí | Sí, restaurar a un nuevo volumen desde un backup de ANF 
 
 
 | Clonado en el sitio de recuperación ante desastres | Sí | Sí | Sí, pero no está integrado en SnapCenter 
 |===
+Información adicional sobre las operaciones de actualización del sistema SAP para HANA con VMware VMFS y sistemas NetApp ASAr2 la puedes encontrar en  https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmfs-asar2sap-refresh.html["Actualización del sistema SAP"].

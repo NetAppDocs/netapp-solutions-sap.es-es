@@ -28,11 +28,11 @@ https://www.netapp.com/us/documentation/snapcenter-software.aspx["https://www.ne
 +
 https://docs.netapp.com/us-en/snapcenter/index.html["https://docs.netapp.com/us-en/snapcenter/index.html"]
 
-* TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter
+* Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter
 +
 link:../lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
 
-* TR-4719: Replicación de sistemas SAP HANA: Backup y recuperación de datos con SnapCenter
+* SAP HANA System Replication — copia de seguridad y recuperación con SnapCenter
 +
 link:hana-sr-scs-system-replication-overview.html["Backup y recuperación con SnapCenter"]
 

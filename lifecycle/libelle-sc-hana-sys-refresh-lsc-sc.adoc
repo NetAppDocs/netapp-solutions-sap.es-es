@@ -28,7 +28,7 @@ Para obtener más detalles sobre estos diferentes agentes de SnapCenter y las op
 
 En las siguientes secciones se destacan las diferencias entre la integración de LSC con SnapCenter mediante la instalación estándar o el host de comunicación central. En particular, todos los pasos de configuración que no se resaltan son los mismos independientemente de la opción de instalación y la base de datos utilizada.
 
-Para realizar un backup automático basado en copias de Snapshot desde la base de datos de origen y crear un clon para la nueva base de datos de destino, la integración descrita entre LSC y SnapCenter usa las opciones de configuración y los scripts descritos en link:sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"^].
+Para realizar una copia de seguridad automatizada basada en copias de Snapshot desde la base de datos de origen y crear un clon para la nueva base de datos de destino, la integración descrita entre LSC y SnapCenter usa las opciones de configuración y los scripts descritos en link:sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"^].
 
 
 
@@ -88,9 +88,9 @@ El maestro LSC y el trabajador LSC deben estar instalados en el entorno SAP. En 
 Recursos de documentación:
 
 * https://docs.netapp.com/us-en/snapcenter/["Centro de documentación de SnapCenter"^]
-* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["TR-4700: Complemento de SnapCenter para base de datos de Oracle"^]
+* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["Complemento de SnapCenter para Oracle Database"^]
 * link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"^]
-* link:sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"^]
+* link:sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2880726["Guía de referencia de cmdlet de SnapCenter 4.6"^]
 
 

@@ -17,4 +17,4 @@ Las operaciones de clonado pueden ejecutarse en el sitio principal o en el almac
 
 El volumen clonado no formará parte del grupo de consistencia de HANA y no se replicará con la sincronización activa de SnapMirror.
 
-Puede encontrar información detallada sobre los flujos de trabajo de actualización del sistema en: link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+Encontrarás información detallada sobre los flujos de trabajo de actualización del sistema en: link:../lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
