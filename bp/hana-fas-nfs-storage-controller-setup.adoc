@@ -38,6 +38,14 @@ El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de Ne
 
 
 
+== Protección autónoma contra ransomware de ONTAP
+
+Las instantáneas creadas por ONTAP Autonomous Ransomware Protection no se pueden usar para la recuperación posterior de la base de datos SAP HANA. Por eso, no se recomienda usarlas para los volúmenes de datos y logs de SAP HANA y deberías desactivar esta función en esos volúmenes. Mejor usa la protección de datos basada en SnapCenter con Tamperproof Snapshots para protegerte contra ransomware: link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"]. ONTAP Autonomous Ransomware Protection puede ser útil para otros volúmenes como /hana/shared.
+
+Es posible desactivar la activación automática de esta funcionalidad durante la creación de un volumen para un ONTAP Cluster, pero se recomienda mantener la configuración predeterminada y desactivarla solo en los volúmenes donde no se necesite esta funcionalidad.
+
+
+
 == Calidad de servicio
 
 La calidad de servicio se puede utilizar para limitar el rendimiento del almacenamiento para sistemas SAP HANA específicos u otras aplicaciones en una controladora de uso compartido. Un caso de uso sería limitar el rendimiento de los sistemas de desarrollo y pruebas para que no puedan influir en los sistemas de producción en una configuración mixta.
@@ -188,6 +196,9 @@ Para cada host SAP HANA DB, un volumen de datos, un volumen de registro y un vol
 |===
 En la siguiente tabla se muestra un ejemplo de la configuración de puntos de montaje para un sistema de un solo host. Para colocar el directorio principal de `sidadm` usuario del almacenamiento central, el `/usr/sap/SID` el sistema de archivos se debe montar desde el `SID_shared` volumen.
 
+
+NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/SID` directorio, el directorio de instalación por defecto de LSS se encuentra en el disco local. En una configuración de recuperación de desastres con replicación basada en disco, NetApp recomienda crear un directorio dentro del  `SID_shared` volumen para el  `/lss/shared/SID` directorio, de forma que todos los sistemas de archivos se encuentren en el almacenamiento central.
+
 |===
 | Ruta de unión | Directorio | Punto de montaje en el host HANA 
 
@@ -198,7 +209,7 @@ En la siguiente tabla se muestra un ejemplo de la configuración de puntos de mo
 | SID_log_mnt00001 | – | /hana/log/SID/mnt00001 
 
 
-| SID_shared | usr-sap compartido | /Usr/SAP/SID /hana/shared 
+| SID-shared | usr-sap + shared + lss-shared | /usr/sap/SID + /hana/shared + /lss/shared/SID 
 |===
 
 
@@ -236,6 +247,9 @@ Para cada host SAP HANA, se crean un volumen de datos y un volumen de registro. 
 |===
 En la siguiente tabla se muestran la configuración y los puntos de montaje de un sistema de varios hosts con cuatro hosts SAP HANA activos. Para colocar los directorios de inicio de `sidadm` un usuario de cada host del almacenamiento central, el `/usr/sap/SID` los sistemas de archivos se montan desde el `SID_shared` volumen.
 
+
+NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/SID` directorio debe ser accesible en todos los hosts. NetApp recomienda crear un directorio dentro del  `SID_shared` volumen para el  `/lss/shared/SID` directorio.
+
 |===
 | Ruta de unión | Directorio | Punto de montaje en el host SAP HANA | Nota 
 
@@ -267,6 +281,9 @@ En la siguiente tabla se muestran la configuración y los puntos de montaje de u
 | SID_shared | compartido | /hana/shared/ | Montado en todos los hosts 
 
 
+| SID_shared | lss-shared | /lss/shared/ | Montado en todos los hosts 
+
+
 | SID_shared | usr-sap-host1 | /Usr/SAP/SID | Montado en el host 1 
 
 
@@ -294,7 +311,10 @@ Debe verificar y configurar las opciones de volumen que aparecen en la siguiente
 | Deshabilitar la visibilidad del directorio Snapshot | vol modify -vserver <vserver-name> -volume <volname> -snapdir-access false 
 
 
-| Deshabilite las copias Snapshot automáticas | vol modify –vserver <vserver-name> -volume <volname> -snapshot-policy none 
+| Deshabilite las copias Snapshot automáticas | vol modify -vserver <vserver-name> -volume <volname> -snapshot-policy none 
+
+
+| Desactiva la protección contra ransomware, excepto en el volumen SID_shared | vol modify -vserver <vserver-name> -volume <volname> -anti-ransomware-state disabled 
 
 
 | Deshabilite el tiempo de acceso de actualización excepto el volumen SID_shared | set advanced vol modify -vserver <vserver-name> -volume <volname> -atime-update false set admin 

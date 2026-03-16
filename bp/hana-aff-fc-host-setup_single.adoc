@@ -37,6 +37,9 @@ En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmen
 NOTE: Con la configuración descrita, el `/usr/sap/FC5` El directorio en el que se almacena el directorio de inicio predeterminado del usuario FC5adm está en el disco local.  En una configuración de recuperación ante desastres con replicación basada en disco, NetApp recomienda crear un LUN adicional dentro del `FC5_shared` volumen para el `/usr/sap/FC5` directorio para que todos los sistemas de archivos estén en el almacenamiento central.
 
 
+NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/SID` directorio, el directorio de instalación predeterminado de LSS, se encuentra en el disco local. En una configuración de recuperación ante desastres con replicación basada en disco, NetApp recomienda crear un LUN adicional dentro del  `SID1_shared` volumen para el  `/lss/shared/SID` directorio, de modo que todos los sistemas de archivos se encuentren en el almacenamiento central.
+
+
 
 === Cree grupos de volúmenes LVM y volúmenes lógicos
 

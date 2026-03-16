@@ -36,6 +36,14 @@ El uso del cifrado de volúmenes de NetApp (NVE) y el cifrado de agregados de Ne
 
 
 
+== Protección autónoma contra ransomware de ONTAP
+
+Las instantáneas creadas por ONTAP Autonomous Ransomware Protection no se pueden usar para la recuperación anticipada de la base de datos SAP HANA. Por eso, no se recomienda usarlas para los volúmenes de datos y registros de SAP HANA y debería desactivarse para estos volúmenes. Usa la protección de datos basada en SnapCenter con instantáneas a prueba de manipulaciones para protegerte contra ransomware. link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"] ONTAP Autonomous Ransomware Protection puede ser útil para otros volúmenes como /hana/shared.
+
+Es posible desactivar la activación automática de esta funcionalidad durante la creación de un volumen para un ONTAP Cluster, pero se recomienda mantener la configuración predeterminada y desactivarla solo en los volúmenes donde no se necesite esta funcionalidad.
+
+
+
 == Calidad de servicio
 
 La calidad de servicio puede utilizarse para limitar el rendimiento del almacenamiento de sistemas SAP HANA específicos o aplicaciones no SAP en una controladora compartida.
