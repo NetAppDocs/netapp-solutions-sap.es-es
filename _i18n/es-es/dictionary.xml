@@ -435,8 +435,6 @@
   <block id="345245c83d2b2c4c2a5eb9f2887da627" category="paragraph">Para obtener más información sobre la información descrita en este documento, consulte los siguientes documentos y/o sitios web:</block>
   <block id="0efd230d120bc177f0918dac852f2cf2" category="list-text">Hardware de almacenamiento empresarial certificado de SAP para SAP HANA</block>
   <block id="244d98fed97800c3bc8073163dc1e3b2" category="list-text">Requisitos de almacenamiento SAP HANA</block>
-  <block id="06ad3435fb38e020aa7a36d8924c9f5c" category="inline-link"><block ref="06ad3435fb38e020aa7a36d8924c9f5c" category="inline-link-rx"></block></block>
-  <block id="3710f13cc62644ea40b0af38f0b1198e" category="paragraph"><block ref="3710f13cc62644ea40b0af38f0b1198e" category="inline-link-rx"></block></block>
   <block id="6137d44b5191549a06e7bea8ffd942d3" category="inline-link"><block ref="6137d44b5191549a06e7bea8ffd942d3" category="inline-link-rx"></block></block>
   <block id="c54847a2046020d06d345fd8b61fc169" category="list-text">Centros de documentación de NetApp</block>
   <block id="1f97b7a68d0268791593f9152a2471f4" category="list-text">Soluciones de software SAP HANA</block>
@@ -5891,8 +5889,11 @@ configurar admin</block>
   <block id="3d4f8b4b1b1faa02f0aa9e9f49fe9088" category="paragraph">Las instantáneas creadas por ONTAP Autonomous Ransomware Protection no se pueden usar para la recuperación posterior de la base de datos SAP HANA. Por eso, no se recomienda usarlas para los volúmenes de datos y logs de SAP HANA y deberías desactivar esta función en esos volúmenes. Mejor usa la protección de datos basada en SnapCenter con Tamperproof Snapshots para protegerte contra ransomware: <block ref="f7a9a89a273a9d57fcd022d94d56f53f" category="inline-link-macro-rx"></block>. ONTAP Autonomous Ransomware Protection puede ser útil para otros volúmenes como /hana/shared.</block>
   <block id="5c9e36a122daafc35d852512bd535596" category="admonition">Si se utiliza el servicio SAP Local Secure Store (LSS), el <block ref="1d7604fd1dd9d655c19ff0843bcd1cab" prefix=" " category="inline-code"></block> directorio, el directorio de instalación por defecto de LSS se encuentra en el disco local. En una configuración de recuperación de desastres con replicación basada en disco, NetApp recomienda crear un directorio dentro del <block ref="07fe7fc9aa3cd33458708758a4a5854e" prefix=" " category="inline-code"></block> volumen para el <block ref="1d7604fd1dd9d655c19ff0843bcd1cab" prefix=" " category="inline-code"></block> directorio, de forma que todos los sistemas de archivos se encuentren en el almacenamiento central.</block>
   <block id="3ee7f42a5f57f42357faa6066ecfb5d8" category="cell">/lss/shared/</block>
-  <block id="e72900b6484d9e136f9baaf67301d38d" category="paragraph"><block ref="8878a31e958f2f4fbc2f0cb5299a88fc" category="inline-link-rx"></block>]</block>
   <block id="b0b3e68761dd70d0fa49b725910dc993" category="list-text">Integración del centro de datos a medida de SAP HANA</block>
   <block id="37716fa00dd641976ad10af0418c9f93" category="inline-link">Integración del centro de datos a medida de SAP HANA</block>
   <block id="74e5a15645e2d65a375593199e01c962" category="list-text"><block ref="74e5a15645e2d65a375593199e01c962" category="inline-link-rx"></block></block>
+  <block id="44fee80ab2b2a3105ec17b94b206cc8f" category="inline-link"><block ref="44fee80ab2b2a3105ec17b94b206cc8f" category="inline-link-rx"></block></block>
+  <block id="55162df4eaa40993b4b04219f5dd5e87" category="paragraph"><block ref="55162df4eaa40993b4b04219f5dd5e87" category="inline-link-rx"></block></block>
+  <block id="9b3c3b7775f8b0fe4b367630784b02be" category="inline-link"><block ref="9b3c3b7775f8b0fe4b367630784b02be" category="inline-link-rx"></block></block>
+  <block id="09e3bfa407b8475f684f4afa0d1a65d0" category="paragraph"><block ref="09e3bfa407b8475f684f4afa0d1a65d0" category="inline-link-rx"></block></block>
 </blocks>
