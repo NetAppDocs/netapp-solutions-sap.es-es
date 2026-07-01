@@ -4693,7 +4693,6 @@ configurar admin</block>
   <block id="c0a3ca4d6887eb5487746b7fd52fe4ea" category="inline-image-macro">ancho=601, alto=441</block>
   <block id="5d9becebd742ba55a338e721cb4098bc" category="doc">SAP HANA con SUSE KVM y almacenamiento NetApp</block>
   <block id="0a2894548989381718d6bc91587921e8" category="inline-link">Mejores prácticas de SUSE para SAP HANA en KVM</block>
-  <block id="2cfc5ea27e5946f6879fde36c69e3ec6" category="inline-link">3538596 - SAP HANA en virtualización SUSE KVM con SLES 15 SP5 - SAP para mí</block>
   <block id="15ddad260ba43b42e35fa929f499221f" category="inline-link">Portal de soporte empresarial de NVIDIA | Cómo configurar SR-IOV para ConnectX-4/ConnectX-5/ConnectX-6 con KVM (Ethernet)</block>
   <block id="6b02943983965065df18dd4bfa58b5f0" category="inline-image-macro">ancho=493, alto=409</block>
   <block id="78c43044658ad43ea5759ac7d4d547e3" category="paragraph"><block ref="78c43044658ad43ea5759ac7d4d547e3" category="inline-image-macro-rx" type="image"></block></block>
@@ -4745,7 +4744,6 @@ configurar admin</block>
   <block id="b04f5fdeaf8c08267bf339c96ea39e88" category="paragraph">Una vez que hayas configurado la red Fibre Channel,<block ref="ae7fcde62644d7c2cce7447887af291a" category="inline-link-macro-rx"></block> .</block>
   <block id="eedf6199d892536e90e4f5f5e9aeead0" category="summary">Implemente SAP HANA Single-Host en SUSE KVM utilizando almacenamiento NetApp con interfaces de red SR-IOV y acceso a almacenamiento NFS o FCP.  Siga este flujo de trabajo para configurar las interfaces virtuales, asignarlas a las máquinas virtuales y configurar las conexiones de almacenamiento para un rendimiento óptimo.</block>
   <block id="b2b3540e7a5adcde33ace97349e2560a" category="doc">Implemente SAP HANA en SUSE KVM con almacenamiento NetApp mediante SR-IOV y NFS.</block>
-  <block id="0e271a63b035a81107076af36774e567" category="paragraph">Para obtener una descripción general de SAP HANA en la virtualización KVM, consulte la documentación de SUSE:<block ref="23bdf6475773b02163c12d0b92b72377" category="inline-link-rx"></block> .</block>
   <block id="06c2cea18679d64399783748fa367bdd" category="inline-image-macro">1</block>
   <block id="a83565177e04591255a835fde719da37" category="inline-link-macro">Revisar los requisitos de configuración</block>
   <block id="ce32521677a8f52f50fefa7a065fa3bc" category="paragraph"><block ref="58f667aaf05f87159670e12bd9bc076b" category="inline-image-macro-rx" type="image"></block><block ref="d33d8d02b4f9bbbf424db99eecbc1fd5" category="inline-link-macro-rx"></block></block>
@@ -4764,7 +4762,6 @@ configurar admin</block>
   <block id="eaa946087d06ee1fee769e3564e0e00a" category="paragraph">Configure las conexiones de almacenamiento NFS o FCP entre la máquina virtual y los sistemas de almacenamiento NetApp para los archivos de la base de datos SAP HANA.</block>
   <block id="46086226fd4f9834e26bad399e56adba" category="summary">Configure las interfaces de red SR-IOV en SUSE KVM para SAP HANA utilizando NIC Mellanox ConnectX.  Configure las funciones virtuales, asígnelas a las máquinas virtuales y configure conexiones de red redundantes para un rendimiento y acceso al almacenamiento óptimos.</block>
   <block id="1a4209a0d3141f25300c6ebecb02b5ca" category="doc">Configurar las interfaces de red SR-IOV para SAP HANA en SUSE KVM</block>
-  <block id="64a9f5744e810899375650d8c2d3fec9" category="paragraph">Configure las interfaces de red SR-IOV en SUSE KVM para SAP HANA.  Configure las funciones virtuales (VF), asígnelas a las máquinas virtuales y configure conexiones de red redundantes para un rendimiento y acceso al almacenamiento óptimos.</block>
   <block id="3e8724f246e16510aad52dd9ecb49a3d" category="section-title">Paso 1: Configurar SR-IOV</block>
   <block id="6b314738afe5bc77a71fceeb84ceb155" category="paragraph">Habilite y configure la funcionalidad SR-IOV en el firmware del adaptador para permitir la creación de funciones virtuales.</block>
   <block id="b99f7ff8b05c08aee442951722cb0edf" category="paragraph">Este procedimiento se basa en<block ref="e682021759c826481e76b33aabbf6839" category="inline-link-rx"></block> . La guía SUSE SAP HANA KVM describe esto basándose en una NIC INTEL.</block>
@@ -4809,13 +4806,10 @@ configurar admin</block>
   <block id="d7c7e191ee6d1a797e5df384683aea38" category="list-text">Adaptadores de red compatibles con SR-IOV (por ejemplo, la serie Mellanox ConnectX)</block>
   <block id="d2e6b4405b465bc9b022aac442b1b10a" category="list-text">Adaptadores HBA de canal de fibra para acceso al almacenamiento FCP</block>
   <block id="f31568af9160e2aa82d3db92980e5c3e" category="list-text">Infraestructura de red que admite las VLAN y los segmentos de red necesarios.</block>
-  <block id="eeb238b1c48c2357fe3444616c9ebced" category="list-text">Máquina virtual configurada según<block ref="8185340d5b69ab85cc184c018157df93" category="inline-link-rx"></block></block>
   <block id="50a1170f516bd7e65549254bce84c24c" category="section-title">Consideraciones importantes</block>
-  <block id="a738c5891f5961226a6dde61f1afbb37" category="list-text">SR-IOV debe utilizarse para la comunicación de red de SAP HANA y para el acceso al almacenamiento mediante NFS. Cada función virtual (VF) asignada a una máquina virtual requiere un ancho de banda de al menos 10 Gbit/s.</block>
   <block id="5978d0cfedef13194dff39678fea0182" category="list-text">Los puertos físicos FCP HBA deben asignarse a la máquina virtual como dispositivos PCI para utilizar las LUN de FCP.  Un puerto físico solo puede asignarse a una máquina virtual.</block>
   <block id="39f701bd19a2da681aadb2c2080ee6ac" category="list-text">Los sistemas SAP HANA de múltiples hosts no son compatibles con esta configuración.</block>
   <block id="8cd58c89ff3d51a256ecfe3fe8bab20f" category="section-title">Recursos adicionales</block>
-  <block id="eaba74287739b947e76e82a1d0b0b128" category="list-text">Para obtener la información más reciente, incluida la arquitectura de CPU compatible y sus limitaciones, consulte la nota SAP.<block ref="7da6a569286eed69a835786cc64ede56" category="inline-link-rx"></block> .</block>
   <block id="c09b5be4c2da04f4040eef1878f258aa" category="inline-link">Documentación de ONTAP 9</block>
   <block id="9a421dce29a43d6aa8fe214499fe1e4a" category="list-text">Para obtener información sobre la configuración de los sistemas de almacenamiento ONTAP , consulte la<block ref="6f483b863c5185fefdfed5a5dff0efff" category="inline-link-rx"></block> .</block>
   <block id="1d3f77b304dcdf504c9e8550fc7801e7" category="inline-link">Documentación de soluciones SAP de NetApp</block>
@@ -4842,7 +4836,6 @@ configurar admin</block>
   <block id="5f05fd970d378d7b908fd310167d1342" category="list-text">Configure el enrutamiento de múltiples rutas dentro de la máquina virtual para lograr redundancia entre los conmutadores de la estructura.</block>
   <block id="b3529caae24ec3b6317fed33b199fc17" category="list-text">Configure los controladores de almacenamiento y las máquinas virtuales de acuerdo con la Guía de configuración de SAP HANA.</block>
   <block id="57e1771ce1e6d595e42a3b886ca50109" category="cell">noviembre de 2025</block>
-  <block id="08fc16a4a36250041009c3c33c9c9388" category="cell">Actualización de diseño.</block>
   <block id="ba6af9e4a46c6c9c5542891d417327e8" category="section-title">12 de noviembre de 2025</block>
   <block id="1ae3ab0d4dcb2d1a3eb0edf2e52ce3a2" category="paragraph">Nueva solución<block ref="2c0446aa059b701d9c0d685bc6675dbe" category="inline-link-macro-rx"></block> :</block>
   <block id="c91527b6024ce916ee9e7634580b91cf" category="paragraph">Implemente SAP HANA Single-Host en SUSE KVM utilizando almacenamiento NetApp con interfaces de red SR-IOV y acceso a almacenamiento NFS o FCP.</block>
@@ -5896,4 +5889,13 @@ configurar admin</block>
   <block id="09e3bfa407b8475f684f4afa0d1a65d0" category="paragraph"><block ref="09e3bfa407b8475f684f4afa0d1a65d0" category="inline-link-rx"></block></block>
   <block id="5f3a885afe628dc765db372d552dfc3f" category="inline-link-macro"><block ref="5f3a885afe628dc765db372d552dfc3f" category="inline-link-rx"></block></block>
   <block id="2deb8c2352bb64efaab57e5552bc808d" category="paragraph"><block ref="2deb8c2352bb64efaab57e5552bc808d" category="inline-link-macro-rx"></block></block>
+  <block id="917f9e6cc78a34f25bcca44ee758fdfd" category="paragraph">Para obtener una visión general de SAP HANA en el entorno de virtualización KVM, consulta la documentación de SUSE:<block ref="07290f5e8fedcd643d91fbceebffb3f1" category="inline-link-rx"></block>.</block>
+  <block id="6ae55f1d87d24ddbfbd0d6c2cbd52508" category="paragraph">Configura interfaces de red SR-IOV en SUSE KVM para SAP HANA. Configura funciones virtuales (VF), asígnalas a máquinas virtuales y configura conexiones de red redundantes para lograr un rendimiento óptimo y acceso al almacenamiento. También se admite la red en puente.</block>
+  <block id="11b12737d363a1c1fc891c84c512bfe8" category="list-text">Máquina virtual configurada según el <block ref="84f9f0cb560c07061eb0a9c9983073cf" category="inline-link-rx"></block></block>
+  <block id="88bfc74e7f9daec3034975bb2ccf2c26" category="list-text">Se utilizará SR-IOV para la comunicación de red de SAP HANA y para el acceso al almacenamiento mediante NFS, siempre que sea posible, aunque también se admite la conexión en puente. Cada función virtual (VF) asignada a una máquina virtual requiere un ancho de banda mínimo de 10 Gbit/s.</block>
+  <block id="ae19611463c7931f079137442f375669" category="inline-link">3741904 - SAP HANA en virtualización KVM de SUSE con SLES 15 SP7 - SAP for Me</block>
+  <block id="cfe5524e84c4886ba33731b20fe14a28" category="list-text">Para obtener la información más reciente, incluidas las arquitecturas de CPU compatibles y las limitaciones, consulta la SAP Note<block ref="814684ca8fb6c36f22754431c3a4a6ca" category="inline-link-rx"></block>.</block>
+  <block id="a28cf561c8f701ff19b2c0c69e0dfc34" category="cell">Actualización del diseño</block>
+  <block id="c21446b3ecfb30ed6c2760d686bd4578" category="cell">junio de 2026</block>
+  <block id="ac644778c82f08cf6b78f5b122e0d378" category="cell">Actualización de SUSE SLES 15SP7</block>
 </blocks>

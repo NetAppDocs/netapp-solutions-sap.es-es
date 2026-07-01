@@ -24,5 +24,8 @@ Desde su publicación original se han realizado los siguientes cambios técnicos
 | octubre de 2025 | Versión inicial 
 
 
-| noviembre de 2025 | Actualización de diseño. 
+| noviembre de 2025 | Actualización del diseño 
+
+
+| junio de 2026 | Actualización de SUSE SLES 15SP7 
 |===
