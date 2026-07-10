@@ -21,6 +21,7 @@ NOTE: Los scripts de ejemplo se proporcionan tal cual y no son compatibles con N
 
 
 
+[[validated-configurations-and-limitations]]
 == Configuraciones validadas y limitaciones
 
 En este ejemplo de implantación se aplicaron los siguientes principios y es posible que sea necesario adaptarlas a las necesidades del cliente:
@@ -37,6 +38,7 @@ En este ejemplo de implantación se aplicaron los siguientes principios y es pos
 
 
 
+[[lab-setup]]
 == Configuración de laboratorio
 
 La siguiente figura muestra la configuración de laboratorio que utilizamos. El sistema SAP HN9 de origen utilizado para la operación de clonación de sistemas consistía en la base de datos H09, en SAP CS y en SAP COMO servicios que se ejecutan en el mismo host (SAP-lnx32) con instalado https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e86f8743bdb8d1f6cf4b862c79.html["diseño adaptable"^] activado. Se preparó un nodo de control Ansible de acuerdo con la https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Libros de estrategia de Ansible para ONTAP de NetApp"^] documentación.
@@ -63,10 +65,12 @@ En la configuración de laboratorio se utilizaron las siguientes versiones de so
 
 
 
+[[sap-lama-configuration]]
 == Configuración de SAP Lama
 
 
 
+[[sap-lama-provider-definition]]
 === Definición de proveedor de SAP Lama
 
 La definición del proveedor se lleva a cabo en Automation Studio de SAP Lama como se muestra en la siguiente captura de pantalla. La implementación de ejemplo utiliza una sola definición de proveedor que se utiliza para diferentes pasos de aprovisionamiento personalizados y enlaces de operaciones como se explicó anteriormente.
@@ -87,6 +91,7 @@ image:lama-ansible-image11.png["Captura de pantalla de la sección parámetros c
 
 
 
+[[sap-lama-custom-provisioning]]
 === Aprovisionamiento personalizado de SAP Lama
 
 En la configuración de aprovisionamiento personalizada de SAP Lama, el proveedor de clientes descrito anteriormente se utiliza para sustituir los pasos del flujo de trabajo de aprovisionamiento *Clone Volumes* y *PostCloneVolumes*.
@@ -95,6 +100,7 @@ image:lama-ansible-image12.png["Captura de pantalla de la pantalla de configurac
 
 
 
+[[sap-lama-custom-hook]]
 === Gancho personalizado de SAP Lama
 
 Si un sistema se elimina con el flujo de trabajo de destrucción del sistema, el gancho *Delete NetAppClone* se utiliza para llamar a la definición del proveedor `netapp_clone`. El enlace *Delete NetApp Clone Refresh* se utiliza durante el flujo de trabajo de actualización del sistema porque la instancia se conserva durante la ejecución.
@@ -113,6 +119,7 @@ Puede encontrar más información sobre el uso de ganchos personalizados en http
 
 
 
+[[enable-custom-provisioning-workflow-for-sap-source-system]]
 === Activar flujo de trabajo de aprovisionamiento personalizado para el sistema de origen SAP
 
 Para activar el flujo de trabajo de aprovisionamiento personalizado para el sistema de origen, debe adaptarse en la configuración. Debe seleccionarse la casilla de verificación *usar proceso de aprovisionamiento personalizado* con la definición de aprovisionamiento personalizada correspondiente.

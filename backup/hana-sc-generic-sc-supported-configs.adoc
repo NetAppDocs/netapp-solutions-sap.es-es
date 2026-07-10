@@ -13,6 +13,7 @@ SnapCenter admite una amplia gama de arquitecturas de sistemas SAP HANA y escena
 
 
 
+[[supported-sap-hana-configurations]]
 == Configuraciones de SAP HANA compatibles
 
 SnapCenter admite las siguientes configuraciones y funciones de HANA:
@@ -35,6 +36,7 @@ SnapCenter admite las siguientes configuraciones y funciones de HANA:
 
 
 
+[[supported-platform-and-infrastructure-configurations]]
 == Configuraciones de plataforma e infraestructura compatibles
 
 SnapCenter admite las siguientes combinaciones de plataformas de host, sistemas de archivos y plataformas de almacenamiento.
@@ -71,10 +73,12 @@ NOTE: Los complementos de HANA y Linux solo están disponibles para la plataform
 
 
 
+[[supported-features-and-operations]]
 == Funciones y operaciones compatibles
 
 
 
+[[abbreviation-explanation]]
 === Explicación de la abreviatura
 
 * VBSR: SnapRestore basado en volumen + Un SnapRestore basado en volumen revierte el volumen al estado de la instantánea.
@@ -85,6 +89,7 @@ Véase también https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_
 
 
 
+[[ontap-aff-and-fsx-for-ontap]]
 === ONTAP AFF y FSx para ONTAP
 
 
@@ -175,6 +180,7 @@ NOTE: Solo la columna 1 (montajes NFS) de la tabla a continuación es relevante 
 
 
 
+[[ontap-asa]]
 === ONTAP ASA
 
 [cols="40%,30%,30%"]
@@ -262,6 +268,7 @@ NOTE: Solo la columna 1 (montajes NFS) de la tabla a continuación es relevante 
 
 
 
+[[azure-netapp-files]]
 === Azure NetApp Files
 
 [cols="60%,40%"]

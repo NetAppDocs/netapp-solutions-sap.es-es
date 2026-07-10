@@ -22,6 +22,7 @@ En este capítulo se describe la instalación y configuración del sistema SAP H
 
 
 
+[[storage-configuration]]
 == Configuración del almacenamiento
 
 La siguiente figura muestra la configuración de almacenamiento y almacén de datos para el sistema HANA. Debe configurar un volumen dedicado, LUN y un almacén de datos para cada sistema de archivos del sistema HANA. Los almacenes de datos no deben compartirse entre varios sistemas HANA u otras cargas de trabajo.
@@ -39,6 +40,7 @@ Se debe configurar un iGroup y las LUN anteriores deben asignarse al host ESX-1,
 
 
 
+[[datastore-provisioning]]
 == Aprovisionamiento del almacén de datos
 
 Creamos tres almacenes de datos para el sistema HANA utilizando las tres LUN que habíamos aprovisionado antes. Además, creamos un almacén de datos de infraestructura con la LUN de infraestructura.
@@ -47,12 +49,14 @@ image:sc-saphana-vmware-smas-image7.png["Figura que muestra el contenido que se 
 
 
 
+[[vm-provisioning-and-os-installation]]
 == Aprovisionamiento de equipos virtuales e instalación de SO
 
 En nuestra configuración de laboratorio, implementamos una nueva máquina virtual y colocamos el VMDK para el sistema operativo Linux en el almacén de datos de infraestructura.
 
 
 
+[[vm-disk-configuration]]
 == Configuración de discos de máquina virtual
 
 Se han añadido tres nuevos discos a la máquina virtual HANA, cada disco dentro de uno de los almacenes de datos que se han creado para el sistema HANA.
@@ -61,6 +65,7 @@ image:sc-saphana-vmware-smas-image8.png["Figura que muestra el contenido que se 
 
 
 
+[[vm-parameter-setting]]
 == Valor del parámetro de VM
 
 El parámetro disk.EnableUUID se debe agregar y establecer en TRUE . SnapCenter requiere el parámetro. Si no se establece, se producirá un error en la operación “Detectar recurso virtual” de SnapCenter.
@@ -87,10 +92,12 @@ Unit serial number: 6000c293fecf25ac6bc457af67fe1f54
 ....
 
 
+[[file-system-preparation-at-linux-host]]
 == Preparación del sistema de archivos en el host Linux
 
 
 
+[[creation-of-xfs-filesystem-on-new-disks]]
 === Creación del sistema de archivos xfs en nuevos discos
 
 Los nombres de dispositivos de los nuevos discos se pueden comprobar con el siguiente comando.
@@ -161,6 +168,7 @@ hana-1:/install #
 ....
 
 
+[[creation-of-mount-points]]
 === Creación de puntos de montaje
 
 ....
@@ -173,6 +181,7 @@ hana-1:/ # chmod -R 777 /hana/shared
 ....
 
 
+[[configuration-of-etcfstab]]
 === Configuración de /etc/fstab
 
 ....
@@ -221,6 +230,7 @@ hana-1:/install #
 ....
 
 
+[[hana-installation]]
 == Instalación de HANA
 
 Ahora puede ejecutarse la instalación de HANA.
@@ -230,6 +240,7 @@ NOTE: Con la configuración descrita, el directorio /usr/sap/sma estará en el V
 
 
 
+[[userstore-key-for-snapcenter]]
 == Clave de almacén de usuarios para SnapCenter
 
 Se debe crear un almacén de usuarios para un usuario de base de datos del sistema, que debe utilizar SnapCenter. El número de instancia de HANA se debe definir en consecuencia para el puerto de comunicación. En nuestra instancia de configuración se utiliza el número “00”.

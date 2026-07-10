@@ -21,6 +21,7 @@ NOTE: Los scripts de ejemplo se proporcionan tal cual y no son compatibles con N
 
 
 
+[[provider-configuration-file-netappclone-conf]]
 == Archivo de configuración del proveedor netapp_clone.conf
 
 El archivo de configuración se crea tal como se describe en https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/250dfc5eef4047a38bab466c295d3a49.html["Documentación de SAP Lama: Configuración de secuencias de comandos registradas de SAP Host Agent"^]. Este archivo de configuración se debe ubicar en el nodo de control de Ansible donde esté instalado el agente de host SAP.
@@ -40,12 +41,14 @@ Platform: Unix
 ....
 
 
+[[provider-script-netappclone-sh]]
 == Guión del proveedor netapp_clone.sh
 
 La secuencia de comandos del proveedor debe almacenarse en `/usr/sap/scripts` según se configuró en el archivo de configuración del proveedor.
 
 
 
+[[variables]]
 === Variables
 
 Las siguientes variables están codificadas en el script y deben adaptarse en consecuencia.
@@ -61,18 +64,21 @@ NOTE: Si se necesitan diferentes clústeres o SVM para diferentes sistemas SAP, 
 
 
 
+[[function-create-inventory-file]]
 === Función: Crear archivo de inventario
 
 Para hacer que la ejecución del libro de aplicaciones de Ansible sea más dinámica, una `inventory. yml` el archivo se crea sobre la marcha. Algunos valores estáticos se configuran en la sección variable y otros se crean dinámicamente durante la ejecución.
 
 
 
+[[function-run-ansible-playbook]]
 === Función: Ejecute el libro de estrategia de Ansible
 
 Esta función se utiliza para ejecutar el libro de aplicaciones de Ansible junto con el creado dinámicamente `inventory.yml` archivo. La convención de nomenclatura para los libros de estrategia es `netapp_lama_${HookOperationName}.yml`. Los valores para `${HookOperationName}` Depende de la operación Lama y se entrega a Lama como parámetro de línea de comandos.
 
 
 
+[[section-main]]
 === Sección Principal
 
 Esta sección contiene el plan de ejecución principal. La variable `${HookOperationName}` Contiene el nombre del paso de reemplazo Lama y lo proporciona Lama cuando se llama al script.
@@ -97,6 +103,7 @@ Esta sección contiene el plan de ejecución principal. La variable `${HookOpera
 
 
 
+[[hookoperationname-clonevolumes]]
 === HookOperationName = CloneVolumes
 
 Con este paso, se ejecuta el libro de estrategia de Ansible, lo que activa las operaciones de copia Snapshot y clonado. SAP Lama entrega los nombres de volúmenes y la configuración de montaje a través de un archivo XML definido en la variable `$MOUNT_XML_PATH`. Este archivo se guarda porque se utiliza más adelante en el paso `FinalizeCloneVolumes` para crear la nueva configuración de punto de montaje. Los nombres de los volúmenes se extraen del archivo XML y se ejecuta la libro de estrategia de clonado de Ansible para cada volumen.
@@ -106,6 +113,7 @@ NOTE: En este ejemplo, la instancia AS y los servicios centrales comparten el mi
 
 
 
+[[hookoperationname-postclonevolumes]]
 === HookOperationName = PostCloneVolumes
 
 Durante este paso, las propiedades personalizadas `ClonePostFix` y.. `SnapPostFix` además, se mantiene la configuración del punto de montaje para el sistema de destino.
@@ -128,6 +136,7 @@ NOTE: En este ejemplo, los qtrees del sistema de almacenamiento se utilizan como
 
 
 
+[[hookoperationname-serviceconfigremoval]]
 === HookOperationName = ServiceConfigRemoval
 
 En este paso, se ejecuta el libro de estrategia de Ansible responsable de la eliminación de los clones de volúmenes.
@@ -141,6 +150,7 @@ NOTE: En este ejemplo, la instancia AS y los servicios centrales comparten el mi
 
 
 
+[[hookoperationname-clearmountconfig]]
 === HookOperationName = ClearMountConfig
 
 En este paso, se está ejecutando el libro de estrategia de Ansible responsable de la eliminación de los clones del volumen durante un flujo de trabajo de actualización del sistema.
@@ -373,6 +383,7 @@ exit 0
 ....
 
 
+[[ansible-playbook-netapplamaclonevolumes-yml]]
 == Libro de aplicaciones de Ansible netapp_lama_CloneVolumes.yml
 
 El libro de estrategia que se ejecuta durante el paso CloneVolumes del flujo de trabajo del clon del sistema Lama es una combinación de `create_snapshot.yml` y.. `create_clone.yml` (consulte https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Módulos Ansible de NetApp: Archivos YAML"^]). Este libro de estrategia se puede ampliar fácilmente para cubrir casos prácticos adicionales como la clonación de operaciones secundarias y de división de clones.
@@ -416,6 +427,7 @@ root@sap-jump:~# cat /usr/sap/scripts/ansible/netapp_lama_CloneVolumes.yml
 ....
 
 
+[[ansible-playbook-netapplamaserviceconfigremoval-yml]]
 == Libro de aplicaciones de Ansible netapp_lama_ServiceConfigRemoving.yml
 
 el libro de estrategia que se ejecuta durante la `ServiceConfigRemoval` La fase del flujo de trabajo de destrucción del sistema Lama es la combinación de `delete_clone.yml` y.. `delete_snapshot.yml` (consulte https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Módulos Ansible de NetApp: Archivos YAML"^]). Debe alinearse con los pasos de ejecución del `netapp_lama_CloneVolumes` libro de estrategia.
@@ -458,6 +470,7 @@ root@sap-jump:~#
 ....
 
 
+[[ansible-playbook-netapplamaclearmountconfig-yml]]
 == Libro de aplicaciones de Ansible netapp_lama_ClearMountConfig.yml
 
 el libro de estrategia, que se ejecuta durante la `netapp_lama_ClearMountConfig` La fase del flujo de trabajo de actualización del sistema Lama es la combinación de `delete_clone.yml` y.. `delete_snapshot.yml` (consulte https://github.com/sap-linuxlab/demo.netapp_ontap/blob/main/netapp_ontap.md["Módulos Ansible de NetApp: Archivos YAML"^]). Debe alinearse con los pasos de ejecución del `netapp_lama_CloneVolumes` libro de estrategia.
@@ -500,6 +513,7 @@ root@sap-jump:~#
 ....
 
 
+[[sample-ansible-inventory-yml]]
 == Muestra de Ansible Inventory.yml
 
 Este archivo de inventario se crea dinámicamente durante la ejecución del flujo de trabajo y solo se muestra aquí con fines ilustrativos.

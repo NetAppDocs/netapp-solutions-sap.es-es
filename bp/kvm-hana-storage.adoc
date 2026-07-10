@@ -20,6 +20,7 @@ Después de configurar la máquina virtual con interfaces de red SR-IOV o puerto
 
 
 
+[[configure-nfs-storage-for-sap-hana]]
 == Configurar el almacenamiento NFS para SAP HANA
 
 Utilice las interfaces de red SR-IOV creadas previamente si se va a utilizar el protocolo NFS para el almacenamiento de SAP HANA.
@@ -36,6 +37,7 @@ Consideraciones clave de configuración para entornos KVM:
 
 
 
+[[configure-fcp-storage-for-sap-hana]]
 == Configurar el almacenamiento FCP para SAP HANA
 
 Utilice los puertos HBA físicos asignados a la máquina virtual como dispositivos PCI si se va a utilizar el protocolo FCP para el almacenamiento de SAP HANA.

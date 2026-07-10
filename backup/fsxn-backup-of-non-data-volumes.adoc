@@ -24,6 +24,7 @@ El backup de volúmenes que no son de datos de SnapCenter permite crear copias S
 
 
 
+[[configure-non-data-volume-resources]]
 === Configure los recursos que no sean de volúmenes en datos
 
 Siga estos pasos para configurar recursos de volúmenes sin datos:

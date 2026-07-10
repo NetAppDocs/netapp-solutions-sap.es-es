@@ -38,6 +38,7 @@ image:saphana-fas-nfs_image5a.png["Se añadió el par de alta disponibilidad adi
 
 
 
+[[sap-hana-backup]]
 == Backup de SAP HANA
 
 El software ONTAP presente en todas las controladoras de almacenamiento de NetApp proporciona un mecanismo integrado para realizar backups de bases de datos SAP HANA mientras se ejecuta sin que el rendimiento se ve afectado. Los backups de Snapshot de NetApp basados en el almacenamiento son una solución de backup totalmente compatible e integrada disponible para contenedores individuales de SAP HANA y para sistemas de contenedores de bases de datos multitenant (MDC) de SAP HANA con un solo inquilino o varios inquilinos.
@@ -62,6 +63,7 @@ Para obtener información detallada sobre la solución de copia de seguridad y r
 
 
 
+[[sap-hana-disaster-recovery]]
 == Recuperación ante desastres de SAP HANA
 
 La recuperación ante desastres de SAP HANA se puede llevar a cabo a nivel de base de datos mediante la replicación del sistema SAP HANA o en la capa de almacenamiento mediante tecnologías de replicación de almacenamiento. La siguiente sección ofrece información general sobre las soluciones de recuperación ante desastres basadas en la replicación de almacenamiento.
@@ -70,6 +72,7 @@ Para obtener información detallada acerca de las soluciones de recuperación an
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Replicación de almacenamiento basada en SnapMirror
 
 La siguiente figura muestra una solución de recuperación ante desastres en tres sitios que utiliza la replicación sincrónica de SnapMirror en el centro de datos de recuperación ante desastres local y SnapMirror asíncrono para replicar datos en el centro de datos de recuperación ante desastres remoto.
@@ -90,6 +93,7 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 
 
+[[storage-replication-based-on-metrocluster]]
 === Replicación de almacenamiento basada en MetroCluster
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles si se produce una conmutación por error ante desastres.

@@ -40,6 +40,7 @@ NOTE: Según el número de hosts SAP HANA y la velocidad de conexión utilizada,
 
 
 
+[[vmware-specific-network-setup]]
 == Configuración de red específica de VMware
 
 Una configuración y un diseño de red adecuados son cruciales, ya que todos los datos para las instancias de SAP HANA, incluidos los datos críticos para el rendimiento y los volúmenes de registros para la base de datos, se proporcionan a través de NFS en esta solución. Se utiliza una red de almacenamiento dedicada para separar el tráfico NFS del tráfico de comunicación y acceso de usuarios entre los nodos SAP HANA. Cada nodo SAP HANA requiere una conexión de red dedicada redundante con un ancho de banda mínimo de 10 GB. También se admite un mayor ancho de banda. Esta red debe ampliarse de extremo a extremo desde la capa de almacenamiento, hasta el switch de red e informática hasta el sistema operativo invitado alojado en VMware vSphere. Además de la infraestructura de conmutación física, se utiliza un switch distribuido de VMware (VDS) para proporcionar un rendimiento y una gestión adecuados del tráfico de red en la capa del hipervisor.

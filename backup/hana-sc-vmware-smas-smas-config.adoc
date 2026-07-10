@@ -18,6 +18,7 @@ En este artículo se tratan los pasos de configuración necesarios para esta sol
 
 
 
+[[pre-requisites]]
 == Requisitos previos
 
 Los clústeres de almacenamiento y las SVM relevantes deben tener una relación entre iguales.
@@ -30,6 +31,7 @@ image:sc-saphana-vmware-smas-image11.png["Figura que muestra el contenido que se
 
 
 
+[[storage-layout-and-consistency-group-configuration]]
 == Configuración de la distribución de almacenamiento y del grupo de consistencia
 
 En la documentación de ONTAP https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#key-concepts["Información general sobre la sincronización activa de SnapMirror en ONTAP"], se describe a continuación el concepto de grupos de consistencia con SnapMirror sincronización activa:
@@ -44,6 +46,7 @@ image:sc-saphana-vmware-smas-image12.png["Figura que muestra el contenido que se
 
 
 
+[[initiator-group-configuration]]
 == Configuración del iGroup
 
 En nuestra configuración de laboratorio, creamos un iGroup que incluye las dos SVM de almacenamiento que se usan para la replicación síncrona activa de SnapMirror. En la configuración de sincronización activa de SnapMirror descrita más adelante, definiremos que el iGroup formará parte de la replicación.
@@ -59,12 +62,14 @@ NOTE: En una configuración de acceso no uniforme, el iGroup del clúster de alm
 
 
 
+[[configure-protection-with-ontap-system-manager]]
 == Configure la protección con el administrador del sistema de ONTAP
 
 image:sc-saphana-vmware-smas-image15.png["Figura que muestra el contenido que se está discutiendo"]
 
 
 
+[[consistency-group-and-initiator-group-replication]]
 === Replicación del grupo de consistencia e iGroup
 
 Debe crearse un nuevo grupo de consistencia, y las tres LUN del sistema HANA deben agregarse al grupo de consistencia.
@@ -84,6 +89,7 @@ Debe configurarse el clúster de almacenamiento de destino y debe estar habilita
 
 
 
+[[synchronisation]]
 === Sincronización
 
 En el clúster de almacenamiento A700 (origen), la nueva relación ahora se muestra en la lista.
@@ -96,12 +102,14 @@ image:sc-saphana-vmware-smas-image19.png["Figura que muestra el contenido que se
 
 
 
+[[infrastructure-datastore]]
 == Almacén de datos de infraestructura
 
 El almacén de datos, donde se almacenan las imágenes del sistema operativo del sistema HANA, SnapCenter y el complemento de vSphere, se replica de la misma manera que se describe para los almacenes de datos de la base de datos de HANA.
 
 
 
+[[primary-site]]
 == Sitio principal
 
 El comportamiento de la sincronización activa de SnapMirror es simétrico, con una excepción importante: La configuración del sitio principal.

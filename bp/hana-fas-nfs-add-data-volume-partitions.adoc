@@ -21,6 +21,7 @@ NOTE: El uso de dos o más volúmenes individuales para el volumen de datos est�
 
 
 
+[[enabling-additional-data-volume-partitions]]
 == Activación de particiones de volumen de datos adicionales
 
 . Para habilitar particiones de volúmenes de datos adicionales, añada la siguiente entrada dentro `global.ini` Uso de SAP HANA Studio o Cockpit en la configuración SYSTEMDB.
@@ -35,6 +36,7 @@ NOTE: Adición manual del parámetro a la `global.ini` file requiere el reinicio
 
 
 
+[[volume-configuration-for-a-single-host-sap-hana-system]]
 == Configuración de volumen para un sistema SAP HANA de un solo host
 
 La distribución de los volúmenes para un sistema SAP HANA con un único host, con varias particiones, es como la distribución de un sistema con una partición de volumen de datos, pero con un volumen de datos adicional almacenado en un agregado diferente, como el volumen de registro y el otro volumen de datos. En la siguiente tabla se muestra un ejemplo de configuración de un sistema host único de SAP HANA con dos particiones de volúmenes de datos.
@@ -66,6 +68,7 @@ Cree el nuevo volumen de datos y móntelo en el espacio de nombres mediante el A
 
 
 
+[[volume-configuration-for-multiple-host-sap-hana-system]]
 == Configuración de volumen para el sistema SAP HANA de varios hosts
 
 La distribución de los volúmenes para un sistema SAP HANA con varios hosts, con varias particiones, es como la distribución de un sistema con una partición de volumen de datos, pero con un volumen de datos adicional almacenado en un agregado diferente como el volumen de registro y el otro volumen de datos. En la siguiente tabla se muestra un ejemplo de configuración de un sistema SAP HANA de varios hosts con dos particiones de volúmenes de datos.
@@ -151,6 +154,7 @@ Cree el nuevo volumen de datos y móntelo en el espacio de nombres mediante el A
 
 
 
+[[host-configuration]]
 == Configuración de hosts
 
 Además de las tareas descritas en la secciónlink:hana-fas-nfs-host-setup.html["“Configuración del host”,"], debe crear los puntos de montaje adicionales y las entradas fstab para los nuevos volúmenes de datos adicionales, y debe montar los nuevos volúmenes.
@@ -205,6 +209,7 @@ NOTE: Utilice una interfaz virtual de almacenamiento diferente para conectarse a
 
 
 
+[[adding-an-additional-data-volume-partition]]
 == Adición de una partición de volumen de datos adicional
 
 Ejecute la siguiente sentencia SQL en la base de datos de tenant para agregar una partición de volumen de datos adicional a la base de datos de tenant. Utilice la ruta a volúmenes adicionales:

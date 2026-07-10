@@ -17,6 +17,7 @@ En este capítulo se describe la instalación y configuración del sistema SAP H
 
 
 
+[[storage-configuration]]
 == Configuración del almacenamiento
 
 Para cumplir con los KPI de rendimiento de almacenamiento definidos por SAP para los sistemas HANA de producción, se deben configurar LUN y almacenes de datos dedicados para los sistemas de archivos de datos y registros del sistema HANA. Los almacenes de datos no deben compartirse entre varios sistemas HANA ni con otras cargas de trabajo.
@@ -39,6 +40,7 @@ image:sc-hana-asrr2-vmfs-image3.png["Figura que muestra el contenido que se est�
 
 
 
+[[vm-disk-configuration]]
 == Configuración de discos de máquina virtual
 
 Se deben agregar tres discos nuevos (VMDK) a la máquina virtual HANA. Cada disco pertenece a uno de los almacenes de datos creados previamente, como se muestra en la imagen a continuación.
@@ -76,6 +78,7 @@ sr0 11:0 1 17.1G 0 rom
 ....
 
 
+[[vm-parameter-disk-enableuuid]]
 == Parámetro de máquina virtual disk.EnableUUID
 
 Este parámetro debe configurarse como corresponde; de ​​lo contrario, el descubrimiento automático de la base de datos de SnapCenter fallará.
@@ -89,10 +92,12 @@ image:sc-hana-asrr2-vmfs-image7.png["Figura que muestra el contenido que se est�
 
 
 
+[[file-system-preparation-at-linux-host]]
 == Preparación del sistema de archivos en el host Linux
 
 
 
+[[creation-of-xfs-filesystem-on-new-disks]]
 === Creación del sistema de archivos xfs en nuevos discos
 
 Se ha creado un sistema de archivos xfs en cada uno de los tres nuevos discos.
@@ -141,6 +146,7 @@ hana-8:~ #
 ....
 
 
+[[creation-of-mount-points]]
 === Creación de puntos de montaje
 
 ....
@@ -153,6 +159,7 @@ hana-8:/ # chmod -R 777 /hana/shared
 ....
 
 
+[[configuration-of-etcfstab]]
 === Configuración de /etc/fstab
 
 ....
@@ -213,6 +220,7 @@ hana-8:/ #
 ....
 
 
+[[hana-installation]]
 == Instalación de HANA
 
 Ahora puede ejecutarse la instalación de HANA.

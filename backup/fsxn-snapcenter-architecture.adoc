@@ -20,6 +20,7 @@ SnapCenter gestiona los datos a través de terminales en el Data Fabric con la t
 
 
 
+[[snapcenter-components]]
 == Componentes de SnapCenter
 
 SnapCenter incluye el servidor SnapCenter, el paquete de plugins de SnapCenter para Windows y el paquete de plugins de SnapCenter para Linux. Cada paquete contiene complementos de SnapCenter para diferentes aplicaciones y componentes de la infraestructura.
@@ -28,6 +29,7 @@ image:amazon-fsx-image5.png["Figura que muestra el cuadro de diálogo de entrada
 
 
 
+[[snapcenter-sap-hana-backup-solution]]
 == Solución de backup SAP HANA de SnapCenter
 
 La solución de backup SnapCenter para SAP HANA cubre las siguientes áreas:
@@ -82,6 +84,7 @@ Al ejecutar un backup de Snapshot basado en el almacenamiento de la base de dato
 
 
 
+[[scope-of-this-document]]
 == Alcance de este documento
 
 Este documento describe la opción de configuración de SnapCenter más común para un sistema de host único SAP HANA MDC con un solo inquilino en FSx para ONTAP. Son posibles otras opciones de configuración y, en algunos casos, necesarias para sistemas SAP HANA específicos, por ejemplo, para un sistema host múltiple. Para obtener una descripción detallada sobre otras opciones de configuración, consulte link:hana-sc-generic-concepts.html["Conceptos y prácticas recomendadas de SnapCenter (netapp.com)"^].
@@ -90,6 +93,7 @@ En este documento, utilizamos la consola de Amazon Web Services (AWS) y la inter
 
 
 
+[[data-protection-strategy]]
 == Estrategia de protección de datos
 
 La siguiente figura muestra una arquitectura de backup típica para SAP HANA en FSX para ONTAP. El sistema HANA se encuentra en la zona de disponibilidad 1 de AWS y utiliza un FSX para el sistema de archivos ONTAP dentro de la misma zona de disponibilidad. Se ejecutan las operaciones de backup de Snapshot para los datos y el volumen compartido de la base de datos de HANA. Además de los backups de Snapshot locales, que se conservan durante 3-5 días, los backups también se replican en un almacenamiento externo para su retención a largo plazo. El almacenamiento de backup externo es un segundo FSX para el sistema de archivos ONTAP ubicado en una zona de disponibilidad de AWS diferente. Los backups de los datos de HANA y el volumen compartido se replican con SnapVault al segundo FSX para el sistema de archivos ONTAP y se mantienen durante 2-3 semanas.
@@ -177,6 +181,7 @@ En este ejemplo, las políticas de protección y la retención para los recursos
 
 
 
+[[example-lab-setup]]
 == Configuración de ejemplo de laboratorio
 
 La siguiente configuración de laboratorio se utilizó como configuración de ejemplo para el resto de este documento.

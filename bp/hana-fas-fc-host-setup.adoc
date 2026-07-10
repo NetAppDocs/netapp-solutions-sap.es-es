@@ -20,6 +20,7 @@ La documentación también contiene información sobre las configuraciones de mu
 
 
 
+[[configure-multipathing]]
 == Configure el acceso multivía
 
 

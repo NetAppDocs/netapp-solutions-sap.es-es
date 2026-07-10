@@ -18,12 +18,14 @@ A continuación figuran los requisitos para la instalación del software SAP HAN
 
 
 
+[[install-on-single-host-system]]
 == Instale en un sistema de host único
 
 La instalación del software SAP HANA no requiere ninguna preparación adicional para un sistema de un solo host.
 
 
 
+[[install-on-multiple-host-system]]
 == Instale en un sistema con varios hosts
 
 

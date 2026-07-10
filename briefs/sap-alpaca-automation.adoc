@@ -18,6 +18,7 @@ Este documento se centra en la integración de las tecnologías NetApp® Snapsho
 
 
 
+[[solution-overview]]
 == Descripción general de la solución
 
 Las operaciones de los sistemas y las soluciones SAP son muy complejas. Sin embargo, para las empresas que utilizan SAP, los sistemas y servicios son fundamentales para sus procesos empresariales. Al automatizar las tareas operativas diarias periódicas, como las operaciones de copia y actualización del sistema, los administradores de sistemas SAP pueden gestionar más sistemas con menos esfuerzo, producir resultados repetibles y reducir el error humano.
@@ -32,12 +33,14 @@ Este documento describe cómo se integra ALPACA con NetApp SnapCenter®, la herr
 
 
 
+[[target-audience]]
 === Público objetivo
 
 Este documento está dirigido a los administradores de sistemas SAP que han realizado copias del sistema SAP manualmente y desean automatizar esta actividad con ALPACA. El objetivo previsto de combinar las tecnologías Snapshot y FlexClone de NetApp, orquestadas por NetApp SnapCenter, con los flujos de trabajo DE ALPACA es reducir la duración de las copias del sistema SAP totalmente automatizadas.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === Situaciones de clonación, copia y actualización del sistema SAP
 
 El término copia del sistema SAP se suele utilizar como sinónimo de tres procesos distintos: Clon del sistema SAP, copia del sistema SAP y actualización del sistema SAP. Es importante distinguir entre estas operaciones, ya que los flujos de trabajo y los casos de uso difieren.
@@ -61,6 +64,7 @@ Aunque se trata de tres casos de uso diferentes, el proceso de gestión de datos
 
 
 
+[[solution-technology]]
 === Tecnología de soluciones
 
 La solución general consta de estos componentes principales:
@@ -90,6 +94,7 @@ image:sap-alpaca-image5.png["Imagen que muestra el servidor de ALPACAS, el servi
 
 
 
+[[use-case-summary]]
 === Resumen de casos de uso
 
 Existen varios casos en los que los datos de un sistema de origen se deben poner a disposición de un sistema de destino con fines de prueba o formación. Estos sistemas de prueba y formación deben actualizarse regularmente con los datos del sistema de origen para asegurarse de que las pruebas y la formación se realizan con el conjunto de datos actual. Estas operaciones de actualización del sistema consisten en varias tareas en las capas de infraestructura, base de datos y aplicación, que pueden tardar varios días en función del nivel de automatización.
@@ -102,12 +107,14 @@ image:sap-alpaca-image6.png["Imagen que muestra las posibles mejoras de eficienc
 
 
 
+[[integrating-the-technology-components]]
 === Integración de los componentes tecnológicos
 
 La integración real de SnapCenter en un flujo de trabajo DE ALPACA consiste en utilizar scripts de shell para acceder a la API REST DE NetApp SnapCenter. Esta integración basada en API de REST crea una copia Snapshot del sistema de origen SAP, crea un volumen FlexClone y lo monta en el sistema de destino de SAP. Los administradores de almacenamiento y SAP saben cómo desarrollar scripts que SnapCenter activa y ejecuta el agente SnapCenter para automatizar las tareas operativas diarias recurrentes. Esta arquitectura poco ligada, que activa tareas de SnapCenter a través de scripts de shell, les permite reutilizar los procedimientos de automatización existentes para lograr los resultados deseados más rápido utilizando ALPACA como motor de flujos de trabajo para una automatización integral.
 
 
 
+[[conclusion]]
 == Conclusión
 
 La combinación de la tecnología de gestión de datos de ALPACA y NetApp proporciona una potente solución que puede reducir en gran medida el tiempo y el esfuerzo necesarios para las tareas más complejas y laboriosas para la administración de sistemas SAP. Esta combinación también puede ayudar a evitar las desviaciones de la configuración que puede provocar un error humano de un sistema a otro.
@@ -116,6 +123,7 @@ Debido a que las actualizaciones del sistema, las copias, los clones y las prueb
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Si quiere más información sobre la información contenida en este documento, consulte los siguientes documentos y sitios web:
@@ -127,6 +135,7 @@ Si quiere más información sobre la información contenida en este documento, c
 
 
 
+[[version-history]]
 == Historial de versiones
 
 [cols="25,25,50"]

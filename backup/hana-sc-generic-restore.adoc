@@ -42,6 +42,7 @@ NOTE: Si el cifrado de volúmenes está activado y se utiliza SAP local secure s
 
 
 
+[[automated-restore-and-recovery-for-sap-hana-mdc-systems-with-a-single-tenant]]
 == Restauración y recuperación automatizadas para sistemas SAP HANA MDC con un solo inquilino
 
 Una operación de restauración se inicia seleccionando una copia de seguridad instantánea en la vista de topología de recursos y haciendo clic en Restaurar.
@@ -112,6 +113,7 @@ image:hana-sc-generic-image-106.png["ancho=357, alto=439"]
 
 
 
+[[manual-recovery-with-hana-studio]]
 == Recuperación manual con HANA Studio
 
 Para restaurar y recuperar un sistema SAP HANA MDC con uno o varios inquilinos mediante SAP HANA Studio y SnapCenter, complete los siguientes pasos:
@@ -307,6 +309,7 @@ NOTE: Para un sistema SAP HANA MDC con varios inquilinos, debe repetir la recupe
 
 
 
+[[manual-recovery-with-sql-commands]]
 == Recuperación manual con comandos SQL
 
 También puede utilizar sentencias SQL para la recuperación del sistema HANA.
@@ -325,6 +328,7 @@ hdbsql SYSTEMDB=> RECOVER DATABASE FOR SS1 UNTIL TIMESTAMP '2026-08-26 10:55:49'
 ....
 
 
+[[single-tenant-restore-and-recovery]]
 == Restauración y recuperación de un solo inquilino
 
 Una operación de restauración y recuperación de un solo inquilino con SnapCenter es muy similar al flujo de trabajo descrito en el tema anterior. link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Recuperación manual con HANA Studio"].
@@ -355,6 +359,7 @@ Para restaurar y recuperar un sistema de un solo inquilino de SAP HANA MDC media
 
 
 
+[[restore-of-non-data-volumes]]
 == Restauración de volúmenes que no son de datos
 
 Una operación de restauración de un volumen sin datos se inicia seleccionando una copia de seguridad instantánea en la vista de topología del recurso de volumen sin datos y haciendo clic en Restaurar.

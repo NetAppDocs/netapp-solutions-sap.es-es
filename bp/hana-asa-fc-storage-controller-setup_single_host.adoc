@@ -10,6 +10,7 @@ summary: En esta sección se describe la configuración del sistema de almacenam
 
 
 
+[[single-host]]
 == Host único
 
 [role="lead"]
@@ -17,6 +18,7 @@ Esta sección describe la configuración del sistema de almacenamiento NetApp es
 
 
 
+[[lun-overview]]
 == Visión general de LUN
 
 La siguiente tabla muestra la configuración de LUN de un sistema SAP HANA de un solo host.
@@ -41,12 +43,15 @@ NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/S
 
 
 
+[[creating-luns-and-mapping-luns-to-initiator-groups]]
+[[lun_create]]
 == Creación de LUN y asignación de LUN a grupos iniciadores
 
 Puede utilizar NetApp ONTAP System Manager para crear volúmenes de almacenamiento y LUN y asignarlos a los igroups de los servidores y la CLI de ONTAP .
 
 
 
+[[creating-luns-and-mapping-luns-to-initiator-groups-using-the-cli]]
 === Creación de LUN y asignación de LUN a grupos de iniciadores mediante la CLI
 
 Esta sección muestra un ejemplo de configuración utilizando la línea de comandos con ONTAP 9 para un sistema de host único SAP HANA con SID FC5 usando LVM y dos LUN por grupo de volúmenes LVM:
@@ -82,6 +87,7 @@ lun map -path FC5_shared -igroup HANA-FC5
 
 
 
+[[creating-luns-and-mapping-luns-to-initiator-groups-using-the-gui]]
 === Creación de LUN y asignación de LUN a grupos de iniciadores mediante la GUI
 
 Esta sección muestra un ejemplo de configuración utilizando `ONTAP System Manager` para un sistema host único SAP HANA con SID FC5 que utiliza LVM y dos LUN por grupo de volúmenes LVM:
@@ -155,6 +161,7 @@ image:saphana_asa_fc_image19.png["Administrador del sistema ONTAP : descripción
 
 
 
+[[disable-autonomous-ransomware-protection-for-all-data-und-log-luns]]
 === Desactivar la protección autónoma contra ransomware para todos los LUN de datos y log
 
 Abre el menú contextual de cada LUN de datos y registro y desactiva la protección contra ransomware

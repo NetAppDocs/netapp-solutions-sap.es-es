@@ -20,6 +20,7 @@ En la documentación también se incluye información sobre las configuraciones 
 
 
 
+[[configure-multipathing]]
 === Configure el acceso multivía
 
 

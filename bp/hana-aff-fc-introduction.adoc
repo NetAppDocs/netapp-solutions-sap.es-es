@@ -20,6 +20,7 @@ Marco Schoen: NetApp
 
 
 
+[[introduction]]
 == Introducción
 
 La familia de productos NetApp AFF/ ASA A-Series ha sido certificada para su uso con SAP HANA en proyectos de integración de centros de datos (TDI) personalizados.
@@ -48,6 +49,7 @@ En un entorno de varios hosts de SAP HANA, se utiliza el conector de almacenamie
 
 
 
+[[sap-hana-tailored-data-center-integration]]
 == SAP HANA integración personalizada del centro de datos
 
 Los sistemas de almacenamiento AFF de NetApp cuentan con la certificación del programa SAP HANA TDI mediante protocolos NFS (NAS) y FC (SAN). Pueden ponerse en marcha en cualquiera de los escenarios actuales de SAP HANA, como SAP Business Suite en HANA, S/4HANA, BW/4HANA o SAP Business Warehouse en HANA en configuraciones de un solo host o de varios hosts. Cualquier servidor certificado para su uso con SAP HANA se puede combinar con soluciones de almacenamiento certificadas de NetApp. En la siguiente figura, se muestra información general de la arquitectura.

@@ -18,6 +18,7 @@ Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP est
 
 
 
+[[tenant-names-at-target-system]]
 == Nombre(s) de inquilino en el sistema de destino
 
 Los pasos necesarios para realizar una actualización del sistema SAP HANA dependen de la configuración del inquilino del sistema de origen y del nombre de inquilino necesario en el sistema de destino, como se muestra en la siguiente figura.
@@ -35,6 +36,7 @@ image:sc-copy-clone-image11.png[""]
 
 
 
+[[system-refresh-workflow-with-enabled-sap-hana-encryption]]
 == Flujo de trabajo de actualización del sistema con cifrado SAP HANA habilitado
 
 Cuando el cifrado de persistencia de SAP HANA está activado y, dependiendo del almacén seguro utilizado para las claves raíz de cifrado, instancia SFSS o local secure store LSS, se requieren pasos adicionales antes de que puedas recuperar la base de datos SAP HANA en el sistema de destino.
@@ -47,6 +49,7 @@ Las operaciones necesarias se describen con más detalle en los siguientes capí
 
 
 
+[[secure-store-sfss]]
 === Almacén seguro SFSS
 
 En el sistema de origen, es necesario crear una copia de seguridad de las claves raíz de cifrado para la base de datos del sistema, así como para todas las bases de datos de arrendatarios. Los archivos de copia de seguridad deben copiarse en el sistema de destino y las claves raíz deben importarse del backup antes de que se ejecute la operación de recuperación.
@@ -145,6 +148,7 @@ La salida anterior muestra dos inquilinos con dbid=3 y dbid=4. Si el sistema de 
 
 
 
+[[secure-store-lss]]
 === Almacén seguro LSS
 
 

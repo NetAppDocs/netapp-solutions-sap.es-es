@@ -20,6 +20,7 @@ La implementación requiere servidores SAP HANA certificados, sistemas de almace
 
 
 
+[[infrastructure-requirements]]
 == Requisitos de infraestructura
 
 Asegúrese de que los siguientes componentes y configuraciones estén en su lugar:
@@ -36,6 +37,7 @@ Asegúrese de que los siguientes componentes y configuraciones estén en su luga
 
 
 
+[[important-considerations]]
 == Consideraciones importantes
 
 * Se utilizará SR-IOV para la comunicación de red de SAP HANA y para el acceso al almacenamiento mediante NFS, siempre que sea posible, aunque también se admite la conexión en puente. Cada función virtual (VF) asignada a una máquina virtual requiere un ancho de banda mínimo de 10 Gbit/s.
@@ -45,6 +47,7 @@ Asegúrese de que los siguientes componentes y configuraciones estén en su luga
 
 
 
+[[additional-resources]]
 == Recursos adicionales
 
 * Para obtener la información más reciente, incluidas las arquitecturas de CPU compatibles y las limitaciones, consulta la SAP Note https://me.sap.com/notes/3741904["3741904 - SAP HANA en virtualización KVM de SUSE con SLES 15 SP7 - SAP for Me"].
@@ -54,6 +57,7 @@ Asegúrese de que los siguientes componentes y configuraciones estén en su luga
 
 
 
+[[whats-next]]
 == ¿Que sigue?
 
 Una vez que hayas revisado los requisitos de implementación,link:kvm-hana-network.html["configurar interfaces de red SR-IOV"] .

@@ -24,6 +24,7 @@ La configuración de un host de complemento central consta de los siguientes pas
 
 
 
+[[snapcenter-hana-plug-in-deployment]]
 == Implementación del complemento SnapCenter HANA
 
 Los requisitos del anfitrión se enumeran en https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_host_requirements_to_install_snapcenter_plug_in_package_for_linux.html["Requisitos de host para instalar el paquete de complementos de SnapCenter para Linux"].
@@ -38,6 +39,7 @@ image:hana-sc-generic-image-060.png["ancho=601, alto=166"]
 
 
 
+[[sap-hana-hdbsql-client-software-installation-and-configuration]]
 == Instalación y configuración del software de cliente SAP HANA hdbsql
 
 El software cliente SAP HANA hdbsql debe estar instalado en el mismo host en el que está instalado el complemento SAP HANA. El software se puede descargar desde https://support.sap.com/en/index.html["Portal de asistencia SAP"].
@@ -60,6 +62,7 @@ HANA_HDBSQL_CMD=/usr/sap/hdbclient/hdbsql
 ....
 
 
+[[sap-hana-user-store-configuration-for-a-central-plug-in-host]]
 == Configuración del almacén de usuarios de SAP HANA para un host de complemento central
 
 Para cada sistema HANA administrado por el host de complemento central, se debe configurar una clave de almacén de usuarios de SAP HANA. Antes de poder configurar la clave en el host del complemento central, se debe crear un usuario de base de datos como se describe en link:hana-sc-generic-sc-resource-config.html#sap-hana-backup-user-and-sap-hana-user-store-configuration["Configuración del almacén de usuarios de SAP HANA y del usuario de copia de seguridad de SAP HANA"].
@@ -97,6 +100,7 @@ C:\Program Files\sap\hdbclient>
 ....
 
 
+[[hana-manual-resource-configuration]]
 == Configuración manual de recursos de HANA
 
 Se crea un recurso del sistema HANA configurado manualmente en SnapCenter haciendo clic en el botón Agregar en la vista de recursos.

@@ -21,6 +21,7 @@ NOTE: Póngase en contacto con su representante de ventas de NetApp o de partner
 
 
 
+[[performance-considerations]]
 == Consideraciones de rendimiento
 
 SAP ha definido un conjunto estático de indicadores de rendimiento clave del almacenamiento (KPI). Estos KPI son válidos para todos los entornos SAP HANA de producción independientemente del tamaño de la memoria de los hosts de la base de datos y de las aplicaciones que utilizan la base de datos SAP HANA. Estos KPI son válidos para entornos de un solo host, de varios hosts, Business Suite en HANA, Business Warehouse en HANA, S/4HANA y BW/4HANA. Por lo tanto, el enfoque actual de ajuste de tamaño del rendimiento depende únicamente del número de hosts SAP HANA activos conectados al sistema de almacenamiento.
@@ -36,6 +37,7 @@ El número máximo de hosts SAP HANA que se pueden ejecutar en una bandeja de di
 
 
 
+[[ns224-nvme-shelf]]
 === Bandeja NS224 NVMe
 
 Un SSD de NVMe (datos) admite hasta 2/5 hosts SAP HANA en función del disco NVMe específico que se utilice.
@@ -45,6 +47,7 @@ NOTE: Añadir más bandejas de discos no aumenta el número máximo de hosts SAP
 
 
 
+[[mixed-workloads]]
 == Cargas de trabajo mixtas
 
 Se admiten cargas de trabajo de SAP HANA y otras aplicaciones que se ejecutan en la misma controladora de almacenamiento o en el mismo agregado de almacenamiento. Sin embargo, una mejor práctica de NetApp es separar las cargas de trabajo de SAP HANA de las demás cargas de trabajo de aplicaciones.
@@ -55,6 +58,7 @@ La herramienta de pruebas HCMT de SAP debe utilizarse para comprobar si se puede
 
 
 
+[[capacity-considerations]]
 == Consideraciones de capacidad
 
 Existe una descripción detallada de los requisitos de capacidad para SAP HANA https://launchpad.support.sap.com/#/notes/1900823["Nota de SAP 1900823"^] whitepaper.
@@ -64,6 +68,7 @@ NOTE: El tamaño de la capacidad del entorno general de SAP con varios sistemas 
 
 
 
+[[configuration-of-performance-test-tool]]
 == Configuración de la herramienta de prueba de rendimiento
 
 A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para el sistema de archivos y almacenamiento utilizado. Estos parámetros también deben definirse para la herramienta de prueba de rendimiento de SAP cuando se realiza una prueba del rendimiento de almacenamiento con la herramienta de prueba de SAP.
@@ -179,6 +184,7 @@ Estas variables deben utilizarse para la configuración de prueba. Este suele se
 ....
 
 
+[[storage-sizing-process-overview]]
 == Descripción general del proceso de configuración del almacenamiento
 
 El número de discos por host HANA y la densidad de host de SAP HANA para cada modelo de almacenamiento se determinaron mediante la herramienta de prueba de SAP HANA.

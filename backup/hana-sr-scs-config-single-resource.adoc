@@ -41,6 +41,7 @@ image:saphana-sr-scs-image29.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[snapcenter-configuration]]
 == Configuración de SnapCenter
 
 La siguiente figura muestra la configuración del laboratorio y una descripción general de la configuración de SnapCenter necesaria.
@@ -73,6 +74,7 @@ image:saphana-sr-scs-image33.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[snapcenter-backup-operation]]
 == Operación de backup de SnapCenter
 
 Las operaciones de backup ahora se ejecutan de la forma habitual. El mantenimiento de backups de datos y registros se realiza independientemente del host SAP HANA principal o secundario.
@@ -96,6 +98,7 @@ image:saphana-sr-scs-image36.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[restore-and-recovery]]
 == Restauración y recuperación
 
 Como hemos visto anteriormente, es necesario poder identificar dónde se creó el backup seleccionado para definir la operación de restauración necesaria. Si la base de datos SAP HANA sigue conectada, puede usar SAP HANA Studio para identificar el host en el que se creó el backup. Si la base de datos está sin conexión, la información solo está disponible en el registro de trabajos de backup de SnapCenter.
@@ -124,6 +127,7 @@ image:saphana-sr-scs-image38.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[snapcenter-restore-of-the-valid-backup-only]]
 === Restauración SnapCenter únicamente del backup válido
 
 La siguiente figura muestra información general sobre el escenario de restauración y recuperación descrito en esta sección.
@@ -167,6 +171,7 @@ image:saphana-sr-scs-image44.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[snapcenter-restore-of-valid-backup-and-crash-image]]
 === Restauración SnapCenter de una imagen de bloqueo y backup válida
 
 La siguiente figura muestra información general sobre el escenario de restauración y recuperación descrito en esta sección.

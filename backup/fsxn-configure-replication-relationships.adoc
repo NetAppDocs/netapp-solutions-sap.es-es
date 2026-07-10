@@ -24,6 +24,7 @@ Puede encontrar información adicional sobre las opciones de configuración de S
 
 
 
+[[peer-fsx-for-ontap-file-systems]]
 == FSX de paridad para sistemas de archivos ONTAP
 
 ....
@@ -74,6 +75,7 @@ FsxId05f7f00af49dc7a3e    1-80-000011           Available      ok
 ....
 
 
+[[peer-svms]]
 == SVM de paridad
 
 ....
@@ -96,6 +98,7 @@ sapcc-backup-target-zone5
 ....
 
 
+[[create-a-target-volume]]
 == Cree un volumen de destino
 
 Debe crear el volumen objetivo con el tipo `DP` para marcarla como un destino de replicación.
@@ -106,6 +109,7 @@ FsxId05f7f00af49dc7a3e::> volume create -vserver sapcc-backup-target-zone5  -vol
 ....
 
 
+[[create-a-snapmirror-policy]]
 == Cree una política de SnapMirror
 
 La política de SnapMirror y la regla añadida definen la retención y la etiqueta de SnapMirror para identificar los Snapshots que deben replicarse. Al crear la política de SnapCenter más adelante, debe usar la misma etiqueta.
@@ -127,6 +131,7 @@ FsxId00fa9e3c784b6abbb
 ....
 
 
+[[create-snapmirror-relationship]]
 == Crear una relación de SnapMirror
 
 Ahora se define la relación entre el volumen de origen y el de destino, así como el tipo XDP y la política que hemos creado anteriormente.
@@ -137,6 +142,7 @@ Operation succeeded: snapmirror create for the relationship with destination "sa
 ....
 
 
+[[initialize-snapmirror]]
 == Inicializar SnapMirror
 
 Con este comando, se inicia la replicación inicial. Esta es una transferencia completa de todos los datos del volumen de origen al volumen objetivo.

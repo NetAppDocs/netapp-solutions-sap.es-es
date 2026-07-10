@@ -15,6 +15,7 @@ summary:
 
 
 
+[[configure-snapcenter-database-user]]
 == Configurar el usuario de la base de datos de SnapCenter
 
 Se debe crear un almacén de usuarios para un usuario de base de datos del sistema, que debe utilizar SnapCenter.
@@ -23,6 +24,7 @@ image:sc-hana-asrr2-vmfs-image8.png["Figura que muestra el contenido que se est�
 
 
 
+[[configure-hdb-userstore-key]]
 == Configurar la clave del almacén de usuarios de hdb
 
 Se debe crear una clave de almacén de usuario para el usuario vfsadm. El número de instancia de HANA debe configurarse según corresponda para la comunicación con el puerto. En nuestra instancia de configuración se utiliza el número “45”.

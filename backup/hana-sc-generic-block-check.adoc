@@ -46,6 +46,7 @@ Los siguientes capítulos describen la configuración y ejecución de las difere
 
 
 
+[[consistency-checks-with-hdbpersdiag-using-the-local-snapshot-directory]]
 == Comprobaciones de coherencia con hdbpersdiag utilizando el directorio de instantáneas local
 
 Dentro de SnapCenter se crea una política dedicada para las operaciones de hdbpersdiag con una programación diaria y una retención de dos. No utilizamos la programación semanal, ya que entonces tendríamos al menos 2 copias de seguridad instantáneas (retención mínima = 2), donde una de ellas tendría hasta dos semanas de antigüedad.
@@ -179,6 +180,7 @@ LobFileIDMap OK
 ....
 
 
+[[consistency-checks-with-hdbpersdiag-using-a-central-verification-host]]
 == Comprobaciones de coherencia con hdbpersdiag mediante un host de verificación central
 
 La siguiente figura muestra una vista de alto nivel de la arquitectura de la solución y el flujo de trabajo. Con un host de verificación central, el host de verificación se puede utilizar para comprobar la coherencia de varios sistemas HANA diferentes. La solución aprovecha los flujos de trabajo de creación y eliminación de clones de SnapCenter para adjuntar un volumen clonado del sistema HANA que debe verificarse en el host de verificación. Se utiliza un script posterior a la clonación para ejecutar la herramienta HANA hdbpersdiag. Como segundo paso, se utiliza el flujo de trabajo de eliminación de clones de SnapCenter para desmontar y eliminar el volumen clonado.
@@ -220,6 +222,7 @@ NOTE: El script de ejemplo call-hdbpersdiag-flexclone.sh se proporciona tal cual
 
 
 
+[[manual-workflow-execution]]
 === Ejecución manual del flujo de trabajo
 
 En la mayoría de los casos, la operación de verificación de consistencia se ejecutará como una operación programada como se describe en el siguiente capítulo. Sin embargo, conocer el flujo de trabajo manual es útil para comprender los parámetros que se utilizan para el proceso automatizado.
@@ -369,6 +372,7 @@ SnapCenter ahora desmontará el volumen clonado del host de verificación y elim
 
 
 
+[[snapcenter-workflow-automation-using-powershell-scripts]]
 === Automatización del flujo de trabajo de SnapCenter mediante scripts de PowerShell
 
 En la sección anterior, los flujos de trabajo de creación de clones y eliminación de clones se ejecutaron mediante la interfaz de usuario de SnapCenter . Todos los flujos de trabajo también se pueden ejecutar con scripts de PowerShell o llamadas API REST, lo que permite una mayor automatización. La siguiente sección describe un ejemplo básico de script de PowerShell para ejecutar los flujos de trabajo de creación de clones y eliminación de clones de SnapCenter .
@@ -510,6 +514,7 @@ hana-7:/mnt/sapcc-share/hdbpersdiag #
 ....
 
 
+[[file-based-backup]]
 == Copia de seguridad basada en archivos
 
 SnapCenter admite la ejecución de una comprobación de integridad de bloque mediante una política en la que se selecciona la copia de seguridad basada en archivos como tipo de copia de seguridad.

@@ -23,6 +23,7 @@ image:saphana-dr-anf_image2.png["Figura que muestra el cuadro de diálogo de ent
 
 
 
+[[business-application-requirements]]
 == Requisitos de las aplicaciones empresariales
 
 Existen dos indicadores clave para las aplicaciones de negocio:
@@ -35,6 +36,7 @@ Estos requisitos se definen por el tipo de aplicación utilizada y la naturaleza
 
 
 
+[[high-availability]]
 == Alta disponibilidad
 
 La infraestructura para SAP HANA, como máquinas virtuales, redes y almacenamiento, debe tener componentes redundantes para garantizar de que no exista un único punto de error. MS Azure ofrece redundancia para los diferentes componentes de la infraestructura.
@@ -45,6 +47,7 @@ Si no se aceptan tiempos de inactividad de las aplicaciones en caso de un fallo 
 
 
 
+[[logical-corruption]]
 == Daño lógico
 
 La corrupción lógica puede deberse a errores de software, errores humanos o sabotaje. Desgraciadamente, la corrupción lógica no se puede hacer frente a menudo con soluciones estándares de alta disponibilidad y de recuperación ante desastres. Como resultado, dependiendo de la capa, la aplicación, el sistema de archivos o el almacenamiento donde se produjo el daño lógico, a veces no se pueden satisfacer los requisitos de objetivo de tiempo de recuperación y objetivo de punto de recuperación.
@@ -58,6 +61,7 @@ NOTE: Los pasos necesarios para configurar un sistema de reparación son idénti
 
 
 
+[[backups]]
 == Completos
 
 Los backups se crean para habilitar la restauración y recuperación de diferentes conjuntos de datos de un momento específico. Normalmente, estos backups se guardan durante un par de días a unas semanas.
@@ -70,6 +74,7 @@ Por el contrario, una solución de backup debe hacer frente a un daño lógico, 
 
 
 
+[[synchronous-or-asynchronous-data-replication]]
 == Replicación de datos síncrona o asíncrona
 
 El RPO determina principalmente el método de replicación de datos que se debe usar. Si el RPO debe ser cero, incluso cuando se pierde el almacenamiento primario y backup, los datos se deben replicar de forma síncrona. Sin embargo, existen limitaciones técnicas para la replicación síncrona como la distancia entre dos regiones de Azure. En la mayoría de los casos, la replicación síncrona no es adecuada para distancias superiores a 100 km debido a la latencia, por lo que esto no es una opción para la replicación de datos entre regiones de Azure.
@@ -78,6 +83,7 @@ Si se admite un objetivo de punto de recuperación de mayor tamaño, es posible 
 
 
 
+[[hana-system-replication-with-or-without-data-preload]]
 == Replicación del sistema HANA con o sin precarga de datos
 
 El tiempo de inicio de una base de datos SAP HANA es mucho más largo que el de las bases de datos tradicionales, ya que debe cargarse una gran cantidad de datos en la memoria antes de que la base de datos pueda proporcionar el rendimiento esperado. Por lo tanto, una parte significativa del objetivo de tiempo de recuperación es el tiempo necesario para iniciar la base de datos. Con cualquier replicación basada en almacenamiento y con la replicación del sistema HANA sin carga previa de los datos, se debe iniciar la base de datos de SAP HANA en caso de conmutación al nodo de respaldo en el sitio de recuperación ante desastres.

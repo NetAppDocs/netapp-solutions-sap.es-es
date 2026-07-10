@@ -27,6 +27,7 @@ Las siguientes secciones describen las diferentes operaciones para sistemas HANA
 
 
 
+[[sap-hana-snapshot-backups-in-snapcenter]]
 == Copias de seguridad de instantáneas de SAP HANA en SnapCenter
 
 La topología de recursos de SnapCenter muestra la lista de copias de seguridad creadas por SnapCenter. La siguiente figura muestra las copias de seguridad disponibles en el almacenamiento principal y resalta la copia de seguridad más reciente.
@@ -43,6 +44,7 @@ image:hana-sc-generic-image-066.png["ancho=601, alto=293"]
 
 
 
+[[sap-hana-snapshot-backups-in-sap-hana-studio]]
 == Copias de seguridad de instantáneas de SAP HANA en SAP HANA Studio
 
 Al realizar una copia de seguridad utilizando instantáneas de almacenamiento para un sistema SAP HANA MDC, se crea una copia instantánea del volumen de datos. Este volumen de datos contiene los datos de la base de datos del sistema, así como los datos de todas las bases de datos de inquilinos. Para reflejar esta arquitectura física, SAP HANA realiza internamente una instantánea combinada de la base de datos interna del sistema, así como de todas las bases de datos de los inquilinos, cada vez que SnapCenter activa una copia de seguridad de instantánea. Esto genera varias entradas de respaldo independientes en el catálogo de respaldo de SAP HANA: una para la base de datos del sistema y una para cada base de datos de inquilino.
@@ -58,6 +60,7 @@ NOTE: SnapCenter solo tiene conocimiento de sus propias copias de seguridad. Las
 
 
 
+[[sap-hana-snapshot-backups-on-storage-layer]]
 == Copias de seguridad instantáneas de SAP HANA en la capa de almacenamiento
 
 Para ver las copias de seguridad en la capa de almacenamiento, puede utilizar NetApp System Manager y seleccionar el volumen de la base de datos. La siguiente captura de pantalla muestra las copias de seguridad disponibles para el volumen de base de datos SS1_data_mnt00001 en el almacenamiento principal. La copia de seguridad resaltada es la copia de seguridad que se muestra en SnapCenter y SAP HANA Studio en las imágenes anteriores y tiene la misma convención de nomenclatura.
@@ -70,6 +73,7 @@ image:hana-sc-generic-image-070.png["ancho=601, alto=294"]
 
 
 
+[[sap-hana-snapshot-backups-with-anf]]
 == Copias de seguridad instantáneas de SAP HANA con ANF
 
 La siguiente captura de pantalla muestra la vista de topología de un sistema HANA que utiliza Azure NetApp Files. Para este sistema HANA se han configurado copias de seguridad instantáneas locales, así como replicación de copias de seguridad mediante copias de seguridad ANF.
@@ -90,6 +94,7 @@ image:hana-sc-generic-image-074.png["ancho=601, alto=216"]
 
 
 
+[[snapshot-backups-of-non-data-volumes]]
 == Copias de seguridad instantáneas de volúmenes que no son de datos
 
 La topología de recursos de SnapCenter muestra la lista de copias de seguridad de volúmenes que no son de datos. En la siguiente figura se enumeran las copias de seguridad del volumen compartido de HANA.
@@ -98,6 +103,7 @@ image:hana-sc-generic-image-075.png["ancho=601, alto=294"]
 
 
 
+[[backup-workflow-for-hana-database-backups]]
 == Flujo de trabajo de respaldo para copias de seguridad de bases de datos de HANA
 
 El flujo de trabajo de respaldo para una copia de seguridad instantánea de una base de datos HANA consta de tres secciones principales.
@@ -147,6 +153,7 @@ image:hana-sc-generic-image-076.png["ancho=339, alto=475"]
 
 
 
+[[backup-workflow-for-non-data-volumes]]
 == Flujo de trabajo de respaldo para volúmenes que no son de datos
 
 Para un volumen sin datos, el flujo de trabajo de respaldo consta de la operación de instantánea y la operación de administración de retención.
@@ -155,6 +162,7 @@ image:hana-sc-generic-image-077.png["ancho=329, alto=404"]
 
 
 
+[[cleanup-of-secondary-backups]]
 == Limpieza de copias de seguridad secundarias
 
 Como se describe en link:hana-sc-generic-concepts.html#retention-management-of-backups-at-the-secondary-storage-snapvault["Gestión de retención para copias de seguridad secundarias"]La gestión de retención de copias de seguridad de datos en un almacenamiento de copia de seguridad secundario está a cargo de ONTAP. SnapCenter verifica periódicamente si ONTAP ha eliminado copias de seguridad en el almacenamiento de copias de seguridad secundario ejecutando un trabajo de limpieza con una programación semanal predeterminada.
@@ -169,6 +177,7 @@ Hasta que finalice esta limpieza programada, SAP HANA y SnapCenter seguirán mos
 
 
 
+[[change-the-frequency-of-the-snapcenter-cleanup-job]]
 === Cambie la frecuencia del trabajo de limpieza de SnapCenter
 
 SnapCenter ejecuta el trabajo de limpieza SnapCenter_RemoveSecondaryBackup de forma predeterminada para todos los recursos semanalmente. Esto se puede cambiar mediante un cmdlet de PowerShell de SnapCenter .
@@ -233,6 +242,7 @@ image:hana-sc-generic-image-080.png["ancho=601, alto=257"]
 
 
 
+[[manual-refresh-on-resource-level]]
 === Actualización manual a nivel de recursos
 
 Si es necesario, también se puede ejecutar una limpieza manual de las copias de seguridad secundarias en la vista de topología de un recurso. SnapCenter muestra las copias de seguridad en el almacenamiento de copias de seguridad secundario al seleccionar las copias de seguridad secundarias, como se muestra en la siguiente captura de pantalla. SnapCenter ejecuta una operación de limpieza con el ícono Actualizar para sincronizar las copias de seguridad de este recurso.

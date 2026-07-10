@@ -17,6 +17,7 @@ Las ventanas de respaldo se están reduciendo mientras que la cantidad de datos 
 
 
 
+[[backup-and-recovery-using-snapshot-backups]]
 == Copia de seguridad y recuperación mediante copias de seguridad instantáneas
 
 Puede utilizar la tecnología NetApp Snapshot para crear copias de seguridad de bases de datos en minutos. El tiempo necesario para crear una copia instantánea es independiente del tamaño de la base de datos porque una copia instantánea no mueve ningún bloque de datos físicos en la plataforma de almacenamiento. Además, el uso de la tecnología Snapshot no tiene ningún efecto sobre el rendimiento del sistema SAP en vivo, ya que todas las operaciones se ejecutan en el sistema de almacenamiento. Por lo tanto, puede programar la creación de copias de instantáneas sin tener en cuenta los períodos pico de diálogo o actividad por lotes. Los clientes de SAP en NetApp generalmente programan varias copias de seguridad instantáneas en línea durante el día; por ejemplo, lo habitual es que se realicen cada seis horas. Estas copias de seguridad instantáneas normalmente se conservan durante tres a cinco días en el sistema de almacenamiento principal antes de eliminarlas o almacenarlas en un almacenamiento más económico para su retención a largo plazo.
@@ -33,6 +34,7 @@ Las copias de seguridad de SnapVault y ANF ofrecen ventajas significativas en co
 
 
 
+[[runtime-of-snapshot-backup-and-restore-operations]]
 == Tiempo de ejecución de las operaciones de backup y restauración de Snapshot
 
 La siguiente figura muestra el HANA Studio de un cliente utilizando operaciones de respaldo de instantáneas. La imagen muestra que la base de datos HANA (de aproximadamente 4 TB de tamaño) se respalda en 1 minuto y 20 segundos utilizando la tecnología de respaldo Snapshot y más de 4 horas con una operación de respaldo basada en archivos.
@@ -43,12 +45,14 @@ image:hana-sc-generic-image-001.png["ancho=624, alto=267"]
 
 
 
+[[recovery-time-objective-comparison]]
 == Comparación de objetivos de tiempo de recuperación
 
 Esta sección proporciona una comparación del objetivo de tiempo de recuperación (RTO) de las copias de seguridad instantáneas basadas en archivos y basadas en almacenamiento. El RTO se define por la suma del tiempo necesario para restaurar, recuperar y luego iniciar la base de datos.
 
 
 
+[[time-needed-to-restore-database]]
 === Tiempo necesario para restaurar las bases de datos
 
 Con un backup basado en archivos, el tiempo de restauración depende del tamaño de la infraestructura de backup y base de datos, que define la velocidad de restauración en megabytes por segundo. Por ejemplo, si la infraestructura admite una operación de restauración a una velocidad de 250 Mbps, se tarda aproximadamente 4.5 horas en restaurar una base de datos de 4 TB de tamaño en la persistencia.
@@ -57,6 +61,7 @@ Con las copias de seguridad Snapshot de NetApp , el tiempo de restauración es i
 
 
 
+[[time-needed-to-recover-database]]
 === Tiempo necesario para recuperar las bases de datos
 
 El tiempo de recuperación depende de la cantidad de registros que se deben aplicar después de la restauración. Este número viene determinado por la frecuencia con la que se realizan backups de datos.
@@ -67,12 +72,14 @@ Las copias de seguridad instantáneas generalmente se programan con una frecuenc
 
 
 
+[[time-needed-to-start-database]]
 === Tiempo necesario para iniciar la base de datos
 
 El tiempo de inicio de la base de datos depende del tamaño de la base de datos y del tiempo necesario para cargar los datos en la memoria. En los siguientes ejemplos, se supone que los datos se pueden cargar con 1000 Mbps. Cargar 4 TB en la memoria tarda aproximadamente 1 hora y 10 minutos. La hora de inicio es la misma para las operaciones de recuperación y restauración basadas en archivos y de Snapshot.
 
 
 
+[[restore-and-recovery-sample-calculation]]
 === Cálculo de muestra de restauración y recuperación
 
 La siguiente figura muestra una comparación entre las operaciones de restauración y recuperación con una copia de seguridad diaria basada en archivos y copias de seguridad instantáneas con diferentes programaciones.
@@ -85,6 +92,7 @@ image:hana-sc-generic-image-002.png["ancho=624, alto=326"]
 
 
 
+[[use-cases-and-values-of-accelerated-backup-and-cloning-operations]]
 == Casos de uso y valores de operaciones de backup y clonado aceleradas
 
 La ejecución de backups es una parte fundamental de cualquier estrategia de protección de datos. Las copias de seguridad se programan regularmente para garantizar que puede recuperarse de fallos del sistema. Este es el caso de uso más obvio, pero también hay otras tareas de gestión del ciclo de vida de SAP, en las que acelerar las operaciones de backup y recuperación es decisivo.

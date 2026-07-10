@@ -24,6 +24,7 @@ image:sc-saphana-vmware-smas-image1.png["Figura que muestra el contenido que se 
 
 
 
+[[software-versions]]
 == Versiones de software
 
 [cols="50%,50%"]

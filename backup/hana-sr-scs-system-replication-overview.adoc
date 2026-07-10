@@ -26,6 +26,7 @@ Existen dos casos de uso principales que pueden combinarse:
 
 
 
+[[high-availability-with-an-rpo-of-zero-and-a-minimal-rto]]
 == Alta disponibilidad con un objetivo de punto de recuperación de cero y un objetivo de tiempo de recuperación mínimo
 
 La replicación del sistema se configura con la replicación síncrona mediante tablas precargadas en la memoria en el host secundario de SAP HANA. Esta solución de alta disponibilidad se puede usar para solucionar fallos de hardware o software y también para reducir el tiempo de inactividad planificado durante las actualizaciones de software SAP HANA (operaciones de tiempo de inactividad casi cero).
@@ -40,6 +41,7 @@ image:saphana-sr-scs-image1.png["Figura que muestra el cuadro de diálogo de ent
 
 
 
+[[disaster-recovery-over-a-large-distance]]
 == Recuperación ante desastres a gran distancia
 
 La replicación del sistema se puede configurar con la replicación asíncrona sin que la tabla quede precargada en la memoria del host secundario. Esta solución se utiliza para resolver los fallos del centro de datos y, por lo general, las operaciones de conmutación por error se realizan manualmente.

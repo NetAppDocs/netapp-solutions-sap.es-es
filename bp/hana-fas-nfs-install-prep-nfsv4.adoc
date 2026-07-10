@@ -20,6 +20,7 @@ Los usuarios de administración `<sid>adm`,`<sid>crypt` y `sapsys` el grupo debe
 
 
 
+[[sap-hana-hosts]]
 == Hosts SAP HANA
 
 Si no existe, el `sapsys` El grupo debe crearse en el host SAP HANA. Debe seleccionarse un ID de grupo único que no entra en conflicto con los ID de grupo existentes en las controladoras de almacenamiento.
@@ -42,6 +43,7 @@ NOTE: Los kernels más recientes de Linux no requieren este paso. Los mensajes d
 
 
 
+[[storage-controllers]]
 == Controladoras de almacenamiento
 
 Los ID de usuario y el ID de grupo deben ser los mismos en los hosts SAP HANA y en las controladoras de almacenamiento. El grupo y el usuario se crean introduciendo los siguientes comandos en el clúster de almacenamiento:

@@ -18,6 +18,7 @@ SnapCenter 4.6 admite la detección automática para los sistemas HANA configura
 
 
 
+[[snapcenter-4-6-configuration-of-hana-system-replication-environments]]
 == Configuración de SnapCenter 4.6 de entornos de replicación de sistemas HANA
 
 La siguiente figura muestra la configuración de laboratorio utilizada en este capítulo. Dos hosts HANA, hana-3 y hana-4, fueron configurados con HANA System Replication.
@@ -82,6 +83,7 @@ image:saphana-sr-scs-image16.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[snapshot-backup-operations]]
 == Operaciones de backup de Snapshot
 
 Cuando se ejecuta una operación de backup del grupo de recursos, SnapCenter identifica el host primario y solo activa un backup en el host primario. Esto significa que solo se hará copia Snapshot del volumen de datos del host primario. En nuestro ejemplo, hana-3 es el host primario actual y se ejecuta un backup en este host.
@@ -121,12 +123,14 @@ image:saphana-sr-scs-image24.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[block-integrity-check-operations-with-file-based-backups]]
 == Operaciones de comprobación de integridad de bloques con backups basados en archivos
 
 SnapCenter 4.6 usa el mismo lógico que se describe para las operaciones de backup de Snapshot para operaciones de comprobación de integridad de bloques con backups basados en archivos. SnapCenter identifica el host HANA primario actual y ejecuta el backup basado en archivos para este host. La gestión de retención también se realiza en ambos hosts, de modo que el backup más antiguo se elimina independientemente de qué host sea actualmente el primario.
 
 
 
+[[snapvault-replication]]
 == Replicación SnapVault
 
 Para permitir operaciones de backup transparentes sin interacción manual en el caso de toma de control e independiente del host HANA que actualmente es el host primario, debe configurar una relación de SnapVault para los volúmenes de datos de ambos hosts. SnapCenter ejecuta una operación de actualización de SnapVault para el host primario actual con cada ejecución de backup.
@@ -143,6 +147,7 @@ image:saphana-sr-scs-image25.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[retention-management]]
 == Gestión de retención
 
 SnapCenter 4.6 gestiona la retención de backups de Snapshot, operaciones de comprobación de integridad de bloques, entradas de catálogo de backup de HANA y backups de registros (si no están deshabilitados) en ambos hosts HANA, por lo que no importa qué host sea actualmente primario o secundario. Los backups (datos y registro) y las entradas en el catálogo HANA se eliminan de acuerdo con la retención definida, independientemente de si es necesaria una operación de eliminación en el host primario o secundario actual. Es decir, no es necesaria ninguna interacción manual si se realiza una operación de toma de control y/o si la replicación se configura en la otra dirección.
@@ -151,6 +156,7 @@ Si la replicación de SnapVault forma parte de la estrategia de protección de d
 
 
 
+[[restore-and-recovery]]
 == Restauración y recuperación
 
 La siguiente figura muestra una situación en la que se han ejecutado varias adquisiciones y se han creado backups de Snapshot en ambos sitios. Con el estado actual, el host hana-3 es el host principal y el último backup es T4, que se ha creado en el host hana-3. Si necesita realizar una restauración y recuperación de datos, los backups T1 y T4 están disponibles para su restauración y recuperación en SnapCenter. Los backups, que se crearon en el host hana-4 (T2, T3), no se pueden restaurar mediante SnapCenter. Estos backups deben copiarse manualmente en el volumen de datos de hana-3 para la recuperación.

@@ -24,6 +24,7 @@ Autor: Nils Bauer, NetApp
 
 
 
+[[scope-of-this-document]]
 == Alcance de este documento
 
 El documento no pretende ser una descripción detallada de cómo configurar el entorno completo, pero tratará los conceptos y detalles relevantes relacionados con:

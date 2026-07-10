@@ -18,6 +18,7 @@ La integración de un marco de automatización moderno como Ansible en los flujo
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Si quiere más información sobre el contenido de este documento, consulte los siguientes documentos o sitios web:
@@ -70,6 +71,7 @@ https://www.netapp.com/support-and-training/documentation/["https://www.netapp.c
 
 
 
+[[version-history]]
 == Historial de versiones
 
 |===

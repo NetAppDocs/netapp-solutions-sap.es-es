@@ -38,6 +38,7 @@ image:saphana_fas_fc_image4a.png["Figura que muestra el cuadro de diálogo de en
 
 
 
+[[sap-hana-backup]]
 == Backup de SAP HANA
 
 El software ONTAP de NetApp proporciona un mecanismo integrado para realizar backups de las bases de datos SAP HANA. El backup de Snapshot basado en el almacenamiento es una solución de backup integrada y con compatibilidad total disponible para los sistemas de contenedor único de SAP HANA y para los sistemas de un solo inquilino de SAP HANA MDC.
@@ -62,6 +63,7 @@ Para obtener información detallada sobre la solución de copia de seguridad y r
 
 
 
+[[sap-hana-disaster-recovery]]
 == Recuperación ante desastres de SAP HANA
 
 La recuperación ante desastres de SAP HANA se puede llevar a cabo en la capa de bases de datos mediante la replicación de sistemas SAP o en la capa de almacenamiento mediante tecnologías de replicación del almacenamiento. La siguiente sección ofrece información general sobre las soluciones de recuperación ante desastres basadas en la replicación de almacenamiento.
@@ -70,6 +72,7 @@ Para obtener información detallada sobre la solución de recuperación ante des
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Replicación de almacenamiento basada en SnapMirror
 
 La siguiente figura muestra una solución de recuperación ante desastres en tres sitios, utilizando la replicación SnapMirror síncrona en el centro de datos de recuperación ante desastres local y SnapMirror asíncrono para replicar datos en el centro de datos de recuperación ante desastres remoto.
@@ -90,6 +93,7 @@ La replicación síncrona ofrece el modo StrictSync. Si la escritura en almacena
 
 
 
+[[storage-replication-based-on-netapp-metrocluster]]
 === Replicación de almacenamiento basada en MetroCluster de NetApp
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El clúster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para cargas de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.

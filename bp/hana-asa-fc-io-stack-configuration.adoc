@@ -10,6 +10,7 @@ summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar 
 
 
 
+[[io-stack-configuration-for-sap-hana]]
 == Configuración de pila I/o para SAP HANA
 
 A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para el sistema de archivos y almacenamiento utilizado.

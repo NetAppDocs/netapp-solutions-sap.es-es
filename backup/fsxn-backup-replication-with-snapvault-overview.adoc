@@ -22,6 +22,7 @@ image:amazon-fsx-image8.png["Figura que muestra el cuadro de diálogo de entrada
 
 
 
+[[overview-of-configuration-steps]]
 === Descripción general de los pasos de configuración
 
 Hay un par de pasos de configuración que debe ejecutar en la capa FSX para ONTAP. Puede hacerlo con Cloud Manager de NetApp o con la línea de comandos FSX para ONTAP.

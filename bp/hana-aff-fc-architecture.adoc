@@ -38,6 +38,7 @@ image:saphana_aff_fc_image4b.png["Añadir un par de alta disponibilidad de almac
 
 
 
+[[sap-hana-backup]]
 == Backup de SAP HANA
 
 El software ONTAP presente en todas las controladoras de almacenamiento de NetApp proporciona un mecanismo integrado para realizar backups de bases de datos SAP HANA mientras se ejecuta sin que el rendimiento se ve afectado. Los backups Snapshot de NetApp basados en el almacenamiento son una solución de backup totalmente compatible e integrada disponible para contenedores únicos de SAP HANA y para sistemas MDC de SAP HANA con un único inquilino o varios inquilinos.
@@ -62,6 +63,7 @@ Para obtener información detallada sobre la solución de copia de seguridad y r
 
 
 
+[[sap-hana-disaster-recovery]]
 == Recuperación ante desastres de SAP HANA
 
 La recuperación ante desastres de SAP HANA se puede llevar a cabo a nivel de base de datos mediante la replicación del sistema SAP HANA o en la capa de almacenamiento mediante tecnologías de replicación de almacenamiento. La siguiente sección ofrece información general sobre las soluciones de recuperación ante desastres basadas en la replicación de almacenamiento.
@@ -70,6 +72,7 @@ Para obtener información detallada acerca de las soluciones de recuperación an
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Replicación de almacenamiento basada en SnapMirror
 
 La siguiente figura muestra una solución de recuperación ante desastres de tres sitios que utiliza la sincronización activa síncrona de SnapMirror con el centro de datos de recuperación ante desastres local y la sincronización asíncrona de SnapMirror para replicar los datos al centro de datos de recuperación ante desastres remoto. La sincronización activa de SnapMirror permite que los servicios empresariales sigan funcionando incluso tras un fallo total del sitio, lo que permite la conmutación por error transparente de las aplicaciones mediante una copia secundaria (RPO=0 y RTO=0). No se requiere intervención manual ni secuencias de comandos personalizadas para activar una conmutación por error con SnapMirror Active Sync. A partir de ONTAP 9.15.1, SnapMirror active sync admite una funcionalidad activo-activo simétrica. Activo-activo simétrico permite operaciones de I/O de lectura y escritura desde ambas copias de una LUN protegida con replicación síncrona bidireccional. De este modo, ambas copias LUN pueden servir operaciones de I/O localmente.
@@ -86,6 +89,7 @@ image:saphana_aff_fc_image6a.png["Solución SnapMirror"]
 
 
 
+[[storage-replication-based-on-netapp-metrocluster]]
 === Replicación de almacenamiento basada en MetroCluster de NetApp
 
 En la siguiente figura, se muestra una descripción general de alto nivel de la solución. El cluster de almacenamiento de cada sitio proporciona alta disponibilidad local y se utiliza para la carga de trabajo de producción. Los datos de cada sitio se replican de forma síncrona en la otra ubicación y están disponibles en caso de recuperación tras fallos.

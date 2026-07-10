@@ -18,6 +18,7 @@ Este documento describe las características específicas de la integración de 
 
 
 
+[[introduction]]
 == Introducción
 
 El documento no pretende ser una descripción detallada de cómo configurar el entorno completo, pero tratará los conceptos y detalles relevantes relacionados con:
@@ -32,6 +33,7 @@ Autor: Michael Schlosser, NetApp
 
 
 
+[[example-configuration-overview]]
 === Descripción general de la configuración de ejemplo
 
 Implementación de ejemplo del complemento SnapCenter ASE para un sistema SAP que se ejecuta en la plataforma Azure.
@@ -43,12 +45,14 @@ También se puede utilizar la estructura de volumen descrita en este link:https:
 
 
 
+[[demo-environment]]
 === Entorno de demostración
 
 image:sc-sap-ase-image01.png["Figura en la que se destaca el entorno de demostración utilizado"]
 
 
 
+[[software-versions]]
 === Versiones de software
 
 [cols="50%, 50%"]
@@ -69,6 +73,7 @@ image:sc-sap-ase-image01.png["Figura en la que se destaca el entorno de demostra
 |===
 
 
+[[ase-volume-design]]
 === Diseño de volumen de ASE
 
 A continuación, la distribución de volúmenes al menos debe usarse para habilitar los casos de uso de backup/recuperación y clonado para la base de datos SAP ASE. En la configuración de ejemplo, utilice <SID>: A01.
@@ -121,6 +126,7 @@ A continuación, la distribución de volúmenes al menos debe usarse para habili
 |===
 
 
+[[steps-to-protect-database-a01]]
 === Pasos para proteger la base de datos A01
 
 * Compruebe la distribución de archivos, según el diseño de ejemplo
@@ -132,6 +138,7 @@ A continuación, la distribución de volúmenes al menos debe usarse para habili
 
 
 
+[[prerequisites-on-host]]
 === Requisitos previos en el host
 
 Más información actual podría estar disponible link:https://docs.netapp.com/us-en/snapcenter/protect-scu/reference_prerequisites_for_adding_hosts_and_installing_snapcenter_plug_ins_package_for_linux.html["aquí"].
@@ -150,6 +157,7 @@ Antes de añadir un host e instalar el paquete de plugins para Linux, debe satis
 
 
 
+[[prerequisites-for-the-database-enable-logging-and-backups]]
 === Requisitos previos para la base de datos: Active el registro y las copias de seguridad
 
 * Creación de directorios para backups y log_archives (/sybase/A01/backups, /sybase/A01/log_archives)
@@ -198,6 +206,7 @@ Antes de añadir un host e instalar el paquete de plugins para Linux, debe satis
 
 
 
+[[optional-create-dedicated-database-user]]
 === Opcional: Cree un usuario de base de datos dedicado
 
 En el caso de entornos SAP, el usuario podría utilizarse sapsa.
@@ -223,6 +232,7 @@ En el caso de entornos SAP, el usuario podría utilizarse sapsa.
 
 
 
+[[deploy-snapcenter-agent-to-host-vm-a01]]
 === Implemente el agente SnapCenter en el host vm-A01
 
 Más información se puede encontrar en el link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["Documentación de SnapCenter"].
@@ -233,6 +243,7 @@ image:sc-sap-ase-image02.png["Captura de pantalla del cuadro de diálogo Agregar
 
 
 
+[[create-snapcenter-instance-resource-configuration-for-database-a01]]
 === Crear Configuración de Recursos de Instancia de SnapCenter para la Base de Datos A01
 
 Recursos -> SAP ASE -> Añadir recursos
@@ -300,6 +311,7 @@ En la siguiente tabla, se enumeran los parámetros del plugin de Sybase, se prop
 |===
 
 
+[[sequence-to-recover-system-a01]]
 === Secuencia para recuperar el sistema A01
 
 . Detenga SAP System A01 (incluida la base de datos), detenga sapinit
@@ -316,6 +328,7 @@ En la siguiente tabla, se enumeran los parámetros del plugin de Sybase, se prop
 
 
 
+[[recover-instance-a01]]
 === Recuperar la instancia A01
 
 * Detenga el sistema SAP + DB A01 en el host vm-A01
@@ -398,10 +411,12 @@ image:sc-sap-ase-image11.png["Captura de pantalla del resumen de la restauració
 
 
 
+[[additional-information-and-version-history]]
 == Información adicional e historial de versiones
 
 
 
+[[quiesce-vs-prepare]]
 === Desactivar vs. Preparar
 
 Consulte la documentación en el enlace: Página de ayuda de https://help.sap.com/docs/SAP_ASE/4e870f06a15b4bbeb237cca890000421/d9d3ce996bdd415693cdb17663bfc0e3.html?locale=en-US&version=16.0.2.0[SAP].
@@ -414,6 +429,7 @@ image:sc-sap-ase-image13.png["Captura de pantalla del comando de base de datos e
 
 
 
+[[recorded-demos]]
 === Demostraciones grabadas
 
 Las siguientes demostraciones recodificadas están disponibles para respaldar la documentación.
@@ -424,6 +440,7 @@ video::079554d1-452c-42e5-95f6-b2b900c1fa86[panopto,width=360]
 video::0aba8433-e0d0-4c40-be0a-b2b900c1fb54[panopto,width=360]
 
 
+[[external-documentation]]
 === Documentación externa
 
 Si quiere más información sobre el contenido de este documento, consulte los siguientes documentos o sitios web:
@@ -447,6 +464,7 @@ Si quiere más información sobre el contenido de este documento, consulte los s
 
 
 
+[[version-history]]
 === Historial de versiones
 
 [cols="30%, 30%, 40%"]

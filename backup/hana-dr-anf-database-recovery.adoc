@@ -35,6 +35,7 @@ Los siguientes subapartados describen el proceso de recuperación con y sin recu
 
 
 
+[[recovery-to-latest-hana-data-volume-backup-savepoint]]
 == Recuperación en el último punto de guardado de backup de volumen de datos de HANA
 
 La recuperación del último punto de guardado de la copia de seguridad se ejecuta con los siguientes comandos como usuario pr1adm:
@@ -57,6 +58,7 @@ El siguiente resultado del comando muestra la ejecución de la recuperación.
 
 
 
+[[system-database-recovery]]
 === Recuperación de la base de datos del sistema
 
 ....
@@ -87,6 +89,7 @@ pr1adm@vm-pr1:/usr/sap/PR1/HDB01>
 ....
 
 
+[[tenant-database-recovery]]
 === Recuperación de bases de datos de tenant
 
 Si no se ha creado una clave de almacenamiento de usuario para el usuario pr1adm en el sistema de origen, debe crearse una clave en el sistema de destino. El usuario de la base de datos configurado en la clave debe tener privilegios para ejecutar operaciones de recuperación de inquilinos.
@@ -109,6 +112,7 @@ La base de datos HANA ahora está en funcionamiento y el flujo de trabajo de rec
 
 
 
+[[recovery-with-forward-recovery-using-logcatalog-backups]]
 == Recuperación con recuperación de reenvío mediante backups de registros/catálogos
 
 Los backups de registros y el catálogo de backup de HANA se están replicando desde el sistema de origen.
@@ -136,6 +140,7 @@ El siguiente resultado del comando muestra la ejecución de la recuperación.
 
 
 
+[[system-database-recovery]]
 === Recuperación de la base de datos del sistema
 
 ....
@@ -165,6 +170,7 @@ recoverSys finished successfully: 2021-02-19 16:07:20
 ....
 
 
+[[tenant-database-recovery]]
 === Recuperación de bases de datos de tenant
 
 ....
@@ -182,6 +188,7 @@ La base de datos HANA ahora está en funcionamiento y el flujo de trabajo de rec
 
 
 
+[[check-consistency-of-latest-log-backups]]
 == Comprobar la coherencia de los backups de registros más recientes
 
 Debido a que la replicación del volumen de backup de registros se realiza de forma independiente del proceso de backup de registros ejecutado por la base de datos SAP HANA, puede haber archivos de backup de registros abiertos e incoherentes en el sitio de recuperación ante desastres. Sólo es posible que los archivos de backup de registro más recientes no sean consistentes y se deben comprobar dichos archivos antes de que se realice una recuperación Reenviar en el sitio de recuperación ante desastres mediante el `hdbbackupcheck` herramienta.

@@ -26,6 +26,7 @@ image:saphana-dr-anf_image3.png["Figura que muestra el cuadro de diálogo de ent
 
 
 
+[[sap-hana-system-replication]]
 == Replicación de sistemas SAP HANA
 
 La replicación de sistemas SAP HANA funciona en la capa de bases de datos. La solución se basa en un sistema SAP HANA adicional del sitio de recuperación ante desastres al que recibe los cambios del sistema principal. Este sistema secundario debe ser idéntico al sistema primario.
@@ -56,6 +57,7 @@ image:saphana-dr-anf_image4.png["Figura que muestra el cuadro de diálogo de ent
 
 
 
+[[sap-hana-system-replication-with-data-preloaded-into-memory]]
 === Replicación de sistemas SAP HANA con carga previa de los datos en la memoria
 
 Los valores de objetivo de tiempo de recuperación muy bajos en SAP HANA solo se pueden lograr con la replicación de sistemas SAP HANA con carga previa de los datos en la memoria. La operación de la replicación de sistemas SAP HANA con un servidor secundario dedicado en el sitio de recuperación de desastres permite obtener un valor de objetivo de tiempo de recuperación de aproximadamente 1 minuto o menos. Los datos replicados se reciben y precargados en la memoria del sistema secundario. Debido a este reducido tiempo de conmutación al nodo de respaldo, la replicación de sistemas SAP HANA también se suele utilizar en operaciones de mantenimiento que prácticamente no producen tiempos de inactividad, como actualizaciones de software HANA.
@@ -64,6 +66,7 @@ Normalmente, la replicación de sistemas SAP HANA está configurada para replica
 
 
 
+[[sap-system-replication-without-data-preloaded-into-memory]]
 === Replicación de sistemas SAP sin carga previa de los datos en la memoria
 
 Para cumplir los requisitos de objetivo de tiempo de recuperación menos estrictos, puede usar la replicación de sistemas SAP HANA sin tener que preinstalada la carga de datos. En este modo operativo, los datos de la región de recuperación ante desastres no se cargan en la memoria. El servidor de la región de recuperación ante desastres se sigue utilizando para procesar la replicación del sistema SAP HANA que ejecuta todos los procesos SAP HANA necesarios. Sin embargo, la mayor parte de la memoria del servidor está disponible para ejecutar otros servicios, como los sistemas SAP HANA dev/test.
@@ -72,6 +75,7 @@ En caso de desastre, el sistema de prueba/desarrollo debe estar apagado, se debe
 
 
 
+[[sap-hana-disaster-recovery-with-anf-cross-region-replication]]
 == Recuperación ante desastres de SAP HANA con replicación entre regiones de ANF
 
 LA replicación entre regiones DE ANF está integrada en ANF como solución de recuperación ante desastres mediante replicación de datos asíncrona. ANF Cross-Region Replication se configura mediante una relación de protección de datos entre dos volúmenes ANF en una región de Azure primaria y secundaria. ANF Cross-Region Replication actualiza el volumen secundario mediante replicaciones delta por bloques eficientes. Las programaciones de actualización pueden definirse durante la configuración de replicación.
@@ -90,6 +94,7 @@ image:saphana-dr-anf_image5.png["Figura que muestra el cuadro de diálogo de ent
 
 
 
+[[summary-of-disaster-recovery-solutions]]
 == Resumen de soluciones de recuperación tras siniestros
 
 En la siguiente tabla se comparan las soluciones de recuperación ante desastres tratadas en esta sección y se destacan los indicadores más importantes.

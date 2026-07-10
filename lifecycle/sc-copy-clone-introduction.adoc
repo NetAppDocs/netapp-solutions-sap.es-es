@@ -24,6 +24,7 @@ Autor: Nils Bauer, NetApp
 
 
 
+[[introduction]]
 == Introducción
 
 Los cambios en las demandas del mercado también afectan a los entornos SAP de una empresa, de manera que requieren integraciones, cambios y actualizaciones regulares. Los departamentos DE TECNOLOGÍA deben implementar estos cambios con menos recursos y con un periodo de tiempo más corto. Para minimizar el riesgo en la puesta en marcha de estos cambios, es necesario realizar pruebas y formación exhaustivas que requieran sistemas SAP adicionales con datos reales de producción.
@@ -36,18 +37,21 @@ image:sc-copy-clone-image1.png["Figura que muestra el cuadro de diálogo de entr
 
 
 
+[[application-integrated-snapshot-backup-operations]]
 === * Operaciones de copia de seguridad Snapshot integradas en la aplicación*
 
 La capacidad para crear backups de Snapshot coherentes con las aplicaciones en la capa de almacenamiento es la base para las operaciones de copia del sistema y de clonado del sistema descritas en este documento. Los backups de Snapshot basados en el almacenamiento se crean mediante el plugin de SnapCenter de NetApp para SAP HANA y las interfaces que proporciona la base de datos SAP HANA. SnapCenter registra los backups de Snapshot en el catálogo de backup de SAP HANA, de manera que estos backups se puedan usar para operaciones de restauración y recuperación, así como para operaciones de clonado.
 
 
 
+[[off-site-backup-andor-disaster-recovery-data-replication]]
 === * Copia de seguridad externa y / o replicación de datos de recuperación de desastres *
 
 Los backups de Snapshot coherentes con las aplicaciones se pueden replicar en la capa de almacenamiento en un centro de backup externo o en un sitio de recuperación ante desastres controlado por SnapCenter. La replicación se basa en los bloques nuevos y modificados y, por tanto, gestiona el espacio y el ancho de banda de manera eficiente.
 
 
 
+[[use-any-snapshot-backup-for-sap-system-copy-or-clone-operations]]
 === *Utilice cualquier copia de seguridad de Snapshot para las operaciones de copia o clonación del sistema SAP*
 
 La integración de software y la tecnología de NetApp permite usar cualquier backup de Snapshot de un sistema de origen para una operación de clonado o copia del sistema SAP. Este backup de Snapshot puede seleccionarse desde el mismo almacenamiento que se utiliza para los sistemas de producción SAP, el almacenamiento que se utiliza para backups externos o el almacenamiento en el centro de recuperación ante desastres. Esta flexibilidad le permite separar los sistemas de desarrollo y prueba de la producción en caso necesario y cubre otras situaciones, como la prueba de la recuperación ante desastres en el centro de recuperación ante desastres.
@@ -57,6 +61,7 @@ NOTE: La clonado desde el almacenamiento de backup o recuperación ante desastre
 
 
 
+[[automation-with-integration]]
 === *Automatización con integración*
 
 El aprovisionamiento de sistemas de prueba de SAP incluye varios escenarios y casos de uso, además de requisitos de nivel de automatización diferentes. Los productos de software de NetApp para SAP se integran en los productos de gestión del ciclo de vida y de bases de datos de SAP para admitir diferentes situaciones y niveles de automatización.

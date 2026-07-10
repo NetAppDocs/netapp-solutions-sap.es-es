@@ -18,6 +18,7 @@ Las soluciones de NetApp para optimizar la gestión del ciclo de vida de SAP est
 
 
 
+[[data-refresh-of-qa-test-sandbox-or-training-systems]]
 == Actualización de datos de sistemas de control de calidad, pruebas, filtrado o formación
 
 Hay varios escenarios en los que los datos de un sistema de origen deben estar disponibles para un sistema de destino con fines de pruebas o entrenamiento. Estos sistemas de pruebas y formación deben actualizarse periódicamente con los datos del sistema de origen para asegurarse de que se realizan las pruebas y la formación con el conjunto de datos actual. Estas operaciones de actualización del sistema constan de varias tareas en las capas de infraestructura, base de datos y aplicación. Pueden tardar varios días en función del nivel de automatización.
@@ -30,6 +31,7 @@ El flujo de trabajo de las operaciones de actualización del sistema se describe
 
 
 
+[[address-logical-corruption]]
 == Daños lógicos de dirección
 
 La corrupción lógica puede estar causada por errores de software, errores humanos o sabotaje. Desafortunadamente, la corrupción lógica a menudo no puede abordarse con soluciones estándar de alta disponibilidad y recuperación ante desastres. Como resultado, dependiendo de la capa, la aplicación, el sistema de archivos o el almacenamiento donde se produjo la corrupción lógica, a veces no se pueden cumplir los requisitos de tiempo de inactividad máximo y pérdida de datos.
@@ -46,6 +48,7 @@ El flujo de trabajo de creación del sistema de reparación se describe en la se
 
 
 
+[[disaster-recovery-testing]]
 == Pruebas de recuperación ante desastres
 
 Una estrategia de recuperación ante desastres eficaz necesita probar el flujo de trabajo requerido. Las pruebas demuestran si la estrategia funciona y si la documentación interna es suficiente. También permite a los administradores formar los procedimientos necesarios.

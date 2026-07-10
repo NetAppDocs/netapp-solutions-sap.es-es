@@ -10,6 +10,7 @@ summary: La documentación también contiene información sobre las configuracio
 
 
 
+[[multiple-hosts-setup]]
 == Configuración de varios hosts
 
 [role="lead"]
@@ -17,6 +18,7 @@ Este capítulo describe la configuración de un sistema host múltiple SAP HANA 
 
 
 
+[[lun-configuration-for-sap-hana-multiple-hosts-systems]]
 == Configuración de LUN para sistemas SAP HANA con múltiples hosts
 
 En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos, como se indica en la siguiente tabla.
@@ -47,6 +49,7 @@ NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/S
 
 
 
+[[create-lvm-volume-groups-and-logical-volumes]]
 === Cree grupos de volúmenes LVM y volúmenes lógicos
 
 . Inicialice todas las LUN como volumen físico.
@@ -96,6 +99,7 @@ vgchange -a y
 ....
 
 
+[[create-file-systems]]
 === Crear sistemas de archivos
 
 Cree el sistema de archivos XFS en todos los volúmenes lógicos de datos y registros.
@@ -108,6 +112,7 @@ mkfs.xfs /dev/mapper/FC5_log_mnt00002-vol
 ....
 
 
+[[create-mount-points]]
 === Cree puntos de montaje
 
 Cree los directorios de puntos de montaje necesarios y configure los permisos en todos los hosts de trabajo y en espera:
@@ -124,6 +129,7 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 ....
 
 
+[[mount-file-systems]]
 === Montaje de sistemas de archivos
 
 Para montar el  `/hana/shared` sistemas de archivos durante el arranque del sistema utilizando el  `/etc/fstab` archivo de configuración, agregue el  `/hana/shared` sistema de archivos al  `/etc/fstab` archivo de configuración de cada host.

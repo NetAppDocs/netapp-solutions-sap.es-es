@@ -13,6 +13,7 @@ Este documento describe cómo Avantra se integra con la plataforma NetApp SnapCe
 
 
 
+[[solution-overview]]
 == Descripción general de la solución
 
 Las operaciones de los sistemas y las soluciones SAP son muy complejas. Sin embargo, para las empresas que utilizan SAP, estos sistemas y servicios son fundamentales para sus procesos empresariales. Automatizando las tareas operativas diarias recurrentes, como las operaciones de copia y actualización del sistema, los administradores de sistemas de SAP pueden gestionar más sistemas con menos esfuerzo, producir resultados repetibles y reducir el error humano.
@@ -23,12 +24,14 @@ Este documento describe cómo Avantra se integra con la plataforma NetApp SnapCe
 
 
 
+[[target-audience]]
 === Público objetivo
 
 Este documento está dirigido a los administradores de sistemas SAP que previamente han realizado copias del sistema SAP manualmente y desean automatizar esta actividad con Avantra. El objetivo previsto de combinar la tecnología Snapshot y FlexClone de NetApp, orquestada por SnapCenter de NetApp, con los flujos de trabajo de Avantra es acelerar las copias del sistema SAP automatizándolas completamente.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === Situaciones de clonación, copia y actualización del sistema SAP
 
 El término copia del sistema SAP se utiliza a menudo como término general en tres procesos diferentes: Clon del sistema SAP, copia del sistema SAP y actualización del sistema SAP. Es importante distinguir las distintas operaciones, ya que los flujos de trabajo y los casos de uso son distintos.
@@ -52,6 +55,7 @@ Aunque tenemos tres casos de uso distintos, el proceso de gestión de datos sigu
 
 
 
+[[solution-technology]]
 === Tecnología de soluciones
 
 La solución general consta de estos componentes principales:
@@ -81,6 +85,7 @@ image:sap-avantra-image4.png["Imagen que muestra el servidor Avantra, el servido
 
 
 
+[[use-case-summary]]
 === Resumen de casos de uso
 
 Existen varios casos en los que los datos de un sistema de origen se deben poner a disposición de un sistema de destino con fines de prueba o formación. Estos sistemas de prueba y formación deben actualizarse regularmente con los datos del sistema de origen para asegurarse de que las pruebas y la formación se realizan con el conjunto de datos actual. Estas operaciones de actualización del sistema consisten en varias tareas en las capas de infraestructura, base de datos y aplicación, que pueden tardar varios días en función del nivel de automatización.
@@ -93,6 +98,7 @@ image:sap-avantra-image5.png["Imagen que muestra las posibles mejoras de eficien
 
 
 
+[[integrating-the-different-technology-components]]
 === Integrando los diferentes componentes tecnológicos
 
 La integración real de SnapCenter en un flujo de trabajo Avantra consiste en usar JavaScript para acceder a la API REST DE NetApp SnapCenter. Esta integración basada en API de REST crea una copia Snapshot del sistema de origen SAP, crea un volumen FlexClone y lo monta en el sistema de destino de SAP.
@@ -101,6 +107,7 @@ Los administradores de almacenamiento y SAP han invertido tiempo y conocimientos
 
 
 
+[[conclusion]]
 == Conclusión
 
 La combinación de la tecnología de gestión de datos de Avantra y NetApp proporciona una potente solución que puede reducir drásticamente el tiempo y el esfuerzo necesarios para las tareas más complejas y laboriosas relacionadas con la administración de sistemas SAP. Esta combinación también puede ayudar a evitar las desviaciones de la configuración que puede provocar un error humano de un sistema a otro.
@@ -109,6 +116,7 @@ Debido a que las actualizaciones del sistema, las copias, los clones y las prueb
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Si quiere obtener más información sobre el contenido de este documento, consulte los siguientes documentos y sitios web:
@@ -120,6 +128,7 @@ Si quiere obtener más información sobre el contenido de este documento, consul
 
 
 
+[[version-history]]
 == Historial de versiones
 
 [cols="25,25,50"]

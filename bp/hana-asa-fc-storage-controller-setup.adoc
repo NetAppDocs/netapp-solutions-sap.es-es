@@ -18,12 +18,14 @@ En esta sección se describe la configuración del sistema de almacenamiento de 
 
 
 
+[[storage-efficiency]]
 == Eficiencia del almacenamiento
 
 SAP HANA es compatible con la deduplicación inline, la deduplicación inline, la compresión inline y la compactación inline, en una configuración de SSD.
 
 
 
+[[ontap-autonomous-ransomware-protection]]
 == Protección autónoma contra ransomware de ONTAP
 
 Las instantáneas creadas por ONTAP Autonomous Ransomware Protection no se pueden usar para la recuperación posterior de la base de datos SAP HANA. Por eso, no se recomienda usarlas para los volúmenes de datos y registros de SAP HANA y deberías desactivar esta función en esos volúmenes. Usa la protección de datos basada en SnapCenter con instantáneas a prueba de manipulaciones para protegerte contra ransomware: link:../backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"]. ONTAP Autonomous Ransomware Protection puede ser útil para otros volúmenes como /hana/shared.
@@ -32,18 +34,21 @@ Es posible desactivar la activación automática de esta funcionalidad durante l
 
 
 
+[[quality-of-service]]
 == Calidad de servicio
 
 La calidad de servicio puede utilizarse para limitar el rendimiento del almacenamiento de sistemas SAP HANA específicos o aplicaciones no SAP en una controladora compartida.
 
 
 
+[[production-and-devtest]]
 === Producción y desarrollo y pruebas
 
 Un caso de uso sería limitar el rendimiento de los sistemas de desarrollo y pruebas para que no puedan influir en los sistemas de producción en una configuración mixta. Durante el proceso de configuración, debe determinar los requisitos de rendimiento de un sistema que no sea de producción. Los sistemas de desarrollo y pruebas pueden ser dimensionados con valores de rendimiento más bajos, normalmente en el rango del 20% al 50% de un KPI de sistemas de producción, según lo define SAP. Las grandes I/o de escritura tienen el mayor efecto en el rendimiento del sistema de almacenamiento. Por lo tanto, el límite de rendimiento de calidad de servicio debe definirse como un porcentaje de los valores de KPI de rendimiento de almacenamiento SAP HANA de escritura correspondientes en los volúmenes de datos y registros.
 
 
 
+[[shared-environments]]
 === Entornos compartidos
 
 Otro caso de uso es limitar el rendimiento de cargas de trabajo de escritura pesadas, especialmente para evitar que estas cargas de trabajo tengan un impacto en otras cargas de trabajo de escritura sensibles a la latencia. En estos entornos, es mejor aplicar una política de grupo de calidad de servicio con techo de rendimiento no compartido a cada LUN dentro de cada SVM para restringir el rendimiento máximo de cada objeto de almacenamiento individual al valor dado. De este modo, se reduce la posibilidad de que una única carga de trabajo pueda influir de forma negativa en otras cargas de trabajo.
@@ -70,6 +75,7 @@ NOTE: El límite se aplica también a las lecturas. Por ello, utilice suficiente
 
 
 
+[[configure-storage]]
 == Configurar el almacenamiento
 
 La siguiente información general resume los pasos necesarios para la configuración del almacenamiento. Cada paso se trata con más detalle en las secciones siguientes. En esta sección, asumimos que el hardware de almacenamiento está configurado y que el software ONTAP ya está instalado. Además, debe haberse conectado los puertos FCP del almacenamiento a la estructura SAN.
@@ -81,6 +87,7 @@ La siguiente información general resume los pasos necesarios para la configurac
 
 
 
+[[nvme-based-disk-shelves]]
 === Estantes de discos basados en NVMe
 
 Cada bandeja de discos NVMe NS224 está conectada con dos puertos 100GbE GbE por controladora, como se muestra en la figura siguiente. Los discos se distribuyen automáticamente a ambos controladores del par HA.
@@ -89,6 +96,7 @@ image:saphana_asa_fc_image11a.png["Conexión de la bandeja de discos NVMe de NS2
 
 
 
+[[initiator-groups]]
 === Grupos de iniciadores
 
 Se puede configurar un igroup para cada servidor o para un grupo de servidores que requieran acceso a una LUN. La configuración del igroup requiere los nombres de puerto WWPN de los servidores.

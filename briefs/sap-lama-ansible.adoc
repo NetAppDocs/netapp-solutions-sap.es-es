@@ -18,6 +18,7 @@ Este documento se centra en la integración de los sistemas de almacenamiento de
 
 
 
+[[solution-overview]]
 == Descripción general de la solución
 
 Los sistemas SAP son muy complejos. Sin embargo, para las empresas que utilizan SAP, estos sistemas son fundamentales para sus procesos empresariales. Al automatizar las tareas operativas diarias periódicas, los administradores de sistemas SAP pueden gestionar más sistemas con menos esfuerzo, generar resultados repetibles y reducir el error humano.
@@ -26,12 +27,14 @@ Este documento se centra en la integración de los sistemas de almacenamiento de
 
 
 
+[[target-audience]]
 === Público objetivo
 
 Este documento se dirige a los administradores de sistemas SAP que no hayan tenido mucha experiencia (ni ninguna) con la automatización de Ansible. Debería ayudarte a comenzar a usar Ansible, a ejecutar tus primeros libros de estrategia y a configurar y ejecutar tu primera operación de actualización de sistema basado en SAP LaMa.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === Situaciones de clonación, copia y actualización del sistema SAP
 
 El término copia del sistema SAP se suele utilizar como sinónimo de tres procesos distintos: Clon del sistema SAP, copia del sistema SAP y actualización del sistema SAP. Es importante distinguir las distintas operaciones, ya que los flujos de trabajo y los casos de uso son distintos.
@@ -47,6 +50,7 @@ image:sap-lama-image1.png["Imagen que muestra los pasos del flujo de trabajo LaM
 
 
 
+[[solution-technology]]
 === Tecnología de soluciones
 
 La solución general consta de estos componentes principales:
@@ -72,6 +76,7 @@ image:sap-lama-image2.png["Imagen que muestra cómo LaMa de SAP y los sistemas d
 
 
 
+[[use-case-summary]]
 === Resumen de casos de uso
 
 Existen varios casos en los que los datos de un sistema de origen se deben poner a disposición de un sistema de destino con fines de prueba o formación. Estos sistemas de prueba y formación deben actualizarse regularmente con los datos del sistema de origen para asegurarse de que las pruebas y la formación se realizan con el conjunto de datos actual. Estas operaciones de actualización del sistema consisten en varias tareas en las capas de infraestructura, base de datos y aplicación, que pueden tardar varios días en función del nivel de automatización.
@@ -84,6 +89,7 @@ image:sap-lama-image3.png["Imagen que muestra las posibles mejoras de eficiencia
 
 
 
+[[integrating-the-different-technology-components]]
 === Integrando los diferentes componentes tecnológicos
 
 Para integrar SAP LaMa con los sistemas de almacenamiento de NetApp mediante Ansible, necesita un nodo en el que puede ejecutar Playbooks de Ansible. Recomendamos utilizar Ansible Automation Platform. Para ejecutar scripts de shell y Playbooks de Ansible en este host, iniciado desde SAP LaMa, necesita un agente de host de SAP en ejecución en este servidor. SAP Host Agent se hace cargo de la comunicación bidireccional con SAP LaMa y ejecuta scripts de shell que activarán los libros de estrategia.
@@ -92,6 +98,7 @@ Esta arquitectura unida de forma dispersa le da la libertad de iniciar flujos de
 
 
 
+[[conclusion]]
 == Conclusión
 
 La combinación de NetApp, SAP LaMa y Ansible Automation Platform ofrece una potente solución que puede reducir drásticamente el tiempo y el esfuerzo necesarios para las tareas más complejas y tediosas relacionadas con la administración de sistemas SAP. Esta combinación también puede ayudar a evitar las desviaciones de la configuración que puede provocar un error humano de un sistema a otro.
@@ -100,6 +107,7 @@ Debido a que las actualizaciones del sistema, las copias, los clones y las prueb
 
 
 
+[[where-to-find-additional-information]]
 == Dónde encontrar información adicional
 
 Si quiere obtener más información sobre el contenido de este documento, consulte los siguientes documentos y sitios web:
@@ -112,6 +120,7 @@ Si quiere obtener más información sobre el contenido de este documento, consul
 
 
 
+[[version-history]]
 == Historial de versiones
 
 [cols="25,25,50"]

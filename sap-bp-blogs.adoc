@@ -18,4 +18,5 @@ Descripción general de los blogs en los que se destacan las mejores prácticas 
 
 
 
+[[sap-configuration-best-practices-blogs]]
 == Blogs de mejores prácticas de configuración de SAP

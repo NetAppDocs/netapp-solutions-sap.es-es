@@ -22,6 +22,7 @@ La preparación del host de destino también incluye apagar el sistema de prueba
 
 
 
+[[target-server-host-name-and-ip-address]]
 == El nombre de host y la dirección IP del servidor de destino
 
 El nombre de host del servidor de destino debe ser idéntico al nombre de host del sistema de origen. La dirección IP puede ser diferente.
@@ -31,6 +32,7 @@ NOTE: Se debe establecer una correcta delimitación del servidor de destino para
 
 
 
+[[install-required-software]]
 == Instale el software necesario
 
 El software del agente de host SAP debe instalarse en el servidor de destino. Para obtener toda la información, consulte https://help.sap.com/viewer/9f03f1852ce94582af41bb49e0a667a7/103/en-US["Agente host SAP"^] En el portal de ayuda de SAP.
@@ -40,6 +42,7 @@ NOTE: Si el host se usa como sistema de control de calidad o prueba de HANA, el 
 
 
 
+[[configure-users-ports-and-sap-services]]
 == Configurar usuarios, puertos y servicios SAP
 
 Los usuarios y los grupos requeridos para la base de datos SAP HANA deben estar disponibles en el servidor de destino. Normalmente, se utiliza la gestión central de usuarios; por lo tanto, no es necesario realizar ningún paso de configuración en el servidor de destino. Los puertos necesarios para la base de datos HANA deben configurarse en los hosts objetivo. La configuración se puede copiar desde el sistema de origen copiando el `/etc/services` archivo al servidor de destino.
@@ -54,6 +57,7 @@ limit.descriptors=1048576
 ....
 
 
+[[prepare-hana-log-volume]]
 == Prepare el volumen de registro de HANA
 
 Debido a que el volumen de registro de HANA no forma parte de la replicación, debe existir un volumen de registro vacío en el host de destino. El volumen de registro debe incluir los mismos subdirectorios que el sistema HANA de origen.
@@ -70,6 +74,7 @@ vm-pr1:~ #
 ....
 
 
+[[prepare-log-backup-volume]]
 == Preparar el volumen de backup de registros
 
 Dado que el sistema de origen está configurado con un volumen separado para los backups de registros de HANA, debe haber un volumen de backup de registros también disponible en el host de destino. Es necesario configurar y montar un volumen para los backups de registros en el host objetivo.
@@ -78,6 +83,7 @@ Si la replicación de volumen de backup de registros forma parte de la configura
 
 
 
+[[prepare-file-system-mounts]]
 == Preparar los montajes del sistema de archivos
 
 En la siguiente tabla se muestran las convenciones de nomenclatura utilizadas en la configuración del laboratorio. Los nombres de los volúmenes en el sitio de recuperación de desastres se incluyen en `/etc/fstab`.

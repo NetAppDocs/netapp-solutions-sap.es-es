@@ -15,12 +15,14 @@ summary: Este documento se centra en la recuperación ante desastres para SAP HA
 
 
 
+[[the-challenge]]
 == El desafío
 
 La continuidad del negocio es esencial en las organizaciones de TI.  Deben poder proporcionar servicios de alta disponibilidad para las aplicaciones de misión crítica que sus clientes requieren para operar sus negocios.  De lo contrario, sus clientes enfrentarán una disminución de la productividad y las organizaciones de comercio electrónico podrían enfrentar un impacto directo en sus ingresos.
 
 
 
+[[the-solution]]
 == La solución
 
 NetApp ha desarrollado una cartera completa de tecnologías y herramientas para ayudar a las organizaciones de TI a construir o adaptar sus planes de recuperación ante desastres para responder a todas las demandas del negocio:

@@ -22,6 +22,7 @@ Este capítulo ofrece una descripción general de las opciones de alta disponibi
 
 
 
+[[sap-hana-system-replication-hsr]]
 == Replicación de sistemas SAP HANA (HSR)
 
 La replicación del sistema SAP HANA ofrece un modo de operación en el que los datos se replican de forma síncrona, se cargan previamente en la memoria y se actualizan continuamente en el host secundario. Este modo permite valores de RTO muy bajos, aproximadamente 1 minuto o menos, pero también requiere un servidor dedicado que solo se usa para recibir los datos de replicación del sistema de origen. Debido al bajo tiempo de conmutación al respaldo, la replicación de sistemas SAP HANA también se utiliza a menudo en operaciones de mantenimiento de casi cero tiempo de inactividad, como las actualizaciones de software HANA. Las soluciones de clúster Linux Pacemaker se utilizan normalmente para automatizar las operaciones de conmutación por error.
@@ -34,6 +35,7 @@ image:sc-saphana-vmware-smas-image2.png["Figura que muestra el contenido que se 
 
 
 
+[[netapp-snapmirror-active-sync]]
 == Sincronización activa de NetApp SnapMirror
 
 La sincronización activa de SnapMirror permite que los servicios empresariales continúen funcionando incluso si se produce un fallo completo del sitio, lo que permite a las aplicaciones conmutar por error de forma transparente mediante una copia secundaria. No se requiere intervención manual ni secuencias de comandos personalizadas para activar una conmutación por error con SnapMirror Active Sync. La sincronización activa de SnapMirror se admite en clústeres AFF, clústeres de cabinas All Flash SAN (ASA) y C-Series (AFF o ASA). La sincronización activa de SnapMirror protege las aplicaciones con LUN iSCSI o FCP.
@@ -44,6 +46,7 @@ Puede encontrar más información en https://docs.netapp.com/us-en/ontap/snapmir
 
 
 
+[[hana-bare-metal]]
 === Hardware nativo de HANA
 
 Al ejecutar SAP HANA en un servidor con configuración básica, puede utilizar la sincronización activa de SnapMirror para proporcionar una solución de almacenamiento de alta disponibilidad. Los datos se replican de forma síncrona, por lo que proporcionan un objetivo de punto de recuperación=0.
@@ -56,6 +59,7 @@ image:sc-saphana-vmware-smas-image3.png["Figura que muestra el contenido que se 
 
 
 
+[[vsphere-metro-storage-cluster-vmsc]]
 === Clúster de almacenamiento Metro de vSphere (VMSC)
 
 Al ejecutar SAP HANA en un entorno VMware mediante almacenes de datos conectados a FCP, puede utilizar la sincronización activa de SnapMirror para crear un clúster de almacenamiento de VMware Metro. En esta configuración, los almacenes de datos que utiliza el sistema HANA se replican de manera sincrónica en el sitio secundario.
@@ -68,6 +72,7 @@ image:sc-saphana-vmware-smas-image4.png["Figura que muestra el contenido que se 
 
 
 
+[[solution-comparison]]
 == Comparación de soluciones
 
 La siguiente tabla ofrece un resumen de las características clave de las soluciones descritas anteriormente.

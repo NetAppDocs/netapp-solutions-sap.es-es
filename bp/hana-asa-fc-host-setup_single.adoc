@@ -10,6 +10,7 @@ summary: Antes de configurar el host, las utilidades de host SAN de NetApp deben
 
 
 
+[[single-host-setup]]
 == Configuración de un solo host
 
 [role="lead"]
@@ -17,6 +18,7 @@ Este capítulo describe la configuración de un único host SAP HANA.
 
 
 
+[[lun-configuration-for-sap-hana-single-host-systems]]
 == Configuración de LUN para sistemas de host único de SAP HANA
 
 Se utiliza Linux LVM para aumentar el rendimiento y abordar las limitaciones de tamaño de LUN. En el host SAP HANA, es necesario crear y montar grupos de volúmenes y volúmenes lógicos, como se indica en la siguiente tabla.
@@ -41,6 +43,7 @@ NOTE: Si se utiliza el servicio SAP Local Secure Store (LSS), el  `/lss/shared/S
 
 
 
+[[create-lvm-volume-groups-and-logical-volumes]]
 === Cree grupos de volúmenes LVM y volúmenes lógicos
 
 . Inicialice todas las LUN como volumen físico.
@@ -82,6 +85,7 @@ vgchange -a y
 ....
 
 
+[[create-file-systems]]
 === Crear sistemas de archivos
 
 Cree el sistema de archivos XFS en todos los volúmenes lógicos de datos y registros y el LUN compartido de hana.
@@ -96,6 +100,7 @@ NOTE: Los varios comandos de ejemplo de host muestran un sistema HANA de dos+1 h
 
 
 
+[[create-mount-points]]
 === Cree puntos de montaje
 
 Cree los directorios de puntos de montaje necesarios y configure los permisos en el host de la base de datos:
@@ -110,6 +115,7 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 ....
 
 
+[[mount-file-systems]]
 === Montaje de sistemas de archivos
 
 Para montar sistemas de archivos durante el arranque del sistema utilizando el  `/etc/fstab` archivo de configuración, agregue los sistemas de archivos requeridos al  `/etc/fstab` archivo de configuración:

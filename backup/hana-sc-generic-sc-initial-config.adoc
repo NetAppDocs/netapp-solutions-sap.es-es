@@ -45,10 +45,12 @@ Los siguientes capítulos describen los pasos de configuración inicial.
 
 
 
+[[credentials-configuration]]
 == Configuración de credenciales
 
 
 
+[[credentials-for-hana-plug-in-deployment]]
 === Credenciales para la implementación del complemento HANA
 
 Las credenciales se configuran en la sección Configuración y seleccionando la pestaña Credencial. Se pueden agregar credenciales haciendo clic en el ícono +.
@@ -61,6 +63,7 @@ image:hana-sc-generic-image-019.png["ancho=287, alto=247"]
 
 
 
+[[credentials-for-azure-netapp-files]]
 === Credenciales para Azure NetApp Files
 
 Se debe preparar una entidad de servicio de Azure que permita a SnapCenter ejecutar las operaciones necesarias para los volúmenes ANF. El siguiente ejemplo muestra los permisos mínimos necesarios, que deben incluirse.
@@ -155,10 +158,12 @@ image:hana-sc-generic-image-021.png["ancho=252, alto=246"]
 
 
 
+[[storage-system-configuration]]
 == Configuración del sistema de almacenamiento
 
 
 
+[[ontap-systems-and-fsx-for-ontap]]
 === Sistemas ONTAP y FSx para ONTAP
 
 El sistema ONTAP o FSx para ONTAP se puede agregar a SnapCenter proporcionando credenciales de clúster o credenciales para cada SVM requerida. Cuando se proporcionan las credenciales del clúster, todas las SVM del clúster se agregan a SnapCenter.
@@ -188,6 +193,7 @@ image:hana-sc-generic-image-024.png["ancho=331, alto=199"]
 
 
 
+[[azure-netapp-files]]
 === Azure NetApp Files
 
 Una vez configuradas las credenciales de ANF, se pueden agregar cuentas de NetApp de ANF a SnapCenter. Las cuentas de NetApp se configuran en la sección Sistemas de almacenamiento y seleccionando la pestaña Azure NetApp Files . Se agrega una nueva cuenta de NetApp haciendo clic en el ícono +.
@@ -200,12 +206,14 @@ image:hana-sc-generic-image-026.png["ancho=401, alto=176"]
 
 
 
+[[storage-configuration-when-using-snapmirror-active-sync]]
 === Configuración de almacenamiento al utilizar la sincronización activa de SnapMirror
 
 Los pasos específicos de configuración del almacenamiento se describen en https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#add-storage-systems["Configuración de almacenamiento con sincronización activa de SnapMirror"].
 
 
 
+[[policies-configuration]]
 == Configuración de políticas
 
 Como se analiza en la sección Las políticas de estrategia de protección de datos generalmente se configuran independientemente del recurso y se pueden usar para múltiples sistemas SAP HANA.
@@ -232,6 +240,7 @@ image:hana-sc-generic-image-028.png["ancho=601, alto=138"]
 
 
 
+[[snapshot-backups-with-ontap-systems-and-fsx-for-ontap]]
 === Copias de seguridad instantáneas con sistemas ONTAP y FSx para ONTAP
 
 Las políticas de respaldo de instantáneas para el sistema ONTAP o FSx para ONTAP pueden combinar una instantánea local con operaciones de replicación o bloqueo de instantáneas (instantánea a prueba de manipulaciones). Este ejemplo muestra una política con replicación a un almacenamiento secundario mediante SnapVault.
@@ -263,6 +272,7 @@ image:hana-sc-generic-image-032.png["ancho=385, alto=119"]
 
 
 
+[[snapshot-backups-with-azure-netapp-files]]
 === Copias de seguridad de instantáneas con Azure NetApp Files
 
 Las políticas de copia de seguridad de instantáneas para Azure NetApp Files pueden combinar una instantánea local con una copia de seguridad de ANF, que replica los datos de la instantánea en un blob de Azure. Este ejemplo muestra una política utilizada para la replicación con copia de seguridad ANF.
@@ -292,6 +302,7 @@ image:hana-sc-generic-image-036.png["ancho=376, alto=138"]
 
 
 
+[[block-integrity-check-operations-for-all-platforms]]
 === Operaciones de verificación de integridad de bloques para todas las plataformas
 
 
@@ -328,6 +339,7 @@ image:hana-sc-generic-image-040.png["ancho=366, alto=101"]
 
 
 
+[[policy-configuration-when-using-snapmirror-active-sync]]
 === Configuración de políticas al utilizar la sincronización activa de SnapMirror
 
 Los pasos específicos de configuración de políticas se describen en el documento https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-sc-config.html#policy-configuration["Configuración de la política de sincronización activa de SnapMirror"].
