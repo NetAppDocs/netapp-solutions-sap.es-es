@@ -96,6 +96,19 @@ entries:
     url: "/backup/hana-sc-vmware-smas-failover-scenarios.html"
   - title: Información adicional e historial de versiones
     url: "/backup/hana-sc-vmware-smas-additional-info.html"
+- title: Protección de datos de SAP HANA con SnapCenter con servidores bare metal
+    y sistemas ASA de NetApp
+  entries:
+  - title: Alcance de este documento
+    url: "/backup/hana-sc-bare-metal-asar2-scope.html"
+  - title: Configuración de laboratorio utilizada para este documento
+    url: "/backup/hana-sc-bare-metal-asar2-lab-setup.html"
+  - title: Aprovisionamiento e instalación de sistemas HANA
+    url: "/backup/hana-sc-bare-metal-asar2-hana-provisioning.html"
+  - title: SnapCenter operaciones
+    url: "/backup/hana-sc-bare-metal-asar2-sc-operations.html"
+  - title: Información adicional e historial de versiones
+    url: "/backup/hana-sc-bare-metal-asar2-additional-info.html"
 - title: Protección de datos de SAP HANA con SnapCenter con sistemas VMware VMFS y
     NetApp ASA
   entries:

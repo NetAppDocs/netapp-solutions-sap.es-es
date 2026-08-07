@@ -27,4 +27,4 @@ La continuidad del negocio es esencial en las organizaciones de TI.  Deben poder
 
 NetApp ha desarrollado una cartera completa de tecnologías y herramientas para ayudar a las organizaciones de TI a construir o adaptar sus planes de recuperación ante desastres para responder a todas las demandas del negocio:
 
-link:https://www.netapp.com/pdf.html?item=/media/6998-sb-3968pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6998-sb-3968pdf.pdf"]
+link:https://www.netapp.com/pdf.html?item=/media/6998-sb-3968.pdf["https://www.netapp.com/pdf.html?item=/media/6998-sb-3968.pdf"]
