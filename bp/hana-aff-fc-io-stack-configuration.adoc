@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: bp/hana-aff-fc-io-stack-configuration.html 
-keywords: io, i/o, stack, configuration, database 
-summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para el sistema de archivos y almacenamiento utilizado. 
+keywords: io, io, stack, configuration, database 
+summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de E/S y optimizar la base de datos para el sistema de archivos y almacenamiento utilizado. 
 ---
 = Configuración de pila I/o para SAP HANA
 :hardbreaks:

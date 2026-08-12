@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-sc-br-syscopy.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, system copy 
+summary:  
+---
+= SnapCenter backup y recuperación y copia del sistema SAP HANA
+:allow-uri-read: 
+
+
+
+
+[[snapcenter-backup-recovery-and-sap-hana-system-copy]]
+== SnapCenter backup y recuperación y copia del sistema SAP HANA
+
+[role="lead"]
+NetApp SnapCenter optimiza las tareas del ciclo de vida de SAP HANA, como backup & recovery y la copia del sistema SAP HANA, y está integrado en la base de datos SAP HANA y en las herramientas de gestión del ciclo de vida, combinando una protección de datos eficiente e integrada en las aplicaciones con el aprovisionamiento flexible de sistemas de prueba de SAP, como se muestra en la siguiente figura.
+
+image:hana-sc-vmfs-asar2-smas-image-080.png["Figura que muestra el cuadro de diálogo de entrada/salida o que representa el contenido escrito"]
+
+Este capítulo te indica dónde encontrar información adicional sobre SnapCenter Backup & Recovery y las operaciones de SAP HANA System Copy.
+
+
+
+[[backup-operations]]
+=== Operaciones de backup
+
+Las operaciones de copia de seguridad se llevan a cabo tal y como se describe en https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-backup-operations.html["Obtenga información sobre las operaciones de respaldo para SAP HANA Snapshot en SnapCenter"].
+
+
+
+[[restore-and-recovery]]
+=== Restauración y recuperación
+
+Las operaciones de restauración y recuperación se llevan a cabo tal y como se describe https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-restore.html["Restaurar y recuperar bases de datos de SAP HANA con SnapCenter"].
+
+
+
+[[sap-system-refresh]]
+=== Actualización del sistema SAP
+
+Para obtener información más detallada sobre las operaciones de actualización y clonación del sistema SAP mediante SnapCenter, consulta https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"].

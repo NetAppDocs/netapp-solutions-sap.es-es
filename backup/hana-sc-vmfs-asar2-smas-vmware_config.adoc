@@ -1,0 +1,59 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-vmware_config.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Configuración de VMware datastore y creación de VM
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[vmware-configuration-datastore-and-vm-creation]]
+== Configuración de VMware datastore y creación de VM
+
+[role="lead"]
+Crea el almacén de datos utilizando los LUN creados anteriormente para la máquina virtual usada para SAP HANA y luego crea la máquina virtual utilizando estos almacenes de datos.
+
+Cada LUN se utilizará para un datastore, así que se crearán datastores para datos, log, shared y OS.
+
+
+
+[[datastore-creation]]
+=== Creación de un datastore
+
+. Inicia sesión en el cliente vSphere y ve a la pestaña «Datastore». Elige «Storage» -++>++ «New Datastore …» en el menú contextual de tu datacenter + image:hana-sc-vmfs-asar2-smas-image-024.png["imagen"]
+. Selecciona «VMFS» como tipo de almacén de datos. + image:hana-sc-vmfs-asar2-smas-image-025.png["imagen"]
+. Especifica el nombre del almacén de datos que contiene los archivos de datos de SAP HANA y elige la unidad de almacenamiento (LUN) creada antes. + image:hana-sc-vmfs-asar2-smas-image-026.png["imagen"]
+. Elige la última versión de VMFS. + image:hana-sc-vmfs-asar2-smas-image-027.png["imagen"]
+. Utiliza todo el espacio disponible para la partición. Mantén la configuración predeterminada. + image:hana-sc-vmfs-asar2-smas-image-028.png["imagen"]
+. Revisa el resumen y pulsa «Finalizar». + image:hana-sc-vmfs-asar2-smas-image-029.png["imagen"]
+. Repite los pasos anteriores para los almacenes de datos de log, shared y el OS. + image:hana-sc-vmfs-asar2-smas-image-030.png["imagen"]
+
+
+
+
+[[vm-creation]]
+=== Creación de máquinas virtuales
+
+. Una vez creados todos los almacenes de datos, ve a la pestaña «Máquinas virtuales y plantillas». Selecciona «Nueva máquina virtual…» en el menú contextual de tu datacenter. + image:hana-sc-vmfs-asar2-smas-image-031.png["imagen"]
+. Selecciona la forma de crear una máquina virtual. En este ejemplo se utiliza el flujo de trabajo «Crear una nueva máquina virtual». + image:hana-sc-vmfs-asar2-smas-image-032.png["imagen"]
+. Introduce un nombre para la máquina virtual y selecciona tu centro de datos. + image:hana-sc-vmfs-asar2-smas-image-033.png["imagen"]
+. Elige tu hardware de procesamiento + image:hana-sc-vmfs-asar2-smas-image-034.png["imagen"]
+. Selecciona el almacén de datos del sistema operativo creado antes. + image:hana-sc-vmfs-asar2-smas-image-035.png["imagen"]
+. Selecciona la máquina virtual que desees. + image:hana-sc-vmfs-asar2-smas-image-036.png["imagen"]
+. Selecciona la versión del sistema operativo que se utiliza para el sistema SAP HANA. En este ejemplo se utiliza SUSE Linux Enterprise (SLES) 15. + image:hana-sc-vmfs-asar2-smas-image-037.png["imagen"]
+. Configura la máquina virtual con la CPU y la memoria necesarias. Además del disco duro para el sistema operativo, añade discos adicionales para los datos, los registros y el almacenamiento compartido usando los almacenes de datos creados antes. + image:hana-sc-vmfs-asar2-smas-image-038.png["imagen"]
+. Adjunta un archivo ISO para la instalación del sistema operativo como unidad de DVD y marca la casilla «Conectar al encender». + image:hana-sc-vmfs-asar2-smas-image-039.png["imagen"]
+. En la pestaña «Parámetros avanzados», añade el atributo «disk.EnableUUID» con el valor «True». Esto permite que SnapCenter detecte posteriormente los detalles del disco. + image:hana-sc-vmfs-asar2-smas-image-040.png["imagen"]
+. Revisa la configuración y pulsa «Finalizar» para crear la nueva máquina virtual. + image:hana-sc-vmfs-asar2-smas-image-041.png["imagen"]
+. Enciende la nueva máquina virtual. + image:hana-sc-vmfs-asar2-smas-image-042.png["imagen"]
+. Conéctate a la consola e instala el sistema operativo según las directrices de SAP. + image:hana-sc-vmfs-asar2-smas-image-043.png["imagen"]
+. Instala tu sistema SAP HANA tras la instalación del sistema operativo. Utiliza los discos dedicados para los directorios /hana/data, /hana/log y /hana/shared.
+

@@ -1,0 +1,72 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-config_asar2.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Configuración de los sistemas ONTAP ASA R2
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[configuring-ontap-asa-r2-systems]]
+== Configuración de los sistemas ONTAP ASA R2
+
+[role="lead"]
+Este capítulo te muestra cómo crear los LUN necesarios para un sistema SAP HANA, cómo configurar la replicación usando SMas en modo activo/activo y cómo instalar y configurar ONTAP Mediator.
+
+
+
+[[creating-luns]]
+=== Creación de LUNs
+
+Este capítulo describe cómo crear las LUN para un SAP HANA usando el ONTAP System Manager de un sistema de almacenamiento ASA R2 de NetApp.
+
+. Inicia sesión en ONTAP System Manager del clúster de almacenamiento ASA R2 + image:hana-sc-vmfs-asar2-smas-image-004.jpeg["imagen"]
+. Se mostrará el panel de control + image:hana-sc-vmfs-asar2-smas-image-005.png["imagen"]
+. Selecciona «Hosts» en el menú de la izquierda y haz clic en «+ Add» + image:hana-sc-vmfs-asar2-smas-image-006.png["imagen"]
+. Introduce un nombre para tu VMware ESXi, marca la opción «Nuevos hosts» y, si lo deseas, «Configurar proximidad de hosts». Selecciona o introduce los nombres de puerto globales (WWPN) de los HBA de tus hosts ESXi que pertenecen a tu clúster y configura la proximidad si lo deseas. + Haz clic en «Add». + image:hana-sc-vmfs-asar2-smas-image-007.png["imagen"]
+. Los hosts se han definido correctamente. + image:hana-sc-vmfs-asar2-smas-image-008.png["imagen"]
+. Selecciona «Storage» en el menú de la izquierda y haz clic en «+ Add» + image:hana-sc-vmfs-asar2-smas-image-009.png["imagen"]
+. Crear el LUN del almacén de datos para el volumen de datos de SAP HANA + image:hana-sc-vmfs-asar2-smas-image-010.png["imagen"]
+. Crea el LUN del almacén de datos para el volumen de registros de SAP HANA + image:hana-sc-vmfs-asar2-smas-image-011.png["imagen"]
+. Crea el LUN del almacén de datos para el volumen compartido de SAP HANA + image:hana-sc-vmfs-asar2-smas-image-012.png["imagen"]
+. Crea el LUN del almacén de datos para el sistema operativo SAP HANA + image:hana-sc-vmfs-asar2-smas-image-013.png["imagen"]
+. Se han creado todos los LUN necesarios para los distintos almacenes de datos + image:hana-sc-vmfs-asar2-smas-image-014.png["imagen"]
+
+
+
+
+[[setting-up-the-replication]]
+=== Configuración de la replicación
+
+Una vez creados los LUN, se configurará la replicación mediante SMas en modo simétrico activo/activo y una replicación asíncrona SnapVault/SnapMirror como destino de copia de seguridad. La replicación asíncrona es opcional pero permite almacenar copias de seguridad adicionales en un tercer sistema de almacenamiento durante más tiempo.
+
+. Selecciona «Grupos de consistencia» dentro de «Protección» en el menú de la izquierda de ONTAP System Manager y «&#43; add» un nuevo grupo de consistencia «Using existing storage units» + image:hana-sc-vmfs-asar2-smas-image-015.png["imagen"]
+. Introduce un nombre para el grupo de consistencia utilizado para las unidades de almacenamiento de SAP HANA, elige «SAP HANA» como tipo de replicación y selecciona las unidades de almacenamiento para datos, registros y almacenamiento compartido. + Marca «Replicar a un clúster remoto», elige el clúster remoto y el SVM que quieras. Elige «AutomatedFailOverDuplex» para configurar SMAS activo/activo. Marca los hosts de replicación. Opcionalmente, define los parámetros de proximidad. + image:hana-sc-vmfs-asar2-smas-image-016.png["imagen"]
+. Repite el paso anterior para la unidad de almacenamiento utilizada como almacén de datos de los archivos de la máquina virtual. + image:hana-sc-vmfs-asar2-smas-image-017.png["imagen"]
+. Se han creado correctamente los grupos de consistencia con protección SMAS + image:hana-sc-vmfs-asar2-smas-image-018.png["imagen"]
+. Crea además una replicación asíncrona con fines de copia de seguridad. Elige “Proteger” en el menú contextual del grupo de Consistency para la base de datos SAP HANA. + image:hana-sc-vmfs-asar2-smas-image-019.png["imagen"]
+. Marca la casilla de comprobación “Replicar a otro clúster”, selecciona el clúster remoto y el SVM deseados y elige la política de replicación “MirrorAndVault”. + image:hana-sc-vmfs-asar2-smas-image-020.png["imagen"]
+. Se ha configurado la replicación asíncrona para la base de datos SAP HANA. Si lo deseas, repite los pasos para el LUN del almacén de datos del sistema operativo de la VM. + image:hana-sc-vmfs-asar2-smas-image-018.png["imagen"]
+
+
+
+
+[[ontap-mediator]]
+=== ONTAP Mediator
+
+Instala ONTAP Mediator según la  https://docs.netapp.com/us-en/ontap/mediator/#installation-and-upgrade-considerations["Instalar o actualizar ONTAP Mediator"] guía. + La opción solo HTTPs es suficiente para SMas. + Una vez finalizada la instalación, copia el contenido del archivo de certificado _/opt/netapp/lib/ontap++_++mediator/ontap++_++mediator/server++_++config/intermediate.crt_
+
+Configura el Mediator en el clúster de ONTAP:
+
+. Inicia sesión en ONTAP System Manager, ve a «Protección» -++>++ «Resumen» y selecciona «Add a mediator» image:hana-sc-vmfs-asar2-smas-image-021.png["imagen"]
+. Introduce la información del mediador instalado previamente. Pega el contenido del archivo del certificado en la sección del certificado. Pulsa add. image:hana-sc-vmfs-asar2-smas-image-022.png["imagen"]
+. El mediador ONTAP se ha añadido correctamente. image:hana-sc-vmfs-asar2-smas-image-023.png["imagen"]
+

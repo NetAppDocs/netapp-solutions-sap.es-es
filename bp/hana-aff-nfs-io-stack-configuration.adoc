@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: bp/hana-aff-nfs-io-stack-configuration.html 
-keywords: stack, configuration, io, i/o, optimal values 
+keywords: stack, configuration, io, optimal values 
 summary: A partir de SAP HANA 1.0 SPS10, SAP introdujo parámetros para ajustar el comportamiento de I/o y optimizar la base de datos para los sistemas de archivos y almacenamiento utilizados. 
 ---
 = Configuración de pila de I/o para SAP HANA

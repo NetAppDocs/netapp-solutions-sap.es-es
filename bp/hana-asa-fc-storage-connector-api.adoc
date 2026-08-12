@@ -13,6 +13,7 @@ summary: Sólo se necesita un conector de almacenamiento en entornos de varios h
 :imagesdir: ../media/
 
 
+[role="lead"]
 Sólo se necesita un conector de almacenamiento en entornos de varios hosts que tengan capacidades de conmutación por error. En configuraciones de múltiples hosts, SAP HANA ofrece una funcionalidad de alta disponibilidad para que un host de base de datos de SAP HANA pueda conmutar al nodo de respaldo a un host de espera.
 
 En este caso, el host en espera accede a los LUN del host con error y los usa. El conector de almacenamiento se utiliza para asegurarse de que sólo un host de base de datos puede acceder activamente a una partición de almacenamiento.

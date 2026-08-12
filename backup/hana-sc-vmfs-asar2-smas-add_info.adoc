@@ -1,0 +1,74 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-add_info.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Información adicional
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[additional-information]]
+== *Información adicional*
+
+[role="lead"]
+Este artículo proporciona enlaces a recursos adicionales relevantes para esta solución.
+
+*Prácticas recomendadas de SAP HANA*
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA en sistemas ASA de NetApp con el protocolo Fibre Channel"].
+
+
+*SnapCenter*
+
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-scope.html["Backup y recuperación de datos de SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sr-scs-system-replication-overview.html["Replicación de sistemas SAP HANA: Backup y recuperación de datos con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"]
+* https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmware-smas-scope.html["Protección de datos y alta disponibilidad de SAP HANA con SnapCenter™ SnapMirror active sync y VMware Metro Storage Cluster"]
+* https://docs.netapp.com/us-en/snapcenter/index.html["Documentación sobre el software SnapCenter"]
+* https://docs.netapp.com/us-en/snapcenter/protect-hana/concept_snapcenter_plug_in_for_sap_hana_database_overview.html["SnapCenter descripción general del complemento para SAP HANA"]
+* https://docs.netapp.com/us-en/snapcenter/protect-hana/task_add_hosts_and_install_plug_in_packages_on_remote_hosts_sap_hana.html["Agrega hosts e instala los paquetes de complementos de SnapCenter"]
+
+
+*NetApp ASA sistemas de almacenamiento* para acceso al almacenamiento en bloques basado en SAN
+
+* https://docs.netapp.com/us-en/ontap-systems/asa-r2/index.html["NetApp documentación de los sistemas ASA R2"]
+* https://docs.netapp.com/us-en/ontap/san-admin/index.html["Administración de ONTAP SAN"]
+
+
+*Grupos de consistencia de ONTAP* para gestionar las unidades de almacenamiento relacionadas con SAP HANA como una única entidad protegida
+
+* https://docs.netapp.com/us-en/ontap/consistency-groups/index.html["Descripción general de los grupos de consistencia de ONTAP"]
+
+
+*SnapMirror active sync* en modo *AutomatedFailOverDuplex* para la replicación síncrona simétrica activo/activo
+
+* https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["SnapMirror active sync: descripción general"]
+* https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/architecture-concept.html["SnapMirror arquitectura de sincronización activa"]
+
+
+Instalación y configuración de *ONTAP Mediator*
+
+* https://docs.netapp.com/us-en/ontap/mediator/index.html["Documentación de ONTAP Mediator"]
+* https://docs.netapp.com/us-en/ontap/mediator/workflow-summary.html["Instalar o actualizar ONTAP Mediator"]
+
+
+*SnapMirror y SnapVault replication* para la replicación asíncrona de copias de seguridad en un sistema secundario
+
+* https://docs.netapp.com/us-en/ontap/data-protection/index.html["Documentación sobre la protección de datos de ONTAP"]
+* https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-replication-concept.html["SnapMirror resumen de la replicación"]
+* https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-disaster-recovery-concept.html["SnapVault conceptos de protección de archivo / bóveda"] ++|++
+
+
+*VMware vSphere y almacenes de datos VMFS* para alojar discos de VM de SAP HANA
+
+* https://docs.netapp.com/us-en/ontap-apps-dbs/vmware/vmware-vsphere-overview.html["VMware vSphere con documentación de ONTAP"]
+* https://docs.netapp.com/us-en/ontap-tools-vmware-vsphere/["Documentación de ONTAP tools for VMware vSphere"]
+

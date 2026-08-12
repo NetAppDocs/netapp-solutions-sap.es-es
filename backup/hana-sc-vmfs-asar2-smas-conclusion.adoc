@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-conclusion.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Conclusión
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[conclusion]]
+== *Conclusión*
+
+[role="lead"]
+La implementación descrita en este documento muestra cómo puedes proteger las cargas de trabajo de SAP HANA que se ejecutan en VMware con una arquitectura de protección de datos de alta disponibilidad, consistente con las aplicaciones y eficiente desde el punto de vista operativo, basada en NetApp ASA, ONTAP, SnapMirror active sync y SnapCenter.
+
+Al usar SnapMirror active sync con los grupos de consistencia de ONTAP, los volúmenes de almacenamiento de SAP HANA pueden replicarse de forma síncrona entre dos clústeres de ONTAP, manteniendo la consistencia del orden de escritura en los volúmenes de datos, registro y compartidos de la base de datos. Este diseño permite el acceso continuo a los recursos de almacenamiento y admite capacidades de conmutación automática al respaldo en caso de un fallo de almacenamiento o a nivel de sitio. La integración de ONTAP Mediator refuerza aún más la solución al admitir la toma de decisiones automatizada durante escenarios de fallo.
+
+SnapCenter añade la conciencia necesaria de las aplicaciones para las operaciones de copia de seguridad y recuperación de SAP HANA. Mediante copias de seguridad de instantáneas integradas con SAP HANA, SnapCenter permite realizar copias de seguridad rápidas, con gestión eficiente del espacio y consistentes con las aplicaciones, mientras simplifica la programación, retención, supervisión y los flujos de trabajo de replicación. Cuando se combina con replicación asíncrona adicional, la solución también puede proporcionar una retención ampliada de las copias de seguridad y una capa de recuperación adicional en una ubicación secundaria.
+
+En general, esta arquitectura proporciona una base sólida para proteger los sistemas SAP HANA críticos para el negocio. Combina alta disponibilidad, replicación síncrona, copias de seguridad consistentes con las aplicaciones y una gestión operativa simplificada en una única solución integrada. Las organizaciones que utilicen este enfoque pueden mejorar la disponibilidad del servicio, reducir el tiempo de recuperación, reforzar la protección de los datos y simplificar la administración de los entornos SAP HANA que se ejecutan en VMware con almacenamiento NetApp.
