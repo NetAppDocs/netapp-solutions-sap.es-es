@@ -8,6 +8,7 @@ summary:
 :allow-uri-read: 
 
 
+[role="lead"]
 Puedes encontrar información detallada sobre las operaciones de actualización del sistema SAP usando SnapCenter en https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatización de las operaciones de copia y clonado del sistema SAP HANA con SnapCenter"].
 
 El segundo sistema HANA QFS se ha aprovisionado de la misma manera que se describe en el capítulo link:hana-sc-vmfs-asar2-hana-prov.html["Aprovisionamiento e instalación del sistema HANA"] .

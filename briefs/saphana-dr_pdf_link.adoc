@@ -13,6 +13,9 @@ summary: Este documento se centra en la recuperación ante desastres para SAP HA
 :imagesdir: ../media/
 
 
+[role="lead"]
+Utiliza la cartera de tecnologías y herramientas de NetApp para crear o adaptar planes de recuperación ante desastres que mantengan disponibles las aplicaciones SAP HANA esenciales para la misión.
+
 
 
 [[the-challenge]]

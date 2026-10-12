@@ -8,6 +8,7 @@ summary:
 :allow-uri-read: 
 
 
+[role="lead"]
 Con recursos virtuales almacenados en SnapCenter de VMFS/VMDK, las operaciones de restauración siempre se realizan mediante una operación de clonación, montaje y copia.
 
 . SnapCenter crea un clon de almacenamiento basado en la instantánea seleccionada

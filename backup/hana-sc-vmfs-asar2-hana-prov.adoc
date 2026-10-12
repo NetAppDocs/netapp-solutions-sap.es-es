@@ -13,6 +13,7 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
 En este capítulo se describe la instalación y configuración del sistema SAP HANA específico para una configuración de VMware mediante VMFS. Puede encontrar mejores prácticas genéricas adicionales en https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-asa-fc-introduction.html["SAP HANA en sistemas ASA de NetApp con el protocolo Fibre Channel"].
 
 
